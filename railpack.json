@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "caches": {
+    "buildproj-next": {
+      "directory": "/root/.cache/buildproj-next",
+      "type": "shared"
+    }
+  },
+  "steps": {
+    "build": {
+      "caches": ["buildproj-next"]
+    }
+  }
+}
