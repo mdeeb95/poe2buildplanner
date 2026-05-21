@@ -81,7 +81,7 @@ describe("formatSkillCraftAdditionalText", () => {
           uncutTier: 5,
         }),
       ),
-    ).toBe("Requires Uncut Skill Gem Tier 5 (+28 Dex)");
+    ).toBe("Requires Uncut Skill Gem Tier 5 (28 Dex)");
   });
 });
 

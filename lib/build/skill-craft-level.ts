@@ -45,7 +45,7 @@ export function skillStatRequirementsAtTier(gem: SkillTierInput): GemStatRequire
 /** `.build` `additional_text` for a skill gem's uncut tier and stat requirements. */
 export function formatSkillCraftAdditionalText(gem: SkillTierInput): string {
   const tier = skillUncutTier(gem);
-  const stats = formatStatRequirements(skillStatRequirementsAtTier(gem));
+  const stats = formatStatRequirements(skillStatRequirementsAtTier(gem), "absolute");
   const suffix = stats ? ` (${stats})` : "";
   return `Requires Uncut Skill Gem Tier ${tier}${suffix}`;
 }

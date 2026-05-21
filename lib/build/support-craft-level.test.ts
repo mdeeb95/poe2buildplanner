@@ -94,7 +94,7 @@ describe("formatSupportCraftAdditionalText", () => {
 });
 
 describe("defaultSupportLevelInterval", () => {
-  it("defaults to equip level (L1 for supports)", () => {
+  it("defaults min to drop level and max to 100 when no next tier", () => {
     expect(
       defaultSupportLevelInterval(
         support({
@@ -104,7 +104,21 @@ describe("defaultSupportLevelInterval", () => {
           uncutTier: 2,
         }),
       ),
-    ).toEqual([1, 100]);
+    ).toEqual([16, 100]);
+  });
+
+  it("caps max at next tier drop minus one", () => {
+    expect(
+      defaultSupportLevelInterval(
+        support({
+          id: "a",
+          variantId: "BrutalitySupport",
+          baseTypeName: "Brutality I",
+          uncutTier: 1,
+        }),
+        16,
+      ),
+    ).toEqual([1, 15]);
   });
 });
 

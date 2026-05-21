@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
-  resolveSupportAdditionalText,
+  defaultSupportAdditionalText,
   syncBuildGemAdditionalText,
 } from "./gem-additional-text";
 import { createEmptyBuild } from "./defaults";
@@ -33,22 +33,16 @@ function retreatCatalog(): SupportGem {
   };
 }
 
-describe("resolveSupportAdditionalText", () => {
-  it("prefers catalog over stale stored tier text", () => {
-    expect(
-      resolveSupportAdditionalText(
-        {
-          skillId: "Metadata/Items/Gems/SkillGemRetreatSupportThree",
-          additionalText: "Requires Uncut Support Tier 3",
-        },
-        retreatCatalog(),
-      ),
-    ).toBe("Requires Uncut Support Tier 5 (+5 Dex)");
+describe("defaultSupportAdditionalText", () => {
+  it("formats uncut tier and stat requirements from catalog", () => {
+    expect(defaultSupportAdditionalText(retreatCatalog())).toBe(
+      "Requires Uncut Support Tier 5 (+5 Dex)",
+    );
   });
 });
 
 describe("syncBuildGemAdditionalText", () => {
-  it("rewrites outdated support additionalText from catalog", () => {
+  it("fills empty support additionalText from catalog", () => {
     const build = {
       ...createEmptyBuild(),
       skills: [
@@ -66,7 +60,7 @@ describe("syncBuildGemAdditionalText", () => {
               name: "Retreat III",
               color: "green" as const,
               levelInterval: [1, 100] as [number, number],
-              additionalText: "Requires Uncut Support Tier 3",
+              additionalText: "",
             },
           ],
         },
@@ -83,5 +77,41 @@ describe("syncBuildGemAdditionalText", () => {
     expect(synced.skills[0]?.supports[0]?.additionalText).toBe(
       "Requires Uncut Support Tier 5 (+5 Dex)",
     );
+  });
+
+  it("does not overwrite user-edited support text", () => {
+    const build = {
+      ...createEmptyBuild(),
+      skills: [
+        {
+          id: "s1",
+          skillId: "Metadata/Items/Gems/SkillGemBarrage",
+          name: "Barrage",
+          color: "green" as const,
+          levelInterval: [14, 100] as [number, number],
+          additionalText: "",
+          supports: [
+            {
+              id: "sup1",
+              skillId: "Metadata/Items/Gems/SkillGemRetreatSupportThree",
+              name: "Retreat III",
+              color: "green" as const,
+              levelInterval: [1, 100] as [number, number],
+              additionalText: "My custom note",
+            },
+          ],
+        },
+      ],
+    };
+    const synced = syncBuildGemAdditionalText(build, {
+      version: { pobCommit: "", fetchedAt: "" },
+      active: {},
+      support: {
+        "Metadata/Items/Gems/SkillGemRetreatSupportThree": retreatCatalog(),
+      },
+      byBaseTypeName: {},
+    });
+    expect(synced).toBe(build);
+    expect(synced.skills[0]?.supports[0]?.additionalText).toBe("My custom note");
   });
 });

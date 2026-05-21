@@ -63,7 +63,7 @@ describe("build-file round-trip", () => {
           {
             id: "Metadata/Items/Gems/SkillGemBarrage",
             level_interval: [14, 100],
-            additional_text: "Requires Uncut Skill Gem Tier 5 (+28 Dex)",
+            additional_text: "Requires Uncut Skill Gem Tier 5 (28 Dex)",
             support_skills: [
               {
                 id: "Metadata/Items/Gems/SkillGemRetreatSupportThree",
@@ -77,18 +77,47 @@ describe("build-file round-trip", () => {
       classes,
     );
     expect(back.skills[0]?.levelInterval).toEqual([14, 100]);
-    expect(back.skills[0]?.additionalText).toBe("Requires Uncut Skill Gem Tier 5 (+28 Dex)");
+    expect(back.skills[0]?.additionalText).toBe("Requires Uncut Skill Gem Tier 5 (28 Dex)");
     expect(back.skills[0]?.supports[0]?.levelInterval).toEqual([1, 100]);
     expect(back.skills[0]?.supports[0]?.additionalText).toBe(
       "Requires Uncut Support Tier 5 (+5 Dex)",
     );
     const file = buildToFile(back);
     expect(file.skills[0]?.level_interval).toEqual([14, 100]);
-    expect(file.skills[0]?.additional_text).toBe("Requires Uncut Skill Gem Tier 5 (+28 Dex)");
+    expect(file.skills[0]?.additional_text).toBe("Requires Uncut Skill Gem Tier 5 (28 Dex)");
     expect(file.skills[0]?.support_skills[0]?.level_interval).toEqual([1, 100]);
     expect(file.skills[0]?.support_skills[0]?.additional_text).toBe(
       "Requires Uncut Support Tier 5 (+5 Dex)",
     );
+  });
+
+  it("exports user-edited additional_text without catalog override", () => {
+    const build: BuildState = {
+      ...createEmptyBuild(),
+      skills: [
+        {
+          id: "skill-row-1",
+          skillId: "Metadata/Items/Gems/SkillGemBarrage",
+          name: "Barrage",
+          color: "green",
+          levelInterval: [14, 100],
+          additionalText: "Custom skill note",
+          supports: [
+            {
+              id: "sup-row-1",
+              skillId: "Metadata/Items/Gems/SkillGemRetreatSupportThree",
+              name: "Retreat III",
+              color: "green",
+              levelInterval: [55, 100],
+              additionalText: "Custom support note",
+            },
+          ],
+        },
+      ],
+    };
+    const file = buildToFile(build);
+    expect(file.skills[0]?.additional_text).toBe("Custom skill note");
+    expect(file.skills[0]?.support_skills[0]?.additional_text).toBe("Custom support note");
   });
 
   it("imports gear unique and rare modes", () => {

@@ -11,6 +11,7 @@ interface AddPickerProps {
   onPick: (item: GemPickerRow) => void;
   onClose: () => void;
   placeholder: string;
+  highlightIds?: Set<string>;
 }
 
 export function AddPicker({
@@ -20,6 +21,7 @@ export function AddPicker({
   onPick,
   onClose,
   placeholder,
+  highlightIds,
 }: AddPickerProps) {
   const inpRef = useRef<HTMLInputElement>(null);
 
@@ -46,6 +48,12 @@ export function AddPicker({
           ref={inpRef}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && results.length > 0) {
+              e.preventDefault();
+              onPick(results[0]!);
+            }
+          }}
           placeholder={placeholder}
         />
         <button type="button" className="add-picker-x" onClick={onClose} title="Cancel (Esc)">
@@ -58,16 +66,19 @@ export function AddPicker({
             No matches. The gem catalog ships with the build editor.
           </div>
         ) : (
-          results.slice(0, 12).map((r) => (
+          results.map((r) => (
             <button
               key={r.id}
               type="button"
-              className="add-picker-item"
+              className={`add-picker-item${highlightIds?.has(r.id) ? " is-upgrade" : ""}`}
               onClick={() => onPick(r)}
             >
               <GemIcon color={r.color} size={20} kind={r.kind} />
               <span className="add-picker-name">{r.name}</span>
-              <span className="add-picker-desc">{r.desc}</span>
+              <span className="add-picker-desc">
+                {highlightIds?.has(r.id) ? "Upgrade · " : ""}
+                {r.desc}
+              </span>
             </button>
           ))
         )}

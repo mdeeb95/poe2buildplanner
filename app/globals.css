@@ -186,6 +186,21 @@ body {
   align-items: center;
   gap: 8px;
 }
+.level-picker-row-interval {
+  flex-wrap: wrap;
+}
+.level-picker-field-label {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3, #6a6a6a);
+}
+.level-picker-hint {
+  margin: 6px 0 0;
+  font-size: 10px;
+  line-height: 1.35;
+  color: var(--text-3, #6a6a6a);
+}
 .level-picker-input {
   width: 52px;
   padding: 4px 6px;
@@ -235,4 +250,30 @@ body {
 .level-picker-secondary:hover {
   background: var(--bg-4, #222);
   color: var(--color-text-primary);
+}
+
+/* Site footer — fan disclaimer */
+.site-footer {
+  flex: none;
+  padding: 6px 16px;
+  border-top: 1px solid var(--color-edge, rgba(255, 255, 255, 0.12));
+  background: var(--color-bg-1, #0a0a0a);
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--color-text-muted, #6a6a6a);
+  text-align: center;
+}
+.site-footer p {
+  margin: 0;
+}
+.site-footer-disclaimer {
+  margin-bottom: 2px !important;
+}
+.site-footer-links a {
+  color: var(--color-text-muted, #6a6a6a);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.site-footer-links a:hover {
+  color: var(--color-text-primary, #f5f5f5);
 }

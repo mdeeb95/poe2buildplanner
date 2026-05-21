@@ -33,8 +33,17 @@ describe("getGemStatRequirementsAtLevel", () => {
 });
 
 describe("formatStatRequirements", () => {
-  it("formats multiple attributes", () => {
+  it("formats additive (supports) by default", () => {
     expect(formatStatRequirements({ reqStr: 0, reqDex: 28, reqInt: 0 })).toBe("+28 Dex");
     expect(formatStatRequirements({ reqStr: 5, reqDex: 5, reqInt: 0 })).toBe("+5 Str, +5 Dex");
+  });
+
+  it("formats absolute (skills) without plus prefix", () => {
+    expect(formatStatRequirements({ reqStr: 0, reqDex: 28, reqInt: 0 }, "absolute")).toBe(
+      "28 Dex",
+    );
+    expect(formatStatRequirements({ reqStr: 5, reqDex: 5, reqInt: 0 }, "absolute")).toBe(
+      "5 Str, 5 Dex",
+    );
   });
 });

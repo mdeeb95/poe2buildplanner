@@ -9,9 +9,20 @@ export function clampLevel(level: number): number {
   return Math.max(LEVEL_MIN, Math.min(LEVEL_MAX, Math.round(level)));
 }
 
-/** Editor single level → `.build` `level_interval` tuple. */
-export function toLevelInterval(level: number): LevelInterval {
-  return [clampLevel(level), DEFAULT_LEVEL_MAX];
+/** Editor single level → `.build` `level_interval` tuple (open-ended max). */
+export function toLevelInterval(level: number): LevelInterval;
+export function toLevelInterval(min: number, max: number): LevelInterval;
+export function toLevelInterval(min: number, max?: number): LevelInterval {
+  const lo = clampLevel(min);
+  const hi = max != null ? clampLevel(max) : DEFAULT_LEVEL_MAX;
+  return normalizeLevelInterval(lo, hi);
+}
+
+/** Clamp and order a level interval so min ≤ max. */
+export function normalizeLevelInterval(min: number, max: number): LevelInterval {
+  const lo = clampLevel(min);
+  const hi = clampLevel(max);
+  return lo <= hi ? [lo, hi] : [hi, lo];
 }
 
 /** `.build` `level_interval` → editor single level (min only). */
@@ -32,10 +43,11 @@ export function passiveExportLevel(build: BuildState, nodeId: string): number {
   return build.nodeLevels[nodeId] ?? LEVEL_MIN;
 }
 
-/** Display string for a skill/support min level. */
+/** Display string for a skill/support level range. */
 export function formatGemLevel(levelInterval: LevelInterval): string {
   const min = levelInterval[0];
   const max = levelInterval[1];
-  if (max < DEFAULT_LEVEL_MAX) return `L${min}+`;
-  return `L${min}`;
+  if (max >= DEFAULT_LEVEL_MAX) return `L${min}`;
+  if (min === max) return `L${min}`;
+  return `L${min}–${max}`;
 }

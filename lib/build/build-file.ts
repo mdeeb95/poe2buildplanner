@@ -1,4 +1,3 @@
-import { resolveSkillAdditionalText, resolveSupportAdditionalText } from "./gem-additional-text";
 import { createEmptyBuild } from "./defaults";
 import { fromLevelInterval, passiveExportLevel, toLevelInterval } from "./levels";
 import type { BuildState, GearItem, SkillSetup } from "@/schemas/build";
@@ -20,7 +19,7 @@ function newEditorId(prefix: string, gameId: string): string {
 }
 
 /** Editor working state → `.build` JSON object. */
-export function buildToFile(build: BuildState, gems?: GemsFile): BuildFile {
+export function buildToFile(build: BuildState, _gems?: GemsFile): BuildFile {
   return {
     name: build.name || "Untitled build",
     description: build.description || "",
@@ -34,11 +33,11 @@ export function buildToFile(build: BuildState, gems?: GemsFile): BuildFile {
     skills: build.skills.map((s) => ({
       id: s.skillId,
       level_interval: s.levelInterval,
-      additional_text: resolveSkillAdditionalText(s, gems?.active[s.skillId]),
+      additional_text: (s.additionalText ?? "").trim(),
       support_skills: s.supports.map((sup) => ({
         id: sup.skillId,
         level_interval: sup.levelInterval,
-        additional_text: resolveSupportAdditionalText(sup, gems?.support[sup.skillId]),
+        additional_text: (sup.additionalText ?? "").trim(),
       })),
     })),
     items: build.items.map((i) => ({

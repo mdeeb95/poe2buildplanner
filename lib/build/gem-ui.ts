@@ -1,3 +1,5 @@
+import { formatSkillCraftAdditionalText } from "./skill-craft-level";
+import { formatSupportCraftAdditionalText } from "./support-craft-level";
 import type { ActiveGem, SupportGem } from "@/schemas/gem";
 
 export type GemUiColor = "red" | "green" | "blue" | "white";
@@ -24,22 +26,29 @@ export function gemColorToUi(color: ActiveGem["color"]): GemUiColor {
   }
 }
 
+function pickerDesc(craft: string, fallback: string | null): string {
+  if (craft.trim()) return craft;
+  return fallback ?? "";
+}
+
 export function activeToPickerRow(gem: ActiveGem): GemPickerRow {
+  const craft = formatSkillCraftAdditionalText(gem);
   return {
     id: gem.id,
     name: gem.name,
     color: gemColorToUi(gem.color),
     kind: "skill",
-    desc: gem.tagString ?? gem.gemType,
+    desc: pickerDesc(craft, gem.tagString ?? gem.gemType),
   };
 }
 
 export function supportToPickerRow(gem: SupportGem): GemPickerRow {
+  const craft = formatSupportCraftAdditionalText(gem);
   return {
     id: gem.id,
     name: gem.name,
     color: gemColorToUi(gem.color),
     kind: "support",
-    desc: gem.tagString ?? gem.gemType,
+    desc: pickerDesc(craft, gem.tagString ?? gem.gemType),
   };
 }

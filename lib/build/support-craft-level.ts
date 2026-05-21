@@ -1,4 +1,4 @@
-import { toLevelInterval } from "./levels";
+import { DEFAULT_LEVEL_MAX, toLevelInterval } from "./levels";
 import type { LevelInterval } from "@/schemas/build";
 import {
   formatStatRequirements,
@@ -64,9 +64,25 @@ export function formatSupportCraftAdditionalText(gem: SupportTierInput): string 
   return `Requires Uncut Support Tier ${tier}${suffix}`;
 }
 
+/** Max character level for this support before upgrading to the next tier (if any). */
+export function defaultSupportLevelMax(
+  gem: SupportTierInput,
+  nextTierDropLevel: number | null | undefined,
+): number {
+  if (nextTierDropLevel != null && nextTierDropLevel > 1) {
+    return Math.max(supportCraftRequirementLevel(gem), nextTierDropLevel - 1);
+  }
+  return DEFAULT_LEVEL_MAX;
+}
+
 /** Default `.build` level_interval for a newly added support gem. */
-export function defaultSupportLevelInterval(gem: SupportTierInput): LevelInterval {
-  return toLevelInterval(defaultSupportEquipLevel(gem));
+export function defaultSupportLevelInterval(
+  gem: SupportTierInput,
+  nextTierDropLevel?: number | null,
+): LevelInterval {
+  const min = supportCraftRequirementLevel(gem);
+  const max = defaultSupportLevelMax(gem, nextTierDropLevel);
+  return toLevelInterval(min, max);
 }
 
 /** @deprecated Use defaultSupportEquipLevel. */

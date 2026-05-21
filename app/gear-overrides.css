@@ -56,3 +56,8 @@
   z-index: 50;
   max-height: min(420px, calc(100dvh - 10rem));
 }
+
+/* Skill/support gem picker: show full filtered list with scroll. */
+.app .add-picker-results {
+  max-height: min(420px, calc(100dvh - 10rem));
+}

@@ -8,40 +8,71 @@ import {
   useState,
   type FormEvent,
 } from "react";
-import { clampLevel, LEVEL_MAX, LEVEL_MIN } from "@/lib/build/levels";
+import {
+  clampLevel,
+  DEFAULT_LEVEL_MAX,
+  LEVEL_MAX,
+  LEVEL_MIN,
+  normalizeLevelInterval,
+} from "@/lib/build/levels";
+import type { LevelInterval } from "@/schemas/build";
 
 export interface LevelPickerAnchor {
   clientX: number;
   clientY: number;
 }
 
-interface LevelPickerPopoverProps {
+interface LevelPickerPopoverBase {
   anchor: LevelPickerAnchor;
-  currentLevel: number;
-  title?: string;
-  onApply: (level: number) => void;
-  onClear: () => void;
   onClose: () => void;
 }
 
+interface LevelPickerMinMode extends LevelPickerPopoverBase {
+  currentLevel: number;
+  onApply: (level: number) => void;
+  onClear: () => void;
+  title?: string;
+  currentInterval?: never;
+  onApplyInterval?: never;
+}
+
+interface LevelPickerIntervalMode extends LevelPickerPopoverBase {
+  currentInterval: LevelInterval;
+  onApplyInterval: (interval: LevelInterval) => void;
+  onClear: () => void;
+  title?: string;
+  currentLevel?: never;
+  onApply?: never;
+}
+
+export type LevelPickerPopoverProps = LevelPickerMinMode | LevelPickerIntervalMode;
+
 const PADDING = 8;
 
-export function LevelPickerPopover({
-  anchor,
-  currentLevel,
-  title = "Allocate at level",
-  onApply,
-  onClear,
-  onClose,
-}: LevelPickerPopoverProps) {
-  const popRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [draft, setDraft] = useState(String(currentLevel));
+export function LevelPickerPopover(props: LevelPickerPopoverProps) {
+  const { anchor, onClose } = props;
+  const intervalMode = "currentInterval" in props && props.currentInterval != null;
+
+  const [draftMin, setDraftMin] = useState(
+    intervalMode ? String(props.currentInterval[0]) : String(props.currentLevel),
+  );
+  const [draftMax, setDraftMax] = useState(
+    intervalMode ? String(props.currentInterval[1]) : String(DEFAULT_LEVEL_MAX),
+  );
   const [pos, setPos] = useState({ left: anchor.clientX, top: anchor.clientY });
 
+  const popRef = useRef<HTMLDivElement>(null);
+  const minInputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
-    setDraft(String(currentLevel));
-  }, [currentLevel]);
+    if (intervalMode) {
+      setDraftMin(String(props.currentInterval[0]));
+      setDraftMax(String(props.currentInterval[1]));
+    } else {
+      setDraftMin(String(props.currentLevel));
+      setDraftMax(String(DEFAULT_LEVEL_MAX));
+    }
+  }, [intervalMode, intervalMode ? props.currentInterval : props.currentLevel]);
 
   useLayoutEffect(() => {
     const el = popRef.current;
@@ -58,11 +89,11 @@ export function LevelPickerPopover({
     left = Math.max(PADDING, left);
     top = Math.max(PADDING, top);
     setPos({ left, top });
-  }, [anchor.clientX, anchor.clientY]);
+  }, [anchor.clientX, anchor.clientY, intervalMode]);
 
   useEffect(() => {
-    inputRef.current?.focus();
-    inputRef.current?.select();
+    minInputRef.current?.focus();
+    minInputRef.current?.select();
   }, []);
 
   useEffect(() => {
@@ -85,12 +116,20 @@ export function LevelPickerPopover({
   const submit = useCallback(
     (e?: FormEvent) => {
       e?.preventDefault();
-      const parsed = parseInt(draft, 10);
-      if (Number.isNaN(parsed)) return;
-      onApply(clampLevel(parsed));
+      const min = parseInt(draftMin, 10);
+      if (Number.isNaN(min)) return;
+      if (intervalMode) {
+        const max = parseInt(draftMax, 10);
+        if (Number.isNaN(max)) return;
+        props.onApplyInterval(normalizeLevelInterval(min, max));
+        return;
+      }
+      props.onApply(clampLevel(min));
     },
-    [draft, onApply],
+    [draftMin, draftMax, intervalMode, props],
   );
+
+  const title = props.title ?? (intervalMode ? "Active level range" : "Allocate at level");
 
   return (
     <div
@@ -103,24 +142,55 @@ export function LevelPickerPopover({
     >
       <form className="level-picker-form" onSubmit={submit}>
         <label className="level-picker-label">{title}</label>
-        <div className="level-picker-row">
-          <input
-            ref={inputRef}
-            type="number"
-            min={LEVEL_MIN}
-            max={LEVEL_MAX}
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            className="level-picker-input mono"
-            aria-label={title}
-          />
+        <div className={`level-picker-row${intervalMode ? " level-picker-row-interval" : ""}`}>
+          {intervalMode ? (
+            <>
+              <span className="level-picker-field-label mono">From</span>
+              <input
+                ref={minInputRef}
+                type="number"
+                min={LEVEL_MIN}
+                max={LEVEL_MAX}
+                value={draftMin}
+                onChange={(e) => setDraftMin(e.target.value)}
+                className="level-picker-input mono"
+                aria-label="From level"
+              />
+              <span className="level-picker-field-label mono">Until</span>
+              <input
+                type="number"
+                min={LEVEL_MIN}
+                max={LEVEL_MAX}
+                value={draftMax}
+                onChange={(e) => setDraftMax(e.target.value)}
+                className="level-picker-input mono"
+                aria-label="Until level"
+              />
+            </>
+          ) : (
+            <input
+              ref={minInputRef}
+              type="number"
+              min={LEVEL_MIN}
+              max={LEVEL_MAX}
+              value={draftMin}
+              onChange={(e) => setDraftMin(e.target.value)}
+              className="level-picker-input mono"
+              aria-label={title}
+            />
+          )}
           <button type="submit" className="level-picker-apply">
             Apply
           </button>
         </div>
+        {intervalMode ? (
+          <p className="level-picker-hint">
+            Until 100 = rest of campaign. Set until level before the next support tier (e.g. 15).
+          </p>
+        ) : null}
         <div className="level-picker-actions">
-          <button type="button" className="level-picker-secondary" onClick={onClear}>
-            Clear
+          <button type="button" className="level-picker-secondary" onClick={props.onClear}>
+            {intervalMode ? "Reset default" : "Clear"}
           </button>
           <button type="button" className="level-picker-secondary" onClick={onClose}>
             Cancel

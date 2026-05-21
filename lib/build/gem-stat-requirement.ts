@@ -51,11 +51,18 @@ export function getGemStatRequirementsAtLevel(
   };
 }
 
-/** Display string for non-zero attribute requirements, e.g. "+28 Dex". */
-export function formatStatRequirements(stats: GemStatRequirements): string {
+export type StatRequirementStyle = "additive" | "absolute";
+
+/** Display string for non-zero attribute requirements. */
+export function formatStatRequirements(
+  stats: GemStatRequirements,
+  style: StatRequirementStyle = "additive",
+): string {
   const parts: string[] = [];
-  if (stats.reqStr > 0) parts.push(`+${stats.reqStr} Str`);
-  if (stats.reqDex > 0) parts.push(`+${stats.reqDex} Dex`);
-  if (stats.reqInt > 0) parts.push(`+${stats.reqInt} Int`);
+  const fmt = (n: number, label: string) =>
+    style === "additive" ? `+${n} ${label}` : `${n} ${label}`;
+  if (stats.reqStr > 0) parts.push(fmt(stats.reqStr, "Str"));
+  if (stats.reqDex > 0) parts.push(fmt(stats.reqDex, "Dex"));
+  if (stats.reqInt > 0) parts.push(fmt(stats.reqInt, "Int"));
   return parts.join(", ");
 }

@@ -3,6 +3,7 @@ import {
   clampLevel,
   formatGemLevel,
   fromLevelInterval,
+  normalizeLevelInterval,
   toLevelInterval,
 } from "./levels";
 
@@ -21,6 +22,11 @@ describe("levels helpers", () => {
   it("formats gem level display", () => {
     expect(formatGemLevel([1, 100])).toBe("L1");
     expect(formatGemLevel([12, 100])).toBe("L12");
-    expect(formatGemLevel([12, 50])).toBe("L12+");
+    expect(formatGemLevel([1, 15])).toBe("L1–15");
+    expect(formatGemLevel([16, 100])).toBe("L16");
+  });
+
+  it("normalizes reversed intervals", () => {
+    expect(normalizeLevelInterval(20, 5)).toEqual([5, 20]);
   });
 });
