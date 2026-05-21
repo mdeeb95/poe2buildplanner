@@ -36,7 +36,7 @@ function support(partial: Partial<SupportGem> & Pick<SupportGem, "id">): Support
 }
 
 describe("supportUncutTier", () => {
-  it("prefers PoB uncutTier over variant suffix", () => {
+  it("uses PoB uncutTier and ignores SupportThree suffix", () => {
     expect(
       supportUncutTier(
         support({
@@ -47,6 +47,19 @@ describe("supportUncutTier", () => {
         }),
       ),
     ).toBe(5);
+  });
+
+  it("does not infer tier from SupportThree when uncutTier is missing", () => {
+    expect(
+      supportUncutTier(
+        support({
+          id: "Metadata/Items/Gems/SkillGemRetreatSupportThree",
+          variantId: "RetreatSupportThree",
+          baseTypeName: "Retreat III",
+          uncutTier: null,
+        }),
+      ),
+    ).toBe(1);
   });
 });
 

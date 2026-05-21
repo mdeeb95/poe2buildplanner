@@ -32,21 +32,7 @@ export function supportUncutTier(gem: SupportTierInput): number {
   if (gem.uncutTier != null && gem.uncutTier > 0) {
     return gem.uncutTier;
   }
-
-  const variant = gem.variantId ?? "";
-  const id = gem.id;
-
-  if (/SupportFive/i.test(variant) || /SupportFive/i.test(id)) return 5;
-  if (/SupportFour/i.test(variant) || /SupportFour/i.test(id)) return 4;
-  if (/SupportThree/i.test(variant) || /SupportThree/i.test(id)) return 3;
-  if (/SupportTwo/i.test(variant) || /SupportTwo/i.test(id)) return 2;
-
-  const label = gem.baseTypeName || gem.name;
-  if (/ IV$/.test(label)) return 4;
-  if (/ III$/.test(label)) return 3;
-  if (/ II$/.test(label)) return 2;
-  if (/ I$/.test(label)) return 1;
-
+  // Do not infer tier from variant suffix (e.g. Retreat III → SupportThree is tier 5).
   return 1;
 }
 

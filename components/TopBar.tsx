@@ -189,7 +189,7 @@ export function TopBar({ build, setBuild, classes }: TopBarProps) {
         <button
           type="button"
           className="tb-btn tb-btn-primary"
-          onClick={() => downloadBuildFile(build)}
+          onClick={() => void downloadBuildFile(build)}
           title="Download this build as a .build file"
         >
           <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden>

@@ -1,7 +1,9 @@
+import { resolveSkillAdditionalText, resolveSupportAdditionalText } from "./gem-additional-text";
 import { createEmptyBuild } from "./defaults";
 import { fromLevelInterval, passiveExportLevel, toLevelInterval } from "./levels";
 import type { BuildState, GearItem, SkillSetup } from "@/schemas/build";
 import { BuildFileSchema, type BuildFile } from "@/schemas/build-file";
+import { GemsFileSchema, type GemsFile } from "@/schemas/gem";
 import type { TreeClass } from "@/schemas/tree";
 
 function classForAscendancy(classes: TreeClass[], ascendancy: string): string {
@@ -17,7 +19,7 @@ function newEditorId(prefix: string, gameId: string): string {
 }
 
 /** Editor working state → `.build` JSON object. */
-export function buildToFile(build: BuildState): BuildFile {
+export function buildToFile(build: BuildState, gems?: GemsFile): BuildFile {
   return {
     name: build.name || "Untitled build",
     description: build.description || "",
@@ -31,11 +33,11 @@ export function buildToFile(build: BuildState): BuildFile {
     skills: build.skills.map((s) => ({
       id: s.skillId,
       level_interval: s.levelInterval,
-      additional_text: s.additionalText ?? "",
+      additional_text: resolveSkillAdditionalText(s, gems?.active[s.skillId]),
       support_skills: s.supports.map((sup) => ({
         id: sup.skillId,
         level_interval: sup.levelInterval,
-        additional_text: sup.additionalText ?? "",
+        additional_text: resolveSupportAdditionalText(sup, gems?.support[sup.skillId]),
       })),
     })),
     items: build.items.map((i) => ({
@@ -128,8 +130,18 @@ export function buildFileDownloadName(name: string): string {
   return `${safe}.build`;
 }
 
-export function downloadBuildFile(build: BuildState): void {
-  const json = buildToFile(build);
+export async function downloadBuildFile(build: BuildState): Promise<void> {
+  let gems: GemsFile | undefined;
+  try {
+    const res = await fetch("/gems", { cache: "force-cache" });
+    if (res.ok) {
+      const parsed = GemsFileSchema.safeParse(await res.json());
+      if (parsed.success) gems = parsed.data;
+    }
+  } catch {
+    /* export without catalog refresh */
+  }
+  const json = buildToFile(build, gems);
   const blob = new Blob([JSON.stringify(json, null, 2)], {
     type: "application/json",
   });

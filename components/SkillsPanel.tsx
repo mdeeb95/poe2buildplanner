@@ -10,6 +10,7 @@ import {
 } from "@/lib/build/gem-ui";
 import { LevelPickerPopover } from "@/components/LevelPickerPopover";
 import { formatGemLevel, toLevelInterval } from "@/lib/build/levels";
+import { resolveSupportAdditionalText, syncBuildGemAdditionalText } from "@/lib/build/gem-additional-text";
 import { defaultSupportLevelInterval, formatSupportCraftAdditionalText } from "@/lib/build/support-craft-level";
 import { defaultSkillLevelInterval, formatSkillCraftAdditionalText } from "@/lib/build/skill-craft-level";
 import { fuzzyMatchAny } from "@/lib/build/fuzzy-search";
@@ -37,11 +38,11 @@ interface LevelPickerState {
   clientY: number;
 }
 
-function supportAdditionalText(sup: SupportSetup, gems: GemsFile | null): string {
-  const stored = sup.additionalText?.trim();
-  if (stored) return stored;
-  const catalog = gems?.support[sup.skillId];
-  return catalog ? formatSupportCraftAdditionalText(catalog) : "";
+function supportAdditionalText(
+  sup: SupportSetup,
+  gems: GemsFile | null,
+): string {
+  return resolveSupportAdditionalText(sup, gems?.support[sup.skillId]);
 }
 
 export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
@@ -69,6 +70,11 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
       aborted = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (!gems) return;
+    setBuild((prev) => syncBuildGemAdditionalText(prev, gems));
+  }, [gems, setBuild]);
 
   const activeRows = useMemo(
     () => (gems ? Object.values(gems.active).map(activeToPickerRow) : []),
