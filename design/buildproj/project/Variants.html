@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Theme Variants — .build Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,500;0,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0b0e;
+      --surface: #14171f;
+      --border: rgba(255,255,255,0.08);
+      --border-2: rgba(255,255,255,0.16);
+      --text: #e8e5dd;
+      --text-1: #a8a7a1;
+      --text-2: #74757d;
+      --text-3: #51535d;
+      --accent: #c9a36b;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; }
+    body { font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+
+    .head {
+      position: sticky; top: 0; z-index: 50;
+      padding: 18px 28px 16px;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 70%, rgba(10,11,14,0.7) 100%);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .head-eyebrow { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--accent); text-transform: uppercase; }
+    .head-title {
+      margin: 4px 0 6px;
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 24px; font-weight: 500; letter-spacing: -0.005em;
+      color: var(--text);
+    }
+    .head-sub { color: var(--text-1); font-size: 12.5px; max-width: 720px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0;
+      padding: 0;
+    }
+    .vt {
+      position: relative;
+      min-width: 0;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      background: #000;
+    }
+    .vt:nth-child(2n) { border-right: 0; }
+
+    .vt-h {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding: 14px 18px 12px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+    }
+    .vt-h-l { display: flex; flex-direction: column; min-width: 0; }
+    .vt-h-name {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 19px; font-weight: 500; color: var(--text);
+      letter-spacing: -0.005em;
+    }
+    .vt-h-sub { color: var(--text-2); font-size: 11.5px; margin-top: 2px; line-height: 1.45; max-width: 520px; }
+    .vt-h-open {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px;
+      background: transparent;
+      border: 1px solid var(--border-2);
+      color: var(--text-1);
+      font-family: inherit; font-size: 11px;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+      white-space: nowrap;
+    }
+    .vt-h-open:hover { background: var(--surface); color: var(--text); border-color: var(--border-2); }
+    .vt-h-open svg { width: 10px; height: 10px; }
+
+    .vt-frame-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #000;
+    }
+    .vt-frame-shell {
+      position: absolute;
+      top: 0; left: 0;
+      width: 1440px; height: 900px;
+      transform-origin: top left;
+    }
+    .vt-frame {
+      display: block;
+      border: 0;
+      background: #000;
+      width: 1440px; height: 900px;
+    }
+
+    .swatches { display: flex; gap: 6px; padding: 8px 18px 14px; background: var(--bg); border-top: 1px solid var(--border); }
+    .swatch {
+      width: 14px; height: 14px;
+      border: 0.5px solid rgba(255,255,255,0.15);
+      border-radius: 2px;
+    }
+    .swatch-lbl { font-family: 'Geist Mono', monospace; font-size: 9.5px; color: var(--text-3); letter-spacing: 0.04em; align-self: center; padding-left: 4px; text-transform: uppercase; }
+
+    .footer { padding: 24px 28px; color: var(--text-3); font-size: 11.5px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<header class="head">
+  <div class="head-eyebrow">Theme variants</div>
+  <h1 class="head-title">Same wireframe, four directions.</h1>
+  <p class="head-sub">Only color, typography, and corner-radius tokens differ. Layout, components, spacing, interactions — identical across all four. Click <em>Open fullscreen</em> to interact with any variant in its own tab.</p>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<footer class="footer">Each frame embeds <code>Editor.html?theme=&lt;name&gt;</code> — the theme block at the top of the editor stylesheet drives the variation.</footer>
+
+<script>
+  const VARIANTS = [
+    {
+      id: 'ember',
+      name: 'Ember',
+      sub: 'Warm gold over deep slate · Geist sans + Newsreader display. Moody and restrained — the accent feels lit-from-within. Current default.',
+      swatches: ['#0a0b0e', '#14171f', '#262c39', '#c9a36b', '#d4cb7c'],
+      swatchLbl: 'gold · slate',
+    },
+    {
+      id: 'frost',
+      name: 'Frost',
+      sub: 'Icy cyan over blue-slate · Crimson Text display. Cooler temperature, same skeleton — reads as a winter biome rather than an arcanum.',
+      swatches: ['#0a0e14', '#121823', '#283449', '#6cc9c4', '#94a6f0'],
+      swatchLbl: 'cyan · slate-blue',
+    },
+    {
+      id: 'vellum',
+      name: 'Vellum',
+      sub: 'Parchment cream · burgundy ink · EB Garamond. The light-theme outlier — antiquarian codex/grimoire feel, ink on paper.',
+      swatches: ['#e8dfc6', '#ece2c6', '#d8cba7', '#8a3324', '#6e4d10'],
+      swatchLbl: 'burgundy · cream',
+    },
+    {
+      id: 'sablesteel',
+      name: 'Sablesteel',
+      sub: 'Near-black greyscale · 0px radii · JetBrains Mono display. Strictly tool, no decoration — closest to Linear / Arc / Raycast lineage.',
+      swatches: ['#000000', '#0a0a0a', '#1d1d1d', '#ffffff', '#a8a8a8'],
+      swatchLbl: 'mono noir',
+    },
+  ];
+
+  function el(tag, props = {}, ...kids) {
+    const e = document.createElement(tag);
+    for (const k in props) {
+      if (k === 'class') e.className = props[k];
+      else if (k === 'html') e.innerHTML = props[k];
+      else e.setAttribute(k, props[k]);
+    }
+    for (const c of kids.flat()) {
+      if (c == null) continue;
+      e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    }
+    return e;
+  }
+
+  const grid = document.getElementById('grid');
+  for (const v of VARIANTS) {
+    const url = `Editor.html?theme=${v.id}`;
+
+    const swatches = el('div', { class: 'swatches' },
+      ...v.swatches.map((c) => el('span', { class: 'swatch', style: `background:${c}` })),
+      el('span', { class: 'swatch-lbl' }, v.swatchLbl),
+    );
+
+    const frameWrap = el('div', { class: 'vt-frame-wrap' });
+    const frameShell = el('div', { class: 'vt-frame-shell' });
+    const frame = el('iframe', { class: 'vt-frame', src: url, title: `${v.name} variant` });
+    frameShell.appendChild(frame);
+    frameWrap.appendChild(frameShell);
+
+    const wrap = el('div', { class: 'vt' },
+      el('div', { class: 'vt-h' },
+        el('div', { class: 'vt-h-l' },
+          el('div', { class: 'vt-h-name' }, v.name),
+          el('div', { class: 'vt-h-sub' }, v.sub),
+        ),
+        el('a', { class: 'vt-h-open', href: url, target: '_blank', rel: 'noopener', html:
+          `<span>Open fullscreen</span><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 1 H9 V6 M9 1 L5 5 M9 9 H1 V1 H4"/></svg>`
+        }),
+      ),
+      frameWrap,
+      swatches,
+    );
+    grid.appendChild(wrap);
+  }
+
+  // Set up fit() AFTER everything is in the DOM so wraps have real dimensions
+  // and the ResizeObserver fires on a measured node. Belt-and-suspenders —
+  // call fit() immediately, on RAF, on setTimeout, AND attach a ResizeObserver.
+  function fitAll() {
+    document.querySelectorAll('.vt-frame-wrap').forEach((wrap) => {
+      const shell = wrap.querySelector('.vt-frame-shell');
+      if (!shell) return;
+      const w = wrap.clientWidth;
+      if (!w) return;
+      const scale = w / 1440;
+      shell.style.transform = `scale(${scale})`;
+      wrap.style.height = (900 * scale) + 'px';
+    });
+  }
+  function attachObservers() {
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', fitAll);
+      return;
+    }
+    document.querySelectorAll('.vt-frame-wrap').forEach((wrap) => {
+      new ResizeObserver(fitAll).observe(wrap);
+    });
+  }
+  fitAll();
+  requestAnimationFrame(fitAll);
+  setTimeout(fitAll, 50);
+  setTimeout(fitAll, 250);
+  setTimeout(() => { fitAll(); attachObservers(); }, 600);
+</script>
+
+</body>
+</html>

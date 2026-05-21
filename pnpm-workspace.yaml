@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: true
+  '@tailwindcss/oxide': true
+  '@next/swc-linux-x64-gnu': true
+  sharp: true
+  unrs-resolver: true

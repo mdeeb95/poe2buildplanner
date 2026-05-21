@@ -1,0 +1,2564 @@
+{
+  "bySlot": {
+    "amulet": [
+      "Astramentis",
+      "Beacon of Azis",
+      "Carnage Heart",
+      "Choir of the Storm",
+      "Defiance of Destiny",
+      "Eye of Chayula",
+      "Fireflower",
+      "Fixation of Yix",
+      "Hinekora's Sight",
+      "Idol of Uldurn",
+      "Igniferis",
+      "Ligurium Talisman",
+      "Revered Resin",
+      "Rondel of Fragility",
+      "Serpent's Egg",
+      "Stone of Lazhwar",
+      "Strugglescream",
+      "Surefooted Sigil",
+      "The Anvil",
+      "The Everlasting Gaze",
+      "The Pandemonius",
+      "Ungil's Harmony",
+      "Xoph's Blood",
+      "Yoke of Suffering"
+    ],
+    "belt": [
+      "Bijouborne",
+      "Birthright Buckle",
+      "Byrnabas",
+      "Coward's Legacy",
+      "Darkness Enthroned",
+      "Goregirdle",
+      "Headhunter",
+      "Infernoclasp",
+      "Ingenuity",
+      "Keelhaul",
+      "Meginord's Girdle",
+      "Midnight Braid",
+      "Ryslatha's Coil",
+      "Shavronne's Satchel",
+      "Soul Tether",
+      "The Gnashing Sash",
+      "Umbilicus Immortalis",
+      "Waistgate Heavy Belt",
+      "Zerphi's Genesis"
+    ],
+    "body": [
+      "Apron of Emiran",
+      "Ashrend",
+      "Belly of the Beast",
+      "Bitterbloom",
+      "Blackbraid",
+      "Bramblejack",
+      "Briskwrap",
+      "Bristleboar",
+      "Cloak of Defiance",
+      "Cloak of Flame",
+      "Coat of Red",
+      "Cospri's Will",
+      "Couture of Crimson",
+      "Doryani's Prototype",
+      "Dustbloom",
+      "Edyrn's Tusks",
+      "Enfolding Dawn",
+      "Foxshade",
+      "Ghostwrithe",
+      "Gloamgown",
+      "Gloomform",
+      "Greed's Embrace",
+      "Husk of Dreams",
+      "Hyrri's Ire",
+      "Icetomb",
+      "Irongrasp",
+      "Kaom's Heart",
+      "Kingsguard",
+      "Lightning Coil",
+      "Morior Invictus",
+      "Necromantle",
+      "Pariah's Embrace",
+      "Perfidy",
+      "Pragmatism",
+      "Prayers for Rain",
+      "Quatl's Molt",
+      "Queen of the Forest",
+      "Redflare Conduit",
+      "Sacrosanctum",
+      "Sands of Silk",
+      "Sierran Inheritance",
+      "Silks of Veneration",
+      "Skin of the Loyal",
+      "Soul Mantle",
+      "Tabula Rasa",
+      "Temporalis",
+      "Tetzlapokal's Desire",
+      "The Barrow Dweller",
+      "The Black Doubt",
+      "The Brass Dome",
+      "The Coming Calamity",
+      "The Covenant",
+      "The Dancing Mirage",
+      "The Fallen Formation",
+      "The Mutable Star",
+      "The Rat Cage",
+      "The Road Warrior",
+      "Titanrot Cataphract",
+      "Vis Mortis",
+      "Voll's Protector",
+      "Wandering Reliquary",
+      "Waveshaper",
+      "Widow's Reign",
+      "Yriel's Fostering",
+      "Zerphi's Serape"
+    ],
+    "boots": [
+      "Ab Aeterno",
+      "Beetlebite",
+      "Birth of Fury",
+      "Bones of Ullr",
+      "Briarpatch",
+      "Bushwhack",
+      "Corpsewade",
+      "Darkray Vectors",
+      "Gamblesprint",
+      "Ghostmarch",
+      "Legionstride",
+      "Luminous Pace",
+      "Obern's Bastion",
+      "Powertread",
+      "Shankgonne",
+      "The Infinite Pursuit",
+      "The Knight-errant",
+      "Thunderstep",
+      "Trampletoe",
+      "Wake of Destruction",
+      "Wanderlust",
+      "Windscream",
+      "Wondertrap"
+    ],
+    "bow": [
+      "Death's Harp",
+      "Doomfletch",
+      "Fairgraves' Curse",
+      "Lioneye's Glare",
+      "Quill Rain",
+      "Slivertongue",
+      "Splinterheart",
+      "Voltaxic Rift",
+      "Widowhail"
+    ],
+    "crossbow": [
+      "Double Vision",
+      "Mist Whisper",
+      "Rampart Raptor",
+      "The Last Lament"
+    ],
+    "focus": [
+      "Apep's Supremacy",
+      "Carrion Call",
+      "Deathrattle",
+      "Effigy of Cruelty",
+      "Rathpith Globe",
+      "Serpent's Lesson",
+      "The Eternal Spark",
+      "Threaded Light"
+    ],
+    "gloves": [
+      "Aerisvane's Wings",
+      "Atziri's Acuity",
+      "Aurseize",
+      "Blessed Bonds",
+      "Blueflame Bracers",
+      "Candlemaker",
+      "Death Articulated",
+      "Deathblow",
+      "Demon Stitcher",
+      "Doedre's Tenure",
+      "Dreadfist",
+      "Empire's Grasp",
+      "Essentia Sanguis",
+      "Gravebind",
+      "Grip of Winter",
+      "Hand of Wisdom and Action",
+      "Hateforge",
+      "Idle Hands",
+      "Jarngreipr",
+      "Killjoy",
+      "Kitoko's Current",
+      "Leopold's Applause",
+      "Lochtonial Caress",
+      "Maligaro's Virtuosity",
+      "Nightscale",
+      "Northpaw",
+      "Painter's Servant",
+      "Plaguefinger",
+      "Shackles of the Wretched",
+      "Sine Aequo",
+      "Snakebite",
+      "The Prisoner's Manacles",
+      "Thunderfist",
+      "Treefingers",
+      "Valako's Vice"
+    ],
+    "helmet": [
+      "Alpha's Howl",
+      "Assailum",
+      "Atsak's Sight",
+      "Atziri's Disdain",
+      "Black Sun Crest",
+      "Blood Price",
+      "Bronzebeard",
+      "Constricting Command",
+      "Cornathaum",
+      "Corona of the Red Sun",
+      "Crown of Eyes",
+      "Crown of Thorns",
+      "Crown of the Pale King",
+      "Crown of the Victor",
+      "Deidbell",
+      "Elevore",
+      "Erian's Cobble",
+      "Ezomyte Peak",
+      "Forbidden Gaze",
+      "Glimpse of Chaos",
+      "Goldrim",
+      "Greymake",
+      "Heatshiver",
+      "Horns of Bynden",
+      "Indigon",
+      "Innsmouth",
+      "Ironride",
+      "Keeper of the Arc",
+      "Leer Cast",
+      "Mask of the Sanguimancer",
+      "Mask of the Stitched Demon",
+      "Mind of the Council",
+      "Myris Uxor",
+      "Radiant Grief",
+      "Sandstorm Visage",
+      "Scold's Bridle",
+      "Solus Ipse",
+      "Starkonja's Head",
+      "The Black Insignia",
+      "The Bringer of Rain",
+      "The Deepest Tower",
+      "The Devouring Diadem",
+      "The Hollow Mask",
+      "The Smiling Knight",
+      "The Three Dragons",
+      "The Vertex",
+      "The Vile Knight",
+      "Thrillsteel",
+      "Veil of the Night",
+      "Visage of Ayah",
+      "Wings of Caelyn"
+    ],
+    "mace": [
+      "Brain Rattler",
+      "Brynhand's Mark",
+      "Chober Chaber",
+      "Frostbreath",
+      "Hoghunt",
+      "Hrimnor's Hymn",
+      "Marohi Erqi",
+      "MjÃ¶lner",
+      "Nebuloch",
+      "Olrovasara",
+      "Quecholli",
+      "Sculpted Suffering",
+      "Seeing Stars",
+      "Shyaba",
+      "The Empty Roar",
+      "The Hammer of Faith",
+      "Tidebreaker",
+      "Trenchtimbre",
+      "Trephina",
+      "Wylund's Stake"
+    ],
+    "quiver": [
+      "Asphyxia's Wrath",
+      "Beyond Reach",
+      "Blackgleam",
+      "Cadiro's Gambit",
+      "Murkshaft",
+      "Rearguard",
+      "The Lethal Draw"
+    ],
+    "ring": [
+      "Andvarius",
+      "Blackflame",
+      "Blackheart",
+      "Blistering Bond",
+      "Bursting Decay",
+      "Call of the Brotherhood",
+      "Cracklecreep",
+      "Death Rush",
+      "Doedre's Damning",
+      "Dream Fragments",
+      "Evergrasping Ring",
+      "Gifts from Above",
+      "Glowswarm",
+      "Heartbound Loop",
+      "Icefang Orbit",
+      "Kalandra's Touch",
+      "Levinstone",
+      "Ming's Heart",
+      "Original Sin",
+      "Perandus Seal",
+      "Polcirkeln",
+      "Prized Pain",
+      "Seed of Cataclysm",
+      "Sekhema's Resolve",
+      "Snakepit",
+      "The Burrower",
+      "Thief's Torment",
+      "Venopuncture",
+      "Ventor's Gamble",
+      "Vigilant View",
+      "Whisper of the Brotherhood"
+    ],
+    "sceptre": [
+      "Font of Power",
+      "Guiding Palm",
+      "Guiding Palm of the Eye",
+      "Guiding Palm of the Heart",
+      "Guiding Palm of the Mind",
+      "Palm of the Dreamer",
+      "Sacred Flame",
+      "The Dark Defiler"
+    ],
+    "shield": [
+      "Alkem Eira",
+      "Arvil's Wheel",
+      "Bloodbarrier",
+      "Calgyra's Arc",
+      "Chernobog's Pillar",
+      "Crest of Ardura",
+      "Dionadair",
+      "Doomgate",
+      "Dunkelhalt",
+      "Feathered Fortress",
+      "Kaltenhalt",
+      "Lycosidae",
+      "Mahuxotl's Machination",
+      "Merit of Service",
+      "Nocturne",
+      "Oaksworn",
+      "Prism Guardian",
+      "Redblade Banner",
+      "Rise of the Phoenix",
+      "Rondel de Ezo",
+      "Saffell's Frame",
+      "Silverthorne",
+      "Sunsplinter",
+      "Svalinn",
+      "The Surrender",
+      "The Wailing Wall",
+      "Window to Paradise",
+      "Wulfsbane"
+    ],
+    "spear": [
+      "Chainsting",
+      "Daevata's Wind",
+      "Saitha's Spear",
+      "Skysliver",
+      "Spire of Ire",
+      "Splinter of Lorrata",
+      "Tangletongue",
+      "Tyranny's Grip"
+    ],
+    "staff": [
+      "Collapsing Horizon",
+      "Dusk Vigil",
+      "Earthbound",
+      "Matsya",
+      "Nazir's Judgement",
+      "Pillar of the Caged God",
+      "Sire of Shards",
+      "Taryn's Shiver",
+      "The Blood Thorn",
+      "The Burden of Shadows",
+      "The Searing Touch",
+      "The Sentry",
+      "The Unborn Lich",
+      "The Whispering Ice"
+    ],
+    "wand": [
+      "Adonia's Ego",
+      "Cursecarver",
+      "Enezun's Charge",
+      "Lifesprig",
+      "Sanguine Diviner",
+      "The Wicked Quill"
+    ]
+  },
+  "uniques": {
+    "Ab Aeterno": {
+      "base": "Grand Cuisses",
+      "id": "Ab Aeterno",
+      "name": "Ab Aeterno",
+      "slot": "boots"
+    },
+    "Adonia's Ego": {
+      "base": "Siphoning Wand",
+      "id": "Adonia's Ego",
+      "name": "Adonia's Ego",
+      "slot": "wand"
+    },
+    "Aerisvane's Wings": {
+      "base": "Burnished Gauntlets",
+      "id": "Aerisvane's Wings",
+      "name": "Aerisvane's Wings",
+      "slot": "gloves"
+    },
+    "Alkem Eira": {
+      "base": "Blazon Crest Shield",
+      "id": "Alkem Eira",
+      "name": "Alkem Eira",
+      "slot": "shield"
+    },
+    "Alpha's Howl": {
+      "base": "Armoured Cap",
+      "id": "Alpha's Howl",
+      "name": "Alpha's Howl",
+      "slot": "helmet"
+    },
+    "Andvarius": {
+      "base": "Gold Ring",
+      "id": "Andvarius",
+      "name": "Andvarius",
+      "slot": "ring"
+    },
+    "Apep's Supremacy": {
+      "base": "Voodoo Focus",
+      "id": "Apep's Supremacy",
+      "name": "Apep's Supremacy",
+      "slot": "focus"
+    },
+    "Apron of Emiran": {
+      "base": "Hermit Garb",
+      "id": "Apron of Emiran",
+      "name": "Apron of Emiran",
+      "slot": "body"
+    },
+    "Arvil's Wheel": {
+      "base": "Hardwood Targe",
+      "id": "Arvil's Wheel",
+      "name": "Arvil's Wheel",
+      "slot": "shield"
+    },
+    "Ashrend": {
+      "base": "Pathfinder Coat",
+      "id": "Ashrend",
+      "name": "Ashrend",
+      "slot": "body"
+    },
+    "Asphyxia's Wrath": {
+      "base": "Broadhead Quiver",
+      "id": "Asphyxia's Wrath",
+      "name": "Asphyxia's Wrath",
+      "slot": "quiver"
+    },
+    "Assailum": {
+      "base": "Closed Helm",
+      "id": "Assailum",
+      "name": "Assailum",
+      "slot": "helmet"
+    },
+    "Astramentis": {
+      "base": "Stellar Amulet",
+      "id": "Astramentis",
+      "name": "Astramentis",
+      "slot": "amulet"
+    },
+    "Atsak's Sight": {
+      "base": "Veiled Mask",
+      "id": "Atsak's Sight",
+      "name": "Atsak's Sight",
+      "slot": "helmet"
+    },
+    "Atziri's Acuity": {
+      "base": "Moulded Mitts",
+      "id": "Atziri's Acuity",
+      "name": "Atziri's Acuity",
+      "slot": "gloves"
+    },
+    "Atziri's Disdain": {
+      "base": "Gold Circlet",
+      "id": "Atziri's Disdain",
+      "name": "Atziri's Disdain",
+      "slot": "helmet"
+    },
+    "Aurseize": {
+      "base": "Layered Gauntlets",
+      "id": "Aurseize",
+      "name": "Aurseize",
+      "slot": "gloves"
+    },
+    "Beacon of Azis": {
+      "base": "Solar Amulet",
+      "id": "Beacon of Azis",
+      "name": "Beacon of Azis",
+      "slot": "amulet"
+    },
+    "Beetlebite": {
+      "base": "Velour Shoes",
+      "id": "Beetlebite",
+      "name": "Beetlebite",
+      "slot": "boots"
+    },
+    "Belly of the Beast": {
+      "base": "Explorer Armour",
+      "id": "Belly of the Beast",
+      "name": "Belly of the Beast",
+      "slot": "body"
+    },
+    "Beyond Reach": {
+      "base": "Visceral Quiver",
+      "id": "Beyond Reach",
+      "name": "Beyond Reach",
+      "slot": "quiver"
+    },
+    "Bijouborne": {
+      "base": "Double Belt",
+      "id": "Bijouborne",
+      "name": "Bijouborne",
+      "slot": "belt"
+    },
+    "Birth of Fury": {
+      "base": "Stone Greaves",
+      "id": "Birth of Fury",
+      "name": "Birth of Fury",
+      "slot": "boots"
+    },
+    "Birthright Buckle": {
+      "base": "Wide Belt",
+      "id": "Birthright Buckle",
+      "name": "Birthright Buckle",
+      "slot": "belt"
+    },
+    "Bitterbloom": {
+      "base": "Feathered Robe",
+      "id": "Bitterbloom",
+      "name": "Bitterbloom",
+      "slot": "body"
+    },
+    "Black Sun Crest": {
+      "base": "Wrapped Greathelm",
+      "id": "Black Sun Crest",
+      "name": "Black Sun Crest",
+      "slot": "helmet"
+    },
+    "Blackbraid": {
+      "base": "Fur Plate",
+      "id": "Blackbraid",
+      "name": "Blackbraid",
+      "slot": "body"
+    },
+    "Blackflame": {
+      "base": "Amethyst Ring",
+      "id": "Blackflame",
+      "name": "Blackflame",
+      "slot": "ring"
+    },
+    "Blackgleam": {
+      "base": "Fire Quiver",
+      "id": "Blackgleam",
+      "name": "Blackgleam",
+      "slot": "quiver"
+    },
+    "Blackheart": {
+      "base": "Iron Ring",
+      "id": "Blackheart",
+      "name": "Blackheart",
+      "slot": "ring"
+    },
+    "Blessed Bonds": {
+      "base": "Linen Wraps",
+      "id": "Blessed Bonds",
+      "name": "Blessed Bonds",
+      "slot": "gloves"
+    },
+    "Blistering Bond": {
+      "base": "Ruby Ring",
+      "id": "Blistering Bond",
+      "name": "Blistering Bond",
+      "slot": "ring"
+    },
+    "Blood Price": {
+      "base": "Fierce Greathelm",
+      "id": "Blood Price",
+      "name": "Blood Price",
+      "slot": "helmet"
+    },
+    "Bloodbarrier": {
+      "base": "Iron Buckler",
+      "id": "Bloodbarrier",
+      "name": "Bloodbarrier",
+      "slot": "shield"
+    },
+    "Blueflame Bracers": {
+      "base": "Goldcast Cuffs",
+      "id": "Blueflame Bracers",
+      "name": "Blueflame Bracers",
+      "slot": "gloves"
+    },
+    "Bones of Ullr": {
+      "base": "Lattice Sandals",
+      "id": "Bones of Ullr",
+      "name": "Bones of Ullr",
+      "slot": "boots"
+    },
+    "Brain Rattler": {
+      "base": "Studded Greatclub",
+      "id": "Brain Rattler",
+      "name": "Brain Rattler",
+      "slot": "mace"
+    },
+    "Bramblejack": {
+      "base": "Rusted Cuirass",
+      "id": "Bramblejack",
+      "name": "Bramblejack",
+      "slot": "body"
+    },
+    "Briarpatch": {
+      "base": "Laced Boots",
+      "id": "Briarpatch",
+      "name": "Briarpatch",
+      "slot": "boots"
+    },
+    "Briskwrap": {
+      "base": "Rhoahide Coat",
+      "id": "Briskwrap",
+      "name": "Briskwrap",
+      "slot": "body"
+    },
+    "Bristleboar": {
+      "base": "Leather Vest",
+      "id": "Bristleboar",
+      "name": "Bristleboar",
+      "slot": "body"
+    },
+    "Bronzebeard": {
+      "base": "Horned Crown",
+      "id": "Bronzebeard",
+      "name": "Bronzebeard",
+      "slot": "helmet"
+    },
+    "Brynhand's Mark": {
+      "base": "Wooden Club",
+      "id": "Brynhand's Mark",
+      "name": "Brynhand's Mark",
+      "slot": "mace"
+    },
+    "Bursting Decay": {
+      "base": "Unset Ring",
+      "id": "Bursting Decay",
+      "name": "Bursting Decay",
+      "slot": "ring"
+    },
+    "Bushwhack": {
+      "base": "Lizardscale Boots",
+      "id": "Bushwhack",
+      "name": "Bushwhack",
+      "slot": "boots"
+    },
+    "Byrnabas": {
+      "base": "Wide Belt",
+      "id": "Byrnabas",
+      "name": "Byrnabas",
+      "slot": "belt"
+    },
+    "Cadiro's Gambit": {
+      "base": "Primed Quiver",
+      "id": "Cadiro's Gambit",
+      "name": "Cadiro's Gambit",
+      "slot": "quiver"
+    },
+    "Calgyra's Arc": {
+      "base": "Ornate Buckler",
+      "id": "Calgyra's Arc",
+      "name": "Calgyra's Arc",
+      "slot": "shield"
+    },
+    "Call of the Brotherhood": {
+      "base": "Topaz Ring",
+      "id": "Call of the Brotherhood",
+      "name": "Call of the Brotherhood",
+      "slot": "ring"
+    },
+    "Candlemaker": {
+      "base": "Sombre Gloves",
+      "id": "Candlemaker",
+      "name": "Candlemaker",
+      "slot": "gloves"
+    },
+    "Carnage Heart": {
+      "base": "Amber Amulet",
+      "id": "Carnage Heart",
+      "name": "Carnage Heart",
+      "slot": "amulet"
+    },
+    "Carrion Call": {
+      "base": "Engraved Focus",
+      "id": "Carrion Call",
+      "name": "Carrion Call",
+      "slot": "focus"
+    },
+    "Chainsting": {
+      "base": "Hunting Spear",
+      "id": "Chainsting",
+      "name": "Chainsting",
+      "slot": "spear"
+    },
+    "Chernobog's Pillar": {
+      "base": "Blacksteel Tower Shield",
+      "id": "Chernobog's Pillar",
+      "name": "Chernobog's Pillar",
+      "slot": "shield"
+    },
+    "Chober Chaber": {
+      "base": "Leaden Greathammer",
+      "id": "Chober Chaber",
+      "name": "Chober Chaber",
+      "slot": "mace"
+    },
+    "Choir of the Storm": {
+      "base": "Jade Amulet",
+      "id": "Choir of the Storm",
+      "name": "Choir of the Storm",
+      "slot": "amulet"
+    },
+    "Cloak of Defiance": {
+      "base": "Havoc Raiment",
+      "id": "Cloak of Defiance",
+      "name": "Cloak of Defiance",
+      "slot": "body"
+    },
+    "Cloak of Flame": {
+      "base": "Silk Robe",
+      "id": "Cloak of Flame",
+      "name": "Cloak of Flame",
+      "slot": "body"
+    },
+    "Coat of Red": {
+      "base": "Chain Mail",
+      "id": "Coat of Red",
+      "name": "Coat of Red",
+      "slot": "body"
+    },
+    "Collapsing Horizon": {
+      "base": "Wyrm Quarterstaff",
+      "id": "Collapsing Horizon",
+      "name": "Collapsing Horizon",
+      "slot": "staff"
+    },
+    "Constricting Command": {
+      "base": "Viper Cap",
+      "id": "Constricting Command",
+      "name": "Constricting Command",
+      "slot": "helmet"
+    },
+    "Cornathaum": {
+      "base": "Heavy Crown",
+      "id": "Cornathaum",
+      "name": "Cornathaum",
+      "slot": "helmet"
+    },
+    "Corona of the Red Sun": {
+      "base": "Warrior Greathelm",
+      "id": "Corona of the Red Sun",
+      "name": "Corona of the Red Sun",
+      "slot": "helmet"
+    },
+    "Corpsewade": {
+      "base": "Iron Greaves",
+      "id": "Corpsewade",
+      "name": "Corpsewade",
+      "slot": "boots"
+    },
+    "Cospri's Will": {
+      "base": "Assassin Garb",
+      "id": "Cospri's Will",
+      "name": "Cospri's Will",
+      "slot": "body"
+    },
+    "Couture of Crimson": {
+      "base": "Gilded Vestments",
+      "id": "Couture of Crimson",
+      "name": "Couture of Crimson",
+      "slot": "body"
+    },
+    "Coward's Legacy": {
+      "base": "Mail Belt",
+      "id": "Coward's Legacy",
+      "name": "Coward's Legacy",
+      "slot": "belt"
+    },
+    "Cracklecreep": {
+      "base": "Ruby Ring",
+      "id": "Cracklecreep",
+      "name": "Cracklecreep",
+      "slot": "ring"
+    },
+    "Crest of Ardura": {
+      "base": "Jingling Crest Shield",
+      "id": "Crest of Ardura",
+      "name": "Crest of Ardura",
+      "slot": "shield"
+    },
+    "Crown of Eyes": {
+      "base": "Vermeil Circlet",
+      "id": "Crown of Eyes",
+      "name": "Crown of Eyes",
+      "slot": "helmet"
+    },
+    "Crown of Thorns": {
+      "base": "Twig Circlet",
+      "id": "Crown of Thorns",
+      "name": "Crown of Thorns",
+      "slot": "helmet"
+    },
+    "Crown of the Pale King": {
+      "base": "Cultist Crown",
+      "id": "Crown of the Pale King",
+      "name": "Crown of the Pale King",
+      "slot": "helmet"
+    },
+    "Crown of the Victor": {
+      "base": "Iron Crown",
+      "id": "Crown of the Victor",
+      "name": "Crown of the Victor",
+      "slot": "helmet"
+    },
+    "Cursecarver": {
+      "base": "Acrid Wand",
+      "id": "Cursecarver",
+      "name": "Cursecarver",
+      "slot": "wand"
+    },
+    "Daevata's Wind": {
+      "base": "War Spear",
+      "id": "Daevata's Wind",
+      "name": "Daevata's Wind",
+      "slot": "spear"
+    },
+    "Darkness Enthroned": {
+      "base": "Fine Belt",
+      "id": "Darkness Enthroned",
+      "name": "Darkness Enthroned",
+      "slot": "belt"
+    },
+    "Darkray Vectors": {
+      "base": "Braced Sabatons",
+      "id": "Darkray Vectors",
+      "name": "Darkray Vectors",
+      "slot": "boots"
+    },
+    "Death Articulated": {
+      "base": "Ornate Gauntlets",
+      "id": "Death Articulated",
+      "name": "Death Articulated",
+      "slot": "gloves"
+    },
+    "Death Rush": {
+      "base": "Emerald Ring",
+      "id": "Death Rush",
+      "name": "Death Rush",
+      "slot": "ring"
+    },
+    "Death's Harp": {
+      "base": "Dualstring Bow",
+      "id": "Death's Harp",
+      "name": "Death's Harp",
+      "slot": "bow"
+    },
+    "Deathblow": {
+      "base": "Doubled Gauntlets",
+      "id": "Deathblow",
+      "name": "Deathblow",
+      "slot": "gloves"
+    },
+    "Deathrattle": {
+      "base": "Twig Focus",
+      "id": "Deathrattle",
+      "name": "Deathrattle",
+      "slot": "focus"
+    },
+    "Defiance of Destiny": {
+      "base": "Jade Amulet",
+      "id": "Defiance of Destiny",
+      "name": "Defiance of Destiny",
+      "slot": "amulet"
+    },
+    "Deidbell": {
+      "base": "Elite Greathelm",
+      "id": "Deidbell",
+      "name": "Deidbell",
+      "slot": "helmet"
+    },
+    "Demon Stitcher": {
+      "base": "Intricate Gloves",
+      "id": "Demon Stitcher",
+      "name": "Demon Stitcher",
+      "slot": "gloves"
+    },
+    "Dionadair": {
+      "base": "Splintered Tower Shield",
+      "id": "Dionadair",
+      "name": "Dionadair",
+      "slot": "shield"
+    },
+    "Doedre's Damning": {
+      "base": "Lazuli Ring",
+      "id": "Doedre's Damning",
+      "name": "Doedre's Damning",
+      "slot": "ring"
+    },
+    "Doedre's Tenure": {
+      "base": "Stitched Gloves",
+      "id": "Doedre's Tenure",
+      "name": "Doedre's Tenure",
+      "slot": "gloves"
+    },
+    "Doomfletch": {
+      "base": "Composite Bow",
+      "id": "Doomfletch",
+      "name": "Doomfletch",
+      "slot": "bow"
+    },
+    "Doomgate": {
+      "base": "Braced Tower Shield",
+      "id": "Doomgate",
+      "name": "Doomgate",
+      "slot": "shield"
+    },
+    "Doryani's Prototype": {
+      "base": "Scale Mail",
+      "id": "Doryani's Prototype",
+      "name": "Doryani's Prototype",
+      "slot": "body"
+    },
+    "Double Vision": {
+      "base": "Dyad Crossbow",
+      "id": "Double Vision",
+      "name": "Double Vision",
+      "slot": "crossbow"
+    },
+    "Dreadfist": {
+      "base": "Bolstered Mitts",
+      "id": "Dreadfist",
+      "name": "Dreadfist",
+      "slot": "gloves"
+    },
+    "Dream Fragments": {
+      "base": "Sapphire Ring",
+      "id": "Dream Fragments",
+      "name": "Dream Fragments",
+      "slot": "ring"
+    },
+    "Dunkelhalt": {
+      "base": "Leather Buckler",
+      "id": "Dunkelhalt",
+      "name": "Dunkelhalt",
+      "slot": "shield"
+    },
+    "Dusk Vigil": {
+      "base": "Ashen Staff",
+      "id": "Dusk Vigil",
+      "name": "Dusk Vigil",
+      "slot": "staff"
+    },
+    "Dustbloom": {
+      "base": "Studded Vest",
+      "id": "Dustbloom",
+      "name": "Dustbloom",
+      "slot": "body"
+    },
+    "Earthbound": {
+      "base": "Voltaic Staff",
+      "id": "Earthbound",
+      "name": "Earthbound",
+      "slot": "staff"
+    },
+    "Edyrn's Tusks": {
+      "base": "Iron Cuirass",
+      "id": "Edyrn's Tusks",
+      "name": "Edyrn's Tusks",
+      "slot": "body"
+    },
+    "Effigy of Cruelty": {
+      "base": "Antler Focus",
+      "id": "Effigy of Cruelty",
+      "name": "Effigy of Cruelty",
+      "slot": "focus"
+    },
+    "Elevore": {
+      "base": "Hunter Hood",
+      "id": "Elevore",
+      "name": "Elevore",
+      "slot": "helmet"
+    },
+    "Empire's Grasp": {
+      "base": "Titan Mitts",
+      "id": "Empire's Grasp",
+      "name": "Empire's Grasp",
+      "slot": "gloves"
+    },
+    "Enezun's Charge": {
+      "base": "Volatile Wand",
+      "id": "Enezun's Charge",
+      "name": "Enezun's Charge",
+      "slot": "wand"
+    },
+    "Enfolding Dawn": {
+      "base": "Pilgrim Vestments",
+      "id": "Enfolding Dawn",
+      "name": "Enfolding Dawn",
+      "slot": "body"
+    },
+    "Erian's Cobble": {
+      "base": "Guarded Helm",
+      "id": "Erian's Cobble",
+      "name": "Erian's Cobble",
+      "slot": "helmet"
+    },
+    "Essentia Sanguis": {
+      "base": "Furtive Wraps",
+      "id": "Essentia Sanguis",
+      "name": "Essentia Sanguis",
+      "slot": "gloves"
+    },
+    "Evergrasping Ring": {
+      "base": "Pearl Ring",
+      "id": "Evergrasping Ring",
+      "name": "Evergrasping Ring",
+      "slot": "ring"
+    },
+    "Eye of Chayula": {
+      "base": "Gold Amulet",
+      "id": "Eye of Chayula",
+      "name": "Eye of Chayula",
+      "slot": "amulet"
+    },
+    "Ezomyte Peak": {
+      "base": "Soldier Greathelm",
+      "id": "Ezomyte Peak",
+      "name": "Ezomyte Peak",
+      "slot": "helmet"
+    },
+    "Fairgraves' Curse": {
+      "base": "Artillery Bow",
+      "id": "Fairgraves' Curse",
+      "name": "Fairgraves' Curse",
+      "slot": "bow"
+    },
+    "Feathered Fortress": {
+      "base": "Crescent Targe",
+      "id": "Feathered Fortress",
+      "name": "Feathered Fortress",
+      "slot": "shield"
+    },
+    "Fireflower": {
+      "base": "Solar Amulet",
+      "id": "Fireflower",
+      "name": "Fireflower",
+      "slot": "amulet"
+    },
+    "Fixation of Yix": {
+      "base": "Stellar Amulet",
+      "id": "Fixation of Yix",
+      "name": "Fixation of Yix",
+      "slot": "amulet"
+    },
+    "Font of Power": {
+      "base": "Omen Sceptre",
+      "id": "Font of Power",
+      "name": "Font of Power",
+      "slot": "sceptre"
+    },
+    "Forbidden Gaze": {
+      "base": "Chain Tiara",
+      "id": "Forbidden Gaze",
+      "name": "Forbidden Gaze",
+      "slot": "helmet"
+    },
+    "Foxshade": {
+      "base": "Quilted Vest",
+      "id": "Foxshade",
+      "name": "Foxshade",
+      "slot": "body"
+    },
+    "Frostbreath": {
+      "base": "Slim Mace",
+      "id": "Frostbreath",
+      "name": "Frostbreath",
+      "slot": "mace"
+    },
+    "Gamblesprint": {
+      "base": "Embossed Boots",
+      "id": "Gamblesprint",
+      "name": "Gamblesprint",
+      "slot": "boots"
+    },
+    "Ghostmarch": {
+      "base": "Threaded Shoes",
+      "id": "Ghostmarch",
+      "name": "Ghostmarch",
+      "slot": "boots"
+    },
+    "Ghostwrithe": {
+      "base": "Tattered Robe",
+      "id": "Ghostwrithe",
+      "name": "Ghostwrithe",
+      "slot": "body"
+    },
+    "Gifts from Above": {
+      "base": "Prismatic Ring",
+      "id": "Gifts from Above",
+      "name": "Gifts from Above",
+      "slot": "ring"
+    },
+    "Glimpse of Chaos": {
+      "base": "Tribal Mask",
+      "id": "Glimpse of Chaos",
+      "name": "Glimpse of Chaos",
+      "slot": "helmet"
+    },
+    "Gloamgown": {
+      "base": "Elementalist Robe",
+      "id": "Gloamgown",
+      "name": "Gloamgown",
+      "slot": "body"
+    },
+    "Gloomform": {
+      "base": "Waxed Jacket",
+      "id": "Gloomform",
+      "name": "Gloomform",
+      "slot": "body"
+    },
+    "Glowswarm": {
+      "base": "Lazuli Ring",
+      "id": "Glowswarm",
+      "name": "Glowswarm",
+      "slot": "ring"
+    },
+    "Goldrim": {
+      "base": "Felt Cap",
+      "id": "Goldrim",
+      "name": "Goldrim",
+      "slot": "helmet"
+    },
+    "Goregirdle": {
+      "base": "Plate Belt",
+      "id": "Goregirdle",
+      "name": "Goregirdle",
+      "slot": "belt"
+    },
+    "Gravebind": {
+      "base": "Rope Cuffs",
+      "id": "Gravebind",
+      "name": "Gravebind",
+      "slot": "gloves"
+    },
+    "Greed's Embrace": {
+      "base": "Vaal Cuirass",
+      "id": "Greed's Embrace",
+      "name": "Greed's Embrace",
+      "slot": "body"
+    },
+    "Greymake": {
+      "base": "Brimmed Helm",
+      "id": "Greymake",
+      "name": "Greymake",
+      "slot": "helmet"
+    },
+    "Grip of Winter": {
+      "base": "Firm Bracers",
+      "id": "Grip of Winter",
+      "name": "Grip of Winter",
+      "slot": "gloves"
+    },
+    "Guiding Palm": {
+      "base": "Shrine Sceptre",
+      "id": "Guiding Palm",
+      "name": "Guiding Palm",
+      "slot": "sceptre"
+    },
+    "Guiding Palm of the Eye": {
+      "base": "Shrine Sceptre",
+      "id": "Guiding Palm of the Eye",
+      "name": "Guiding Palm of the Eye",
+      "slot": "sceptre"
+    },
+    "Guiding Palm of the Heart": {
+      "base": "Shrine Sceptre",
+      "id": "Guiding Palm of the Heart",
+      "name": "Guiding Palm of the Heart",
+      "slot": "sceptre"
+    },
+    "Guiding Palm of the Mind": {
+      "base": "Shrine Sceptre",
+      "id": "Guiding Palm of the Mind",
+      "name": "Guiding Palm of the Mind",
+      "slot": "sceptre"
+    },
+    "Hand of Wisdom and Action": {
+      "base": "Variant: Pre 0.2.0",
+      "id": "Hand of Wisdom and Action",
+      "name": "Hand of Wisdom and Action",
+      "slot": "gloves"
+    },
+    "Hateforge": {
+      "base": "Moulded Mitts",
+      "id": "Hateforge",
+      "name": "Hateforge",
+      "slot": "gloves"
+    },
+    "Headhunter": {
+      "base": "Heavy Belt",
+      "id": "Headhunter",
+      "name": "Headhunter",
+      "slot": "belt"
+    },
+    "Heartbound Loop": {
+      "base": "Pearl Ring",
+      "id": "Heartbound Loop",
+      "name": "Heartbound Loop",
+      "slot": "ring"
+    },
+    "Heatshiver": {
+      "base": "Velvet Cap",
+      "id": "Heatshiver",
+      "name": "Heatshiver",
+      "slot": "helmet"
+    },
+    "Hinekora's Sight": {
+      "base": "Stellar Amulet",
+      "id": "Hinekora's Sight",
+      "name": "Hinekora's Sight",
+      "slot": "amulet"
+    },
+    "Hoghunt": {
+      "base": "Felled Greatclub",
+      "id": "Hoghunt",
+      "name": "Hoghunt",
+      "slot": "mace"
+    },
+    "Horns of Bynden": {
+      "base": "Rusted Greathelm",
+      "id": "Horns of Bynden",
+      "name": "Horns of Bynden",
+      "slot": "helmet"
+    },
+    "Hrimnor's Hymn": {
+      "base": "Oak Greathammer",
+      "id": "Hrimnor's Hymn",
+      "name": "Hrimnor's Hymn",
+      "slot": "mace"
+    },
+    "Husk of Dreams": {
+      "base": "Shaman Mantle",
+      "id": "Husk of Dreams",
+      "name": "Husk of Dreams",
+      "slot": "body"
+    },
+    "Hyrri's Ire": {
+      "base": "Armoured Vest",
+      "id": "Hyrri's Ire",
+      "name": "Hyrri's Ire",
+      "slot": "body"
+    },
+    "Icefang Orbit": {
+      "base": "Iron Ring",
+      "id": "Icefang Orbit",
+      "name": "Icefang Orbit",
+      "slot": "ring"
+    },
+    "Icetomb": {
+      "base": "Mail Vestments",
+      "id": "Icetomb",
+      "name": "Icetomb",
+      "slot": "body"
+    },
+    "Idle Hands": {
+      "base": "Sectioned Bracers",
+      "id": "Idle Hands",
+      "name": "Idle Hands",
+      "slot": "gloves"
+    },
+    "Idol of Uldurn": {
+      "base": "Crimson Amulet",
+      "id": "Idol of Uldurn",
+      "name": "Idol of Uldurn",
+      "slot": "amulet"
+    },
+    "Igniferis": {
+      "base": "Crimson Amulet",
+      "id": "Igniferis",
+      "name": "Igniferis",
+      "slot": "amulet"
+    },
+    "Indigon": {
+      "base": "Magus Tiara",
+      "id": "Indigon",
+      "name": "Indigon",
+      "slot": "helmet"
+    },
+    "Infernoclasp": {
+      "base": "Plate Belt",
+      "id": "Infernoclasp",
+      "name": "Infernoclasp",
+      "slot": "belt"
+    },
+    "Ingenuity": {
+      "base": "Utility Belt",
+      "id": "Ingenuity",
+      "name": "Ingenuity",
+      "slot": "belt"
+    },
+    "Innsmouth": {
+      "base": "Shabby Hood",
+      "id": "Innsmouth",
+      "name": "Innsmouth",
+      "slot": "helmet"
+    },
+    "Irongrasp": {
+      "base": "Vagabond Armour",
+      "id": "Irongrasp",
+      "name": "Irongrasp",
+      "slot": "body"
+    },
+    "Ironride": {
+      "base": "Visored Helm",
+      "id": "Ironride",
+      "name": "Ironride",
+      "slot": "helmet"
+    },
+    "Jarngreipr": {
+      "base": "Ringmail Gauntlets",
+      "id": "Jarngreipr",
+      "name": "Jarngreipr",
+      "slot": "gloves"
+    },
+    "Kalandra's Touch": {
+      "base": "Ring",
+      "id": "Kalandra's Touch",
+      "name": "Kalandra's Touch",
+      "slot": "ring"
+    },
+    "Kaltenhalt": {
+      "base": "Ridged Buckler",
+      "id": "Kaltenhalt",
+      "name": "Kaltenhalt",
+      "slot": "shield"
+    },
+    "Kaom's Heart": {
+      "base": "Conqueror Plate",
+      "id": "Kaom's Heart",
+      "name": "Kaom's Heart",
+      "slot": "body"
+    },
+    "Keelhaul": {
+      "base": "Linen Belt",
+      "id": "Keelhaul",
+      "name": "Keelhaul",
+      "slot": "belt"
+    },
+    "Keeper of the Arc": {
+      "base": "Spiritbone Crown",
+      "id": "Keeper of the Arc",
+      "name": "Keeper of the Arc",
+      "slot": "helmet"
+    },
+    "Killjoy": {
+      "base": "Linen Wraps",
+      "id": "Killjoy",
+      "name": "Killjoy",
+      "slot": "gloves"
+    },
+    "Kingsguard": {
+      "base": "Full Plate",
+      "id": "Kingsguard",
+      "name": "Kingsguard",
+      "slot": "body"
+    },
+    "Kitoko's Current": {
+      "base": "Jewelled Gloves",
+      "id": "Kitoko's Current",
+      "name": "Kitoko's Current",
+      "slot": "gloves"
+    },
+    "Leer Cast": {
+      "base": "Hooded Mask",
+      "id": "Leer Cast",
+      "name": "Leer Cast",
+      "slot": "helmet"
+    },
+    "Legionstride": {
+      "base": "Rough Greaves",
+      "id": "Legionstride",
+      "name": "Legionstride",
+      "slot": "boots"
+    },
+    "Leopold's Applause": {
+      "base": "Embroidered Gloves",
+      "id": "Leopold's Applause",
+      "name": "Leopold's Applause",
+      "slot": "gloves"
+    },
+    "Levinstone": {
+      "base": "Topaz Ring",
+      "id": "Levinstone",
+      "name": "Levinstone",
+      "slot": "ring"
+    },
+    "Lifesprig": {
+      "base": "Attuned Wand",
+      "id": "Lifesprig",
+      "name": "Lifesprig",
+      "slot": "wand"
+    },
+    "Lightning Coil": {
+      "base": "Ancestral Mail",
+      "id": "Lightning Coil",
+      "name": "Lightning Coil",
+      "slot": "body"
+    },
+    "Ligurium Talisman": {
+      "base": "Lapis Amulet",
+      "id": "Ligurium Talisman",
+      "name": "Ligurium Talisman",
+      "slot": "amulet"
+    },
+    "Lioneye's Glare": {
+      "base": "Heavy Bow",
+      "id": "Lioneye's Glare",
+      "name": "Lioneye's Glare",
+      "slot": "bow"
+    },
+    "Lochtonial Caress": {
+      "base": "Tempered Mitts",
+      "id": "Lochtonial Caress",
+      "name": "Lochtonial Caress",
+      "slot": "gloves"
+    },
+    "Luminous Pace": {
+      "base": "Straw Sandals",
+      "id": "Luminous Pace",
+      "name": "Luminous Pace",
+      "slot": "boots"
+    },
+    "Lycosidae": {
+      "base": "Rampart Tower Shield",
+      "id": "Lycosidae",
+      "name": "Lycosidae",
+      "slot": "shield"
+    },
+    "Mahuxotl's Machination": {
+      "base": "Omen Crest Shield",
+      "id": "Mahuxotl's Machination",
+      "name": "Mahuxotl's Machination",
+      "slot": "shield"
+    },
+    "Maligaro's Virtuosity": {
+      "base": "Fine Bracers",
+      "id": "Maligaro's Virtuosity",
+      "name": "Maligaro's Virtuosity",
+      "slot": "gloves"
+    },
+    "Marohi Erqi": {
+      "base": "Totemic Greatclub",
+      "id": "Marohi Erqi",
+      "name": "Marohi Erqi",
+      "slot": "mace"
+    },
+    "Mask of the Sanguimancer": {
+      "base": "Face Mask",
+      "id": "Mask of the Sanguimancer",
+      "name": "Mask of the Sanguimancer",
+      "slot": "helmet"
+    },
+    "Mask of the Stitched Demon": {
+      "base": "Feathered Tiara",
+      "id": "Mask of the Stitched Demon",
+      "name": "Mask of the Stitched Demon",
+      "slot": "helmet"
+    },
+    "Matsya": {
+      "base": "Crescent Quarterstaff",
+      "id": "Matsya",
+      "name": "Matsya",
+      "slot": "staff"
+    },
+    "Meginord's Girdle": {
+      "base": "Rawhide Belt",
+      "id": "Meginord's Girdle",
+      "name": "Meginord's Girdle",
+      "slot": "belt"
+    },
+    "Merit of Service": {
+      "base": "Pelage Targe",
+      "id": "Merit of Service",
+      "name": "Merit of Service",
+      "slot": "shield"
+    },
+    "Midnight Braid": {
+      "base": "Rawhide Belt",
+      "id": "Midnight Braid",
+      "name": "Midnight Braid",
+      "slot": "belt"
+    },
+    "Mind of the Council": {
+      "base": "Death Mask",
+      "id": "Mind of the Council",
+      "name": "Mind of the Council",
+      "slot": "helmet"
+    },
+    "Ming's Heart": {
+      "base": "Amethyst Ring",
+      "id": "Ming's Heart",
+      "name": "Ming's Heart",
+      "slot": "ring"
+    },
+    "Mist Whisper": {
+      "base": "Makeshift Crossbow",
+      "id": "Mist Whisper",
+      "name": "Mist Whisper",
+      "slot": "crossbow"
+    },
+    "MjÃ¶lner": {
+      "base": "Torment Club",
+      "id": "MjÃ¶lner",
+      "name": "MjÃ¶lner",
+      "slot": "mace"
+    },
+    "Morior Invictus": {
+      "base": "Grand Regalia",
+      "id": "Morior Invictus",
+      "name": "Morior Invictus",
+      "slot": "body"
+    },
+    "Murkshaft": {
+      "base": "Toxic Quiver",
+      "id": "Murkshaft",
+      "name": "Murkshaft",
+      "slot": "quiver"
+    },
+    "Myris Uxor": {
+      "base": "Covert Hood",
+      "id": "Myris Uxor",
+      "name": "Myris Uxor",
+      "slot": "helmet"
+    },
+    "Nazir's Judgement": {
+      "base": "Steelpoint Quarterstaff",
+      "id": "Nazir's Judgement",
+      "name": "Nazir's Judgement",
+      "slot": "staff"
+    },
+    "Nebuloch": {
+      "base": "Brigand Mace",
+      "id": "Nebuloch",
+      "name": "Nebuloch",
+      "slot": "mace"
+    },
+    "Necromantle": {
+      "base": "Bone Raiment",
+      "id": "Necromantle",
+      "name": "Necromantle",
+      "slot": "body"
+    },
+    "Nightscale": {
+      "base": "Pauascale Gloves",
+      "id": "Nightscale",
+      "name": "Nightscale",
+      "slot": "gloves"
+    },
+    "Nocturne": {
+      "base": "Wooden Buckler",
+      "id": "Nocturne",
+      "name": "Nocturne",
+      "slot": "shield"
+    },
+    "Northpaw": {
+      "base": "Suede Bracers",
+      "id": "Northpaw",
+      "name": "Northpaw",
+      "slot": "gloves"
+    },
+    "Oaksworn": {
+      "base": "Variant: Pre 0.2.0",
+      "id": "Oaksworn",
+      "name": "Oaksworn",
+      "slot": "shield"
+    },
+    "Obern's Bastion": {
+      "base": "Stacked Sabatons",
+      "id": "Obern's Bastion",
+      "name": "Obern's Bastion",
+      "slot": "boots"
+    },
+    "Olrovasara": {
+      "base": "Torment Club",
+      "id": "Olrovasara",
+      "name": "Olrovasara",
+      "slot": "mace"
+    },
+    "Original Sin": {
+      "base": "Amethyst Ring",
+      "id": "Original Sin",
+      "name": "Original Sin",
+      "slot": "ring"
+    },
+    "Painter's Servant": {
+      "base": "Torn Gloves",
+      "id": "Painter's Servant",
+      "name": "Painter's Servant",
+      "slot": "gloves"
+    },
+    "Palm of the Dreamer": {
+      "base": "Shrine Sceptre",
+      "id": "Palm of the Dreamer",
+      "name": "Palm of the Dreamer",
+      "slot": "sceptre"
+    },
+    "Pariah's Embrace": {
+      "base": "Cloaked Mail",
+      "id": "Pariah's Embrace",
+      "name": "Pariah's Embrace",
+      "slot": "body"
+    },
+    "Perandus Seal": {
+      "base": "Gold Ring",
+      "id": "Perandus Seal",
+      "name": "Perandus Seal",
+      "slot": "ring"
+    },
+    "Perfidy": {
+      "base": "Knight Armour",
+      "id": "Perfidy",
+      "name": "Perfidy",
+      "slot": "body"
+    },
+    "Pillar of the Caged God": {
+      "base": "Variant: Pre 0.2.0",
+      "id": "Pillar of the Caged God",
+      "name": "Pillar of the Caged God",
+      "slot": "staff"
+    },
+    "Plaguefinger": {
+      "base": "Gauze Wraps",
+      "id": "Plaguefinger",
+      "name": "Plaguefinger",
+      "slot": "gloves"
+    },
+    "Polcirkeln": {
+      "base": "Sapphire Ring",
+      "id": "Polcirkeln",
+      "name": "Polcirkeln",
+      "slot": "ring"
+    },
+    "Powertread": {
+      "base": "Hunting Shoes",
+      "id": "Powertread",
+      "name": "Powertread",
+      "slot": "boots"
+    },
+    "Pragmatism": {
+      "base": "Explorer Armour",
+      "id": "Pragmatism",
+      "name": "Pragmatism",
+      "slot": "body"
+    },
+    "Prayers for Rain": {
+      "base": "Keth Raiment",
+      "id": "Prayers for Rain",
+      "name": "Prayers for Rain",
+      "slot": "body"
+    },
+    "Prism Guardian": {
+      "base": "Sectarian Crest Shield",
+      "id": "Prism Guardian",
+      "name": "Prism Guardian",
+      "slot": "shield"
+    },
+    "Prized Pain": {
+      "base": "Iron Ring",
+      "id": "Prized Pain",
+      "name": "Prized Pain",
+      "slot": "ring"
+    },
+    "Quatl's Molt": {
+      "base": "Serpentscale Coat",
+      "id": "Quatl's Molt",
+      "name": "Quatl's Molt",
+      "slot": "body"
+    },
+    "Quecholli": {
+      "base": "Crumbling Maul",
+      "id": "Quecholli",
+      "name": "Quecholli",
+      "slot": "mace"
+    },
+    "Queen of the Forest": {
+      "base": "Smuggler Coat",
+      "id": "Queen of the Forest",
+      "name": "Queen of the Forest",
+      "slot": "body"
+    },
+    "Quill Rain": {
+      "base": "Shortbow",
+      "id": "Quill Rain",
+      "name": "Quill Rain",
+      "slot": "bow"
+    },
+    "Radiant Grief": {
+      "base": "Lace Hood",
+      "id": "Radiant Grief",
+      "name": "Radiant Grief",
+      "slot": "helmet"
+    },
+    "Rampart Raptor": {
+      "base": "Tense Crossbow",
+      "id": "Rampart Raptor",
+      "name": "Rampart Raptor",
+      "slot": "crossbow"
+    },
+    "Rathpith Globe": {
+      "base": "Sacred Focus",
+      "id": "Rathpith Globe",
+      "name": "Rathpith Globe",
+      "slot": "focus"
+    },
+    "Rearguard": {
+      "base": "Blunt Quiver",
+      "id": "Rearguard",
+      "name": "Rearguard",
+      "slot": "quiver"
+    },
+    "Redblade Banner": {
+      "base": "Heraldric Tower Shield",
+      "id": "Redblade Banner",
+      "name": "Redblade Banner",
+      "slot": "shield"
+    },
+    "Redflare Conduit": {
+      "base": "Anchorite Garb",
+      "id": "Redflare Conduit",
+      "name": "Redflare Conduit",
+      "slot": "body"
+    },
+    "Revered Resin": {
+      "base": "Amber Amulet",
+      "id": "Revered Resin",
+      "name": "Revered Resin",
+      "slot": "amulet"
+    },
+    "Rise of the Phoenix": {
+      "base": "Omen Crest Shield",
+      "id": "Rise of the Phoenix",
+      "name": "Rise of the Phoenix",
+      "slot": "shield"
+    },
+    "Rondel de Ezo": {
+      "base": "Plated Buckler",
+      "id": "Rondel de Ezo",
+      "name": "Rondel de Ezo",
+      "slot": "shield"
+    },
+    "Rondel of Fragility": {
+      "base": "Lunar Amulet",
+      "id": "Rondel of Fragility",
+      "name": "Rondel of Fragility",
+      "slot": "amulet"
+    },
+    "Ryslatha's Coil": {
+      "base": "Ornate Belt",
+      "id": "Ryslatha's Coil",
+      "name": "Ryslatha's Coil",
+      "slot": "belt"
+    },
+    "Sacred Flame": {
+      "base": "Shrine Sceptre",
+      "id": "Sacred Flame",
+      "name": "Sacred Flame",
+      "slot": "sceptre"
+    },
+    "Sacrosanctum": {
+      "base": "Corvus Mantle",
+      "id": "Sacrosanctum",
+      "name": "Sacrosanctum",
+      "slot": "body"
+    },
+    "Saffell's Frame": {
+      "base": "Emblem Crest Shield",
+      "id": "Saffell's Frame",
+      "name": "Saffell's Frame",
+      "slot": "shield"
+    },
+    "Saitha's Spear": {
+      "base": "Barbed Spear",
+      "id": "Saitha's Spear",
+      "name": "Saitha's Spear",
+      "slot": "spear"
+    },
+    "Sands of Silk": {
+      "base": "Shrouded Vest",
+      "id": "Sands of Silk",
+      "name": "Sands of Silk",
+      "slot": "body"
+    },
+    "Sandstorm Visage": {
+      "base": "Chain Tiara",
+      "id": "Sandstorm Visage",
+      "name": "Sandstorm Visage",
+      "slot": "helmet"
+    },
+    "Sanguine Diviner": {
+      "base": "Bone Wand",
+      "id": "Sanguine Diviner",
+      "name": "Sanguine Diviner",
+      "slot": "wand"
+    },
+    "Scold's Bridle": {
+      "base": "Jade Tiara",
+      "id": "Scold's Bridle",
+      "name": "Scold's Bridle",
+      "slot": "helmet"
+    },
+    "Sculpted Suffering": {
+      "base": "Warpick",
+      "id": "Sculpted Suffering",
+      "name": "Sculpted Suffering",
+      "slot": "mace"
+    },
+    "Seed of Cataclysm": {
+      "base": "Lazuli Ring",
+      "id": "Seed of Cataclysm",
+      "name": "Seed of Cataclysm",
+      "slot": "ring"
+    },
+    "Seeing Stars": {
+      "base": "{variant:1,2}Plated Mace",
+      "id": "Seeing Stars",
+      "name": "Seeing Stars",
+      "slot": "mace"
+    },
+    "Sekhema's Resolve": {
+      "base": "Ring",
+      "id": "Sekhema's Resolve",
+      "name": "Sekhema's Resolve",
+      "slot": "ring"
+    },
+    "Serpent's Egg": {
+      "base": "Gold Amulet",
+      "id": "Serpent's Egg",
+      "name": "Serpent's Egg",
+      "slot": "amulet"
+    },
+    "Serpent's Lesson": {
+      "base": "Tonal Focus",
+      "id": "Serpent's Lesson",
+      "name": "Serpent's Lesson",
+      "slot": "focus"
+    },
+    "Shackles of the Wretched": {
+      "base": "Aged Cuffs",
+      "id": "Shackles of the Wretched",
+      "name": "Shackles of the Wretched",
+      "slot": "gloves"
+    },
+    "Shankgonne": {
+      "base": "Covered Sabatons",
+      "id": "Shankgonne",
+      "name": "Shankgonne",
+      "slot": "boots"
+    },
+    "Shavronne's Satchel": {
+      "base": "Fine Belt",
+      "id": "Shavronne's Satchel",
+      "name": "Shavronne's Satchel",
+      "slot": "belt"
+    },
+    "Shyaba": {
+      "base": "Temple Maul",
+      "id": "Shyaba",
+      "name": "Shyaba",
+      "slot": "mace"
+    },
+    "Sierran Inheritance": {
+      "base": "Marabout Garb",
+      "id": "Sierran Inheritance",
+      "name": "Sierran Inheritance",
+      "slot": "body"
+    },
+    "Silks of Veneration": {
+      "base": "Enlightened Robe",
+      "id": "Silks of Veneration",
+      "name": "Silks of Veneration",
+      "slot": "body"
+    },
+    "Silverthorne": {
+      "base": "Spiked Buckler",
+      "id": "Silverthorne",
+      "name": "Silverthorne",
+      "slot": "shield"
+    },
+    "Sine Aequo": {
+      "base": "Grand Manchettes",
+      "id": "Sine Aequo",
+      "name": "Sine Aequo",
+      "slot": "gloves"
+    },
+    "Sire of Shards": {
+      "base": "Chiming Staff",
+      "id": "Sire of Shards",
+      "name": "Sire of Shards",
+      "slot": "staff"
+    },
+    "Skin of the Loyal": {
+      "base": "Garment",
+      "id": "Skin of the Loyal",
+      "name": "Skin of the Loyal",
+      "slot": "body"
+    },
+    "Skysliver": {
+      "base": "Winged Spear",
+      "id": "Skysliver",
+      "name": "Skysliver",
+      "slot": "spear"
+    },
+    "Slivertongue": {
+      "base": "Zealot Bow",
+      "id": "Slivertongue",
+      "name": "Slivertongue",
+      "slot": "bow"
+    },
+    "Snakebite": {
+      "base": "Spined Bracers",
+      "id": "Snakebite",
+      "name": "Snakebite",
+      "slot": "gloves"
+    },
+    "Snakepit": {
+      "base": "Pearl Ring",
+      "id": "Snakepit",
+      "name": "Snakepit",
+      "slot": "ring"
+    },
+    "Solus Ipse": {
+      "base": "Grand Visage",
+      "id": "Solus Ipse",
+      "name": "Solus Ipse",
+      "slot": "helmet"
+    },
+    "Soul Mantle": {
+      "base": "Sacrificial Mantle",
+      "id": "Soul Mantle",
+      "name": "Soul Mantle",
+      "slot": "body"
+    },
+    "Soul Tether": {
+      "base": "Long Belt",
+      "id": "Soul Tether",
+      "name": "Soul Tether",
+      "slot": "belt"
+    },
+    "Spire of Ire": {
+      "base": "Helix Spear",
+      "id": "Spire of Ire",
+      "name": "Spire of Ire",
+      "slot": "spear"
+    },
+    "Splinter of Lorrata": {
+      "base": "Hardwood Spear",
+      "id": "Splinter of Lorrata",
+      "name": "Splinter of Lorrata",
+      "slot": "spear"
+    },
+    "Splinterheart": {
+      "base": "Recurve Bow",
+      "id": "Splinterheart",
+      "name": "Splinterheart",
+      "slot": "bow"
+    },
+    "Starkonja's Head": {
+      "base": "Leatherbound Hood",
+      "id": "Starkonja's Head",
+      "name": "Starkonja's Head",
+      "slot": "helmet"
+    },
+    "Stone of Lazhwar": {
+      "base": "Lapis Amulet",
+      "id": "Stone of Lazhwar",
+      "name": "Stone of Lazhwar",
+      "slot": "amulet"
+    },
+    "Strugglescream": {
+      "base": "Stellar Amulet",
+      "id": "Strugglescream",
+      "name": "Strugglescream",
+      "slot": "amulet"
+    },
+    "Sunsplinter": {
+      "base": "Array Buckler",
+      "id": "Sunsplinter",
+      "name": "Sunsplinter",
+      "slot": "shield"
+    },
+    "Surefooted Sigil": {
+      "base": "Jade Amulet",
+      "id": "Surefooted Sigil",
+      "name": "Surefooted Sigil",
+      "slot": "amulet"
+    },
+    "Svalinn": {
+      "base": "Crucible Tower Shield",
+      "id": "Svalinn",
+      "name": "Svalinn",
+      "slot": "shield"
+    },
+    "Tabula Rasa": {
+      "base": "Garment",
+      "id": "Tabula Rasa",
+      "name": "Tabula Rasa",
+      "slot": "body"
+    },
+    "Tangletongue": {
+      "base": "Forked Spear",
+      "id": "Tangletongue",
+      "name": "Tangletongue",
+      "slot": "spear"
+    },
+    "Taryn's Shiver": {
+      "base": "Gelid Staff",
+      "id": "Taryn's Shiver",
+      "name": "Taryn's Shiver",
+      "slot": "staff"
+    },
+    "Temporalis": {
+      "base": "Silk Robe",
+      "id": "Temporalis",
+      "name": "Temporalis",
+      "slot": "body"
+    },
+    "Tetzlapokal's Desire": {
+      "base": "Votive Raiment",
+      "id": "Tetzlapokal's Desire",
+      "name": "Tetzlapokal's Desire",
+      "slot": "body"
+    },
+    "The Anvil": {
+      "base": "Bloodstone Amulet",
+      "id": "The Anvil",
+      "name": "The Anvil",
+      "slot": "amulet"
+    },
+    "The Barrow Dweller": {
+      "base": "Rogue Armour",
+      "id": "The Barrow Dweller",
+      "name": "The Barrow Dweller",
+      "slot": "body"
+    },
+    "The Black Doubt": {
+      "base": "Hexer's Robe",
+      "id": "The Black Doubt",
+      "name": "The Black Doubt",
+      "slot": "body"
+    },
+    "The Black Insignia": {
+      "base": "Corsair Cap",
+      "id": "The Black Insignia",
+      "name": "The Black Insignia",
+      "slot": "helmet"
+    },
+    "The Blood Thorn": {
+      "base": "Wrapped Quarterstaff",
+      "id": "The Blood Thorn",
+      "name": "The Blood Thorn",
+      "slot": "staff"
+    },
+    "The Brass Dome": {
+      "base": "Champion Cuirass",
+      "id": "The Brass Dome",
+      "name": "The Brass Dome",
+      "slot": "body"
+    },
+    "The Bringer of Rain": {
+      "base": "Decorated Helm",
+      "id": "The Bringer of Rain",
+      "name": "The Bringer of Rain",
+      "slot": "helmet"
+    },
+    "The Burden of Shadows": {
+      "base": "Chiming Staff",
+      "id": "The Burden of Shadows",
+      "name": "The Burden of Shadows",
+      "slot": "staff"
+    },
+    "The Burrower": {
+      "base": "Topaz Ring",
+      "id": "The Burrower",
+      "name": "The Burrower",
+      "slot": "ring"
+    },
+    "The Coming Calamity": {
+      "base": "Heroic Armour",
+      "id": "The Coming Calamity",
+      "name": "The Coming Calamity",
+      "slot": "body"
+    },
+    "The Covenant": {
+      "base": "Altar Robe",
+      "id": "The Covenant",
+      "name": "The Covenant",
+      "slot": "body"
+    },
+    "The Dancing Mirage": {
+      "base": "Wayfarer Jacket",
+      "id": "The Dancing Mirage",
+      "name": "The Dancing Mirage",
+      "slot": "body"
+    },
+    "The Dark Defiler": {
+      "base": "Rattling Sceptre",
+      "id": "The Dark Defiler",
+      "name": "The Dark Defiler",
+      "slot": "sceptre"
+    },
+    "The Deepest Tower": {
+      "base": "Spiritbone Crown",
+      "id": "The Deepest Tower",
+      "name": "The Deepest Tower",
+      "slot": "helmet"
+    },
+    "The Devouring Diadem": {
+      "base": "Wicker Tiara",
+      "id": "The Devouring Diadem",
+      "name": "The Devouring Diadem",
+      "slot": "helmet"
+    },
+    "The Empty Roar": {
+      "base": "Cultist Greathammer",
+      "id": "The Empty Roar",
+      "name": "The Empty Roar",
+      "slot": "mace"
+    },
+    "The Eternal Spark": {
+      "base": "Crystal Focus",
+      "id": "The Eternal Spark",
+      "name": "The Eternal Spark",
+      "slot": "focus"
+    },
+    "The Everlasting Gaze": {
+      "base": "Azure Amulet",
+      "id": "The Everlasting Gaze",
+      "name": "The Everlasting Gaze",
+      "slot": "amulet"
+    },
+    "The Fallen Formation": {
+      "base": "Lamellar Mail",
+      "id": "The Fallen Formation",
+      "name": "The Fallen Formation",
+      "slot": "body"
+    },
+    "The Gnashing Sash": {
+      "base": "Wide Belt",
+      "id": "The Gnashing Sash",
+      "name": "The Gnashing Sash",
+      "slot": "belt"
+    },
+    "The Hammer of Faith": {
+      "base": "Giant Maul",
+      "id": "The Hammer of Faith",
+      "name": "The Hammer of Faith",
+      "slot": "mace"
+    },
+    "The Hollow Mask": {
+      "base": "Hewn Mask",
+      "id": "The Hollow Mask",
+      "name": "The Hollow Mask",
+      "slot": "helmet"
+    },
+    "The Infinite Pursuit": {
+      "base": "Bronze Greaves",
+      "id": "The Infinite Pursuit",
+      "name": "The Infinite Pursuit",
+      "slot": "boots"
+    },
+    "The Knight-errant": {
+      "base": "Mail Sabatons",
+      "id": "The Knight-errant",
+      "name": "The Knight-errant",
+      "slot": "boots"
+    },
+    "The Last Lament": {
+      "base": "Desolate Crossbow",
+      "id": "The Last Lament",
+      "name": "The Last Lament",
+      "slot": "crossbow"
+    },
+    "The Lethal Draw": {
+      "base": "Sacral Quiver",
+      "id": "The Lethal Draw",
+      "name": "The Lethal Draw",
+      "slot": "quiver"
+    },
+    "The Mutable Star": {
+      "base": "Cleric Vestments",
+      "id": "The Mutable Star",
+      "name": "The Mutable Star",
+      "slot": "body"
+    },
+    "The Pandemonius": {
+      "base": "Lapis Amulet",
+      "id": "The Pandemonius",
+      "name": "The Pandemonius",
+      "slot": "amulet"
+    },
+    "The Prisoner's Manacles": {
+      "base": "Verisium Cuffs",
+      "id": "The Prisoner's Manacles",
+      "name": "The Prisoner's Manacles",
+      "slot": "gloves"
+    },
+    "The Rat Cage": {
+      "base": "Scout's Vest",
+      "id": "The Rat Cage",
+      "name": "The Rat Cage",
+      "slot": "body"
+    },
+    "The Road Warrior": {
+      "base": "Raider Plate",
+      "id": "The Road Warrior",
+      "name": "The Road Warrior",
+      "slot": "body"
+    },
+    "The Searing Touch": {
+      "base": "Pyrophyte Staff",
+      "id": "The Searing Touch",
+      "name": "The Searing Touch",
+      "slot": "staff"
+    },
+    "The Sentry": {
+      "base": "Gothic Quarterstaff",
+      "id": "The Sentry",
+      "name": "The Sentry",
+      "slot": "staff"
+    },
+    "The Smiling Knight": {
+      "base": "Cowled Helm",
+      "id": "The Smiling Knight",
+      "name": "The Smiling Knight",
+      "slot": "helmet"
+    },
+    "The Surrender": {
+      "base": "{variant:1}Stone Tower Shield",
+      "id": "The Surrender",
+      "name": "The Surrender",
+      "slot": "shield"
+    },
+    "The Three Dragons": {
+      "base": "Solid Mask",
+      "id": "The Three Dragons",
+      "name": "The Three Dragons",
+      "slot": "helmet"
+    },
+    "The Unborn Lich": {
+      "base": "Ravenous Staff",
+      "id": "The Unborn Lich",
+      "name": "The Unborn Lich",
+      "slot": "staff"
+    },
+    "The Vertex": {
+      "base": "Tribal Mask",
+      "id": "The Vertex",
+      "name": "The Vertex",
+      "slot": "helmet"
+    },
+    "The Vile Knight": {
+      "base": "Shielded Helm",
+      "id": "The Vile Knight",
+      "name": "The Vile Knight",
+      "slot": "helmet"
+    },
+    "The Wailing Wall": {
+      "base": "Effigial Tower Shield",
+      "id": "The Wailing Wall",
+      "name": "The Wailing Wall",
+      "slot": "shield"
+    },
+    "The Whispering Ice": {
+      "base": "Permafrost Staff",
+      "id": "The Whispering Ice",
+      "name": "The Whispering Ice",
+      "slot": "staff"
+    },
+    "The Wicked Quill": {
+      "base": "Withered Wand",
+      "id": "The Wicked Quill",
+      "name": "The Wicked Quill",
+      "slot": "wand"
+    },
+    "Thief's Torment": {
+      "base": "Emerald Ring",
+      "id": "Thief's Torment",
+      "name": "Thief's Torment",
+      "slot": "ring"
+    },
+    "Threaded Light": {
+      "base": "Woven Focus",
+      "id": "Threaded Light",
+      "name": "Threaded Light",
+      "slot": "focus"
+    },
+    "Thrillsteel": {
+      "base": "Spired Greathelm",
+      "id": "Thrillsteel",
+      "name": "Thrillsteel",
+      "slot": "helmet"
+    },
+    "Thunderfist": {
+      "base": "Utility Wraps",
+      "id": "Thunderfist",
+      "name": "Thunderfist",
+      "slot": "gloves"
+    },
+    "Thunderstep": {
+      "base": "Steeltoe Boots",
+      "id": "Thunderstep",
+      "name": "Thunderstep",
+      "slot": "boots"
+    },
+    "Tidebreaker": {
+      "base": "Pointed Maul",
+      "id": "Tidebreaker",
+      "name": "Tidebreaker",
+      "slot": "mace"
+    },
+    "Titanrot Cataphract": {
+      "base": "Maraketh Cuirass",
+      "id": "Titanrot Cataphract",
+      "name": "Titanrot Cataphract",
+      "slot": "body"
+    },
+    "Trampletoe": {
+      "base": "Trimmed Greaves",
+      "id": "Trampletoe",
+      "name": "Trampletoe",
+      "slot": "boots"
+    },
+    "Treefingers": {
+      "base": "Riveted Mitts",
+      "id": "Treefingers",
+      "name": "Treefingers",
+      "slot": "gloves"
+    },
+    "Trenchtimbre": {
+      "base": "Spiked Club",
+      "id": "Trenchtimbre",
+      "name": "Trenchtimbre",
+      "slot": "mace"
+    },
+    "Trephina": {
+      "base": "Forge Maul",
+      "id": "Trephina",
+      "name": "Trephina",
+      "slot": "mace"
+    },
+    "Tyranny's Grip": {
+      "base": "Ironhead Spear",
+      "id": "Tyranny's Grip",
+      "name": "Tyranny's Grip",
+      "slot": "spear"
+    },
+    "Umbilicus Immortalis": {
+      "base": "Linen Belt",
+      "id": "Umbilicus Immortalis",
+      "name": "Umbilicus Immortalis",
+      "slot": "belt"
+    },
+    "Ungil's Harmony": {
+      "base": "Azure Amulet",
+      "id": "Ungil's Harmony",
+      "name": "Ungil's Harmony",
+      "slot": "amulet"
+    },
+    "Valako's Vice": {
+      "base": "Plate Gauntlets",
+      "id": "Valako's Vice",
+      "name": "Valako's Vice",
+      "slot": "gloves"
+    },
+    "Veil of the Night": {
+      "base": "Martyr Crown",
+      "id": "Veil of the Night",
+      "name": "Veil of the Night",
+      "slot": "helmet"
+    },
+    "Venopuncture": {
+      "base": "Iron Ring",
+      "id": "Venopuncture",
+      "name": "Venopuncture",
+      "slot": "ring"
+    },
+    "Ventor's Gamble": {
+      "base": "Gold Ring",
+      "id": "Ventor's Gamble",
+      "name": "Ventor's Gamble",
+      "slot": "ring"
+    },
+    "Vigilant View": {
+      "base": "Emerald Ring",
+      "id": "Vigilant View",
+      "name": "Vigilant View",
+      "slot": "ring"
+    },
+    "Vis Mortis": {
+      "base": "Plated Raiment",
+      "id": "Vis Mortis",
+      "name": "Vis Mortis",
+      "slot": "body"
+    },
+    "Visage of Ayah": {
+      "base": "Beaded Circlet",
+      "id": "Visage of Ayah",
+      "name": "Visage of Ayah",
+      "slot": "helmet"
+    },
+    "Voll's Protector": {
+      "base": "{variant:1}Ironclad Vestments",
+      "id": "Voll's Protector",
+      "name": "Voll's Protector",
+      "slot": "body"
+    },
+    "Voltaxic Rift": {
+      "base": "Fanatic Bow",
+      "id": "Voltaxic Rift",
+      "name": "Voltaxic Rift",
+      "slot": "bow"
+    },
+    "Waistgate Heavy Belt": {
+      "base": "Heavy Belt",
+      "id": "Waistgate Heavy Belt",
+      "name": "Waistgate Heavy Belt",
+      "slot": "belt"
+    },
+    "Wake of Destruction": {
+      "base": "Secured Leggings",
+      "id": "Wake of Destruction",
+      "name": "Wake of Destruction",
+      "slot": "boots"
+    },
+    "Wandering Reliquary": {
+      "base": "Steel Plate",
+      "id": "Wandering Reliquary",
+      "name": "Wandering Reliquary",
+      "slot": "body"
+    },
+    "Wanderlust": {
+      "base": "Wrapped Sandals",
+      "id": "Wanderlust",
+      "name": "Wanderlust",
+      "slot": "boots"
+    },
+    "Waveshaper": {
+      "base": "Tideseer Mantle",
+      "id": "Waveshaper",
+      "name": "Waveshaper",
+      "slot": "body"
+    },
+    "Whisper of the Brotherhood": {
+      "base": "Sapphire Ring",
+      "id": "Whisper of the Brotherhood",
+      "name": "Whisper of the Brotherhood",
+      "slot": "ring"
+    },
+    "Widow's Reign": {
+      "base": "Knight Armour",
+      "id": "Widow's Reign",
+      "name": "Widow's Reign",
+      "slot": "body"
+    },
+    "Widowhail": {
+      "base": "Crude Bow",
+      "id": "Widowhail",
+      "name": "Widowhail",
+      "slot": "bow"
+    },
+    "Window to Paradise": {
+      "base": "Barricade Tower Shield",
+      "id": "Window to Paradise",
+      "name": "Window to Paradise",
+      "slot": "shield"
+    },
+    "Windscream": {
+      "base": "Feathered Sandals",
+      "id": "Windscream",
+      "name": "Windscream",
+      "slot": "boots"
+    },
+    "Wings of Caelyn": {
+      "base": "Rusted Greathelm",
+      "id": "Wings of Caelyn",
+      "name": "Wings of Caelyn",
+      "slot": "helmet"
+    },
+    "Wondertrap": {
+      "base": "Silk Slippers",
+      "id": "Wondertrap",
+      "name": "Wondertrap",
+      "slot": "boots"
+    },
+    "Wulfsbane": {
+      "base": "Painted Tower Shield",
+      "id": "Wulfsbane",
+      "name": "Wulfsbane",
+      "slot": "shield"
+    },
+    "Wylund's Stake": {
+      "base": "Smithing Hammer",
+      "id": "Wylund's Stake",
+      "name": "Wylund's Stake",
+      "slot": "mace"
+    },
+    "Xoph's Blood": {
+      "base": "Amber Amulet",
+      "id": "Xoph's Blood",
+      "name": "Xoph's Blood",
+      "slot": "amulet"
+    },
+    "Yoke of Suffering": {
+      "base": "Bloodstone Amulet",
+      "id": "Yoke of Suffering",
+      "name": "Yoke of Suffering",
+      "slot": "amulet"
+    },
+    "Yriel's Fostering": {
+      "base": "Strider Vest",
+      "id": "Yriel's Fostering",
+      "name": "Yriel's Fostering",
+      "slot": "body"
+    },
+    "Zerphi's Genesis": {
+      "base": "Heavy Belt",
+      "id": "Zerphi's Genesis",
+      "name": "Zerphi's Genesis",
+      "slot": "belt"
+    },
+    "Zerphi's Serape": {
+      "base": "Scalper's Jacket",
+      "id": "Zerphi's Serape",
+      "name": "Zerphi's Serape",
+      "slot": "body"
+    }
+  },
+  "version": {
+    "fetchedAt": "2026-05-21T01:04:12.273Z",
+    "pobCommit": "63a375c1068e0d0c7ff7d12e7294aba224f64427"
+  }
+}

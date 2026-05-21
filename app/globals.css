@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-0: #000000;
+  --color-bg-1: #0a0a0a;
+  --color-bg-2: #131313;
+  --color-text-primary: #f5f5f5;
+  --color-text-muted: #6a6a6a;
+  --color-accent: #ffffff;
+  --color-edge: rgba(255, 255, 255, 0.12);
+
+  --color-node-normal: #6a6a6a;
+  --color-node-notable: #d4d4d4;
+  --color-node-keystone: #f5f5f5;
+  --color-node-jewel: #a8a8a8;
+  --color-node-ascendancy: #8a8a8a;
+  --color-node-class-start: #ffffff;
+
+  /* Weapon-set passives: Set I = red, Set II = green (matches in-game). */
+  --color-weapon-set-1: #e0524a;
+  --color-weapon-set-2: #57c46a;
+}
+
+html,
+body {
+  background: var(--color-bg-0);
+  color: var(--color-text-primary);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  min-height: 100dvh;
+  overflow: hidden;
+}
