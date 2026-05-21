@@ -3,12 +3,13 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AddPicker } from "@/components/AddPicker";
 import { GemIcon } from "@/components/GemIcon";
+import { LevelPickerPopover } from "@/components/LevelPickerPopover";
 import {
   activeToPickerRow,
   supportToPickerRow,
   type GemPickerRow,
 } from "@/lib/build/gem-ui";
-import { LevelPickerPopover } from "@/components/LevelPickerPopover";
+import { fetchAppJson } from "@/lib/data/fetch-app-json";
 import { formatGemLevel, toLevelInterval } from "@/lib/build/levels";
 import { resolveSupportAdditionalText, syncBuildGemAdditionalText } from "@/lib/build/gem-additional-text";
 import { defaultSupportLevelInterval, formatSupportCraftAdditionalText } from "@/lib/build/support-craft-level";
@@ -55,10 +56,8 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
 
   useEffect(() => {
     let aborted = false;
-    fetch("/gems", { cache: "force-cache" })
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+    fetchAppJson("/gems")
+      .then(async (data) => {
         const parsed = GemsFileSchema.safeParse(data);
         if (!parsed.success) throw new Error(parsed.error.message.slice(0, 120));
         if (!aborted) setGems(parsed.data);

@@ -16,15 +16,28 @@ async function getEtag(filePath: string): Promise<string | null> {
     stat(filePath),
   ]);
   let sha = "unknown";
+  let fetchedAt = "";
+  let fileMeta: Record<string, unknown> | undefined;
   if (metaRaw) {
     try {
-      const meta = JSON.parse(metaRaw) as { pobCommit?: string };
+      const meta = JSON.parse(metaRaw) as {
+        pobCommit?: string;
+        fetchedAt?: string;
+        files?: Record<string, unknown>;
+      };
       sha = meta.pobCommit ?? "unknown";
+      fetchedAt = meta.fetchedAt ?? "";
+      fileMeta = meta.files;
     } catch {
       /* keep unknown */
     }
   }
-  return `"${sha}-${Math.floor(s.mtimeMs)}"`;
+  const fileKey = path.basename(filePath);
+  const fileSig =
+    fileMeta?.[fileKey] != null
+      ? JSON.stringify(fileMeta[fileKey])
+      : String(Math.floor(s.mtimeMs));
+  return `"${sha}-${fetchedAt}-${fileKey}-${fileSig}"`;
 }
 
 export function createJsonDataRoute(filePath: string) {
@@ -44,7 +57,7 @@ export function createJsonDataRoute(filePath: string) {
       status: 200,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        "Cache-Control": "public, max-age=31536000, immutable",
+        "Cache-Control": "public, max-age=0, must-revalidate",
         ETag: etag,
       },
     });

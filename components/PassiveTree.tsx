@@ -11,6 +11,7 @@ import {
   type SetStateAction,
   type PointerEvent as ReactPointerEvent,
 } from "react";
+import { fetchAppJson } from "@/lib/data/fetch-app-json";
 import { buildEdgeIndex } from "@/lib/tree/build-edge-index";
 import { nodeRadius } from "@/lib/tree/node-style";
 import { buildNodeHitIndex, nodeAt } from "@/lib/tree/node-hit";
@@ -148,10 +149,8 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
   // ---- Data fetch ----
   useEffect(() => {
     let aborted = false;
-    fetch("/tree", { cache: "force-cache" })
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+    fetchAppJson("/tree")
+      .then(async (data) => {
         const parsed = TreeSchema.safeParse(data);
         if (!parsed.success) {
           throw new Error(`Schema validation failed: ${parsed.error.message.slice(0, 200)}`);
@@ -161,10 +160,8 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
       .catch((e) => {
         if (!aborted) setError(e instanceof Error ? e.message : String(e));
       });
-    fetch("/tree-art", { cache: "force-cache" })
-      .then(async (res) => {
-        if (!res.ok) return;
-        const data = await res.json();
+    fetchAppJson("/tree-art")
+      .then(async (data) => {
         const parsed = TreeArtManifestSchema.safeParse(data);
         if (!aborted && parsed.success) setTreeArt(parsed.data);
       })

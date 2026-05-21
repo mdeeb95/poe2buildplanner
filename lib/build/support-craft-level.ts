@@ -1,4 +1,5 @@
-import { toLevelInterval, type LevelInterval } from "./levels";
+import { toLevelInterval } from "./levels";
+import type { LevelInterval } from "@/schemas/build";
 import {
   formatStatRequirements,
   getGemStatRequirementsAtLevel,

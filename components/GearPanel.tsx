@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { fetchAppJson } from "@/lib/data/fetch-app-json";
 import { baseNameForUnique, uniqueMatchesForSlot } from "@/lib/build/slot-uniques";
 import { SLOT_LAYOUT, sizeClass, type SlotLayout } from "@/lib/build/slots";
 import type { BuildState, GearItem } from "@/schemas/build";
@@ -23,10 +24,8 @@ export function GearPanel({ build, setBuild, gearH }: GearPanelProps) {
 
   useEffect(() => {
     let aborted = false;
-    fetch("/bases", { cache: "force-cache" })
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+    fetchAppJson("/bases")
+      .then(async (data) => {
         const parsed = BasesFileSchema.safeParse(data);
         if (!parsed.success) throw new Error(parsed.error.message.slice(0, 120));
         if (!aborted) setBases(parsed.data);
@@ -41,10 +40,8 @@ export function GearPanel({ build, setBuild, gearH }: GearPanelProps) {
 
   useEffect(() => {
     let aborted = false;
-    fetch("/uniques", { cache: "force-cache" })
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+    fetchAppJson("/uniques")
+      .then(async (data) => {
         const parsed = UniquesFileSchema.safeParse(data);
         if (!parsed.success) throw new Error(parsed.error.message.slice(0, 120));
         if (!aborted) setUniques(parsed.data);

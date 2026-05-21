@@ -3,6 +3,7 @@ import { createEmptyBuild } from "./defaults";
 import { fromLevelInterval, passiveExportLevel, toLevelInterval } from "./levels";
 import type { BuildState, GearItem, SkillSetup } from "@/schemas/build";
 import { BuildFileSchema, type BuildFile } from "@/schemas/build-file";
+import { fetchAppJson } from "@/lib/data/fetch-app-json";
 import { GemsFileSchema, type GemsFile } from "@/schemas/gem";
 import type { TreeClass } from "@/schemas/tree";
 
@@ -133,11 +134,9 @@ export function buildFileDownloadName(name: string): string {
 export async function downloadBuildFile(build: BuildState): Promise<void> {
   let gems: GemsFile | undefined;
   try {
-    const res = await fetch("/gems", { cache: "force-cache" });
-    if (res.ok) {
-      const parsed = GemsFileSchema.safeParse(await res.json());
-      if (parsed.success) gems = parsed.data;
-    }
+    const res = await fetchAppJson("/gems");
+    const parsed = GemsFileSchema.safeParse(res);
+    if (parsed.success) gems = parsed.data;
   } catch {
     /* export without catalog refresh */
   }
