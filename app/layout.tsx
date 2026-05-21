@@ -19,8 +19,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PoE2 Build Tool",
-  description: "Path of Exile 2 build authoring tool",
+  title: "Unofficial PoE2 Build Planner",
+  description:
+    "Unofficial Path of Exile 2 build planner — passive tree, gear, and skills. Not affiliated with Grinding Gear Games.",
 };
 
 export default function RootLayout({

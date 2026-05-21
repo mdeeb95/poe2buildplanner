@@ -1,9 +1,17 @@
 {
   "name": "buildproj",
   "version": "0.0.0",
-  "private": true,
   "type": "module",
-  "description": "PoE2 build authoring tool — data extraction layer",
+  "description": "Unofficial Path of Exile 2 build planner — Next.js web app and PoB data sync pipeline",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mdeeb95/poe2buildplanner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mdeeb95/poe2buildplanner/issues"
+  },
+  "homepage": "https://github.com/mdeeb95/poe2buildplanner#readme",
   "packageManager": "pnpm@11.1.3",
   "engines": {
     "node": ">=22.13"

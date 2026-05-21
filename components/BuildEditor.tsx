@@ -5,6 +5,7 @@ import { PassiveTree } from "@/components/PassiveTree";
 import { GearPanel } from "@/components/GearPanel";
 import { HResizer, VResizer } from "@/components/Resizer";
 import { SkillsPanel } from "@/components/SkillsPanel";
+import { SiteFooter } from "@/components/SiteFooter";
 import { TopBar } from "@/components/TopBar";
 import { createEmptyBuild } from "@/lib/build/defaults";
 import { useBuildHistory } from "@/hooks/useBuildHistory";
@@ -83,6 +84,8 @@ export function BuildEditor({ seed, classes }: BuildEditorProps) {
           <SkillsPanel build={build} setBuild={setBuild} />
         </aside>
       </main>
+
+      <SiteFooter />
     </div>
   );
 }
