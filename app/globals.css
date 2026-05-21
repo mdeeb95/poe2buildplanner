@@ -129,3 +129,110 @@ body {
 .tree-search-clear:hover {
   color: var(--color-text-primary);
 }
+
+/* Passive node level badges (screen-space overlay, fixed pixel size). */
+.tree-node-level-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+  overflow: hidden;
+}
+.tree-node-level-badge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 13px;
+  text-align: center;
+  color: var(--gold, #c9a36b);
+  background: rgba(10, 10, 10, 0.92);
+  border: 1px solid var(--gold, #c9a36b);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.tree-tip-hint {
+  font-size: 10px;
+  opacity: 0.75;
+}
+
+/* Level picker popover (passives + gems). */
+.level-picker-popover {
+  position: fixed;
+  z-index: 100;
+  min-width: 180px;
+  padding: 10px 12px;
+  background: var(--bg-3, #1a1a1a);
+  border: 1px solid var(--border-2, rgba(255, 255, 255, 0.12));
+  border-radius: 2px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.level-picker-label {
+  display: block;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3, #6a6a6a);
+  margin-bottom: 8px;
+}
+.level-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.level-picker-input {
+  width: 52px;
+  padding: 4px 6px;
+  background: var(--bg-2, #131313);
+  border: 1px solid var(--border-2, rgba(255, 255, 255, 0.12));
+  color: var(--color-text-primary);
+  font-size: 12px;
+  border-radius: 2px;
+  outline: 0;
+  -moz-appearance: textfield;
+}
+.level-picker-input::-webkit-inner-spin-button,
+.level-picker-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.level-picker-input:focus {
+  border-color: var(--gold-dim, #8a7348);
+}
+.level-picker-apply {
+  padding: 4px 10px;
+  background: var(--gold, #c9a36b);
+  border: 0;
+  color: var(--bg-0, #000);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.level-picker-apply:hover {
+  filter: brightness(1.08);
+}
+.level-picker-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.level-picker-secondary {
+  padding: 3px 8px;
+  background: transparent;
+  border: 1px solid var(--border-2, rgba(255, 255, 255, 0.12));
+  color: var(--text-2, #9a9a9a);
+  font-size: 10.5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.level-picker-secondary:hover {
+  background: var(--bg-4, #222);
+  color: var(--color-text-primary);
+}

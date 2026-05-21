@@ -184,3 +184,20 @@ describe("applyTreeAction — smart-allocate (shortest path)", () => {
     expect(r.build.passiveWeaponSet).toEqual({ A: 1 }); // single adjacent click respects mode
   });
 });
+
+describe("applyTreeAction — weapon-set level tracks", () => {
+  it("new set 1 nodes match existing set 2 slot levels after extra globals", () => {
+    let b = freshBuild();
+    b = applyTreeAction(tree, adj, startId, b, "A", "global", { toggle: true }).build;
+    b = applyTreeAction(tree, adj, startId, b, "B", "set2", { toggle: true }).build;
+    expect(b.nodeLevels.A).toBe(1);
+    expect(b.nodeLevels.B).toBe(2);
+
+    b = applyTreeAction(tree, adj, startId, b, "C", "global", { toggle: true }).build;
+    expect(b.nodeLevels.C).toBe(3);
+
+    b = applyTreeAction(tree, adj, startId, b, "ASC", "set1", { toggle: true }).build;
+    expect(b.nodeLevels.ASC).toBe(2);
+    expect(b.nodeLevels.B).toBe(2);
+  });
+});

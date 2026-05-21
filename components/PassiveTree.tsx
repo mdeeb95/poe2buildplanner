@@ -14,6 +14,7 @@ import {
 import { buildEdgeIndex } from "@/lib/tree/build-edge-index";
 import { nodeRadius } from "@/lib/tree/node-style";
 import { buildNodeHitIndex, nodeAt } from "@/lib/tree/node-hit";
+import { artZoomEnabled } from "@/lib/tree/art";
 import {
   WEAPON_SET_MAX,
   globalCount,
@@ -48,7 +49,10 @@ import { TreeNodesFrontier } from "@/components/TreeNodesFrontier";
 import { TreeNodesPreview } from "@/components/TreeNodesPreview";
 import { TreeEdgesPreview } from "@/components/TreeEdgesPreview";
 import { TreeNodesSearch } from "@/components/TreeNodesSearch";
+import { TreeNodeLevelBadges, type TreeNodeLevelBadgesHandle } from "@/components/TreeNodeLevelBadges";
+import { LevelPickerPopover } from "@/components/LevelPickerPopover";
 import { TreeTooltip, type TreeTooltipHandle } from "@/components/TreeTooltip";
+import { passiveDisplayLevel } from "@/lib/build/levels";
 
 interface PassiveTreeProps {
   seed: {
@@ -72,6 +76,12 @@ const SCALE_MAX = 60;
 const DRAG_THRESHOLD_PX = 4;
 const FLASH_MS = 600;
 const MESSAGE_MS = 1400;
+
+interface LevelPickerState {
+  nodeId: string;
+  clientX: number;
+  clientY: number;
+}
 
 const HOVER_RING_RADIUS_BUMP = 8;
 
@@ -97,6 +107,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
   const [allocMode, setAllocMode] = useState<AllocTarget>("global");
   const [flashSet, setFlashSet] = useState<WeaponSet | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [levelPicker, setLevelPicker] = useState<LevelPickerState | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -105,6 +116,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
   const artCanvasRef = useRef<TreeArtCanvasHandle | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const tooltipRef = useRef<TreeTooltipHandle | null>(null);
+  const levelBadgesRef = useRef<TreeNodeLevelBadgesHandle | null>(null);
   const flashTimeoutRef = useRef<number | null>(null);
   const messageTimeoutRef = useRef<number | null>(null);
 
@@ -127,6 +139,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
     moved: boolean;
   } | null>(null);
   const chordRightHandledRef = useRef(false);
+  const suppressClickRef = useRef(false);
   const lastHoverRef = useRef<string | null>(null);
   const allocateNodeRef = useRef<
     ((id: string, target: AllocTarget, toggle: boolean) => void) | null
@@ -235,7 +248,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
       "transform",
       `translate(${v.tx} ${v.ty}) scale(${v.scale})`,
     );
-    const artOn = v.scale >= 0.75;
+    const artOn = artZoomEnabled(v.scale);
     setShowArt((prev) => (prev === artOn ? prev : artOn));
     baseCanvasRef.current?.draw();
     artCanvasRef.current?.draw();
@@ -247,6 +260,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
       rafRef.current = null;
       applyTransform();
       tooltipRef.current?.update();
+      levelBadgesRef.current?.update();
     });
   }, [applyTransform]);
 
@@ -388,6 +402,9 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
   const onPointerUp = useCallback((e: ReactPointerEvent<HTMLDivElement>) => {
     const drag = dragRef.current;
     if (drag && drag.pointerId === e.pointerId) {
+      // Remember whether this was a real pan so the synthesized click (which
+      // fires after dragRef is cleared) can suppress node allocation.
+      suppressClickRef.current = drag.moved;
       dragRef.current = null;
       (e.target as Element).releasePointerCapture?.(e.pointerId);
     }
@@ -436,9 +453,38 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
   );
   allocateNodeRef.current = allocateNode;
 
+  const setNodeLevel = useCallback(
+    (nodeId: string, level: number) => {
+      setBuild((prev) => ({
+        ...prev,
+        nodeLevels: { ...prev.nodeLevels, [nodeId]: level },
+      }));
+      setLevelPicker(null);
+    },
+    [setBuild],
+  );
+
+  const clearNodeLevel = useCallback(
+    (nodeId: string) => {
+      setBuild((prev) => {
+        const idx = prev.allocated.indexOf(nodeId);
+        const reset = idx >= 0 ? idx + 1 : 1;
+        return {
+          ...prev,
+          nodeLevels: { ...prev.nodeLevels, [nodeId]: reset },
+        };
+      });
+      setLevelPicker(null);
+    },
+    [setBuild],
+  );
+
   const onTreeClick = useCallback(
     (e: React.MouseEvent) => {
-      if (dragRef.current?.moved) return; // suppress click after a drag
+      if (suppressClickRef.current) {
+        suppressClickRef.current = false;
+        return; // suppress the click synthesized at the end of a pan
+      }
       const id = nodeAtClient(e.clientX, e.clientY);
       if (!id) return;
       const chord = weaponSetChordTarget(e, "left");
@@ -457,7 +503,13 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
       const id = nodeAtClient(e.clientX, e.clientY);
       if (!id) return;
       const chord = weaponSetChordTarget(e, "right");
-      if (chord) allocateNode(id, chord, true);
+      if (chord) {
+        allocateNode(id, chord, true);
+        return;
+      }
+      if (buildRef.current.allocated.includes(id)) {
+        setLevelPicker({ nodeId: id, clientX: e.clientX, clientY: e.clientY });
+      }
     },
     [allocateNode, nodeAtClient],
   );
@@ -587,14 +639,41 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
         />
       )}
 
-      <TreeTooltip
-        ref={tooltipRef}
-        nodeId={hoveredNodeId}
+      <TreeNodeLevelBadges
+        ref={levelBadgesRef}
         tree={tree}
+        build={build}
         svgRef={svgRef}
         containerRef={containerRef}
         getView={getView}
       />
+
+      <TreeTooltip
+        ref={tooltipRef}
+        nodeId={hoveredNodeId}
+        tree={tree}
+        allocated={
+          hoveredNodeId != null && build.allocated.includes(hoveredNodeId)
+        }
+        level={
+          hoveredNodeId != null && build.allocated.includes(hoveredNodeId)
+            ? passiveDisplayLevel(build, hoveredNodeId)
+            : undefined
+        }
+        svgRef={svgRef}
+        containerRef={containerRef}
+        getView={getView}
+      />
+
+      {levelPicker && (
+        <LevelPickerPopover
+          anchor={{ clientX: levelPicker.clientX, clientY: levelPicker.clientY }}
+          currentLevel={passiveDisplayLevel(build, levelPicker.nodeId)}
+          onApply={(level) => setNodeLevel(levelPicker.nodeId, level)}
+          onClear={() => clearNodeLevel(levelPicker.nodeId)}
+          onClose={() => setLevelPicker(null)}
+        />
+      )}
 
       <div className="tree-status">
         <div className="tree-stat-cluster">

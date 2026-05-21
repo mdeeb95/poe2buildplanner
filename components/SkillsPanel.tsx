@@ -8,8 +8,12 @@ import {
   supportToPickerRow,
   type GemPickerRow,
 } from "@/lib/build/gem-ui";
+import { LevelPickerPopover } from "@/components/LevelPickerPopover";
+import { formatGemLevel, toLevelInterval } from "@/lib/build/levels";
+import { defaultSupportLevelInterval, formatSupportCraftAdditionalText } from "@/lib/build/support-craft-level";
+import { defaultSkillLevelInterval, formatSkillCraftAdditionalText } from "@/lib/build/skill-craft-level";
 import { fuzzyMatchAny } from "@/lib/build/fuzzy-search";
-import type { BuildState, SkillSetup } from "@/schemas/build";
+import type { BuildState, SkillSetup, SupportSetup } from "@/schemas/build";
 import { GemsFileSchema, type ActiveGem, type GemsFile } from "@/schemas/gem";
 
 interface SkillsPanelProps {
@@ -22,12 +26,31 @@ type AddingState =
   | { mode: "support"; parentId: string; replaceSupportId?: string }
   | null;
 
+type GemLevelTarget =
+  | { kind: "skill"; skillId: string }
+  | { kind: "support"; skillId: string; supportId: string };
+
+interface LevelPickerState {
+  target: GemLevelTarget;
+  currentLevel: number;
+  clientX: number;
+  clientY: number;
+}
+
+function supportAdditionalText(sup: SupportSetup, gems: GemsFile | null): string {
+  const stored = sup.additionalText?.trim();
+  if (stored) return stored;
+  const catalog = gems?.support[sup.skillId];
+  return catalog ? formatSupportCraftAdditionalText(catalog) : "";
+}
+
 export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
   const [gems, setGems] = useState<GemsFile | null>(null);
   const [adding, setAdding] = useState<AddingState>(null);
   const [query, setQuery] = useState("");
   const [selectedSkillId, setSelectedSkillId] = useState<string | null>(null);
   const [selectedSupportId, setSelectedSupportId] = useState<string | null>(null);
+  const [levelPicker, setLevelPicker] = useState<LevelPickerState | null>(null);
 
   useEffect(() => {
     let aborted = false;
@@ -79,16 +102,33 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
       if (!adding) return;
 
       if (adding.mode === "skill") {
+        const catalogGem = gems?.active[item.id];
+        const levelInterval = catalogGem
+          ? defaultSkillLevelInterval(catalogGem)
+          : ([1, 100] as [number, number]);
+        const additionalText = catalogGem
+          ? formatSkillCraftAdditionalText(catalogGem)
+          : "";
+
         const newSkill: SkillSetup = {
           id: `${item.id}-${Date.now()}`,
           skillId: item.id,
           name: item.name,
           color: item.color,
-          levelInterval: [1, 100],
+          levelInterval,
+          additionalText,
           supports: [],
         };
         setBuild((prev) => ({ ...prev, skills: [...prev.skills, newSkill] }));
       } else {
+        const catalogGem = gems?.support[item.id];
+        const levelInterval = catalogGem
+          ? defaultSupportLevelInterval(catalogGem)
+          : ([1, 100] as [number, number]);
+        const additionalText = catalogGem
+          ? formatSupportCraftAdditionalText(catalogGem)
+          : "";
+
         setBuild((prev) => ({
           ...prev,
           skills: prev.skills.map((s) => {
@@ -98,7 +138,8 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
               skillId: item.id,
               name: item.name,
               color: item.color,
-              levelInterval: [1, 100] as [number, number],
+              levelInterval,
+              additionalText,
             };
             if (adding.replaceSupportId) {
               return {
@@ -114,7 +155,7 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
       }
       setAdding(null);
     },
-    [adding, setBuild],
+    [adding, gems, setBuild],
   );
 
   const removeSkill = (sid: string) => {
@@ -136,6 +177,82 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
     }));
     if (selectedSupportId === supId) setSelectedSupportId(null);
   };
+
+  const openSkillLevelPicker = (e: React.MouseEvent, skillId: string, level: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setLevelPicker({
+      target: { kind: "skill", skillId },
+      currentLevel: level,
+      clientX: e.clientX,
+      clientY: e.clientY,
+    });
+  };
+
+  const openSupportLevelPicker = (
+    e: React.MouseEvent,
+    skillId: string,
+    supportId: string,
+    level: number,
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setLevelPicker({
+      target: { kind: "support", skillId, supportId },
+      currentLevel: level,
+      clientX: e.clientX,
+      clientY: e.clientY,
+    });
+  };
+
+  const applyGemLevel = useCallback(
+    (level: number) => {
+      if (!levelPicker) return;
+      const interval = toLevelInterval(level);
+      const target = levelPicker.target;
+      setBuild((prev) => ({
+        ...prev,
+        skills: prev.skills.map((s) => {
+          if (target.kind === "skill") {
+            if (s.id !== target.skillId) return s;
+            return { ...s, levelInterval: interval };
+          }
+          if (s.id !== target.skillId) return s;
+          return {
+            ...s,
+            supports: s.supports.map((sup) =>
+              sup.id === target.supportId ? { ...sup, levelInterval: interval } : sup,
+            ),
+          };
+        }),
+      }));
+      setLevelPicker(null);
+    },
+    [levelPicker, setBuild],
+  );
+
+  const clearGemLevel = useCallback(() => {
+    if (!levelPicker) return;
+    const defaultInterval = [1, 100] as [number, number];
+    const target = levelPicker.target;
+    setBuild((prev) => ({
+      ...prev,
+      skills: prev.skills.map((s) => {
+        if (target.kind === "skill") {
+          if (s.id !== target.skillId) return s;
+          return { ...s, levelInterval: defaultInterval };
+        }
+        if (s.id !== target.skillId) return s;
+        return {
+          ...s,
+          supports: s.supports.map((sup) =>
+            sup.id === target.supportId ? { ...sup, levelInterval: defaultInterval } : sup,
+          ),
+        };
+      }),
+    }));
+    setLevelPicker(null);
+  }, [levelPicker, setBuild]);
 
   const parentSkillForAdding =
     adding?.mode === "support"
@@ -183,13 +300,12 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
               <div
                 className="skill-main"
                 onClick={() => setSelectedSkillId(s.id)}
+                onContextMenu={(e) => openSkillLevelPicker(e, s.id, s.levelInterval[0])}
               >
                 <GemIcon color={s.color} size={26} kind="skill" />
                 <div className="skill-name-wrap">
                   <span className="skill-name">{s.name}</span>
-                  <span className="skill-lvl mono">
-                    L{s.levelInterval[0]}–{s.levelInterval[1]}
-                  </span>
+                  <span className="skill-lvl mono">{formatGemLevel(s.levelInterval)}</span>
                 </div>
                 <button
                   type="button"
@@ -211,6 +327,7 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
                     adding?.mode === "support" &&
                     adding.parentId === s.id &&
                     adding.replaceSupportId === sup.id;
+                  const additionalText = supportAdditionalText(sup, gems);
                   return (
                     <div key={sup.id}>
                       {isSwapping ? (
@@ -223,27 +340,36 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
                           placeholder="Search support gems"
                         />
                       ) : (
-                        <div
-                          className={`support-row ${supSel ? "is-sel" : ""}`}
-                          onClick={() => {
-                            setSelectedSupportId(sup.id);
-                            openSwapSupport(s.id, sup.id);
-                          }}
-                        >
-                          <span className="support-rail" />
-                          <GemIcon color={sup.color} size={18} kind="support" />
-                          <span className="support-name">{sup.name}</span>
-                          <button
-                            type="button"
-                            className="row-x"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removeSupport(s.id, sup.id);
+                        <div className={`support-entry ${supSel ? "is-sel" : ""}`}>
+                          <div
+                            className={`support-row ${supSel ? "is-sel" : ""}`}
+                            onClick={() => {
+                              setSelectedSupportId(sup.id);
+                              openSwapSupport(s.id, sup.id);
                             }}
-                            title="Remove"
+                            onContextMenu={(e) =>
+                              openSupportLevelPicker(e, s.id, sup.id, sup.levelInterval[0])
+                            }
                           >
-                            ×
-                          </button>
+                            <span className="support-rail" />
+                            <GemIcon color={sup.color} size={18} kind="support" />
+                            <span className="support-name">{sup.name}</span>
+                            <span className="skill-lvl mono">{formatGemLevel(sup.levelInterval)}</span>
+                            <button
+                              type="button"
+                              className="row-x"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeSupport(s.id, sup.id);
+                              }}
+                              title="Remove"
+                            >
+                              ×
+                            </button>
+                          </div>
+                          {additionalText ? (
+                            <p className="support-additional">{additionalText}</p>
+                          ) : null}
                         </div>
                       )}
                     </div>
@@ -293,6 +419,17 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
           </button>
         )}
       </div>
+
+      {levelPicker && (
+        <LevelPickerPopover
+          anchor={{ clientX: levelPicker.clientX, clientY: levelPicker.clientY }}
+          currentLevel={levelPicker.currentLevel}
+          title="Socket at level"
+          onApply={applyGemLevel}
+          onClear={clearGemLevel}
+          onClose={() => setLevelPicker(null)}
+        />
+      )}
     </section>
   );
 }

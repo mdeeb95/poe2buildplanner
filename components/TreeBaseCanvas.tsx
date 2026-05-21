@@ -148,20 +148,35 @@ const TreeBaseCanvasImpl = forwardRef<TreeBaseCanvasHandle, TreeBaseCanvasProps>
       ctx.stroke(edgePath(edges));
 
       // ---- Node dots ----
-      const dotStroke = resolveColor("var(--color-bg-0)");
-      ctx.lineWidth = 2 / screenScale;
-      ctx.strokeStyle = dotStroke;
+      // Batch every visible dot into one Path2D per (alpha, color) so a 4.7k-node
+      // tree costs ~15 fill calls per frame instead of ~4.7k.
+      const buckets = new Map<string, { alpha: number; color: string; path: Path2D }>();
       for (const [id, node] of Object.entries(t.nodes)) {
         if (node.group === null) continue;
         if (node.x < minX || node.x > maxX || node.y < minY || node.y > maxY) continue;
         const isAlloc = alloc.has(id);
         const onPath = !isAlloc && front.has(id);
-        ctx.globalAlpha = isAlloc ? 1 : onPath ? 0.88 : 0.62;
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, nodeRadius(node), 0, Math.PI * 2);
-        ctx.fillStyle = resolveColor(nodeFill(node));
-        ctx.fill();
-        ctx.stroke();
+        const alpha = isAlloc ? 1 : onPath ? 0.88 : 0.62;
+        const color = resolveColor(nodeFill(node));
+        const key = `${alpha}|${color}`;
+        let bucket = buckets.get(key);
+        if (!bucket) {
+          bucket = { alpha, color, path: new Path2D() };
+          buckets.set(key, bucket);
+        }
+        const r = nodeRadius(node);
+        bucket.path.moveTo(node.x + r, node.y);
+        bucket.path.arc(node.x, node.y, r, 0, Math.PI * 2);
+      }
+
+      const stroke = screenScale > 0.35; // outlines vanish when dots are tiny
+      ctx.lineWidth = 2 / screenScale;
+      ctx.strokeStyle = resolveColor("var(--color-bg-0)");
+      for (const { alpha, color, path } of buckets.values()) {
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = color;
+        ctx.fill(path);
+        if (stroke) ctx.stroke(path);
       }
       ctx.globalAlpha = 1;
     }, [edgePath, resolveColor]);

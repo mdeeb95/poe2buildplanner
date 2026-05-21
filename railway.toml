@@ -1,6 +1,6 @@
 [build]
 builder = "RAILPACK"
-buildCommand = "pnpm install --frozen-lockfile && rm -rf .next && pnpm build && node scripts/copy-standalone-assets.mjs"
+buildCommand = "pnpm install --frozen-lockfile && pnpm build && node scripts/copy-standalone-assets.mjs"
 
 [deploy]
 startCommand = "node scripts/start-standalone.mjs"

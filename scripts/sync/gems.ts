@@ -1,3 +1,4 @@
+import { getGemStatRequirementsAtLevel } from "@/lib/build/gem-stat-requirement.js";
 import { parseAssignmentTable, parseReturnTable, readLuaSource } from "../parse/lua.js";
 import { STATMAP_SKIP_KEYS } from "../parse/lua-skip-statmap.js";
 import {
@@ -38,6 +39,7 @@ interface GemIndexEntry {
   reqDex?: number;
   reqInt?: number;
   naturalMaxLevel?: number;
+  Tier?: number;
 }
 
 interface SkillEntry {
@@ -99,7 +101,12 @@ export async function syncGems(upstream: Upstream): Promise<GemsFile> {
       reqDex: entry.reqDex ?? 0,
       reqInt: entry.reqInt ?? 0,
       naturalMaxLevel: entry.naturalMaxLevel ?? null,
-      levels: collectLevels(skill?.levels),
+      levels: collectLevels(skill?.levels, {
+        reqStr: entry.reqStr ?? 0,
+        reqDex: entry.reqDex ?? 0,
+        reqInt: entry.reqInt ?? 0,
+        isSupport: skill?.support === true,
+      }),
       gemFamily: skill?.gemFamily ?? null,
     };
 
@@ -109,6 +116,7 @@ export async function syncGems(upstream: Upstream): Promise<GemsFile> {
       support[gameId] = {
         ...baseFields,
         kind: "support",
+        uncutTier: typeof entry.Tier === "number" ? entry.Tier : null,
         requireSkillTypes: stripSkillTypePrefix(skill.requireSkillTypes),
         addSkillTypes: stripSkillTypePrefix(skill.addSkillTypes),
         excludeSkillTypes: stripSkillTypePrefix(skill.excludeSkillTypes),
@@ -118,6 +126,7 @@ export async function syncGems(upstream: Upstream): Promise<GemsFile> {
       active[gameId] = {
         ...baseFields,
         kind: "active",
+        uncutTier: typeof entry.Tier === "number" ? entry.Tier : null,
         skillTypes: deriveActiveSkillTypes(entry.tags, skill),
         weaponTypes: normalizeWeaponTypes(skill?.weaponTypes),
         compatibleSupports: [],
@@ -137,18 +146,37 @@ export async function syncGems(upstream: Upstream): Promise<GemsFile> {
   return GemsFileSchema.parse(result);
 }
 
-function collectLevels(rawLevels: Record<string, LuaRecord> | undefined): Array<{
+function collectLevels(
+  rawLevels: Record<string, LuaRecord> | undefined,
+  attrs: { reqStr: number; reqDex: number; reqInt: number; isSupport: boolean },
+): Array<{
   level: number;
   levelRequirement: number;
+  reqStr: number;
+  reqDex: number;
+  reqInt: number;
 }> {
   if (!rawLevels) return [];
-  const out: Array<{ level: number; levelRequirement: number }> = [];
+  const out: Array<{
+    level: number;
+    levelRequirement: number;
+    reqStr: number;
+    reqDex: number;
+    reqInt: number;
+  }> = [];
   for (const [k, v] of Object.entries(rawLevels)) {
     const level = Number(k);
     if (!Number.isFinite(level)) continue;
     const rec = v as Record<string, unknown>;
     const lr = typeof rec.levelRequirement === "number" ? rec.levelRequirement : 0;
-    out.push({ level, levelRequirement: lr });
+    const stats = getGemStatRequirementsAtLevel(
+      level,
+      attrs.reqStr,
+      attrs.reqDex,
+      attrs.reqInt,
+      attrs.isSupport,
+    );
+    out.push({ level, levelRequirement: lr, ...stats });
   }
   out.sort((a, b) => a.level - b.level);
   return out;

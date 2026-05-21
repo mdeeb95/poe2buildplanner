@@ -24,7 +24,10 @@ export const NODE_ART_DRAW_ORDER: readonly FrameState[] = ["unalloc", "path", "a
 
 export type NodeOverlayKind = "Normal" | "Notable" | "Keystone" | "Socket";
 
-const ART_ZOOM_MIN = 0.75;
+// The whole tree fits on screen at scale ~1, so art only renders once the user
+// has zoomed well into a region — keeping the per-frame icon/frame draw count
+// (each icon = a filtered drawImage, the most expensive op) bounded.
+const ART_ZOOM_MIN = 6;
 
 /** Multiplier for on-tree icon + frame ring size (1 ≈ original web renderer). */
 export const ART_NODE_SCALE = 2;

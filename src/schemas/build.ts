@@ -8,6 +8,8 @@ export const SupportSetupSchema = z.object({
   name: z.string(),
   color: z.enum(["red", "green", "blue", "white"]),
   levelInterval: LevelIntervalSchema,
+  /** Auto-set craft requirement note; exported as `additional_text`. */
+  additionalText: z.string().optional().default(""),
 });
 
 export const SkillSetupSchema = z.object({
@@ -16,6 +18,8 @@ export const SkillSetupSchema = z.object({
   name: z.string(),
   color: z.enum(["red", "green", "blue", "white"]),
   levelInterval: LevelIntervalSchema,
+  /** Auto-set craft requirement note; exported as `additional_text`. */
+  additionalText: z.string().optional().default(""),
   supports: z.array(SupportSetupSchema),
 });
 

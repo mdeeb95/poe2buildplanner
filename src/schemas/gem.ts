@@ -16,6 +16,9 @@ const GemTypeKind = z.enum([
 export const GemLevelSchema = z.object({
   level: z.number().int(),
   levelRequirement: z.number().int(),
+  reqStr: z.number().int().optional(),
+  reqDex: z.number().int().optional(),
+  reqInt: z.number().int().optional(),
   cost: z.record(z.string(), z.number()).optional(),
 });
 
@@ -41,6 +44,8 @@ const BaseGemFields = {
 export const ActiveGemSchema = z.object({
   ...BaseGemFields,
   kind: z.literal("active"),
+  /** Uncut skill gem tier (1–20) from PoB `Tier`; 0 = untiered/special. */
+  uncutTier: z.number().int().min(0).max(20).nullish(),
   skillTypes: z.array(z.string()),
   weaponTypes: z.array(z.string()).nullable(),
   compatibleSupports: z.array(z.string()),
@@ -49,11 +54,19 @@ export const ActiveGemSchema = z.object({
 export const SupportGemSchema = z.object({
   ...BaseGemFields,
   kind: z.literal("support"),
+  /** Uncut support gem tier (1–5) from PoB `Tier`; 0 = untiered/special. */
+  uncutTier: z.number().int().min(0).max(5).nullish(),
   requireSkillTypes: z.array(z.string()),
   addSkillTypes: z.array(z.string()),
   excludeSkillTypes: z.array(z.string()),
   compatibleSkills: z.array(z.string()),
 });
+
+/**
+ * Active skills and support variants use PoB `uncutTier` for engrave requirements
+ * and zone-drop defaults — see `lib/build/skill-craft-level.ts` and
+ * `lib/build/support-craft-level.ts`.
+ */
 
 export const GemsFileSchema = z.object({
   version: z.object({

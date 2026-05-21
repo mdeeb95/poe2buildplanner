@@ -1,4 +1,5 @@
 import { createEmptyBuild } from "./defaults";
+import { fromLevelInterval, passiveExportLevel, toLevelInterval } from "./levels";
 import type { BuildState, GearItem, SkillSetup } from "@/schemas/build";
 import { BuildFileSchema, type BuildFile } from "@/schemas/build-file";
 import type { TreeClass } from "@/schemas/tree";
@@ -23,18 +24,18 @@ export function buildToFile(build: BuildState): BuildFile {
     ascendancy: build.ascendancy || "",
     passives: build.allocated.map((id) => ({
       id,
-      level_interval: [build.nodeLevels[id] ?? 1, 100] as [number, number],
+      level_interval: toLevelInterval(passiveExportLevel(build, id)),
       weapon_set: build.passiveWeaponSet[id] ?? 0,
       additional_text: "",
     })),
     skills: build.skills.map((s) => ({
       id: s.skillId,
       level_interval: s.levelInterval,
-      additional_text: "",
+      additional_text: s.additionalText ?? "",
       support_skills: s.supports.map((sup) => ({
         id: sup.skillId,
         level_interval: sup.levelInterval,
-        additional_text: "",
+        additional_text: sup.additionalText ?? "",
       })),
     })),
     items: build.items.map((i) => ({
@@ -66,7 +67,7 @@ export function buildFromFile(raw: unknown, classes: TreeClass[]): BuildState {
   for (const p of file.passives) {
     const id = p.id;
     if (!allocated.includes(id)) allocated.push(id);
-    nodeLevels[id] = p.level_interval[0];
+    nodeLevels[id] = fromLevelInterval(p.level_interval);
     if (p.weapon_set === 1 || p.weapon_set === 2) {
       passiveWeaponSet[id] = p.weapon_set;
     }
@@ -78,12 +79,14 @@ export function buildFromFile(raw: unknown, classes: TreeClass[]): BuildState {
     name: s.id,
     color: "white" as const,
     levelInterval: s.level_interval,
+    additionalText: s.additional_text ?? "",
     supports: s.support_skills.map((sup) => ({
       id: newEditorId("sup", sup.id),
       skillId: sup.id,
       name: sup.id,
       color: "white" as const,
       levelInterval: sup.level_interval,
+      additionalText: sup.additional_text ?? "",
     })),
   }));
 

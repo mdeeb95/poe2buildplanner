@@ -40,6 +40,57 @@ describe("build-file round-trip", () => {
     expect(back.className).toBe("Warrior");
   });
 
+  it("defaults passive level_interval to [1, 100] when nodeLevels unset", () => {
+    const build: BuildState = {
+      ...createEmptyBuild(),
+      allocated: ["a", "b"],
+      nodeLevels: { a: 12 },
+      skills: [],
+      items: [],
+    };
+    const file = buildToFile(build);
+    expect(file.passives).toEqual([
+      { id: "a", level_interval: [12, 100], weapon_set: 0, additional_text: "" },
+      { id: "b", level_interval: [1, 100], weapon_set: 0, additional_text: "" },
+    ]);
+  });
+
+  it("round-trips skill and support level_interval and additional_text", () => {
+    const back = buildFromFile(
+      {
+        name: "Skills",
+        skills: [
+          {
+            id: "Metadata/Items/Gems/SkillGemBarrage",
+            level_interval: [14, 100],
+            additional_text: "Requires Uncut Skill Gem Tier 5 (+28 Dex)",
+            support_skills: [
+              {
+                id: "Metadata/Items/Gems/SkillGemRetreatSupportThree",
+                level_interval: [1, 100],
+                additional_text: "Requires Uncut Support Tier 5 (+5 Dex)",
+              },
+            ],
+          },
+        ],
+      },
+      classes,
+    );
+    expect(back.skills[0]?.levelInterval).toEqual([14, 100]);
+    expect(back.skills[0]?.additionalText).toBe("Requires Uncut Skill Gem Tier 5 (+28 Dex)");
+    expect(back.skills[0]?.supports[0]?.levelInterval).toEqual([1, 100]);
+    expect(back.skills[0]?.supports[0]?.additionalText).toBe(
+      "Requires Uncut Support Tier 5 (+5 Dex)",
+    );
+    const file = buildToFile(back);
+    expect(file.skills[0]?.level_interval).toEqual([14, 100]);
+    expect(file.skills[0]?.additional_text).toBe("Requires Uncut Skill Gem Tier 5 (+28 Dex)");
+    expect(file.skills[0]?.support_skills[0]?.level_interval).toEqual([1, 100]);
+    expect(file.skills[0]?.support_skills[0]?.additional_text).toBe(
+      "Requires Uncut Support Tier 5 (+5 Dex)",
+    );
+  });
+
   it("imports gear unique and rare modes", () => {
     const back = buildFromFile(
       {

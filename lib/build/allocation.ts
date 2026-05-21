@@ -11,6 +11,7 @@ import {
   shortestPath,
   type MainTreeAdjacency,
 } from "./reachability";
+import { applyPassiveLevels } from "./passive-levels";
 import type { BuildState } from "@/schemas/build";
 import type { Tree } from "@/schemas/tree";
 
@@ -19,6 +20,11 @@ export type RejectReason = "no-class" | "unreachable" | WeaponSet;
 export interface TreeActionResult {
   build: BuildState;
   rejected: RejectReason | null;
+}
+
+function finalize(prev: BuildState, build: BuildState, rejected: RejectReason | null): TreeActionResult {
+  if (rejected !== null) return { build, rejected };
+  return { build: applyPassiveLevels(prev, build), rejected: null };
 }
 
 /**
@@ -48,7 +54,7 @@ export function applyTreeAction(
   // Ascendancy: bypass reachability for v1.
   if (node.ascendancyName !== null) {
     const r = applyAllocation(build, id, target, opts);
-    return { build: r.build, rejected: r.rejectedSet };
+    return finalize(build, r.build, r.rejectedSet);
   }
 
   // Class start = implicit always-active root; clicking it is a no-op.
@@ -58,16 +64,13 @@ export function applyTreeAction(
 
   // Toggle-off → cascade-remove orphans.
   if (opts.toggle && current === target) {
-    return {
-      build: cascadeDeallocate(tree, adjacency, startId, build, id),
-      rejected: null,
-    };
+    return finalize(build, cascadeDeallocate(tree, adjacency, startId, build, id), null);
   }
 
   // Reassign between global/Set I/Set II → node stays allocated.
   if (current !== "unallocated") {
     const r = applyAllocation(build, id, target, opts);
-    return { build: r.build, rejected: r.rejectedSet };
+    return finalize(build, r.build, r.rejectedSet);
   }
 
   // New allocation → needs a class.
@@ -77,7 +80,7 @@ export function applyTreeAction(
   // Adjacent to the tree → single allocation, respects the active mode.
   if (canAllocate(adjacency, startId, mainAllocated, id)) {
     const r = applyAllocation(build, id, target, opts);
-    return { build: r.build, rejected: r.rejectedSet };
+    return finalize(build, r.build, r.rejectedSet);
   }
 
   // Distant → smart-allocate path. Connectors are global; destination uses `target`.
@@ -89,7 +92,7 @@ export function applyTreeAction(
   const connectors = nodes.slice(0, -1);
   let next = allocateGlobalPath(build, connectors);
   const r = applyAllocation(next, dest, target, opts);
-  return { build: r.build, rejected: r.rejectedSet };
+  return finalize(build, r.build, r.rejectedSet);
 }
 
 /** Append `nodes` to `build.allocated` as global (no weapon-set entries). Pure. */
