@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createEmptyBuild } from "./defaults";
 import {
+  allocatedEdgeRole,
   WEAPON_SET_MAX,
   applyAllocation,
   clearAllocation,
@@ -150,5 +151,27 @@ describe("unallocate / clearAllocation", () => {
     b = clearAllocation(b);
     expect(b.allocated).toHaveLength(0);
     expect(Object.keys(b.passiveWeaponSet)).toHaveLength(0);
+  });
+});
+
+describe("allocatedEdgeRole", () => {
+  const alloc = new Set(["a", "b", "c", "d"]);
+
+  it("classifies global-only edges", () => {
+    expect(allocatedEdgeRole("a", "b", alloc, {})).toBe("global");
+  });
+
+  it("classifies pure set I and set II edges", () => {
+    expect(allocatedEdgeRole("a", "b", alloc, { a: 1, b: 1 })).toBe(1);
+    expect(allocatedEdgeRole("c", "d", alloc, { c: 2, d: 2 })).toBe(2);
+  });
+
+  it("classifies global↔set connectors under that set", () => {
+    expect(allocatedEdgeRole("a", "b", alloc, { b: 1 })).toBe(1);
+    expect(allocatedEdgeRole("c", "d", alloc, { c: 2 })).toBe(2);
+  });
+
+  it("returns null for set I↔set II bridges", () => {
+    expect(allocatedEdgeRole("a", "b", alloc, { a: 1, b: 2 })).toBeNull();
   });
 });

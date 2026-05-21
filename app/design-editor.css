@@ -311,6 +311,13 @@
     .tree { position: absolute; inset: 0; user-select: none; cursor: grab; }
     .tree[data-dragging="1"] { cursor: grabbing; }
     .tree-svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .tree-art-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
     .tree::before {
       /* vignette */
       content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -447,6 +454,42 @@
     .dot-locked { background: var(--text-4); }
     .dot-unique { background: var(--unique); }
     .dot-rare { background: transparent; border: 1px solid var(--rare); }
+    .dot-set1 { background: var(--color-weapon-set-1); }
+    .dot-set2 { background: var(--color-weapon-set-2); }
+
+    /* Weapon-set allocation mode selector (bottom-left) */
+    .tree-mode {
+      position: absolute; bottom: 16px; left: 18px;
+      display: flex; align-items: stretch; gap: 1px;
+      background: rgba(20,23,31,0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .tree-mode button {
+      padding: 5px 11px;
+      background: transparent; border: 0;
+      color: var(--text-2); cursor: pointer;
+      font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase;
+      line-height: 1.4;
+    }
+    .tree-mode button + button { border-left: 1px solid var(--border-1); }
+    .tree-mode button:hover { background: var(--bg-3); color: var(--text-0); }
+    .tree-mode button[data-active="true"] { color: var(--text-0); background: var(--bg-3); }
+    .tree-mode button[data-set="1"][data-active="true"] {
+      color: var(--color-weapon-set-1);
+      box-shadow: inset 0 -2px 0 var(--color-weapon-set-1);
+    }
+    .tree-mode button[data-set="2"][data-active="true"] {
+      color: var(--color-weapon-set-2);
+      box-shadow: inset 0 -2px 0 var(--color-weapon-set-2);
+    }
+    .tree-stat-flash { animation: treeStatFlash 0.6s ease-out; }
+    @keyframes treeStatFlash {
+      0%, 100% { color: var(--text-0); }
+      20% { color: #ff5a4d; }
+    }
 
     /* Hover tooltip — fixed in tree-section top-right under zoom */
     .node-tip {

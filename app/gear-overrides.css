@@ -1,3 +1,12 @@
+/* Top bar: hidden file input for .build import */
+.app .tb-file-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Gear grid + slot content overrides (survives design-editor.css regen). */
 
 /* ~25% larger slots than density-tight default (32px → 40px). */

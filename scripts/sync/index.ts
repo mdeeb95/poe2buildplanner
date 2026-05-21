@@ -6,6 +6,7 @@ import { syncGems } from "./gems.js";
 import { syncBases } from "./bases.js";
 import { syncUniques } from "./uniques.js";
 import { syncStatDescriptions } from "./stat-descriptions.js";
+import { syncTreeArt, logIconCoverage } from "./tree-art.js";
 
 const SCHEMA_VERSION = 1;
 
@@ -17,6 +18,10 @@ async function main() {
 
   const tree = await timed("tree", () => syncTree(upstream));
   await writeJson("data/tree.json", tree);
+
+  const treeArt = await timed("tree-art", () => syncTreeArt(upstream));
+  console.log(`        icons=${treeArt.iconCount} frames=${treeArt.frameCount}`);
+  logIconCoverage(treeArt.manifest, tree.nodes);
 
   const gems = await timed("gems", () => syncGems(upstream));
   await writeJson("data/gems.json", gems);
@@ -40,6 +45,7 @@ async function main() {
     schemaVersion: SCHEMA_VERSION,
     files: {
       "tree.json": { nodes: Object.keys(tree.nodes).length, groups: tree.groups.length },
+      "tree-art.json": { icons: treeArt.iconCount, frames: treeArt.frameCount },
       "gems.json": { active: Object.keys(gems.active).length, support: Object.keys(gems.support).length },
       "bases.json": { bases: Object.keys(bases.bases).length, slots: Object.keys(bases.bySlot).length },
       "uniques.json": { uniques: Object.keys(uniques.uniques).length, slots: Object.keys(uniques.bySlot).length },

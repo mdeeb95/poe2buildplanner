@@ -44,7 +44,9 @@ describe("TreeNodes (position invariant)", () => {
       "5": fixtureNode({ x: 15156.66, y: 6190.62, isJewelSocket: true }),
     };
     const tree = fixtureTree(nodes);
-    const svg = renderToStaticMarkup(<TreeNodes tree={tree} />);
+    const svg = renderToStaticMarkup(
+      <TreeNodes tree={tree} showArt={false} allocated={new Set()} frontier={new Set()} />,
+    );
     for (const [id, n] of Object.entries(nodes)) {
       // Vitest doesn't ship a DOM, so we assert with regex against the markup.
       const cxPattern = new RegExp(`cx="${escapeForRegex(String(n.x))}"`);
@@ -62,7 +64,9 @@ describe("TreeNodes (position invariant)", () => {
       "2": fixtureNode({ x: 999, y: 999, group: null, orbit: null, orbitIndex: null }),
     };
     const tree = fixtureTree(nodes);
-    const svg = renderToStaticMarkup(<TreeNodes tree={tree} />);
+    const svg = renderToStaticMarkup(
+      <TreeNodes tree={tree} showArt={false} allocated={new Set()} frontier={new Set()} />,
+    );
     expect(svg).toMatch(/cx="100"/);
     expect(svg).not.toMatch(/cx="999"/);
   });
@@ -77,7 +81,9 @@ describe("TreeNodes (position invariant)", () => {
       normal: fixtureNode({ x: 60, y: 0 }),
     };
     const tree = fixtureTree(nodes);
-    const svg = renderToStaticMarkup(<TreeNodes tree={tree} />);
+    const svg = renderToStaticMarkup(
+      <TreeNodes tree={tree} showArt={false} allocated={new Set()} frontier={new Set()} />,
+    );
     expect(svg).toMatch(/r="40".*fill="var\(--color-node-keystone\)"/);
     expect(svg).toMatch(/r="26".*fill="var\(--color-node-notable\)"/);
     expect(svg).toMatch(/r="50".*fill="var\(--color-node-class-start\)"/);

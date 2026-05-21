@@ -1,5 +1,5 @@
 import { memo, type ReactElement } from "react";
-import type { WeaponSet } from "@/lib/build/weapon-set";
+import { WEAPON_SET_STROKE, type WeaponSet } from "@/lib/build/weapon-set";
 import type { Tree, TreeNode } from "@/schemas/tree";
 
 interface TreeNodesActiveProps {
@@ -17,9 +17,15 @@ function radiusFor(node: TreeNode): number {
 }
 
 function strokeFor(weaponSet: WeaponSet | undefined): string {
-  if (weaponSet === 1) return "var(--color-weapon-set-1)";
-  if (weaponSet === 2) return "var(--color-weapon-set-2)";
+  if (weaponSet === 1) return WEAPON_SET_STROKE[1];
+  if (weaponSet === 2) return WEAPON_SET_STROKE[2];
   return "var(--color-node-class-start)";
+}
+
+function fillFor(weaponSet: WeaponSet | undefined): string | undefined {
+  if (weaponSet === 1) return "rgba(224, 82, 74, 0.22)";
+  if (weaponSet === 2) return "rgba(87, 196, 106, 0.22)";
+  return undefined;
 }
 
 function TreeNodesActiveImpl({ tree, allocated, passiveWeaponSet }: TreeNodesActiveProps) {
@@ -29,6 +35,20 @@ function TreeNodesActiveImpl({ tree, allocated, passiveWeaponSet }: TreeNodesAct
     const node = tree.nodes[id];
     if (!node || node.group === null) continue;
     const r = radiusFor(node);
+    const ws = passiveWeaponSet[id];
+    const tint = fillFor(ws);
+    if (tint) {
+      rings.push(
+        <circle
+          key={`${id}-tint`}
+          cx={node.x}
+          cy={node.y}
+          r={r + 4}
+          fill={tint}
+          stroke="none"
+        />,
+      );
+    }
     rings.push(
       <circle
         key={id}
@@ -36,9 +56,9 @@ function TreeNodesActiveImpl({ tree, allocated, passiveWeaponSet }: TreeNodesAct
         cy={node.y}
         r={r + 6}
         fill="none"
-        stroke={strokeFor(passiveWeaponSet[id])}
+        stroke={strokeFor(ws)}
         strokeWidth={5}
-        strokeOpacity={0.95}
+        strokeOpacity={ws ? 0.65 : 0.45}
         vectorEffect="non-scaling-stroke"
       />,
     );

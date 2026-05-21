@@ -28,6 +28,9 @@
       ],
       "@/components/*": [
         "components/*"
+      ],
+      "@/hooks/*": [
+        "hooks/*"
       ]
     },
     "noEmit": true,
@@ -45,6 +48,7 @@
     "src/**/*",
     "lib/**/*",
     "components/**/*",
+    "hooks/**/*",
     "app/**/*",
     "next-env.d.ts",
     ".next/types/**/*.ts"

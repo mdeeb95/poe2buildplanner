@@ -12,26 +12,52 @@ const E: EdgeRecord[] = [
 describe("TreeEdgesActive", () => {
   it("renders nothing when allocatedIds is empty", () => {
     const out = renderToStaticMarkup(
-      <TreeEdgesActive edgeIndex={E} allocatedIds={new Set()} />,
+      <TreeEdgesActive
+        edgeIndex={E}
+        allocatedIds={new Set()}
+        passiveWeaponSet={{}}
+      />,
     );
     expect(out).toBe("");
   });
 
-  it("includes only edges whose BOTH endpoints are in allocatedIds", () => {
+  it("includes only edges whose BOTH endpoints are allocated", () => {
     const out = renderToStaticMarkup(
-      <TreeEdgesActive edgeIndex={E} allocatedIds={new Set(["1", "2", "3"])} />,
+      <TreeEdgesActive
+        edgeIndex={E}
+        allocatedIds={new Set(["1", "2", "3"])}
+        passiveWeaponSet={{}}
+      />,
     );
-    // edge 1↔2 and 2↔3 should appear; edge 3↔4 should not (4 not allocated).
     expect(out).toContain("M0 0L10 0");
     expect(out).toContain("M10 0L20 0");
     expect(out).not.toContain("M20 0L30 0");
   });
 
-  it("renders an empty path (no element) when no edges qualify", () => {
+  it("colors set I edges red and set II edges green", () => {
     const out = renderToStaticMarkup(
-      <TreeEdgesActive edgeIndex={E} allocatedIds={new Set(["1", "4"])} />,
+      <TreeEdgesActive
+        edgeIndex={E}
+        allocatedIds={new Set(["1", "2", "3", "4"])}
+        passiveWeaponSet={{ "1": 1, "2": 1, "3": 2, "4": 2 }}
+      />,
     );
-    // No edge has both endpoints allocated.
-    expect(out).toBe("");
+    expect(out).toContain("var(--color-weapon-set-1)");
+    expect(out).toContain("var(--color-weapon-set-2)");
+    expect(out).toContain("M0 0L10 0");
+    expect(out).toContain("M20 0L30 0");
+    expect(out).not.toContain("var(--color-node-class-start)");
+  });
+
+  it("renders global-only edges in white", () => {
+    const out = renderToStaticMarkup(
+      <TreeEdgesActive
+        edgeIndex={[{ fragment: "M0 0L10 0", a: "1", b: "2" }]}
+        allocatedIds={new Set(["1", "2"])}
+        passiveWeaponSet={{}}
+      />,
+    );
+    expect(out).toContain("var(--color-node-class-start)");
+    expect(out).not.toContain("var(--color-weapon-set-1)");
   });
 });

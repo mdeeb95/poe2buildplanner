@@ -20,6 +20,20 @@ export type WeaponSet = 1 | 2;
 export type AllocTarget = "global" | "set1" | "set2";
 export type NodeAllocState = "unallocated" | "global" | "set1" | "set2";
 
+/** SVG stroke for allocated edges / node rings per weapon set. */
+export const WEAPON_SET_STROKE: Record<WeaponSet, string> = {
+  1: "var(--color-weapon-set-1)",
+  2: "var(--color-weapon-set-2)",
+};
+
+/** Canvas fill tint behind set-assigned node art (matches theme colors). */
+export const WEAPON_SET_TINT_RGBA: Record<WeaponSet, string> = {
+  1: "rgba(224, 82, 74, 0.32)",
+  2: "rgba(87, 196, 106, 0.32)",
+};
+
+export type AllocatedEdgeRole = "global" | WeaponSet;
+
 /**
  * In-game keybind for quick-assigning a node to a weapon set (per the user's
  * recollection — could not be verified against public docs, so kept here as a
@@ -33,6 +47,22 @@ export const WEAPON_SET_CHORD = {
   /** target for ctrl+shift+RIGHT-click */
   rightButton: "set2",
 } as const;
+
+/** True when ctrl+shift (weapon-set chord modifiers) are held. */
+export function weaponSetChordActive(e: { ctrlKey: boolean; shiftKey: boolean; metaKey?: boolean }): boolean {
+  const ctrl = e.ctrlKey || e.metaKey === true;
+  if (WEAPON_SET_CHORD.requireCtrl && !ctrl) return false;
+  if (WEAPON_SET_CHORD.requireShift && !e.shiftKey) return false;
+  return true;
+}
+
+export function weaponSetChordTarget(
+  e: { ctrlKey: boolean; shiftKey: boolean; metaKey?: boolean },
+  button: "left" | "right",
+): AllocTarget | null {
+  if (!weaponSetChordActive(e)) return null;
+  return button === "left" ? WEAPON_SET_CHORD.leftButton : WEAPON_SET_CHORD.rightButton;
+}
 
 export function targetToWeaponSet(target: AllocTarget): WeaponSet | null {
   if (target === "set1") return 1;
@@ -60,6 +90,33 @@ export function globalCount(build: BuildState): number {
   return build.allocated.length - setCount(build, 1) - setCount(build, 2);
 }
 
+/**
+ * How an allocated edge should be drawn. Global = both endpoints are global
+ * passives. Set I/II = both endpoints participate in that set's tree (global
+ * connectors count toward either set when paired with a set node).
+ */
+export function allocatedEdgeRole(
+  a: string,
+  b: string,
+  allocated: ReadonlySet<string>,
+  passiveWeaponSet: Readonly<Record<string, WeaponSet>>,
+): AllocatedEdgeRole | null {
+  if (!allocated.has(a) || !allocated.has(b)) return null;
+
+  const wa = passiveWeaponSet[a];
+  const wb = passiveWeaponSet[b];
+
+  if (wa === undefined && wb === undefined) return "global";
+
+  const inSet1 = wa !== 2 && wb !== 2 && (wa === 1 || wb === 1);
+  if (inSet1) return 1;
+
+  const inSet2 = wa !== 1 && wb !== 1 && (wa === 2 || wb === 2);
+  if (inSet2) return 2;
+
+  return null;
+}
+
 export interface AllocResult {
   build: BuildState;
   /** The weapon set that was full and blocked the change, for UI feedback. null if applied. */
@@ -69,10 +126,11 @@ export interface AllocResult {
 /**
  * Apply an allocation action toward `target` on node `id`.
  *
- * - `toggle: true` (plain click): if the node is already in `target`'s state,
- *   unallocate it; otherwise set it to `target`.
- * - `toggle: false` (chord / quick-set): always set the node to `target`
- *   (idempotent), never unallocate.
+ * - `toggle: true`: if the node is already in `target`'s state, unallocate it;
+ *   otherwise set it to `target`. Used for both plain clicks and chords so the
+ *   same gesture that allocated a node also clears it.
+ * - `toggle: false`: always set the node to `target` (idempotent), never
+ *   unallocate. (Library capability; not currently used by the UI.)
  *
  * Setting a node *into* a weapon set is rejected (build unchanged) when that set
  * already holds WEAPON_SET_MAX nodes and the node isn't already in it. Moving a

@@ -19,6 +19,15 @@
   /* Weapon-set passives: Set I = red, Set II = green (matches in-game). */
   --color-weapon-set-1: #e0524a;
   --color-weapon-set-2: #57c46a;
+
+  /* Allocatable frontier highlight (valid next picks). */
+  --color-frontier: rgba(255, 255, 255, 0.45);
+
+  /* Smart-allocate hover preview (the path a click would take). */
+  --color-preview: #6cc9ff;
+
+  /* Search highlight (nodes matching the query). */
+  --color-search: #ffd54a;
 }
 
 html,
@@ -35,4 +44,71 @@ body {
 body {
   min-height: 100dvh;
   overflow: hidden;
+}
+
+/* Transient allocation message (e.g. "Select a class", "Not connected"). */
+.tree-msg {
+  position: absolute;
+  top: 64px;
+  left: 18px;
+  z-index: 20;
+  padding: 6px 12px;
+  background: rgba(20, 23, 31, 0.92);
+  border: 1px solid var(--color-weapon-set-1);
+  border-radius: 2px;
+  color: var(--color-text-primary);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  animation: treeMsgIn 0.12s ease-out;
+}
+@keyframes treeMsgIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tree node search box (top-center of the tree). */
+.tree-search {
+  position: absolute;
+  bottom: 16px;
+  right: 18px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 4px 12px;
+  background: rgba(20, 23, 31, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-2, rgba(255, 255, 255, 0.1));
+  border-radius: 2px;
+}
+.tree-search input {
+  width: 200px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--color-text-primary);
+  font-size: 12px;
+}
+.tree-search input::placeholder {
+  color: var(--color-text-muted);
+}
+.tree-search-count {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  color: var(--color-search);
+  min-width: 1.5em;
+  text-align: right;
+}
+.tree-search-clear {
+  background: transparent;
+  border: 0;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  padding: 0 2px;
+}
+.tree-search-clear:hover {
+  color: var(--color-text-primary);
 }

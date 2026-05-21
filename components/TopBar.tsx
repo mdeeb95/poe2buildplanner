@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { buildFromFile, downloadBuildFile } from "@/lib/build/build-file";
 import type { BuildState } from "@/schemas/build";
 import type { TreeClass } from "@/schemas/tree";
 
@@ -13,6 +14,7 @@ interface TopBarProps {
 export function TopBar({ build, setBuild, classes }: TopBarProps) {
   const [ascOpen, setAscOpen] = useState(false);
   const ascRef = useRef<HTMLDivElement>(null);
+  const importInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!ascOpen) return;
@@ -28,6 +30,20 @@ export function TopBar({ build, setBuild, classes }: TopBarProps) {
   const passiveCount = build.allocated.length;
   const skillCount = build.skills.length;
   const itemCount = build.items.length;
+
+  const onImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data: unknown = JSON.parse(text);
+      setBuild(buildFromFile(data, classes));
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Could not read .build file";
+      window.alert(msg);
+    }
+  };
 
   return (
     <header className="topbar">
@@ -141,11 +157,40 @@ export function TopBar({ build, setBuild, classes }: TopBarProps) {
       </div>
 
       <div className="tb-actions">
+        <input
+          ref={importInputRef}
+          type="file"
+          accept=".build,application/json"
+          className="tb-file-input"
+          aria-hidden
+          tabIndex={-1}
+          onChange={onImportFile}
+        />
+        <button
+          type="button"
+          className="tb-btn"
+          onClick={() => importInputRef.current?.click()}
+          title="Load a .build file from disk"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden>
+            <path
+              d="M6 10 V3 M3 6 L6 3 L9 6 M2 2 H10"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span>
+            Import <span className="tb-btn-ext">.build</span>
+          </span>
+        </button>
         <button
           type="button"
           className="tb-btn tb-btn-primary"
-          disabled
-          title="Export coming soon"
+          onClick={() => downloadBuildFile(build)}
+          title="Download this build as a .build file"
         >
           <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden>
             <path

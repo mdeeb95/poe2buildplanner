@@ -13,7 +13,7 @@ function TreeEdgesImpl({ edgeIndex }: TreeEdgesProps) {
       fill="none"
       stroke="var(--color-edge)"
       strokeWidth={3}
-      strokeOpacity={0.6}
+      strokeOpacity={0.42}
       vectorEffect="non-scaling-stroke"
     />
   );

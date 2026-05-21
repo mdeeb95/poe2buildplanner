@@ -7,9 +7,32 @@ import {
   useMemo,
   useRef,
   useState,
+  type Dispatch,
+  type SetStateAction,
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import { buildEdgeIndex } from "@/lib/tree/build-edge-index";
+import { nodeRadius } from "@/lib/tree/node-style";
+import {
+  WEAPON_SET_MAX,
+  globalCount,
+  setCount,
+  type AllocTarget,
+  type WeaponSet,
+  weaponSetChordActive,
+  weaponSetChordTarget,
+} from "@/lib/build/weapon-set";
+import { applyTreeAction } from "@/lib/build/allocation";
+import { searchNodes } from "@/lib/build/node-search";
+import {
+  allocatableFrontier,
+  buildMainTreeAdjacency,
+  findClassStartId,
+  mainTreeAllocated,
+  shortestPath,
+} from "@/lib/build/reachability";
+import type { BuildState } from "@/schemas/build";
+import { TreeArtManifestSchema, type TreeArtManifest } from "@/schemas/tree-art";
 import {
   TreeSchema,
   type Tree,
@@ -19,7 +42,12 @@ import {
 import { TreeEdges } from "@/components/TreeEdges";
 import { TreeEdgesActive } from "@/components/TreeEdgesActive";
 import { TreeNodes } from "@/components/TreeNodes";
+import { TreeArtCanvas, type TreeArtCanvasHandle } from "@/components/TreeArtCanvas";
 import { TreeNodesActive } from "@/components/TreeNodesActive";
+import { TreeNodesFrontier } from "@/components/TreeNodesFrontier";
+import { TreeNodesPreview } from "@/components/TreeNodesPreview";
+import { TreeEdgesPreview } from "@/components/TreeEdgesPreview";
+import { TreeNodesSearch } from "@/components/TreeNodesSearch";
 import { TreeTooltip, type TreeTooltipHandle } from "@/components/TreeTooltip";
 
 interface PassiveTreeProps {
@@ -28,6 +56,8 @@ interface PassiveTreeProps {
     bounds: TreeBounds;
     constants: TreeConstants;
   };
+  build: BuildState;
+  setBuild: Dispatch<SetStateAction<BuildState>>;
 }
 
 interface View {
@@ -40,6 +70,8 @@ const INITIAL_VIEW: View = { tx: 0, ty: 0, scale: 1 };
 const SCALE_MIN = 0.6;
 const SCALE_MAX = 60;
 const DRAG_THRESHOLD_PX = 4;
+const FLASH_MS = 600;
+const MESSAGE_MS = 1400;
 
 const HOVER_RING_RADIUS_BUMP = 8;
 
@@ -53,24 +85,34 @@ function hoverRingFor(tree: Tree | null, id: string | null): HoverRingSpec | nul
   if (!tree || id === null) return null;
   const node = tree.nodes[id];
   if (!node || node.group === null) return null;
-  let baseR = 14;
-  if (node.classesStart && node.classesStart.length > 0) baseR = 50;
-  else if (node.isKeystone) baseR = 40;
-  else if (node.isJewelSocket) baseR = 32;
-  else if (node.isNotable) baseR = 26;
-  return { cx: node.x, cy: node.y, r: baseR + HOVER_RING_RADIUS_BUMP };
+  return { cx: node.x, cy: node.y, r: nodeRadius(node) + HOVER_RING_RADIUS_BUMP };
 }
 
-export function PassiveTree({ seed }: PassiveTreeProps) {
+export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
   const [tree, setTree] = useState<Tree | null>(null);
+  const [treeArt, setTreeArt] = useState<TreeArtManifest | null>(null);
+  const [showArt, setShowArt] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [allocatedIds, setAllocatedIds] = useState<ReadonlySet<string>>(() => new Set());
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
+  const [allocMode, setAllocMode] = useState<AllocTarget>("global");
+  const [flashSet, setFlashSet] = useState<WeaponSet | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const gRef = useRef<SVGGElement | null>(null);
+  const artCanvasRef = useRef<TreeArtCanvasHandle | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const tooltipRef = useRef<TreeTooltipHandle | null>(null);
+  const flashTimeoutRef = useRef<number | null>(null);
+  const messageTimeoutRef = useRef<number | null>(null);
+
+  // Latest values, readable synchronously from event handlers without stale closures.
+  const buildRef = useRef(build);
+  buildRef.current = build;
+  const treeRef = useRef<Tree | null>(null);
+  const adjacencyRef = useRef<ReturnType<typeof buildMainTreeAdjacency> | null>(null);
+  const startIdRef = useRef<string | null>(null);
 
   const viewRef = useRef<View>({ ...INITIAL_VIEW });
   const rafRef = useRef<number | null>(null);
@@ -83,6 +125,7 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
     startTy: number;
     moved: boolean;
   } | null>(null);
+  const chordRightHandledRef = useRef(false);
 
   // ---- Data fetch ----
   useEffect(() => {
@@ -99,6 +142,16 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
       })
       .catch((e) => {
         if (!aborted) setError(e instanceof Error ? e.message : String(e));
+      });
+    fetch("/tree-art", { cache: "force-cache" })
+      .then(async (res) => {
+        if (!res.ok) return;
+        const data = await res.json();
+        const parsed = TreeArtManifestSchema.safeParse(data);
+        if (!aborted && parsed.success) setTreeArt(parsed.data);
+      })
+      .catch(() => {
+        /* tree art optional */
       });
     return () => {
       aborted = true;
@@ -119,6 +172,52 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
   // ---- Edge index (one-shot per tree) ----
   const edgeIndex = useMemo(() => (tree ? buildEdgeIndex(tree) : []), [tree]);
 
+  // ---- Allocation derived from build ----
+  const allocatedIds = useMemo(() => new Set(build.allocated), [build.allocated]);
+  const gCount = globalCount(build);
+  const s1Count = setCount(build, 1);
+  const s2Count = setCount(build, 2);
+
+  // ---- Reachability (restriction system) ----
+  const adjacency = useMemo(() => (tree ? buildMainTreeAdjacency(tree) : null), [tree]);
+  const startId = useMemo(
+    () => (tree ? findClassStartId(tree, build.className) : null),
+    [tree, build.className],
+  );
+  const frontier = useMemo(() => {
+    if (!tree || !adjacency || startId === null) return new Set<string>();
+    return allocatableFrontier(adjacency, startId, mainTreeAllocated(tree, build));
+  }, [tree, adjacency, startId, build]);
+
+  // ---- Search highlight (matches node name or stats) ----
+  const searchMatches = useMemo(
+    () => (tree ? searchNodes(tree, searchQuery) : new Set<string>()),
+    [tree, searchQuery],
+  );
+
+  // ---- Hover path preview (nodes + route a smart-allocate click would add) ----
+  const { previewNodes, previewEdgeKeys } = useMemo(() => {
+    const empty = { previewNodes: new Set<string>(), previewEdgeKeys: new Set<string>() };
+    if (!tree || !adjacency || startId === null || hoveredNodeId === null) return empty;
+    const node = tree.nodes[hoveredNodeId];
+    if (!node || node.ascendancyName !== null) return empty;
+    if (build.allocated.includes(hoveredNodeId)) return empty;
+    const path = shortestPath(adjacency, startId, mainTreeAllocated(tree, build), hoveredNodeId);
+    if (!path || path.length < 2) return empty;
+    const previewNodes = new Set<string>(path.slice(1));
+    const previewEdgeKeys = new Set<string>();
+    for (let i = 0; i < path.length - 1; i++) {
+      const a = path[i]!;
+      const b = path[i + 1]!;
+      previewEdgeKeys.add(a < b ? `${a}|${b}` : `${b}|${a}`);
+    }
+    return { previewNodes, previewEdgeKeys };
+  }, [tree, adjacency, startId, hoveredNodeId, build]);
+
+  treeRef.current = tree;
+  adjacencyRef.current = adjacency;
+  startIdRef.current = startId;
+
   // ---- Imperative transform + tooltip update ----
   const applyTransform = useCallback(() => {
     const v = viewRef.current;
@@ -126,7 +225,9 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
       "transform",
       `translate(${v.tx} ${v.ty}) scale(${v.scale})`,
     );
-    tooltipRef.current?.update();
+    const artOn = v.scale >= 0.75;
+    setShowArt((prev) => (prev === artOn ? prev : artOn));
+    artCanvasRef.current?.draw();
   }, []);
 
   const scheduleFlush = useCallback(() => {
@@ -134,6 +235,7 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
     rafRef.current = requestAnimationFrame(() => {
       rafRef.current = null;
       applyTransform();
+      tooltipRef.current?.update();
     });
   }, [applyTransform]);
 
@@ -145,6 +247,8 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
   useEffect(() => {
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      if (flashTimeoutRef.current !== null) clearTimeout(flashTimeoutRef.current);
+      if (messageTimeoutRef.current !== null) clearTimeout(messageTimeoutRef.current);
     };
   }, []);
 
@@ -189,9 +293,11 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
     return () => el.removeEventListener("wheel", onWheel);
   }, [clientToViewBox, scheduleFlush]);
 
-  // ---- Pan: pointer handlers (still through React, low-frequency setup) ----
+  // ---- Pan: pointer handlers ----
   const onPointerDown = useCallback((e: ReactPointerEvent<HTMLDivElement>) => {
     if (e.button !== 0 && e.pointerType === "mouse") return;
+    // Ctrl+shift+click assigns weapon sets — don't start a pan gesture.
+    if (weaponSetChordActive(e)) return;
     (e.target as Element).setPointerCapture?.(e.pointerId);
     const v = viewRef.current;
     dragRef.current = {
@@ -231,61 +337,100 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
     }
   }, []);
 
-  // ---- Reset view ----
-  const resetView = useCallback(() => {
-    viewRef.current = { ...INITIAL_VIEW };
-    applyTransform();
-  }, [applyTransform]);
-
-  const zoomStep = useCallback(
-    (dir: 1 | -1) => {
-      const el = containerRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const cursor = clientToViewBox(rect.left + rect.width / 2, rect.top + rect.height / 2);
-      if (!cursor) return;
-      const factor = dir > 0 ? 1.12 : 0.89;
-      const v = viewRef.current;
-      const newScale = Math.max(SCALE_MIN, Math.min(SCALE_MAX, v.scale * factor));
-      const k = newScale / v.scale;
-      viewRef.current = {
-        tx: cursor.x - (cursor.x - v.tx) * k,
-        ty: cursor.y - (cursor.y - v.ty) * k,
-        scale: newScale,
-      };
-      scheduleFlush();
-    },
-    [clientToViewBox, scheduleFlush],
-  );
-
-  // ---- Delegated click / hover handlers on the interactive <g> ----
-  const onTreeClick = useCallback((e: React.MouseEvent<SVGGElement>) => {
-    if (dragRef.current?.moved) return; // suppress click after a drag
-    const target = e.target as Element | null;
-    const id = target?.getAttribute?.("data-node-id");
-    if (!id) return;
-    setAllocatedIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
+  // ---- Allocation ----
+  const flashRejected = useCallback((set: WeaponSet) => {
+    setFlashSet(set);
+    if (flashTimeoutRef.current !== null) clearTimeout(flashTimeoutRef.current);
+    flashTimeoutRef.current = window.setTimeout(() => setFlashSet(null), FLASH_MS);
   }, []);
 
+  const flashMessage = useCallback((msg: string) => {
+    setMessage(msg);
+    if (messageTimeoutRef.current !== null) clearTimeout(messageTimeoutRef.current);
+    messageTimeoutRef.current = window.setTimeout(() => setMessage(null), MESSAGE_MS);
+  }, []);
+
+  const allocateNode = useCallback(
+    (id: string, target: AllocTarget, toggle: boolean) => {
+      if (!treeRef.current || !adjacencyRef.current) return;
+      const res = applyTreeAction(
+        treeRef.current,
+        adjacencyRef.current,
+        startIdRef.current,
+        buildRef.current,
+        id,
+        target,
+        { toggle },
+      );
+      if (res.rejected === "no-class") {
+        flashMessage("Select a class to allocate");
+        return;
+      }
+      if (res.rejected === "unreachable") {
+        flashMessage("Not connected to your tree");
+        return;
+      }
+      if (res.rejected === 1 || res.rejected === 2) {
+        flashRejected(res.rejected);
+        return;
+      }
+      setBuild(res.build);
+    },
+    [setBuild, flashRejected, flashMessage],
+  );
+
+  const onTreeClick = useCallback(
+    (e: React.MouseEvent<SVGGElement>) => {
+      if (dragRef.current?.moved) return; // suppress click after a drag
+      const id = (e.target as Element)?.getAttribute?.("data-node-id");
+      if (!id) return;
+      const chord = weaponSetChordTarget(e, "left");
+      if (chord) allocateNode(id, chord, true);
+      else allocateNode(id, allocMode, true);
+    },
+    [allocateNode, allocMode],
+  );
+
+  const onTreePointerDown = useCallback(
+    (e: ReactPointerEvent<SVGGElement>) => {
+      if (e.button !== 2) return;
+      const id = (e.target as Element)?.getAttribute?.("data-node-id");
+      if (!id) return;
+      const chord = weaponSetChordTarget(e, "right");
+      if (!chord) return;
+      e.preventDefault();
+      chordRightHandledRef.current = true;
+      allocateNode(id, chord, true);
+    },
+    [allocateNode],
+  );
+
+  const onTreeContextMenu = useCallback(
+    (e: React.MouseEvent<SVGGElement>) => {
+      e.preventDefault();
+      if (chordRightHandledRef.current) {
+        chordRightHandledRef.current = false;
+        return;
+      }
+      const id = (e.target as Element)?.getAttribute?.("data-node-id");
+      if (!id) return;
+      const chord = weaponSetChordTarget(e, "right");
+      if (chord) allocateNode(id, chord, true);
+    },
+    [allocateNode],
+  );
+
   const onTreePointerOver = useCallback((e: React.PointerEvent<SVGGElement>) => {
-    const target = e.target as Element | null;
-    const id = target?.getAttribute?.("data-node-id");
+    const id = (e.target as Element)?.getAttribute?.("data-node-id");
     if (id) setHoveredNodeId(id);
   }, []);
 
   const onTreePointerOut = useCallback((e: React.PointerEvent<SVGGElement>) => {
-    const target = e.target as Element | null;
-    const id = target?.getAttribute?.("data-node-id");
+    const id = (e.target as Element)?.getAttribute?.("data-node-id");
     if (id) setHoveredNodeId(null);
   }, []);
 
   const hoverRing = hoverRingFor(tree, hoveredNodeId);
-
   const getView = useCallback(() => viewRef.current, []);
 
   return (
@@ -296,7 +441,6 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
-      data-dragging={dragRef.current ? "1" : "0"}
       data-tree-loaded={tree ? "true" : "false"}
     >
       <svg
@@ -308,15 +452,46 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
         <g ref={gRef} style={{ willChange: "transform" }}>
           <g pointerEvents="none">
             <TreeEdges edgeIndex={edgeIndex} />
-            <TreeEdgesActive edgeIndex={edgeIndex} allocatedIds={allocatedIds} />
+            <TreeEdgesActive
+              edgeIndex={edgeIndex}
+              allocatedIds={allocatedIds}
+              passiveWeaponSet={build.passiveWeaponSet}
+            />
+            {tree && frontier.size > 0 && (
+              <TreeNodesFrontier tree={tree} frontier={frontier} />
+            )}
+            {tree && previewNodes.size > 0 && (
+              <>
+                <TreeEdgesPreview edgeIndex={edgeIndex} previewEdgeKeys={previewEdgeKeys} />
+                <TreeNodesPreview tree={tree} previewNodes={previewNodes} />
+              </>
+            )}
+            {tree && searchMatches.size > 0 && (
+              <TreeNodesSearch tree={tree} matches={searchMatches} />
+            )}
           </g>
           <g
             onClick={onTreeClick}
+            onPointerDown={onTreePointerDown}
+            onContextMenu={onTreeContextMenu}
             onPointerOver={onTreePointerOver}
             onPointerOut={onTreePointerOut}
           >
-            {tree && <TreeNodes tree={tree} />}
-            {tree && <TreeNodesActive tree={tree} allocatedIds={allocatedIds} />}
+            {tree && (
+              <TreeNodes
+                tree={tree}
+                showArt={showArt && treeArt !== null}
+                allocated={allocatedIds}
+                frontier={frontier}
+              />
+            )}
+            {tree && (
+              <TreeNodesActive
+                tree={tree}
+                allocated={build.allocated}
+                passiveWeaponSet={build.passiveWeaponSet}
+              />
+            )}
             {hoverRing && (
               <circle
                 cx={hoverRing.cx}
@@ -334,6 +509,50 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
         </g>
       </svg>
 
+      <div className="tree-search" onPointerDown={(e) => e.stopPropagation()}>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search nodes…"
+          spellCheck={false}
+          aria-label="Search passive nodes"
+        />
+        {searchQuery.trim().length >= 2 && (
+          <span className="tree-search-count">{searchMatches.size}</span>
+        )}
+        {searchQuery && (
+          <button
+            type="button"
+            className="tree-search-clear"
+            onClick={() => setSearchQuery("")}
+            title="Clear search"
+            aria-label="Clear search"
+          >
+            ×
+          </button>
+        )}
+      </div>
+
+      {tree && treeArt && (
+        <TreeArtCanvas
+          ref={artCanvasRef}
+          tree={tree}
+          art={treeArt}
+          allocated={allocatedIds}
+          frontier={frontier}
+          passiveWeaponSet={build.passiveWeaponSet}
+          showArt={showArt}
+          svgRef={svgRef}
+          gRef={gRef}
+          getView={getView}
+          vbX={vbX}
+          vbY={vbY}
+          vbW={vbW}
+          vbH={vbH}
+        />
+      )}
+
       <TreeTooltip
         ref={tooltipRef}
         nodeId={hoveredNodeId}
@@ -345,8 +564,43 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
 
       <div className="tree-status">
         <div className="tree-stat-cluster">
-          <span className="tree-stat-n">{allocatedIds.size}</span>
+          <span
+            className="tree-stat-n"
+            style={build.className ? undefined : { color: "var(--color-weapon-set-1)" }}
+          >
+            {build.className || "no class"}
+          </span>
+          <span className="tree-stat-l">class</span>
+        </div>
+        <div className="tree-stat-divider" />
+        <div className="tree-stat-cluster">
+          <span className="tree-stat-n">{build.allocated.length}</span>
           <span className="tree-stat-l">allocated</span>
+        </div>
+        <div className="tree-stat-divider" />
+        <div className="tree-stat-cluster">
+          <span className="tree-stat-n">{gCount}</span>
+          <span className="tree-stat-l">global</span>
+        </div>
+        <div className="tree-stat-cluster">
+          <span
+            key={`s1-${flashSet === 1 ? "f" : "n"}`}
+            className={`tree-stat-n${flashSet === 1 ? " tree-stat-flash" : ""}`}
+            style={{ color: "var(--color-weapon-set-1)" }}
+          >
+            {s1Count}/{WEAPON_SET_MAX}
+          </span>
+          <span className="tree-stat-l">set I</span>
+        </div>
+        <div className="tree-stat-cluster">
+          <span
+            key={`s2-${flashSet === 2 ? "f" : "n"}`}
+            className={`tree-stat-n${flashSet === 2 ? " tree-stat-flash" : ""}`}
+            style={{ color: "var(--color-weapon-set-2)" }}
+          >
+            {s2Count}/{WEAPON_SET_MAX}
+          </span>
+          <span className="tree-stat-l">set II</span>
         </div>
         {!tree && !error && (
           <>
@@ -366,41 +620,37 @@ export function PassiveTree({ seed }: PassiveTreeProps) {
         )}
       </div>
 
-      <div className="tree-zoom">
-        <button type="button" onClick={() => zoomStep(1)} title="Zoom in">
-          ＋
+      {message && <div className="tree-msg">{message}</div>}
+
+      <div className="tree-mode" role="group" aria-label="Allocation mode">
+        <button
+          type="button"
+          data-active={allocMode === "global"}
+          onClick={() => setAllocMode("global")}
+          title="Allocate global (always active) passives"
+        >
+          Global
         </button>
-        <button type="button" onClick={() => zoomStep(-1)} title="Zoom out">
-          −
+        <button
+          type="button"
+          data-set="1"
+          data-active={allocMode === "set1"}
+          onClick={() => setAllocMode("set1")}
+          title="Allocate Weapon Set I passives (Ctrl+Shift+Left-click)"
+        >
+          Set I
         </button>
-        <button type="button" onClick={resetView} title="Reset view">
-          ⟲
+        <button
+          type="button"
+          data-set="2"
+          data-active={allocMode === "set2"}
+          onClick={() => setAllocMode("set2")}
+          title="Allocate Weapon Set II passives (Ctrl+Shift+Right-click)"
+        >
+          Set II
         </button>
       </div>
 
-      {allocatedIds.size > 0 && (
-        <div className="tree-legend">
-          <div className="legend-row">
-            <span className="dot dot-alloc" /> Allocated ({allocatedIds.size})
-          </div>
-          <button
-            type="button"
-            className="legend-row"
-            style={{
-              background: "none",
-              border: "none",
-              padding: 0,
-              cursor: "pointer",
-              color: "inherit",
-              font: "inherit",
-              textAlign: "left",
-            }}
-            onClick={() => setAllocatedIds(new Set())}
-          >
-            Clear allocation
-          </button>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,11 +1,16 @@
 import { createReadStream } from "node:fs";
-import { readFile, stat } from "node:fs/promises";
+import { access, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { Readable } from "node:stream";
 
 const META_PATH = path.join(process.cwd(), "data", "_meta.json");
 
-async function getEtag(filePath: string): Promise<string> {
+async function getEtag(filePath: string): Promise<string | null> {
+  try {
+    await access(filePath);
+  } catch {
+    return null;
+  }
   const [metaRaw, s] = await Promise.all([
     readFile(META_PATH, "utf8").catch(() => null),
     stat(filePath),
@@ -25,6 +30,9 @@ async function getEtag(filePath: string): Promise<string> {
 export function createJsonDataRoute(filePath: string) {
   return async function GET(request: Request) {
     const etag = await getEtag(filePath);
+    if (!etag) {
+      return new Response("Not found", { status: 404 });
+    }
     if (request.headers.get("if-none-match") === etag) {
       return new Response(null, { status: 304, headers: { ETag: etag } });
     }

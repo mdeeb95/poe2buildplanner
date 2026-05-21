@@ -7,7 +7,7 @@ import { HResizer, VResizer } from "@/components/Resizer";
 import { SkillsPanel } from "@/components/SkillsPanel";
 import { TopBar } from "@/components/TopBar";
 import { createEmptyBuild } from "@/lib/build/defaults";
-import type { BuildState } from "@/schemas/build";
+import { useBuildHistory } from "@/hooks/useBuildHistory";
 import type { TreeBounds, TreeClass, TreeConstants } from "@/schemas/tree";
 
 const SIDE_W_KEY = "buildEditor.sideW";
@@ -35,7 +35,7 @@ interface BuildEditorProps {
 }
 
 export function BuildEditor({ seed, classes }: BuildEditorProps) {
-  const [build, setBuild] = useState<BuildState>(createEmptyBuild);
+  const { build, setBuild } = useBuildHistory(createEmptyBuild());
   const [sideW, setSideW] = useState(DEFAULT_SIDE_W);
   const [gearH, setGearH] = useState(DEFAULT_GEAR_H);
   const [hydrated, setHydrated] = useState(false);
@@ -73,7 +73,7 @@ export function BuildEditor({ seed, classes }: BuildEditorProps) {
 
       <main className="workspace">
         <section className="tree-section">
-          <PassiveTree seed={seed} />
+          <PassiveTree seed={seed} build={build} setBuild={setBuild} />
         </section>
 
         <aside className="side">

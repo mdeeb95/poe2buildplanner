@@ -39,4 +39,5 @@ elif [ -d .next ]; then
   fi
 fi
 
+# Stable dev server — avoid turbopack manifest corruption under rapid edits.
 exec pnpm exec next dev -p "$PORT"
