@@ -13,6 +13,16 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const cacheDir = cacheRoot(root);
 const changed = getChangedFiles(root);
 
+function gitHead(): string {
+  try {
+    return execSync("git rev-parse --short HEAD", { cwd: root, encoding: "utf8" }).trim();
+  } catch {
+    return "unknown";
+  }
+}
+
+console.log(`[railway-build] commit ${gitHead()}`);
+
 function run(cmd: string): void {
   execSync(cmd, { cwd: root, stdio: "inherit" });
 }

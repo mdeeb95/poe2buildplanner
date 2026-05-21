@@ -13,7 +13,7 @@
     "dev:clean": "bash scripts/dev.sh --clean",
     "build": "next build && node scripts/copy-standalone-assets.mjs",
     "build:railway": "tsx scripts/railway-build.ts",
-    "deploy": "railway deployment redeploy --from-source --yes",
+    "deploy": "railway up --detach --message \"Deploy $(git rev-parse --short HEAD)\"",
     "start": "node scripts/start-standalone.mjs",
     "lint": "next lint",
     "sync": "tsx scripts/sync/index.ts",
