@@ -1,8 +1,8 @@
 [build]
 builder = "RAILPACK"
-buildCommand = "pnpm install --frozen-lockfile && pnpm build"
+buildCommand = "pnpm install --frozen-lockfile && rm -rf .next && pnpm build && node scripts/copy-standalone-assets.mjs"
 
 [deploy]
-startCommand = "pnpm start"
+startCommand = "node scripts/start-standalone.mjs"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10

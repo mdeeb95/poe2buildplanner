@@ -11,8 +11,8 @@
   "scripts": {
     "dev": "bash scripts/dev.sh",
     "dev:clean": "bash scripts/dev.sh --clean",
-    "build": "next build",
-    "start": "next start -H 0.0.0.0",
+    "build": "next build && node scripts/copy-standalone-assets.mjs",
+    "start": "node scripts/start-standalone.mjs",
     "lint": "next lint",
     "sync": "tsx scripts/sync/index.ts",
     "verify": "tsx scripts/verify/index.ts",

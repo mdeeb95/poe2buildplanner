@@ -18,4 +18,9 @@ cpSync(join(root, ".next/static"), join(standalone, ".next/static"), {
   recursive: true,
 });
 
-console.log("copy-standalone-assets: public + static copied into standalone");
+const dataDir = join(root, "data");
+if (existsSync(dataDir)) {
+  cpSync(dataDir, join(standalone, "data"), { recursive: true });
+}
+
+console.log("copy-standalone-assets: public, static, and data copied into standalone");

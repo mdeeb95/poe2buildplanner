@@ -13,6 +13,7 @@ import {
 } from "react";
 import { buildEdgeIndex } from "@/lib/tree/build-edge-index";
 import { nodeRadius } from "@/lib/tree/node-style";
+import { buildNodeHitIndex, nodeAt } from "@/lib/tree/node-hit";
 import {
   WEAPON_SET_MAX,
   globalCount,
@@ -39,9 +40,8 @@ import {
   type TreeBounds,
   type TreeConstants,
 } from "@/schemas/tree";
-import { TreeEdges } from "@/components/TreeEdges";
 import { TreeEdgesActive } from "@/components/TreeEdgesActive";
-import { TreeNodes } from "@/components/TreeNodes";
+import { TreeBaseCanvas, type TreeBaseCanvasHandle } from "@/components/TreeBaseCanvas";
 import { TreeArtCanvas, type TreeArtCanvasHandle } from "@/components/TreeArtCanvas";
 import { TreeNodesActive } from "@/components/TreeNodesActive";
 import { TreeNodesFrontier } from "@/components/TreeNodesFrontier";
@@ -101,6 +101,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const gRef = useRef<SVGGElement | null>(null);
+  const baseCanvasRef = useRef<TreeBaseCanvasHandle | null>(null);
   const artCanvasRef = useRef<TreeArtCanvasHandle | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const tooltipRef = useRef<TreeTooltipHandle | null>(null);
@@ -126,6 +127,10 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
     moved: boolean;
   } | null>(null);
   const chordRightHandledRef = useRef(false);
+  const lastHoverRef = useRef<string | null>(null);
+  const allocateNodeRef = useRef<
+    ((id: string, target: AllocTarget, toggle: boolean) => void) | null
+  >(null);
 
   // ---- Data fetch ----
   useEffect(() => {
@@ -171,6 +176,11 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
 
   // ---- Edge index (one-shot per tree) ----
   const edgeIndex = useMemo(() => (tree ? buildEdgeIndex(tree) : []), [tree]);
+
+  // ---- Hit-test index (JS hit-testing replaces SVG hit circles) ----
+  const hitIndex = useMemo(() => (tree ? buildNodeHitIndex(tree) : null), [tree]);
+  const hitIndexRef = useRef(hitIndex);
+  hitIndexRef.current = hitIndex;
 
   // ---- Allocation derived from build ----
   const allocatedIds = useMemo(() => new Set(build.allocated), [build.allocated]);
@@ -227,6 +237,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
     );
     const artOn = v.scale >= 0.75;
     setShowArt((prev) => (prev === artOn ? prev : artOn));
+    baseCanvasRef.current?.draw();
     artCanvasRef.current?.draw();
   }, []);
 
@@ -268,6 +279,24 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
     [],
   );
 
+  // ---- Cursor → tree coords (g-local, where node.x/node.y live) ----
+  const nodeAtClient = useCallback(
+    (clientX: number, clientY: number): string | null => {
+      const svg = svgRef.current;
+      const g = gRef.current;
+      const index = hitIndexRef.current;
+      if (!svg || !g || !index) return null;
+      const ctm = g.getScreenCTM();
+      if (!ctm) return null;
+      const pt = svg.createSVGPoint();
+      pt.x = clientX;
+      pt.y = clientY;
+      const p = pt.matrixTransform(ctm.inverse());
+      return nodeAt(index, p.x, p.y);
+    },
+    [],
+  );
+
   // ---- Wheel: native listener with passive:false ----
   useEffect(() => {
     const el = containerRef.current;
@@ -293,41 +322,68 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
     return () => el.removeEventListener("wheel", onWheel);
   }, [clientToViewBox, scheduleFlush]);
 
-  // ---- Pan: pointer handlers ----
-  const onPointerDown = useCallback((e: ReactPointerEvent<HTMLDivElement>) => {
-    if (e.button !== 0 && e.pointerType === "mouse") return;
-    // Ctrl+shift+click assigns weapon sets — don't start a pan gesture.
-    if (weaponSetChordActive(e)) return;
-    (e.target as Element).setPointerCapture?.(e.pointerId);
-    const v = viewRef.current;
-    dragRef.current = {
-      pointerId: e.pointerId,
-      startX: e.clientX,
-      startY: e.clientY,
-      startTx: v.tx,
-      startTy: v.ty,
-      moved: false,
-    };
-  }, []);
+  // ---- Pan + node interaction: pointer handlers (JS hit-testing) ----
+  const onPointerDown = useCallback(
+    (e: ReactPointerEvent<HTMLDivElement>) => {
+      // Right-click weapon-set chord (ctrl+shift+right) — handle before pan logic.
+      if (e.button === 2) {
+        const chord = weaponSetChordTarget(e, "right");
+        if (chord) {
+          const id = nodeAtClient(e.clientX, e.clientY);
+          if (id) {
+            e.preventDefault();
+            chordRightHandledRef.current = true;
+            allocateNodeRef.current?.(id, chord, true);
+          }
+        }
+        return;
+      }
+      if (e.button !== 0 && e.pointerType === "mouse") return;
+      // Ctrl+shift+click assigns weapon sets — don't start a pan gesture.
+      if (weaponSetChordActive(e)) return;
+      (e.target as Element).setPointerCapture?.(e.pointerId);
+      const v = viewRef.current;
+      dragRef.current = {
+        pointerId: e.pointerId,
+        startX: e.clientX,
+        startY: e.clientY,
+        startTx: v.tx,
+        startTy: v.ty,
+        moved: false,
+      };
+    },
+    [nodeAtClient],
+  );
 
-  const onPointerMove = useCallback((e: ReactPointerEvent<HTMLDivElement>) => {
-    const drag = dragRef.current;
-    if (!drag || drag.pointerId !== e.pointerId) return;
-    const svg = svgRef.current;
-    if (!svg) return;
-    const ctm = svg.getScreenCTM();
-    if (!ctm) return;
-    const dxScreen = e.clientX - drag.startX;
-    const dyScreen = e.clientY - drag.startY;
-    if (!drag.moved && Math.hypot(dxScreen, dyScreen) > DRAG_THRESHOLD_PX) {
-      drag.moved = true;
-    }
-    const dx = dxScreen / ctm.a;
-    const dy = dyScreen / ctm.d;
-    const v = viewRef.current;
-    viewRef.current = { ...v, tx: drag.startTx + dx, ty: drag.startTy + dy };
-    scheduleFlush();
-  }, [scheduleFlush]);
+  const onPointerMove = useCallback(
+    (e: ReactPointerEvent<HTMLDivElement>) => {
+      const drag = dragRef.current;
+      if (drag && drag.pointerId === e.pointerId) {
+        const svg = svgRef.current;
+        if (!svg) return;
+        const ctm = svg.getScreenCTM();
+        if (!ctm) return;
+        const dxScreen = e.clientX - drag.startX;
+        const dyScreen = e.clientY - drag.startY;
+        if (!drag.moved && Math.hypot(dxScreen, dyScreen) > DRAG_THRESHOLD_PX) {
+          drag.moved = true;
+        }
+        const dx = dxScreen / ctm.a;
+        const dy = dyScreen / ctm.d;
+        const v = viewRef.current;
+        viewRef.current = { ...v, tx: drag.startTx + dx, ty: drag.startTy + dy };
+        scheduleFlush();
+        return;
+      }
+      // Hover (no active drag): resolve the node under the cursor.
+      const id = nodeAtClient(e.clientX, e.clientY);
+      if (id !== lastHoverRef.current) {
+        lastHoverRef.current = id;
+        setHoveredNodeId(id);
+      }
+    },
+    [scheduleFlush, nodeAtClient],
+  );
 
   const onPointerUp = useCallback((e: ReactPointerEvent<HTMLDivElement>) => {
     const drag = dragRef.current;
@@ -378,56 +434,39 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
     },
     [setBuild, flashRejected, flashMessage],
   );
+  allocateNodeRef.current = allocateNode;
 
   const onTreeClick = useCallback(
-    (e: React.MouseEvent<SVGGElement>) => {
+    (e: React.MouseEvent) => {
       if (dragRef.current?.moved) return; // suppress click after a drag
-      const id = (e.target as Element)?.getAttribute?.("data-node-id");
+      const id = nodeAtClient(e.clientX, e.clientY);
       if (!id) return;
       const chord = weaponSetChordTarget(e, "left");
-      if (chord) allocateNode(id, chord, true);
-      else allocateNode(id, allocMode, true);
+      allocateNode(id, chord ?? allocMode, true);
     },
-    [allocateNode, allocMode],
-  );
-
-  const onTreePointerDown = useCallback(
-    (e: ReactPointerEvent<SVGGElement>) => {
-      if (e.button !== 2) return;
-      const id = (e.target as Element)?.getAttribute?.("data-node-id");
-      if (!id) return;
-      const chord = weaponSetChordTarget(e, "right");
-      if (!chord) return;
-      e.preventDefault();
-      chordRightHandledRef.current = true;
-      allocateNode(id, chord, true);
-    },
-    [allocateNode],
+    [allocateNode, allocMode, nodeAtClient],
   );
 
   const onTreeContextMenu = useCallback(
-    (e: React.MouseEvent<SVGGElement>) => {
+    (e: React.MouseEvent) => {
       e.preventDefault();
       if (chordRightHandledRef.current) {
         chordRightHandledRef.current = false;
         return;
       }
-      const id = (e.target as Element)?.getAttribute?.("data-node-id");
+      const id = nodeAtClient(e.clientX, e.clientY);
       if (!id) return;
       const chord = weaponSetChordTarget(e, "right");
       if (chord) allocateNode(id, chord, true);
     },
-    [allocateNode],
+    [allocateNode, nodeAtClient],
   );
 
-  const onTreePointerOver = useCallback((e: React.PointerEvent<SVGGElement>) => {
-    const id = (e.target as Element)?.getAttribute?.("data-node-id");
-    if (id) setHoveredNodeId(id);
-  }, []);
-
-  const onTreePointerOut = useCallback((e: React.PointerEvent<SVGGElement>) => {
-    const id = (e.target as Element)?.getAttribute?.("data-node-id");
-    if (id) setHoveredNodeId(null);
+  const onPointerLeave = useCallback(() => {
+    if (lastHoverRef.current !== null) {
+      lastHoverRef.current = null;
+      setHoveredNodeId(null);
+    }
   }, []);
 
   const hoverRing = hoverRingFor(tree, hoveredNodeId);
@@ -441,71 +480,66 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
+      onPointerLeave={onPointerLeave}
+      onClick={onTreeClick}
+      onContextMenu={onTreeContextMenu}
       data-tree-loaded={tree ? "true" : "false"}
     >
+      {tree && (
+        <TreeBaseCanvas
+          ref={baseCanvasRef}
+          tree={tree}
+          edgeIndex={edgeIndex}
+          allocated={allocatedIds}
+          frontier={frontier}
+          svgRef={svgRef}
+          gRef={gRef}
+          getView={getView}
+        />
+      )}
       <svg
         ref={svgRef}
         className="tree-svg"
         viewBox={`${vbX} ${vbY} ${vbW} ${vbH}`}
         preserveAspectRatio="xMidYMid meet"
       >
-        <g ref={gRef} style={{ willChange: "transform" }}>
-          <g pointerEvents="none">
-            <TreeEdges edgeIndex={edgeIndex} />
-            <TreeEdgesActive
-              edgeIndex={edgeIndex}
-              allocatedIds={allocatedIds}
+        <g ref={gRef} style={{ willChange: "transform" }} pointerEvents="none">
+          <TreeEdgesActive
+            edgeIndex={edgeIndex}
+            allocatedIds={allocatedIds}
+            passiveWeaponSet={build.passiveWeaponSet}
+          />
+          {tree && frontier.size > 0 && (
+            <TreeNodesFrontier tree={tree} frontier={frontier} />
+          )}
+          {tree && previewNodes.size > 0 && (
+            <>
+              <TreeEdgesPreview edgeIndex={edgeIndex} previewEdgeKeys={previewEdgeKeys} />
+              <TreeNodesPreview tree={tree} previewNodes={previewNodes} />
+            </>
+          )}
+          {tree && searchMatches.size > 0 && (
+            <TreeNodesSearch tree={tree} matches={searchMatches} />
+          )}
+          {tree && (
+            <TreeNodesActive
+              tree={tree}
+              allocated={build.allocated}
               passiveWeaponSet={build.passiveWeaponSet}
             />
-            {tree && frontier.size > 0 && (
-              <TreeNodesFrontier tree={tree} frontier={frontier} />
-            )}
-            {tree && previewNodes.size > 0 && (
-              <>
-                <TreeEdgesPreview edgeIndex={edgeIndex} previewEdgeKeys={previewEdgeKeys} />
-                <TreeNodesPreview tree={tree} previewNodes={previewNodes} />
-              </>
-            )}
-            {tree && searchMatches.size > 0 && (
-              <TreeNodesSearch tree={tree} matches={searchMatches} />
-            )}
-          </g>
-          <g
-            onClick={onTreeClick}
-            onPointerDown={onTreePointerDown}
-            onContextMenu={onTreeContextMenu}
-            onPointerOver={onTreePointerOver}
-            onPointerOut={onTreePointerOut}
-          >
-            {tree && (
-              <TreeNodes
-                tree={tree}
-                showArt={showArt && treeArt !== null}
-                allocated={allocatedIds}
-                frontier={frontier}
-              />
-            )}
-            {tree && (
-              <TreeNodesActive
-                tree={tree}
-                allocated={build.allocated}
-                passiveWeaponSet={build.passiveWeaponSet}
-              />
-            )}
-            {hoverRing && (
-              <circle
-                cx={hoverRing.cx}
-                cy={hoverRing.cy}
-                r={hoverRing.r}
-                fill="none"
-                stroke="var(--color-accent)"
-                strokeWidth={4}
-                strokeOpacity={0.9}
-                vectorEffect="non-scaling-stroke"
-                pointerEvents="none"
-              />
-            )}
-          </g>
+          )}
+          {hoverRing && (
+            <circle
+              cx={hoverRing.cx}
+              cy={hoverRing.cy}
+              r={hoverRing.r}
+              fill="none"
+              stroke="var(--color-accent)"
+              strokeWidth={4}
+              strokeOpacity={0.9}
+              vectorEffect="non-scaling-stroke"
+            />
+          )}
         </g>
       </svg>
 
