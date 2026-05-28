@@ -40,10 +40,8 @@ export function buildToFile(build: BuildState, _gems?: GemsFile): BuildFile {
         additional_text: (sup.additionalText ?? "").trim(),
       })),
     })),
-    items: build.items.map((i) => ({
+    inventory_slots: build.items.map((i) => ({
       inventory_id: i.slot,
-      slot_x: 0,
-      slot_y: 0,
       level_interval: i.levelInterval,
       unique_name: i.mode === "unique" ? i.unique_name ?? "" : "",
       additional_text: i.mode === "rare" ? i.desc ?? "" : "",
@@ -92,7 +90,8 @@ export function buildFromFile(raw: unknown, classes: TreeClass[]): BuildState {
     })),
   }));
 
-  const items: GearItem[] = file.items.map((i) => {
+  const slots = file.inventory_slots ?? file.items ?? [];
+  const items: GearItem[] = slots.map((i) => {
     const unique = (i.unique_name ?? "").trim();
     const desc = (i.additional_text ?? "").trim();
     if (unique) {

@@ -120,11 +120,11 @@ describe("build-file round-trip", () => {
     expect(file.skills[0]?.support_skills[0]?.additional_text).toBe("Custom support note");
   });
 
-  it("imports gear unique and rare modes", () => {
+  it("imports gear unique and rare modes from inventory_slots", () => {
     const back = buildFromFile(
       {
         name: "Gear test",
-        items: [
+        inventory_slots: [
           {
             inventory_id: "Weapon1",
             unique_name: "Ngamahu's Chosen",
@@ -150,6 +150,45 @@ describe("build-file round-trip", () => {
       mode: "rare",
       desc: "80+ life, two resists",
     });
+  });
+
+  it("imports gear from the legacy `items` field as a fallback", () => {
+    const back = buildFromFile(
+      {
+        name: "Legacy gear",
+        items: [{ inventory_id: "Helmet", unique_name: "Goldrim", additional_text: "" }],
+      },
+      classes,
+    );
+    expect(back.items).toHaveLength(1);
+    expect(back.items[0]).toMatchObject({ slot: "Helmet", mode: "unique", unique_name: "Goldrim" });
+  });
+
+  it("exports gear to the spec-named `inventory_slots` array", () => {
+    const build: BuildState = {
+      ...createEmptyBuild(),
+      name: "Gear export",
+      items: [
+        { slot: "Weapon1", mode: "unique", unique_name: "Goldrim", levelInterval: [1, 100] },
+        { slot: "BodyArmour", mode: "rare", desc: "life + resists", levelInterval: [1, 100] },
+      ],
+    };
+    const file = buildToFile(build);
+    expect(file).not.toHaveProperty("items");
+    expect(file.inventory_slots).toEqual([
+      {
+        inventory_id: "Weapon1",
+        level_interval: [1, 100],
+        unique_name: "Goldrim",
+        additional_text: "",
+      },
+      {
+        inventory_id: "BodyArmour",
+        level_interval: [1, 100],
+        unique_name: "",
+        additional_text: "life + resists",
+      },
+    ]);
   });
 
   it("rejects invalid JSON shape", () => {

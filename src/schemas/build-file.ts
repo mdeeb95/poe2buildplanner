@@ -22,10 +22,9 @@ export const BuildFileSkillSchema = z.object({
   support_skills: z.array(BuildFileSupportSchema).optional().default([]),
 });
 
+/** Inventory slot entry in a `.build` file (GGG schema: `BuildInventorySlot`). */
 export const BuildFileItemSchema = z.object({
   inventory_id: z.string(),
-  slot_x: z.number().int().optional().default(0),
-  slot_y: z.number().int().optional().default(0),
   level_interval: LevelIntervalSchema.optional().default([1, 100]),
   unique_name: z.string().optional().default(""),
   additional_text: z.string().optional().default(""),
@@ -38,7 +37,10 @@ export const BuildFileSchema = z.object({
   ascendancy: z.string().optional().default(""),
   passives: z.array(BuildFilePassiveSchema).optional().default([]),
   skills: z.array(BuildFileSkillSchema).optional().default([]),
-  items: z.array(BuildFileItemSchema).optional().default([]),
+  // GGG's spec names the gear array `inventory_slots`. Older exports of this
+  // tool wrote `items`; accept it as a fallback on import.
+  inventory_slots: z.array(BuildFileItemSchema).optional(),
+  items: z.array(BuildFileItemSchema).optional(),
 });
 
 export type BuildFile = z.infer<typeof BuildFileSchema>;
