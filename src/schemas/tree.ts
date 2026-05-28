@@ -24,6 +24,10 @@ export const TreeGroupSchema = z.object({
 export const OutEdgeSchema = z.object({
   id: z.string(),
   orbit: z.number().int().nullable(),
+  // Arc centre for orbit-following connectors (from GGG's edge export). Null for
+  // straight edges. arcX/arcY are absolute tree coordinates.
+  arcX: z.number().nullable().optional(),
+  arcY: z.number().nullable().optional(),
 });
 
 export const TreeNodeSchema = z.object({

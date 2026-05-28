@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
-import { createUpstream } from "./fetch.js";
-import { syncTree } from "./tree.js";
+import { createUpstream, createGggUpstream } from "./fetch.js";
+import { syncTree, fetchTreeConstants } from "./tree.js";
 import { syncGems } from "./gems.js";
 import { syncBases } from "./bases.js";
 import { syncUniques } from "./uniques.js";
@@ -12,14 +12,20 @@ const SCHEMA_VERSION = 1;
 
 async function main() {
   const upstream = createUpstream();
+  const ggg = createGggUpstream();
   console.log(`[sync] Pinned PoB commit: ${upstream.sha}`);
+  console.log(`[sync] Pinned GGG tree export: ${ggg.sha}`);
 
   const start = performance.now();
 
-  const tree = await timed("tree", () => syncTree(upstream));
+  // Tree + tree art come from GGG's official export (so we can track 0.5 before
+  // PoB publishes its conversion). Geometry constants are carried from PoB's
+  // last export. Gems/bases/uniques/stats remain PoB Lua catalogs.
+  const constants = await fetchTreeConstants(upstream);
+  const tree = await timed("tree", () => syncTree(ggg, constants));
   await writeJson("data/tree.json", tree);
 
-  const treeArt = await timed("tree-art", () => syncTreeArt(upstream));
+  const treeArt = await timed("tree-art", () => syncTreeArt(ggg));
   console.log(`        icons=${treeArt.iconCount} frames=${treeArt.frameCount}`);
   logIconCoverage(treeArt.manifest, tree.nodes);
 
@@ -41,6 +47,8 @@ async function main() {
 
   const meta = {
     pobCommit: upstream.sha,
+    gggTreeCommit: ggg.sha,
+    treeVersion: tree.version.treeVersion,
     fetchedAt: new Date().toISOString(),
     schemaVersion: SCHEMA_VERSION,
     files: {

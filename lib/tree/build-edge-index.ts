@@ -29,13 +29,7 @@ export function buildEdgeIndex(tree: Tree): EdgeRecord[] {
       const aIsAsc = node.ascendancyName !== null;
       const bIsAsc = other.ascendancyName !== null;
       if (aIsAsc !== bIsAsc) continue;
-      const fragment = buildConnectorPath(
-        node,
-        other,
-        edge.orbit,
-        tree.constants,
-        tree.groups,
-      );
+      const fragment = buildConnectorPath(node, other, edge);
       if (fragment === null) continue;
       out.push({ fragment, a: aId, b: edge.id });
     }

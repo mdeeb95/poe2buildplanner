@@ -52,7 +52,7 @@ function buildSvg(tree: Tree): { svg: string; edgeCount: number } {
     for (const edge of node.out) {
       const other = tree.nodes[edge.id];
       if (!other) continue;
-      const d = buildConnectorPath(node, other, edge.orbit, tree.constants, tree.groups);
+      const d = buildConnectorPath(node, other, edge);
       if (d) edgeFragments.push(d);
     }
   }

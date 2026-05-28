@@ -1,120 +1,44 @@
-import type { TreeConstants, TreeGroup, TreeNode } from "@/schemas/tree.js";
+import type { OutEdge, TreeNode } from "@/schemas/tree.js";
+
+// Radius mismatch tolerance for treating an edge as an arc: both endpoints must
+// sit within this fraction of the same radius around the given arc centre.
+const ARC_TOL = 0.14;
 
 /**
- * Port of PathOfBuilding-PoE2's PassiveTree.lua:BuildConnector (lines 563-678).
- *
  * Returns an SVG path-data fragment (starting with M) for a single edge, or
- * null if either node is un-positioned. Caller concatenates fragments into a
- * single <path d="…">.
+ * null if either node is un-positioned.
  *
- * Branches, in order:
- *   1. Either group is null                                   → null
- *   2. Same group, same orbit, edgeOrbit null                 → arc on group
- *   3. edgeOrbit non-null and a circle through both fits      → arc on derived center
- *   4. Default                                                → straight line
+ * GGG's edge export gives the arc centre (arcX/arcY) for orbit-following
+ * connectors. When present and both endpoints lie on a common circle around it,
+ * we emit the short arc; otherwise a straight line.
  */
 export function buildConnectorPath(
   a: TreeNode,
   b: TreeNode,
-  edgeOrbit: number | null,
-  constants: TreeConstants,
-  _groups: ReadonlyArray<TreeGroup | null>,
+  edge: Pick<OutEdge, "orbit" | "arcX" | "arcY">,
 ): string | null {
   if (a.group === null || b.group === null) return null;
 
-  // Same-orbit-same-group arc (PoB branch 2).
-  if (
-    a.group === b.group &&
-    a.orbit !== null &&
-    b.orbit !== null &&
-    a.orbit === b.orbit &&
-    a.orbitIndex !== null &&
-    b.orbitIndex !== null &&
-    edgeOrbit === null
-  ) {
-    const orbit = a.orbit;
-    const r = constants.orbitRadii[orbit];
-    const angles = constants.orbitAnglesByOrbit[orbit];
-    if (r !== undefined && angles !== undefined) {
-      const θa = angles[a.orbitIndex];
-      const θb = angles[b.orbitIndex];
-      if (typeof r === "number" && typeof θa === "number" && typeof θb === "number") {
-        return arcPath(a.x, a.y, b.x, b.y, r, θa, θb);
+  if (edge.orbit && edge.arcX != null && edge.arcY != null) {
+    const cx = edge.arcX;
+    const cy = edge.arcY;
+    const r = Math.hypot(a.x - cx, a.y - cy);
+    const r2 = Math.hypot(b.x - cx, b.y - cy);
+    if (r > 1 && Math.abs(r2 - r) / r < ARC_TOL) {
+      const θa = Math.atan2(a.y - cy, a.x - cx);
+      const θb = Math.atan2(b.y - cy, b.x - cx);
+      let delta = θb - θa;
+      while (delta > Math.PI) delta -= 2 * Math.PI;
+      while (delta < -Math.PI) delta += 2 * Math.PI;
+      if (Math.abs(delta) > 0.001) {
+        // y-down screen space: positive angular delta sweeps clockwise = flag 1.
+        const sweep = delta >= 0 ? "1" : "0";
+        return `M${num(a.x)} ${num(a.y)}A${num(r)} ${num(r)} 0 0 ${sweep} ${num(b.x)} ${num(b.y)}`;
       }
     }
   }
 
-  // Cross-orbit arc (PoB branch 1).
-  if (edgeOrbit !== null) {
-    const orbitAbs = Math.abs(edgeOrbit);
-    const r = constants.orbitRadii[orbitAbs];
-    if (typeof r === "number" && r > 0) {
-      const dx = b.x - a.x;
-      const dy = b.y - a.y;
-      const chord = Math.hypot(dx, dy);
-      if (chord > 0 && chord <= 2 * r) {
-        const perpLen = Math.sqrt(r * r - (chord * chord) / 4);
-        const sign = edgeOrbit > 0 ? 1 : -1;
-        const cx = a.x + dx / 2 + sign * perpLen * (dy / chord);
-        const cy = a.y + dy / 2 - sign * perpLen * (dx / chord);
-        // Re-derive angles around the computed center, then sweep the short way.
-        const θa = Math.atan2(a.y - cy, a.x - cx);
-        const θb = Math.atan2(b.y - cy, b.x - cx);
-        return arcByCenter(a.x, a.y, b.x, b.y, r, θa, θb);
-      }
-    }
-  }
-
-  // Straight line (PoB branch 3).
   return `M${num(a.x)} ${num(a.y)}L${num(b.x)} ${num(b.y)}`;
-}
-
-/**
- * Arc emitted from a's screen position to b's, using the shorter-way sweep
- * implied by the angular delta between the two source angles (measured at the
- * implicit arc center). Both endpoints are assumed to already be at distance r
- * from that center; we only need the angles to decide sweep direction.
- */
-function arcPath(
-  ax: number,
-  ay: number,
-  bx: number,
-  by: number,
-  r: number,
-  θa: number,
-  θb: number,
-): string {
-  const sweep = shortSweepFlag(θa, θb);
-  return `M${num(ax)} ${num(ay)}A${num(r)} ${num(r)} 0 0 ${sweep} ${num(bx)} ${num(by)}`;
-}
-
-/**
- * Same shape as arcPath but uses arctangent-derived angles around a derived
- * arc center (used by the cross-orbit branch where the center isn't a group).
- */
-function arcByCenter(
-  ax: number,
-  ay: number,
-  bx: number,
-  by: number,
-  r: number,
-  θa: number,
-  θb: number,
-): string {
-  return arcPath(ax, ay, bx, by, r, θa, θb);
-}
-
-/**
- * Returns SVG sweep-flag ("0" | "1") choosing the shorter arc from θa to θb.
- * Works in PoB's screen-space angle convention: in our coordinate system
- * (y-down), increasing angle moves clockwise, which matches SVG sweep-flag=1.
- */
-function shortSweepFlag(θa: number, θb: number): "0" | "1" {
-  let delta = θb - θa;
-  // Normalize to (-π, π]
-  while (delta <= -Math.PI) delta += 2 * Math.PI;
-  while (delta > Math.PI) delta -= 2 * Math.PI;
-  return delta >= 0 ? "1" : "0";
 }
 
 function num(n: number): string {

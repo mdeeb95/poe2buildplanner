@@ -1,2085 +1,2260 @@
 {
   "version": {
-    "pobCommit": "63a375c1068e0d0c7ff7d12e7294aba224f64427",
-    "treeVersion": "0_4",
-    "fetchedAt": "2026-05-21T02:01:04.969Z"
+    "pobCommit": "8d9b16743be1a43faa3cb150673a2335e66335a2",
+    "treeVersion": "0_5",
+    "fetchedAt": "2026-05-28T19:27:08.700Z"
   },
   "atlases": {
-    "skills_64": {
-      "file": "/tree/skills-64.webp",
-      "cellW": 64,
-      "cellH": 64,
+    "skills_normal": {
+      "file": "/tree/skills-normal.webp",
+      "cellW": 34,
+      "cellH": 34,
       "cols": 16,
-      "count": 165
+      "count": 223
     },
-    "skills_128": {
-      "file": "/tree/skills-128.webp",
-      "cellW": 128,
-      "cellH": 128,
+    "skills_notable": {
+      "file": "/tree/skills-notable.webp",
+      "cellW": 49,
+      "cellH": 49,
       "cols": 16,
-      "count": 329
+      "count": 423
+    },
+    "skills_keystone": {
+      "file": "/tree/skills-keystone.webp",
+      "cellW": 68,
+      "cellH": 69,
+      "cols": 16,
+      "count": 33
     }
   },
   "icons": {
-    "Art/2DArt/SkillIcons/ExplosiveGrenade.dds": {
-      "atlas": "skills_64",
-      "index": 1
-    },
-    "Art/2DArt/SkillIcons/WitchBoneStorm.dds": {
-      "atlas": "skills_64",
+    "Art/2DArt/SkillIcons/WitchBoneStorm.png": {
+      "atlas": "skills_notable",
       "index": 2
     },
-    "Art/2DArt/SkillIcons/icongroundslam.dds": {
-      "atlas": "skills_64",
+    "Art/2DArt/SkillIcons/icongroundslam.png": {
+      "atlas": "skills_notable",
       "index": 3
     },
-    "Art/2DArt/SkillIcons/passives/2handeddamage.dds": {
-      "atlas": "skills_64",
+    "Art/2DArt/SkillIcons/passives/2handeddamage.png": {
+      "atlas": "skills_notable",
       "index": 4
     },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaNode.dds": {
-      "atlas": "skills_64",
-      "index": 5
-    },
-    "Art/2DArt/SkillIcons/passives/Amazon/AmazonNode.dds": {
-      "atlas": "skills_64",
-      "index": 6
-    },
-    "Art/2DArt/SkillIcons/passives/ArchonGeneric.dds": {
-      "atlas": "skills_64",
-      "index": 7
-    },
-    "Art/2DArt/SkillIcons/passives/AreaDmgNode.dds": {
-      "atlas": "skills_64",
-      "index": 8
-    },
-    "Art/2DArt/SkillIcons/passives/ArmourAndEnergyShieldNode.dds": {
-      "atlas": "skills_64",
-      "index": 9
-    },
-    "Art/2DArt/SkillIcons/passives/ArmourAndEvasionNode.dds": {
-      "atlas": "skills_64",
-      "index": 10
-    },
-    "Art/2DArt/SkillIcons/passives/ArmourBreak1BuffIcon.dds": {
-      "atlas": "skills_64",
-      "index": 11
-    },
-    "Art/2DArt/SkillIcons/passives/ArmourBreak2BuffIcon.dds": {
-      "atlas": "skills_64",
-      "index": 12
-    },
-    "Art/2DArt/SkillIcons/passives/Ascendants/SkillPoint.dds": {
-      "atlas": "skills_64",
-      "index": 13
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriPrimalMonkey.dds": {
-      "atlas": "skills_64",
-      "index": 14
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriPrimalOwl.dds": {
-      "atlas": "skills_64",
-      "index": 15
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriPrimalSnake.dds": {
-      "atlas": "skills_64",
-      "index": 16
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriSacredFox.dds": {
-      "atlas": "skills_64",
-      "index": 17
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriSacredRabbit.dds": {
-      "atlas": "skills_64",
-      "index": 18
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriVividCat.dds": {
-      "atlas": "skills_64",
-      "index": 19
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriVividStag.dds": {
-      "atlas": "skills_64",
-      "index": 20
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriVividWolf.dds": {
-      "atlas": "skills_64",
-      "index": 21
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriWildBear.dds": {
-      "atlas": "skills_64",
-      "index": 22
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriWildBoar.dds": {
-      "atlas": "skills_64",
-      "index": 23
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriWildOx.dds": {
-      "atlas": "skills_64",
-      "index": 24
-    },
-    "Art/2DArt/SkillIcons/passives/BannerResourceAreaNode.dds": {
-      "atlas": "skills_64",
-      "index": 25
-    },
-    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageNode.dds": {
-      "atlas": "skills_64",
-      "index": 26
-    },
-    "Art/2DArt/SkillIcons/passives/BucklerNode1.dds": {
-      "atlas": "skills_64",
-      "index": 27
-    },
-    "Art/2DArt/SkillIcons/passives/ChannellingAttacksNode.dds": {
-      "atlas": "skills_64",
-      "index": 28
-    },
-    "Art/2DArt/SkillIcons/passives/ChannellingDamage.dds": {
-      "atlas": "skills_64",
-      "index": 29
-    },
-    "Art/2DArt/SkillIcons/passives/ChannellingSpeed.dds": {
-      "atlas": "skills_64",
-      "index": 30
-    },
-    "Art/2DArt/SkillIcons/passives/ChaosDamage.dds": {
-      "atlas": "skills_64",
-      "index": 31
-    },
-    "Art/2DArt/SkillIcons/passives/ChaosDamagenode.dds": {
-      "atlas": "skills_64",
-      "index": 32
-    },
-    "Art/2DArt/SkillIcons/passives/CharmNode1.dds": {
-      "atlas": "skills_64",
-      "index": 33
-    },
-    "Art/2DArt/SkillIcons/passives/ColdDamagenode.dds": {
-      "atlas": "skills_64",
-      "index": 34
-    },
-    "Art/2DArt/SkillIcons/passives/ColdResistNode.dds": {
-      "atlas": "skills_64",
-      "index": 35
-    },
-    "Art/2DArt/SkillIcons/passives/CompanionsNode1.dds": {
-      "atlas": "skills_64",
-      "index": 36
-    },
-    "Art/2DArt/SkillIcons/passives/CorpseDamage.dds": {
-      "atlas": "skills_64",
-      "index": 37
-    },
-    "Art/2DArt/SkillIcons/passives/CurseEffectNode.dds": {
-      "atlas": "skills_64",
-      "index": 38
-    },
-    "Art/2DArt/SkillIcons/passives/CursemitigationclusterNode.dds": {
-      "atlas": "skills_64",
-      "index": 39
-    },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeNode.dds": {
-      "atlas": "skills_64",
-      "index": 40
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/DjinnNode.dds": {
-      "atlas": "skills_64",
-      "index": 41
-    },
-    "Art/2DArt/SkillIcons/passives/DruidGenericShapeshiftNode.dds": {
-      "atlas": "skills_64",
-      "index": 42
-    },
-    "Art/2DArt/SkillIcons/passives/DruidShapeshiftBearNode.dds": {
-      "atlas": "skills_64",
-      "index": 43
-    },
-    "Art/2DArt/SkillIcons/passives/DruidShapeshiftWolfNode.dds": {
-      "atlas": "skills_64",
-      "index": 44
-    },
-    "Art/2DArt/SkillIcons/passives/DruidShapeshiftWyvernNode.dds": {
-      "atlas": "skills_64",
-      "index": 45
-    },
-    "Art/2DArt/SkillIcons/passives/ElementalDamagenode.dds": {
-      "atlas": "skills_64",
-      "index": 46
-    },
-    "Art/2DArt/SkillIcons/passives/EnergyShieldNode.dds": {
-      "atlas": "skills_64",
-      "index": 47
-    },
-    "Art/2DArt/SkillIcons/passives/EvasionNode.dds": {
-      "atlas": "skills_64",
-      "index": 48
-    },
-    "Art/2DArt/SkillIcons/passives/EvasionandEnergyShieldNode.dds": {
-      "atlas": "skills_64",
-      "index": 49
-    },
-    "Art/2DArt/SkillIcons/passives/FireDamagenode.dds": {
-      "atlas": "skills_64",
-      "index": 50
-    },
-    "Art/2DArt/SkillIcons/passives/FireResistNode.dds": {
-      "atlas": "skills_64",
-      "index": 51
-    },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingNode.dds": {
-      "atlas": "skills_64",
-      "index": 52
-    },
-    "Art/2DArt/SkillIcons/passives/GreenAttackSmallPassive.dds": {
-      "atlas": "skills_64",
-      "index": 53
-    },
-    "Art/2DArt/SkillIcons/passives/HeraldBuffEffectNode2.dds": {
-      "atlas": "skills_64",
-      "index": 54
-    },
-    "Art/2DArt/SkillIcons/passives/IncreasedAttackDamageNode.dds": {
-      "atlas": "skills_64",
-      "index": 55
-    },
-    "Art/2DArt/SkillIcons/passives/IncreasedProjectileSpeedNode.dds": {
-      "atlas": "skills_64",
-      "index": 56
-    },
-    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistNode.dds": {
-      "atlas": "skills_64",
-      "index": 57
-    },
-    "Art/2DArt/SkillIcons/passives/Inquistitor/IncreasedElementalDamageAttackCasteSpeed.dds": {
-      "atlas": "skills_64",
-      "index": 58
-    },
-    "Art/2DArt/SkillIcons/passives/InstillationsNode1.dds": {
-      "atlas": "skills_64",
-      "index": 59
-    },
-    "Art/2DArt/SkillIcons/passives/Invoker/InvokerNode.dds": {
-      "atlas": "skills_64",
-      "index": 60
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/AbyssalLichNode.dds": {
-      "atlas": "skills_64",
-      "index": 61
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/LichNode.dds": {
-      "atlas": "skills_64",
-      "index": 62
-    },
-    "Art/2DArt/SkillIcons/passives/LifeRecoupNode.dds": {
-      "atlas": "skills_64",
-      "index": 63
-    },
-    "Art/2DArt/SkillIcons/passives/LightningDamagenode.dds": {
-      "atlas": "skills_64",
-      "index": 64
-    },
-    "Art/2DArt/SkillIcons/passives/LightningResistNode.dds": {
-      "atlas": "skills_64",
-      "index": 65
-    },
-    "Art/2DArt/SkillIcons/passives/ManaLeechThemedNode.dds": {
-      "atlas": "skills_64",
-      "index": 66
-    },
-    "Art/2DArt/SkillIcons/passives/MarkNode.dds": {
-      "atlas": "skills_64",
-      "index": 67
-    },
-    "Art/2DArt/SkillIcons/passives/MeleeAoENode.dds": {
-      "atlas": "skills_64",
-      "index": 68
-    },
-    "Art/2DArt/SkillIcons/passives/MineAreaOfEffectNode.dds": {
-      "atlas": "skills_64",
-      "index": 69
-    },
-    "Art/2DArt/SkillIcons/passives/MinionChaosResistanceNode.dds": {
-      "atlas": "skills_64",
-      "index": 70
-    },
-    "Art/2DArt/SkillIcons/passives/MinionElementalResistancesNode.dds": {
-      "atlas": "skills_64",
-      "index": 71
-    },
-    "Art/2DArt/SkillIcons/passives/MinionsandManaNode.dds": {
-      "atlas": "skills_64",
-      "index": 72
-    },
-    "Art/2DArt/SkillIcons/passives/NodeDualWieldingDamage.dds": {
-      "atlas": "skills_64",
-      "index": 73
-    },
-    "Art/2DArt/SkillIcons/passives/Oracle/OracleNode.dds": {
-      "atlas": "skills_64",
-      "index": 74
-    },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderNode.dds": {
-      "atlas": "skills_64",
-      "index": 75
-    },
-    "Art/2DArt/SkillIcons/passives/PhysicalDamageChaosNode.dds": {
-      "atlas": "skills_64",
-      "index": 76
-    },
-    "Art/2DArt/SkillIcons/passives/PhysicalDamageNode.dds": {
-      "atlas": "skills_64",
-      "index": 77
-    },
-    "Art/2DArt/SkillIcons/passives/PhysicalDamageOverTimeNode.dds": {
-      "atlas": "skills_64",
-      "index": 78
-    },
-    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistNode.dds": {
-      "atlas": "skills_64",
-      "index": 79
-    },
-    "Art/2DArt/SkillIcons/passives/ProjectileDmgNode.dds": {
-      "atlas": "skills_64",
-      "index": 80
-    },
-    "Art/2DArt/SkillIcons/passives/Rage.dds": {
-      "atlas": "skills_64",
-      "index": 81
-    },
-    "Art/2DArt/SkillIcons/passives/RangedTotemDamage.dds": {
-      "atlas": "skills_64",
-      "index": 82
-    },
-    "Art/2DArt/SkillIcons/passives/ReducedSkillEffectDurationNode.dds": {
-      "atlas": "skills_64",
-      "index": 83
-    },
-    "Art/2DArt/SkillIcons/passives/Remnant.dds": {
-      "atlas": "skills_64",
-      "index": 84
-    },
-    "Art/2DArt/SkillIcons/passives/Shaman/ShamanNode.dds": {
-      "atlas": "skills_64",
-      "index": 85
-    },
-    "Art/2DArt/SkillIcons/passives/ShieldNodeOffensive.dds": {
-      "atlas": "skills_64",
-      "index": 86
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithofKitavaNode.dds": {
-      "atlas": "skills_64",
-      "index": 87
-    },
-    "Art/2DArt/SkillIcons/passives/SpearsNode1.dds": {
-      "atlas": "skills_64",
-      "index": 88
-    },
-    "Art/2DArt/SkillIcons/passives/SpellSuppresionNode.dds": {
-      "atlas": "skills_64",
-      "index": 89
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/StormweaverNode.dds": {
-      "atlas": "skills_64",
-      "index": 90
-    },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianNode.dds": {
-      "atlas": "skills_64",
-      "index": 91
-    },
-    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistNode.dds": {
-      "atlas": "skills_64",
-      "index": 92
-    },
-    "Art/2DArt/SkillIcons/passives/ThornsNode1.dds": {
-      "atlas": "skills_64",
-      "index": 93
-    },
-    "Art/2DArt/SkillIcons/passives/Titan/TitanNode.dds": {
-      "atlas": "skills_64",
-      "index": 94
-    },
-    "Art/2DArt/SkillIcons/passives/WarCryEffect.dds": {
-      "atlas": "skills_64",
-      "index": 95
-    },
-    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerNode.dds": {
-      "atlas": "skills_64",
-      "index": 96
-    },
-    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterNode.dds": {
-      "atlas": "skills_64",
-      "index": 97
-    },
-    "Art/2DArt/SkillIcons/passives/accuracydex.dds": {
-      "atlas": "skills_64",
-      "index": 98
-    },
-    "Art/2DArt/SkillIcons/passives/accuracystr.dds": {
-      "atlas": "skills_64",
-      "index": 99
-    },
-    "Art/2DArt/SkillIcons/passives/areaofeffect.dds": {
-      "atlas": "skills_64",
-      "index": 100
-    },
-    "Art/2DArt/SkillIcons/passives/attackspeed.dds": {
-      "atlas": "skills_64",
-      "index": 101
-    },
-    "Art/2DArt/SkillIcons/passives/attackspeedbow.dds": {
-      "atlas": "skills_64",
-      "index": 102
-    },
-    "Art/2DArt/SkillIcons/passives/auraareaofeffect.dds": {
-      "atlas": "skills_64",
-      "index": 103
-    },
-    "Art/2DArt/SkillIcons/passives/auraeffect.dds": {
-      "atlas": "skills_64",
-      "index": 104
-    },
-    "Art/2DArt/SkillIcons/passives/avoidchilling.dds": {
-      "atlas": "skills_64",
-      "index": 105
-    },
-    "Art/2DArt/SkillIcons/passives/axedmgspeed.dds": {
-      "atlas": "skills_64",
-      "index": 106
-    },
-    "Art/2DArt/SkillIcons/passives/blankDex.dds": {
-      "atlas": "skills_64",
-      "index": 107
-    },
-    "Art/2DArt/SkillIcons/passives/blankInt.dds": {
-      "atlas": "skills_64",
-      "index": 108
-    },
-    "Art/2DArt/SkillIcons/passives/blankStr.dds": {
-      "atlas": "skills_64",
-      "index": 109
-    },
-    "Art/2DArt/SkillIcons/passives/blockstr.dds": {
-      "atlas": "skills_64",
-      "index": 110
-    },
-    "Art/2DArt/SkillIcons/passives/castspeed.dds": {
-      "atlas": "skills_64",
-      "index": 111
-    },
-    "Art/2DArt/SkillIcons/passives/chargedex.dds": {
-      "atlas": "skills_64",
-      "index": 112
-    },
-    "Art/2DArt/SkillIcons/passives/chargeint.dds": {
-      "atlas": "skills_64",
-      "index": 113
-    },
-    "Art/2DArt/SkillIcons/passives/chargestr.dds": {
-      "atlas": "skills_64",
-      "index": 114
-    },
-    "Art/2DArt/SkillIcons/passives/colddamage.dds": {
-      "atlas": "skills_64",
-      "index": 115
-    },
-    "Art/2DArt/SkillIcons/passives/coldresist.dds": {
-      "atlas": "skills_64",
-      "index": 116
-    },
-    "Art/2DArt/SkillIcons/passives/criticaldaggerint.dds": {
-      "atlas": "skills_64",
-      "index": 117
-    },
-    "Art/2DArt/SkillIcons/passives/criticalstrikechance.dds": {
-      "atlas": "skills_64",
-      "index": 118
-    },
-    "Art/2DArt/SkillIcons/passives/criticalstrikechance2.dds": {
-      "atlas": "skills_64",
-      "index": 119
-    },
-    "Art/2DArt/SkillIcons/passives/damage.dds": {
-      "atlas": "skills_64",
-      "index": 120
-    },
-    "Art/2DArt/SkillIcons/passives/damage_blue.dds": {
-      "atlas": "skills_64",
-      "index": 121
-    },
-    "Art/2DArt/SkillIcons/passives/damageaxe.dds": {
-      "atlas": "skills_64",
-      "index": 122
-    },
-    "Art/2DArt/SkillIcons/passives/damagedualwield.dds": {
-      "atlas": "skills_64",
-      "index": 123
-    },
-    "Art/2DArt/SkillIcons/passives/damagespells.dds": {
-      "atlas": "skills_64",
-      "index": 124
-    },
-    "Art/2DArt/SkillIcons/passives/damagestaff.dds": {
-      "atlas": "skills_64",
-      "index": 125
-    },
-    "Art/2DArt/SkillIcons/passives/damagesword.dds": {
-      "atlas": "skills_64",
-      "index": 126
-    },
-    "Art/2DArt/SkillIcons/passives/dmgreduction.dds": {
-      "atlas": "skills_64",
-      "index": 127
-    },
-    "Art/2DArt/SkillIcons/passives/elementaldamage.dds": {
-      "atlas": "skills_64",
-      "index": 128
-    },
-    "Art/2DArt/SkillIcons/passives/energyshield.dds": {
-      "atlas": "skills_64",
-      "index": 129
-    },
-    "Art/2DArt/SkillIcons/passives/evade.dds": {
-      "atlas": "skills_64",
-      "index": 130
-    },
-    "Art/2DArt/SkillIcons/passives/firedamage.dds": {
-      "atlas": "skills_64",
-      "index": 131
-    },
-    "Art/2DArt/SkillIcons/passives/firedamageint.dds": {
-      "atlas": "skills_64",
-      "index": 132
-    },
-    "Art/2DArt/SkillIcons/passives/firedamagestr.dds": {
-      "atlas": "skills_64",
-      "index": 133
-    },
-    "Art/2DArt/SkillIcons/passives/fireresist.dds": {
-      "atlas": "skills_64",
-      "index": 134
-    },
-    "Art/2DArt/SkillIcons/passives/flaskdex.dds": {
-      "atlas": "skills_64",
-      "index": 135
-    },
-    "Art/2DArt/SkillIcons/passives/flaskint.dds": {
-      "atlas": "skills_64",
-      "index": 136
-    },
-    "Art/2DArt/SkillIcons/passives/flaskstr.dds": {
-      "atlas": "skills_64",
-      "index": 137
-    },
-    "Art/2DArt/SkillIcons/passives/increasedrunspeeddex.dds": {
-      "atlas": "skills_64",
-      "index": 138
-    },
-    "Art/2DArt/SkillIcons/passives/knockback.dds": {
-      "atlas": "skills_64",
-      "index": 139
-    },
-    "Art/2DArt/SkillIcons/passives/life1.dds": {
-      "atlas": "skills_64",
-      "index": 140
-    },
-    "Art/2DArt/SkillIcons/passives/lifepercentage.dds": {
-      "atlas": "skills_64",
-      "index": 141
-    },
-    "Art/2DArt/SkillIcons/passives/lightningint.dds": {
-      "atlas": "skills_64",
-      "index": 142
-    },
-    "Art/2DArt/SkillIcons/passives/lightningstr.dds": {
-      "atlas": "skills_64",
-      "index": 143
-    },
-    "Art/2DArt/SkillIcons/passives/macedmg.dds": {
-      "atlas": "skills_64",
-      "index": 144
-    },
-    "Art/2DArt/SkillIcons/passives/mana.dds": {
-      "atlas": "skills_64",
-      "index": 145
-    },
-    "Art/2DArt/SkillIcons/passives/manaregeneration.dds": {
-      "atlas": "skills_64",
-      "index": 146
-    },
-    "Art/2DArt/SkillIcons/passives/manastr.dds": {
-      "atlas": "skills_64",
-      "index": 147
-    },
-    "Art/2DArt/SkillIcons/passives/minionattackspeed.dds": {
-      "atlas": "skills_64",
-      "index": 148
-    },
-    "Art/2DArt/SkillIcons/passives/miniondamageBlue.dds": {
-      "atlas": "skills_64",
-      "index": 149
-    },
-    "Art/2DArt/SkillIcons/passives/minionlife.dds": {
-      "atlas": "skills_64",
-      "index": 150
-    },
-    "Art/2DArt/SkillIcons/passives/minionstr.dds": {
-      "atlas": "skills_64",
-      "index": 151
-    },
-    "Art/2DArt/SkillIcons/passives/onehanddamage.dds": {
-      "atlas": "skills_64",
-      "index": 152
-    },
-    "Art/2DArt/SkillIcons/passives/plusattribute.dds": {
-      "atlas": "skills_64",
-      "index": 153
-    },
-    "Art/2DArt/SkillIcons/passives/plusdexterity.dds": {
-      "atlas": "skills_64",
-      "index": 154
-    },
-    "Art/2DArt/SkillIcons/passives/plusintelligence.dds": {
-      "atlas": "skills_64",
-      "index": 155
-    },
-    "Art/2DArt/SkillIcons/passives/plusstrength.dds": {
-      "atlas": "skills_64",
-      "index": 156
-    },
-    "Art/2DArt/SkillIcons/passives/projectilespeed.dds": {
-      "atlas": "skills_64",
-      "index": 157
-    },
-    "Art/2DArt/SkillIcons/passives/shieldblock.dds": {
-      "atlas": "skills_64",
-      "index": 158
-    },
-    "Art/2DArt/SkillIcons/passives/spellcritical.dds": {
-      "atlas": "skills_64",
-      "index": 159
-    },
-    "Art/2DArt/SkillIcons/passives/stun2h.dds": {
-      "atlas": "skills_64",
-      "index": 160
-    },
-    "Art/2DArt/SkillIcons/passives/stunstr.dds": {
-      "atlas": "skills_64",
-      "index": 161
-    },
-    "Art/2DArt/SkillIcons/passives/tempint.dds": {
-      "atlas": "skills_64",
-      "index": 162
-    },
-    "Art/2DArt/SkillIcons/passives/totemandbrandlife.dds": {
-      "atlas": "skills_64",
-      "index": 163
-    },
-    "Art/2DArt/SkillIcons/passives/trapdamage.dds": {
-      "atlas": "skills_64",
-      "index": 164
-    },
-    "Art/2DArt/SkillIcons/passives/trapsmax.dds": {
-      "atlas": "skills_64",
-      "index": 165
-    },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaBreachFlameDoubles.dds": {
-      "atlas": "skills_128",
-      "index": 1
-    },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaBreachWalk.dds": {
-      "atlas": "skills_128",
-      "index": 2
-    },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaDarknessProtectsLonger.dds": {
-      "atlas": "skills_128",
-      "index": 3
-    },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaExtraChaosDamage.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaBreachFlameDoubles.png": {
+      "atlas": "skills_normal",
       "index": 4
     },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaExtraChaosDamageBlue.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaExtraChaosDamageBlue.png": {
+      "atlas": "skills_normal",
       "index": 5
     },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaExtraChaosDamagePerDarkness.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaExtraChaosDamageRed.png": {
+      "atlas": "skills_normal",
       "index": 6
     },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaExtraChaosDamageRed.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaNode.png": {
+      "atlas": "skills_normal",
       "index": 7
     },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaExtraChaosResistance.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Amazon/AmazonNode.png": {
+      "atlas": "skills_normal",
       "index": 8
     },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaFlameSelector.dds": {
-      "atlas": "skills_128",
-      "index": 9
-    },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaManaLeechInstant.dds": {
-      "atlas": "skills_128",
-      "index": 10
-    },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaReplaceSpiritWithDarkness.dds": {
-      "atlas": "skills_128",
-      "index": 11
-    },
-    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaUnravelling.dds": {
-      "atlas": "skills_128",
-      "index": 12
-    },
-    "Art/2DArt/SkillIcons/passives/Amazon/AmazonConsumeFrenzyChargeGainElementalInstillation.dds": {
-      "atlas": "skills_128",
-      "index": 13
-    },
-    "Art/2DArt/SkillIcons/passives/Amazon/AmazonDoubleEvasionfromGlovesBootsHelmsHalvedBodyArmour.dds": {
-      "atlas": "skills_128",
-      "index": 14
-    },
-    "Art/2DArt/SkillIcons/passives/Amazon/AmazonElementalDamageReductionperElementalInstillation.dds": {
-      "atlas": "skills_128",
-      "index": 15
-    },
-    "Art/2DArt/SkillIcons/passives/Amazon/AmazonExcessChancetoHitConvertedtoCritHitChance.dds": {
-      "atlas": "skills_128",
-      "index": 16
-    },
-    "Art/2DArt/SkillIcons/passives/Amazon/AmazonGainPhysicalDamageWeaponsAccuracy.dds": {
-      "atlas": "skills_128",
-      "index": 17
-    },
-    "Art/2DArt/SkillIcons/passives/Amazon/AmazonIncreasedLifeRecoveryRatePerMissingLife.dds": {
-      "atlas": "skills_128",
-      "index": 18
-    },
-    "Art/2DArt/SkillIcons/passives/Amazon/AmazonLifeFlasksRecoverManaViceVersa.dds": {
-      "atlas": "skills_128",
-      "index": 19
-    },
-    "Art/2DArt/SkillIcons/passives/Amazon/AmazonRareUniqueBloodlusted.dds": {
-      "atlas": "skills_128",
-      "index": 20
-    },
-    "Art/2DArt/SkillIcons/passives/Amazon/AmazonSpeedBloodlustedEnemy.dds": {
-      "atlas": "skills_128",
-      "index": 21
-    },
-    "Art/2DArt/SkillIcons/passives/Annihilation.dds": {
-      "atlas": "skills_128",
-      "index": 22
-    },
-    "Art/2DArt/SkillIcons/passives/ArchonGenericNotable.dds": {
-      "atlas": "skills_128",
-      "index": 23
-    },
-    "Art/2DArt/SkillIcons/passives/AspectOfTheLynx.dds": {
-      "atlas": "skills_128",
-      "index": 24
-    },
-    "Art/2DArt/SkillIcons/passives/AuraNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ArchonGeneric.png": {
+      "atlas": "skills_notable",
       "index": 25
     },
-    "Art/2DArt/SkillIcons/passives/AzmeriPrimalMonkeyNotable.dds": {
-      "atlas": "skills_128",
-      "index": 26
+    "Art/2DArt/SkillIcons/passives/ArchonofUndeathNode.png": {
+      "atlas": "skills_normal",
+      "index": 10
     },
-    "Art/2DArt/SkillIcons/passives/AzmeriPrimalOwlNotable.dds": {
-      "atlas": "skills_128",
-      "index": 27
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriPrimalSnakeNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/AreaDmgNode.png": {
+      "atlas": "skills_notable",
       "index": 28
     },
-    "Art/2DArt/SkillIcons/passives/AzmeriSacredFoxNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ArmourAndEnergyShieldNode.png": {
+      "atlas": "skills_notable",
       "index": 29
     },
-    "Art/2DArt/SkillIcons/passives/AzmeriSacredRabbitNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ArmourAndEvasionNode.png": {
+      "atlas": "skills_notable",
       "index": 30
     },
-    "Art/2DArt/SkillIcons/passives/AzmeriVividCatNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ArmourBreak1BuffIcon.png": {
+      "atlas": "skills_notable",
       "index": 31
     },
-    "Art/2DArt/SkillIcons/passives/AzmeriVividStagNotable.dds": {
-      "atlas": "skills_128",
-      "index": 32
-    },
-    "Art/2DArt/SkillIcons/passives/AzmeriVividWolfNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ArmourElementalDamageDeflect.png": {
+      "atlas": "skills_notable",
       "index": 33
     },
-    "Art/2DArt/SkillIcons/passives/AzmeriWildBearNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ArmourElementalDamageEnergyShieldRecharge.png": {
+      "atlas": "skills_notable",
       "index": 34
     },
-    "Art/2DArt/SkillIcons/passives/AzmeriWildBoarNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Ascendants/SkillPoint.png": {
+      "atlas": "skills_notable",
       "index": 35
     },
-    "Art/2DArt/SkillIcons/passives/AzmeriWildOxNotable.dds": {
-      "atlas": "skills_128",
-      "index": 36
-    },
-    "Art/2DArt/SkillIcons/passives/BannerAreaNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/AuraNotable.png": {
+      "atlas": "skills_notable",
       "index": 37
     },
-    "Art/2DArt/SkillIcons/passives/BattleRouse.dds": {
-      "atlas": "skills_128",
-      "index": 38
+    "Art/2DArt/SkillIcons/passives/AzmeriPrimalMonkey.png": {
+      "atlas": "skills_normal",
+      "index": 19
     },
-    "Art/2DArt/SkillIcons/passives/Blood2.dds": {
-      "atlas": "skills_128",
-      "index": 39
+    "Art/2DArt/SkillIcons/passives/AzmeriPrimalOwl.png": {
+      "atlas": "skills_normal",
+      "index": 20
     },
-    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageCritDamagePerLife.dds": {
-      "atlas": "skills_128",
-      "index": 40
+    "Art/2DArt/SkillIcons/passives/AzmeriPrimalSnake.png": {
+      "atlas": "skills_normal",
+      "index": 21
     },
-    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageCurseInfiniteDuration.dds": {
-      "atlas": "skills_128",
-      "index": 41
+    "Art/2DArt/SkillIcons/passives/AzmeriSacredFox.png": {
+      "atlas": "skills_normal",
+      "index": 22
     },
-    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageDamageLeechedLife.dds": {
-      "atlas": "skills_128",
-      "index": 42
+    "Art/2DArt/SkillIcons/passives/AzmeriSacredRabbit.png": {
+      "atlas": "skills_normal",
+      "index": 23
     },
-    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageGainLifeEnergyShield.dds": {
-      "atlas": "skills_128",
-      "index": 43
+    "Art/2DArt/SkillIcons/passives/AzmeriVividCat.png": {
+      "atlas": "skills_normal",
+      "index": 24
     },
-    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageHigherSpellBaseCritStrike.dds": {
-      "atlas": "skills_128",
-      "index": 44
+    "Art/2DArt/SkillIcons/passives/AzmeriVividStag.png": {
+      "atlas": "skills_normal",
+      "index": 25
     },
-    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageLeaveBloodOrbs.dds": {
-      "atlas": "skills_128",
-      "index": 45
+    "Art/2DArt/SkillIcons/passives/AzmeriVividWolf.png": {
+      "atlas": "skills_normal",
+      "index": 26
     },
-    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageLifeLoss.dds": {
-      "atlas": "skills_128",
-      "index": 46
+    "Art/2DArt/SkillIcons/passives/AzmeriWildBear.png": {
+      "atlas": "skills_normal",
+      "index": 27
     },
-    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageSaguineTides.dds": {
-      "atlas": "skills_128",
-      "index": 47
+    "Art/2DArt/SkillIcons/passives/AzmeriWildBoar.png": {
+      "atlas": "skills_normal",
+      "index": 28
     },
-    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodPhysicalDamageExtraGore.dds": {
-      "atlas": "skills_128",
-      "index": 48
+    "Art/2DArt/SkillIcons/passives/AzmeriWildOx.png": {
+      "atlas": "skills_normal",
+      "index": 29
     },
-    "Art/2DArt/SkillIcons/passives/BowDamage.dds": {
-      "atlas": "skills_128",
-      "index": 49
+    "Art/2DArt/SkillIcons/passives/BannerResourceAreaNode.png": {
+      "atlas": "skills_normal",
+      "index": 30
     },
-    "Art/2DArt/SkillIcons/passives/BucklersNotable1.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Blood2.png": {
+      "atlas": "skills_notable",
       "index": 50
     },
-    "Art/2DArt/SkillIcons/passives/BulwarkKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 51
+    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageNode.png": {
+      "atlas": "skills_normal",
+      "index": 32
     },
-    "Art/2DArt/SkillIcons/passives/ChainingProjectiles.dds": {
-      "atlas": "skills_128",
-      "index": 52
-    },
-    "Art/2DArt/SkillIcons/passives/ChannellingAttacksNotable2.dds": {
-      "atlas": "skills_128",
-      "index": 53
-    },
-    "Art/2DArt/SkillIcons/passives/ChaosDamage2.dds": {
-      "atlas": "skills_128",
-      "index": 54
-    },
-    "Art/2DArt/SkillIcons/passives/CharmNotable1.dds": {
-      "atlas": "skills_128",
-      "index": 55
-    },
-    "Art/2DArt/SkillIcons/passives/ClawsOfTheMagpie.dds": {
-      "atlas": "skills_128",
-      "index": 56
-    },
-    "Art/2DArt/SkillIcons/passives/CompanionsNotable1.dds": {
-      "atlas": "skills_128",
-      "index": 57
-    },
-    "Art/2DArt/SkillIcons/passives/CrimsonAssaultKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 58
-    },
-    "Art/2DArt/SkillIcons/passives/CriticalStrikesNotable.dds": {
-      "atlas": "skills_128",
-      "index": 59
-    },
-    "Art/2DArt/SkillIcons/passives/CursemitigationclusterNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/BowDamage.png": {
+      "atlas": "skills_notable",
       "index": 60
     },
-    "Art/2DArt/SkillIcons/passives/DancewithDeathKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 61
+    "Art/2DArt/SkillIcons/passives/BucklerNode1.png": {
+      "atlas": "skills_normal",
+      "index": 34
     },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeDealMoreProjectileDamageClose.dds": {
-      "atlas": "skills_128",
-      "index": 62
+    "Art/2DArt/SkillIcons/passives/ChannellingAttacksNode.png": {
+      "atlas": "skills_normal",
+      "index": 35
     },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeDealMoreProjectileDamageFarAway.dds": {
-      "atlas": "skills_128",
-      "index": 63
-    },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeFrenzyChargesGeneration.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ChannellingDamage.png": {
+      "atlas": "skills_notable",
       "index": 64
     },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeFrenzyChargesHaveMoreEffect.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ChannellingSpeed.png": {
+      "atlas": "skills_normal",
+      "index": 37
+    },
+    "Art/2DArt/SkillIcons/passives/ChaosDamage.png": {
+      "atlas": "skills_normal",
+      "index": 38
+    },
+    "Art/2DArt/SkillIcons/passives/ChaosDamage2.png": {
+      "atlas": "skills_normal",
+      "index": 39
+    },
+    "Art/2DArt/SkillIcons/passives/ChaosDamagenode.png": {
+      "atlas": "skills_notable",
       "index": 65
     },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeGrantsTwoAdditionalProjectiles.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/CharmNode1.png": {
+      "atlas": "skills_notable",
       "index": 66
     },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeLingeringMirage.dds": {
-      "atlas": "skills_128",
-      "index": 67
-    },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeMarkEnemiesSpread.dds": {
-      "atlas": "skills_128",
-      "index": 68
-    },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeMoreAccuracy.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ColdDamagenode.png": {
+      "atlas": "skills_notable",
       "index": 69
     },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeProjectileDamageChoose.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ColdFireNode.png": {
+      "atlas": "skills_notable",
       "index": 70
     },
-    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeTailwind.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ColdResistNode.png": {
+      "atlas": "skills_normal",
+      "index": 44
+    },
+    "Art/2DArt/SkillIcons/passives/CompanionsNode1.png": {
+      "atlas": "skills_notable",
       "index": 71
     },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/ElementalDamageTakenFromMana.dds": {
-      "atlas": "skills_128",
-      "index": 72
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/EnergyShieldPhyDmgReduction.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/CorpseDamage.png": {
+      "atlas": "skills_notable",
       "index": 73
     },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/FireDjinnEmberSlash.dds": {
-      "atlas": "skills_128",
-      "index": 74
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/FireDjinnFlameRunes.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/CurseEffectNode.png": {
+      "atlas": "skills_notable",
       "index": 75
     },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/FireDjinnMeteoricSlam.dds": {
-      "atlas": "skills_128",
-      "index": 76
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeDealMoreProjectileDamageClose.png": {
+      "atlas": "skills_normal",
+      "index": 48
     },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/FocusStaff.dds": {
-      "atlas": "skills_128",
-      "index": 77
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeDealMoreProjectileDamageFarAway.png": {
+      "atlas": "skills_normal",
+      "index": 49
     },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/MoreEnergyShieldRechargeRate.dds": {
-      "atlas": "skills_128",
-      "index": 78
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeNode.png": {
+      "atlas": "skills_normal",
+      "index": 50
     },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SandDjinnCorpseBeetles.dds": {
-      "atlas": "skills_128",
-      "index": 79
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/DjinnNode.png": {
+      "atlas": "skills_normal",
+      "index": 51
     },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SandDjinnDaggerslamSkill.dds": {
-      "atlas": "skills_128",
-      "index": 80
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SandDjinnExplosiveTeleport.dds": {
-      "atlas": "skills_128",
-      "index": 81
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SummonFireDjinn.dds": {
-      "atlas": "skills_128",
-      "index": 82
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SummonSandDjinn.dds": {
-      "atlas": "skills_128",
-      "index": 83
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SummonWaterDjinn.dds": {
-      "atlas": "skills_128",
-      "index": 84
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/TimelostJewelsLargerRadius.dds": {
-      "atlas": "skills_128",
-      "index": 85
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/WaterDjinnChiilldedGroundBurst.dds": {
-      "atlas": "skills_128",
-      "index": 86
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/WaterDjinnCommandOasis.dds": {
-      "atlas": "skills_128",
-      "index": 87
-    },
-    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/WaterDjinnESRechargeCommand.dds": {
-      "atlas": "skills_128",
-      "index": 88
-    },
-    "Art/2DArt/SkillIcons/passives/DruidAlternateEnergyShield.dds": {
-      "atlas": "skills_128",
-      "index": 89
-    },
-    "Art/2DArt/SkillIcons/passives/DruidAnimism.dds": {
-      "atlas": "skills_128",
-      "index": 90
-    },
-    "Art/2DArt/SkillIcons/passives/DruidGenericShapeshiftNotable.dds": {
-      "atlas": "skills_128",
-      "index": 91
-    },
-    "Art/2DArt/SkillIcons/passives/DruidRageKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 92
-    },
-    "Art/2DArt/SkillIcons/passives/DruidShapeshiftBearNotable.dds": {
-      "atlas": "skills_128",
-      "index": 93
-    },
-    "Art/2DArt/SkillIcons/passives/DruidShapeshiftWolfNotable.dds": {
-      "atlas": "skills_128",
-      "index": 94
-    },
-    "Art/2DArt/SkillIcons/passives/DruidShapeshiftWyvernNotable.dds": {
-      "atlas": "skills_128",
-      "index": 95
-    },
-    "Art/2DArt/SkillIcons/passives/DruidWildsurgeIncantation.dds": {
-      "atlas": "skills_128",
-      "index": 96
-    },
-    "Art/2DArt/SkillIcons/passives/ElementalDamagewithAttacks2.dds": {
-      "atlas": "skills_128",
-      "index": 97
-    },
-    "Art/2DArt/SkillIcons/passives/ElementalDominion2.dds": {
-      "atlas": "skills_128",
-      "index": 98
-    },
-    "Art/2DArt/SkillIcons/passives/ElementalResistance2.dds": {
-      "atlas": "skills_128",
-      "index": 99
-    },
-    "Art/2DArt/SkillIcons/passives/EternalYouth.dds": {
-      "atlas": "skills_128",
-      "index": 100
-    },
-    "Art/2DArt/SkillIcons/passives/EvasionAndBlindNotable.dds": {
-      "atlas": "skills_128",
-      "index": 101
-    },
-    "Art/2DArt/SkillIcons/passives/FireSpellsBecomeChaosSpellsKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 102
-    },
-    "Art/2DArt/SkillIcons/passives/FlaskNotableCritStrikeRecharge.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/DruidGenericShapeshiftNode.png": {
+      "atlas": "skills_notable",
       "index": 103
     },
-    "Art/2DArt/SkillIcons/passives/FlaskNotableFlasksLastLonger.dds": {
-      "atlas": "skills_128",
-      "index": 104
+    "Art/2DArt/SkillIcons/passives/DruidShapeshiftBearNode.png": {
+      "atlas": "skills_normal",
+      "index": 53
     },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingBuffSkillsReserveLessSpirit.dds": {
-      "atlas": "skills_128",
-      "index": 105
+    "Art/2DArt/SkillIcons/passives/DruidShapeshiftWolfNode.png": {
+      "atlas": "skills_normal",
+      "index": 54
     },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingHighestAttributeSatisfiesGemRequirements.dds": {
-      "atlas": "skills_128",
-      "index": 106
+    "Art/2DArt/SkillIcons/passives/DruidShapeshiftWyvernNode.png": {
+      "atlas": "skills_normal",
+      "index": 55
     },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingInherentBonusesFromAttributesDouble.dds": {
-      "atlas": "skills_128",
-      "index": 107
-    },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingLevelAllSkillGems.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ElementalDamagenode.png": {
+      "atlas": "skills_notable",
       "index": 108
     },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingLevelDexSkillGems.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ElementalDamagewithAttacks2.png": {
+      "atlas": "skills_notable",
       "index": 109
     },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingLevelIntSkillGems.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ElementalDominion2.png": {
+      "atlas": "skills_notable",
       "index": 110
     },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingLevelStrSkillGems.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ElementalResistance2.png": {
+      "atlas": "skills_notable",
       "index": 111
     },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingMaxElementalResistanceSupportColour.dds": {
-      "atlas": "skills_128",
-      "index": 112
-    },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingSameSupportMultipleTimes.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/EnergyShieldNode.png": {
+      "atlas": "skills_notable",
       "index": 113
     },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingSkillGemQuality.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/EnergyShieldRechargeDeflect.png": {
+      "atlas": "skills_notable",
       "index": 114
     },
-    "Art/2DArt/SkillIcons/passives/Gemling/GemlingSkillsAdditionalSupport.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/EnergyShieldRechargeDeflectNode.png": {
+      "atlas": "skills_notable",
       "index": 115
     },
-    "Art/2DArt/SkillIcons/passives/GiantBloodKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 116
-    },
-    "Art/2DArt/SkillIcons/passives/GlancingBlows.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/EvasionNode.png": {
+      "atlas": "skills_notable",
       "index": 117
     },
-    "Art/2DArt/SkillIcons/passives/Harrier.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/EvasionandEnergyShieldNode.png": {
+      "atlas": "skills_notable",
       "index": 118
     },
-    "Art/2DArt/SkillIcons/passives/HeartstopperKeystone.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/FireDamagenode.png": {
+      "atlas": "skills_notable",
       "index": 119
     },
-    "Art/2DArt/SkillIcons/passives/Hearty.dds": {
-      "atlas": "skills_128",
-      "index": 120
+    "Art/2DArt/SkillIcons/passives/FireResistNode.png": {
+      "atlas": "skills_normal",
+      "index": 66
     },
-    "Art/2DArt/SkillIcons/passives/HiredKiller2.dds": {
-      "atlas": "skills_128",
-      "index": 121
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingLevelDexSkillGems.png": {
+      "atlas": "skills_normal",
+      "index": 67
     },
-    "Art/2DArt/SkillIcons/passives/HollowPalmTechniqueKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 122
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingLevelIntSkillGems.png": {
+      "atlas": "skills_normal",
+      "index": 68
     },
-    "Art/2DArt/SkillIcons/passives/Hunter.dds": {
-      "atlas": "skills_128",
-      "index": 123
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingLevelStrSkillGems.png": {
+      "atlas": "skills_normal",
+      "index": 69
     },
-    "Art/2DArt/SkillIcons/passives/IncreasedAttackDamageNotable.dds": {
-      "atlas": "skills_128",
-      "index": 124
-    },
-    "Art/2DArt/SkillIcons/passives/IncreasedChaosDamage.dds": {
-      "atlas": "skills_128",
-      "index": 125
-    },
-    "Art/2DArt/SkillIcons/passives/IncreasedManaCostNotable.dds": {
-      "atlas": "skills_128",
-      "index": 126
-    },
-    "Art/2DArt/SkillIcons/passives/IncreasedMaximumLifeNotable.dds": {
-      "atlas": "skills_128",
-      "index": 127
-    },
-    "Art/2DArt/SkillIcons/passives/IncreasedPhysicalDamage.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingNode.png": {
+      "atlas": "skills_notable",
       "index": 128
     },
-    "Art/2DArt/SkillIcons/passives/Infernalist/FuryManifest.dds": {
-      "atlas": "skills_128",
-      "index": 129
-    },
-    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalFamiliar.dds": {
-      "atlas": "skills_128",
-      "index": 130
-    },
-    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistConvertLifeToEnergyShield.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/GreenAttackSmallPassive.png": {
+      "atlas": "skills_notable",
       "index": 131
     },
-    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistConvertLifeToMana.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Harrier.png": {
+      "atlas": "skills_notable",
       "index": 132
     },
-    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistConvertLifeToSpirit.dds": {
-      "atlas": "skills_128",
-      "index": 133
-    },
-    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistInfernalHeat.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/HeraldBuffEffectNode2.png": {
+      "atlas": "skills_notable",
       "index": 134
     },
-    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistTransformIntoDemon1.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/HiredKiller2.png": {
+      "atlas": "skills_notable",
       "index": 135
     },
-    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistTransformIntoDemon2.dds": {
-      "atlas": "skills_128",
-      "index": 136
+    "Art/2DArt/SkillIcons/passives/IncreasedAttackDamageNode.png": {
+      "atlas": "skills_normal",
+      "index": 75
     },
-    "Art/2DArt/SkillIcons/passives/Infernalist/MoltenFury.dds": {
-      "atlas": "skills_128",
-      "index": 137
-    },
-    "Art/2DArt/SkillIcons/passives/Infernalist/ScorchTheEarth.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/IncreasedChaosDamage.png": {
+      "atlas": "skills_notable",
       "index": 138
     },
-    "Art/2DArt/SkillIcons/passives/InstillationsNotable1.dds": {
-      "atlas": "skills_128",
-      "index": 139
-    },
-    "Art/2DArt/SkillIcons/passives/Invoker/InvokerChillChanceBasedOnDamage.dds": {
-      "atlas": "skills_128",
-      "index": 140
-    },
-    "Art/2DArt/SkillIcons/passives/Invoker/InvokerCriticalStrikesIgnoreResistances.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/IncreasedPhysicalDamage.png": {
+      "atlas": "skills_notable",
       "index": 141
     },
-    "Art/2DArt/SkillIcons/passives/Invoker/InvokerEnergyDoubled.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/IncreasedProjectileSpeedNode.png": {
+      "atlas": "skills_notable",
       "index": 142
     },
-    "Art/2DArt/SkillIcons/passives/Invoker/InvokerEvasionEnergyShieldGrantsSpirit.dds": {
-      "atlas": "skills_128",
-      "index": 143
+    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistNode.png": {
+      "atlas": "skills_normal",
+      "index": 79
     },
-    "Art/2DArt/SkillIcons/passives/Invoker/InvokerEvasionGrantsPhysicalDamageReduction.dds": {
-      "atlas": "skills_128",
-      "index": 144
-    },
-    "Art/2DArt/SkillIcons/passives/Invoker/InvokerGrantsMeditate.dds": {
-      "atlas": "skills_128",
-      "index": 145
-    },
-    "Art/2DArt/SkillIcons/passives/Invoker/InvokerShockMagnitude.dds": {
-      "atlas": "skills_128",
-      "index": 146
-    },
-    "Art/2DArt/SkillIcons/passives/Invoker/InvokerUnboundAvatar.dds": {
-      "atlas": "skills_128",
-      "index": 147
-    },
-    "Art/2DArt/SkillIcons/passives/Invoker/InvokerWildStrike.dds": {
-      "atlas": "skills_128",
-      "index": 148
-    },
-    "Art/2DArt/SkillIcons/passives/KeystoneAvatarOfFire.dds": {
-      "atlas": "skills_128",
-      "index": 149
-    },
-    "Art/2DArt/SkillIcons/passives/KeystoneBloodMagic.dds": {
-      "atlas": "skills_128",
-      "index": 150
-    },
-    "Art/2DArt/SkillIcons/passives/KeystoneChaosInoculation.dds": {
-      "atlas": "skills_128",
-      "index": 151
-    },
-    "Art/2DArt/SkillIcons/passives/KeystoneConduit.dds": {
-      "atlas": "skills_128",
-      "index": 152
-    },
-    "Art/2DArt/SkillIcons/passives/KeystoneEldritchBattery.dds": {
-      "atlas": "skills_128",
-      "index": 153
-    },
-    "Art/2DArt/SkillIcons/passives/KeystoneElementalEquilibrium.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Inquistitor/IncreasedElementalDamageAttackCasteSpeed.png": {
+      "atlas": "skills_notable",
       "index": 154
     },
-    "Art/2DArt/SkillIcons/passives/KeystoneIronReflexes.dds": {
-      "atlas": "skills_128",
-      "index": 155
+    "Art/2DArt/SkillIcons/passives/InstillationsNode1.png": {
+      "atlas": "skills_normal",
+      "index": 81
     },
-    "Art/2DArt/SkillIcons/passives/KeystonePainAttunement.dds": {
-      "atlas": "skills_128",
-      "index": 156
+    "Art/2DArt/SkillIcons/passives/Invoker/InvokerNode.png": {
+      "atlas": "skills_normal",
+      "index": 82
     },
-    "Art/2DArt/SkillIcons/passives/KeystoneResoluteTechnique.dds": {
-      "atlas": "skills_128",
-      "index": 157
+    "Art/2DArt/SkillIcons/passives/Lich/LichNode.png": {
+      "atlas": "skills_normal",
+      "index": 83
     },
-    "Art/2DArt/SkillIcons/passives/KeystoneUnwaveringStance.dds": {
-      "atlas": "skills_128",
-      "index": 158
-    },
-    "Art/2DArt/SkillIcons/passives/KeystoneWhispersOfDoom.dds": {
-      "atlas": "skills_128",
-      "index": 159
-    },
-    "Art/2DArt/SkillIcons/passives/LethalAssault.dds": {
-      "atlas": "skills_128",
-      "index": 160
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/AbyssalLichAbyssalApparition.dds": {
-      "atlas": "skills_128",
-      "index": 161
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/AbyssalLichBoneGraft.dds": {
-      "atlas": "skills_128",
-      "index": 162
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/AbyssalLichBoneOffering.dds": {
-      "atlas": "skills_128",
-      "index": 163
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/LichApplyAdditionalCurses.dds": {
-      "atlas": "skills_128",
-      "index": 164
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/LichCursedEnemiesExplodeChaos.dds": {
-      "atlas": "skills_128",
-      "index": 165
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/LichImprovedUnholyMight.dds": {
-      "atlas": "skills_128",
-      "index": 166
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/LichLifeCannotChangeWhileES.dds": {
-      "atlas": "skills_128",
-      "index": 167
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/LichManaRegenBasedOnMaxLife.dds": {
-      "atlas": "skills_128",
-      "index": 168
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/LichSpellCostESandMoreDMG.dds": {
-      "atlas": "skills_128",
-      "index": 169
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/LichSpellsConsumePowerCharges.dds": {
-      "atlas": "skills_128",
-      "index": 170
-    },
-    "Art/2DArt/SkillIcons/passives/Lich/LichUnholyMight.dds": {
-      "atlas": "skills_128",
-      "index": 171
-    },
-    "Art/2DArt/SkillIcons/passives/LifeandMana.dds": {
-      "atlas": "skills_128",
-      "index": 172
-    },
-    "Art/2DArt/SkillIcons/passives/Meleerange.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/LifeRecoupNode.png": {
+      "atlas": "skills_notable",
       "index": 173
     },
-    "Art/2DArt/SkillIcons/passives/MineManaReservationNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/LifeandMana.png": {
+      "atlas": "skills_notable",
       "index": 174
     },
-    "Art/2DArt/SkillIcons/passives/MiracleMaker.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/LightningDamagenode.png": {
+      "atlas": "skills_notable",
       "index": 175
     },
-    "Art/2DArt/SkillIcons/passives/MonkAccuracyChakra.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/LightningResistNode.png": {
+      "atlas": "skills_normal",
+      "index": 87
+    },
+    "Art/2DArt/SkillIcons/passives/ManaLeechThemedNode.png": {
+      "atlas": "skills_notable",
       "index": 176
     },
-    "Art/2DArt/SkillIcons/passives/MonkElementalChakra.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MarkNode.png": {
+      "atlas": "skills_notable",
       "index": 177
     },
-    "Art/2DArt/SkillIcons/passives/MonkEnergyShieldChakra.dds": {
-      "atlas": "skills_128",
-      "index": 178
+    "Art/2DArt/SkillIcons/passives/MartialArtist/MartialArtistNode.png": {
+      "atlas": "skills_normal",
+      "index": 90
     },
-    "Art/2DArt/SkillIcons/passives/MonkHealthChakra.dds": {
-      "atlas": "skills_128",
-      "index": 179
-    },
-    "Art/2DArt/SkillIcons/passives/MonkManaChakra.dds": {
-      "atlas": "skills_128",
-      "index": 180
-    },
-    "Art/2DArt/SkillIcons/passives/MonkStrengthChakra.dds": {
-      "atlas": "skills_128",
-      "index": 181
-    },
-    "Art/2DArt/SkillIcons/passives/MonkStunChakra.dds": {
-      "atlas": "skills_128",
-      "index": 182
-    },
-    "Art/2DArt/SkillIcons/passives/MovementSpeedandEvasion.dds": {
-      "atlas": "skills_128",
-      "index": 183
-    },
-    "Art/2DArt/SkillIcons/passives/MultipleBeastCompanionsKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 184
-    },
-    "Art/2DArt/SkillIcons/passives/NecromanticTalismanKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 185
-    },
-    "Art/2DArt/SkillIcons/passives/OasisKeystone2.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MasteryBlank.png": {
+      "atlas": "skills_notable",
       "index": 186
     },
-    "Art/2DArt/SkillIcons/passives/Oracle/OracleDiffChoices.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MeleeAoENode.png": {
+      "atlas": "skills_notable",
       "index": 187
     },
-    "Art/2DArt/SkillIcons/passives/Oracle/OracleEnemiesActionsUnlucky.dds": {
-      "atlas": "skills_128",
-      "index": 188
-    },
-    "Art/2DArt/SkillIcons/passives/Oracle/OracleLifeManaHits.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MineAreaOfEffectNode.png": {
+      "atlas": "skills_notable",
       "index": 189
     },
-    "Art/2DArt/SkillIcons/passives/Oracle/OraclePassiveTreeAllocation.dds": {
-      "atlas": "skills_128",
-      "index": 190
-    },
-    "Art/2DArt/SkillIcons/passives/Oracle/OracleRerollingCrit.dds": {
-      "atlas": "skills_128",
-      "index": 191
-    },
-    "Art/2DArt/SkillIcons/passives/Oracle/OracleRipFromTime.dds": {
-      "atlas": "skills_128",
-      "index": 192
-    },
-    "Art/2DArt/SkillIcons/passives/Oracle/OracleSpellFlux.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MinionElementalResistancesNode.png": {
+      "atlas": "skills_notable",
       "index": 193
     },
-    "Art/2DArt/SkillIcons/passives/Oracle/OracleTotemLimit.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MinionsandManaNode.png": {
+      "atlas": "skills_notable",
       "index": 194
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderAdditionalPoints.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MiracleMaker.png": {
+      "atlas": "skills_notable",
       "index": 195
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoction.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MonkAccuracyChakra.png": {
+      "atlas": "skills_notable",
       "index": 196
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoctionBleed.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MonkElementalChakra.png": {
+      "atlas": "skills_notable",
       "index": 197
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoctionCold.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MonkEnergyShieldChakra.png": {
+      "atlas": "skills_notable",
       "index": 198
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoctionFire.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MonkHealthChakra.png": {
+      "atlas": "skills_notable",
       "index": 199
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoctionLightning.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MonkManaChakra.png": {
+      "atlas": "skills_notable",
       "index": 200
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoctionPoison.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MonkStrengthChakra.png": {
+      "atlas": "skills_notable",
       "index": 201
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderCannotBeSlowed.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MonkStunChakra.png": {
+      "atlas": "skills_notable",
       "index": 202
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderEnemiesMultiplePoisons.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/MovementSpeedandEvasion.png": {
+      "atlas": "skills_notable",
       "index": 203
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderEvasionDmgReducVsElementalDmg.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/NodeDualWieldingDamage.png": {
+      "atlas": "skills_notable",
       "index": 204
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderLifeFlasks.dds": {
-      "atlas": "skills_128",
-      "index": 205
+    "Art/2DArt/SkillIcons/passives/Oracle/OracleNode.png": {
+      "atlas": "skills_normal",
+      "index": 106
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderMoreMovemenSpeedUsingSkills.dds": {
-      "atlas": "skills_128",
-      "index": 206
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoctionBleed.png": {
+      "atlas": "skills_normal",
+      "index": 107
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderMultichoicePath.dds": {
-      "atlas": "skills_128",
-      "index": 207
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoctionCold.png": {
+      "atlas": "skills_normal",
+      "index": 108
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderPathoftheSorceress.dds": {
-      "atlas": "skills_128",
-      "index": 208
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoctionFire.png": {
+      "atlas": "skills_normal",
+      "index": 109
     },
-    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderPathoftheWarrior.dds": {
-      "atlas": "skills_128",
-      "index": 209
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoctionLightning.png": {
+      "atlas": "skills_normal",
+      "index": 110
     },
-    "Art/2DArt/SkillIcons/passives/PhysicalDamageOverTimeNotable.dds": {
-      "atlas": "skills_128",
-      "index": 210
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoctionPoison.png": {
+      "atlas": "skills_normal",
+      "index": 111
     },
-    "Art/2DArt/SkillIcons/passives/Poison.dds": {
-      "atlas": "skills_128",
-      "index": 211
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderNode.png": {
+      "atlas": "skills_normal",
+      "index": 112
     },
-    "Art/2DArt/SkillIcons/passives/PressurePoints.dds": {
-      "atlas": "skills_128",
-      "index": 212
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderPathoftheSorceress.png": {
+      "atlas": "skills_normal",
+      "index": 113
     },
-    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistBloodBoils.dds": {
-      "atlas": "skills_128",
-      "index": 213
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderPathoftheWarrior.png": {
+      "atlas": "skills_normal",
+      "index": 114
     },
-    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistDrainManaActivateCharms.dds": {
-      "atlas": "skills_128",
-      "index": 214
-    },
-    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistIncreasedEffectOfJewellery.dds": {
-      "atlas": "skills_128",
-      "index": 215
-    },
-    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistLifeLeechFromElementalOrChaos.dds": {
-      "atlas": "skills_128",
-      "index": 216
-    },
-    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistPlusOneMaxCharm.dds": {
-      "atlas": "skills_128",
-      "index": 217
-    },
-    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistPlusOneRingSlot.dds": {
-      "atlas": "skills_128",
-      "index": 218
-    },
-    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistStabCorpse.dds": {
-      "atlas": "skills_128",
-      "index": 219
-    },
-    "Art/2DArt/SkillIcons/passives/ProjectileDmgNotable.dds": {
-      "atlas": "skills_128",
-      "index": 220
-    },
-    "Art/2DArt/SkillIcons/passives/ProjectilesNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/PhysicalDamageChaosNode.png": {
+      "atlas": "skills_notable",
       "index": 221
     },
-    "Art/2DArt/SkillIcons/passives/RageNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/PhysicalDamageNode.png": {
+      "atlas": "skills_notable",
       "index": 222
     },
-    "Art/2DArt/SkillIcons/passives/RemnantNotable.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/PhysicalDamageOverTimeNode.png": {
+      "atlas": "skills_notable",
       "index": 223
     },
-    "Art/2DArt/SkillIcons/passives/ResonanceKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 224
-    },
-    "Art/2DArt/SkillIcons/passives/Shaman/ShamanAdaptToElements.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Poison.png": {
+      "atlas": "skills_notable",
       "index": 225
     },
-    "Art/2DArt/SkillIcons/passives/Shaman/ShamanEvenMoreAdaptation.dds": {
-      "atlas": "skills_128",
-      "index": 226
+    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistNode.png": {
+      "atlas": "skills_normal",
+      "index": 119
     },
-    "Art/2DArt/SkillIcons/passives/Shaman/ShamanGainSpiritEmptyCharmSlot.dds": {
-      "atlas": "skills_128",
-      "index": 227
+    "Art/2DArt/SkillIcons/passives/ProjectileDmgNode.png": {
+      "atlas": "skills_normal",
+      "index": 120
     },
-    "Art/2DArt/SkillIcons/passives/Shaman/ShamanPickEleDmg.dds": {
-      "atlas": "skills_128",
-      "index": 228
+    "Art/2DArt/SkillIcons/passives/PuppeteerNode.png": {
+      "atlas": "skills_normal",
+      "index": 121
     },
-    "Art/2DArt/SkillIcons/passives/Shaman/ShamanRageAffectsSpells.dds": {
-      "atlas": "skills_128",
-      "index": 229
-    },
-    "Art/2DArt/SkillIcons/passives/Shaman/ShamanRageonHit.dds": {
-      "atlas": "skills_128",
-      "index": 230
-    },
-    "Art/2DArt/SkillIcons/passives/Shaman/ShamanRunesTalismans.dds": {
-      "atlas": "skills_128",
-      "index": 231
-    },
-    "Art/2DArt/SkillIcons/passives/Shaman/ShamanUnleashTheElements.dds": {
-      "atlas": "skills_128",
-      "index": 232
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaCanOnlyWearNormalRarityBodyArmour.dds": {
-      "atlas": "skills_128",
-      "index": 233
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaCreateMinionMeleeWeapon.dds": {
-      "atlas": "skills_128",
-      "index": 234
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaFireResistAppliesToColdLightning.dds": {
-      "atlas": "skills_128",
-      "index": 235
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaImbueMainHandWeapon.dds": {
-      "atlas": "skills_128",
-      "index": 236
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaImprovedFireResistAppliesToColdLightning.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Rage.png": {
+      "atlas": "skills_notable",
       "index": 237
     },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus1.dds": {
-      "atlas": "skills_128",
-      "index": 238
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus10.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/RangedTotemDamage.png": {
+      "atlas": "skills_notable",
       "index": 239
     },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus11.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ReducedSkillEffectDurationNode.png": {
+      "atlas": "skills_notable",
       "index": 240
     },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus12.dds": {
-      "atlas": "skills_128",
-      "index": 241
+    "Art/2DArt/SkillIcons/passives/Remnant.png": {
+      "atlas": "skills_normal",
+      "index": 125
     },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus2.dds": {
-      "atlas": "skills_128",
-      "index": 242
+    "Art/2DArt/SkillIcons/passives/Shaman/ShamanNode.png": {
+      "atlas": "skills_normal",
+      "index": 126
     },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus3.dds": {
-      "atlas": "skills_128",
-      "index": 243
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus4.dds": {
-      "atlas": "skills_128",
-      "index": 244
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus5.dds": {
-      "atlas": "skills_128",
-      "index": 245
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus6.dds": {
-      "atlas": "skills_128",
-      "index": 246
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus7.dds": {
-      "atlas": "skills_128",
-      "index": 247
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus8.dds": {
-      "atlas": "skills_128",
-      "index": 248
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus9.dds": {
-      "atlas": "skills_128",
-      "index": 249
-    },
-    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithofKitavaTriggerFireSpellsMeleeWeapon.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ShieldNodeOffensive.png": {
+      "atlas": "skills_notable",
       "index": 250
     },
-    "Art/2DArt/SkillIcons/passives/SorceressInvocationSpellsKeystone.dds": {
-      "atlas": "skills_128",
-      "index": 251
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithofKitavaNode.png": {
+      "atlas": "skills_normal",
+      "index": 128
     },
-    "Art/2DArt/SkillIcons/passives/SpearsNotable1.dds": {
-      "atlas": "skills_128",
-      "index": 252
+    "Art/2DArt/SkillIcons/passives/SpearsNode1.png": {
+      "atlas": "skills_normal",
+      "index": 129
     },
-    "Art/2DArt/SkillIcons/passives/SpellMultiplyer2.dds": {
-      "atlas": "skills_128",
-      "index": 253
+    "Art/2DArt/SkillIcons/passives/SpellMultiplyer2.png": {
+      "atlas": "skills_normal",
+      "index": 130
     },
-    "Art/2DArt/SkillIcons/passives/SpellSupressionNotable1.dds": {
-      "atlas": "skills_128",
-      "index": 254
-    },
-    "Art/2DArt/SkillIcons/passives/Storm Weaver.dds": {
-      "atlas": "skills_128",
-      "index": 255
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/AllDamageCanChill.dds": {
-      "atlas": "skills_128",
-      "index": 256
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/AllDamageCanShock.dds": {
-      "atlas": "skills_128",
-      "index": 257
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/ChillAddditionalTime.dds": {
-      "atlas": "skills_128",
-      "index": 258
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/GrantsArcaneSurge.dds": {
-      "atlas": "skills_128",
-      "index": 259
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/GrantsElementalStorm.dds": {
-      "atlas": "skills_128",
-      "index": 260
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/ImprovedArcaneSurge.dds": {
-      "atlas": "skills_128",
-      "index": 261
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/ImprovedElementalStorm.dds": {
-      "atlas": "skills_128",
-      "index": 262
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/ShockAddditionalTime.dds": {
-      "atlas": "skills_128",
-      "index": 263
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/StormweaverRemnant1.dds": {
-      "atlas": "skills_128",
-      "index": 264
-    },
-    "Art/2DArt/SkillIcons/passives/Stormweaver/StormweaverRemnant2.dds": {
-      "atlas": "skills_128",
-      "index": 265
-    },
-    "Art/2DArt/SkillIcons/passives/StunAvoidNotable.dds": {
-      "atlas": "skills_128",
-      "index": 266
-    },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianAlliesGainAttack.dds": {
-      "atlas": "skills_128",
-      "index": 267
-    },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianDeathFromAboveCommand.dds": {
-      "atlas": "skills_128",
-      "index": 268
-    },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianEvasionArmourHigher.dds": {
-      "atlas": "skills_128",
-      "index": 269
-    },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianGainStunThresholdArmour.dds": {
-      "atlas": "skills_128",
-      "index": 270
-    },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianLessSpiritCostBuff.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/SpellSuppresionNode.png": {
+      "atlas": "skills_notable",
       "index": 271
     },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianMultipleBanners.dds": {
-      "atlas": "skills_128",
-      "index": 272
+    "Art/2DArt/SkillIcons/passives/SpellSupressionNotable1.png": {
+      "atlas": "skills_normal",
+      "index": 132
     },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianPinnedEnemiesCannotAct.dds": {
-      "atlas": "skills_128",
-      "index": 273
+    "Art/2DArt/SkillIcons/passives/Stormweaver/StormweaverNode.png": {
+      "atlas": "skills_normal",
+      "index": 133
     },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianProjectileBuildsPin.dds": {
-      "atlas": "skills_128",
-      "index": 274
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianNode.png": {
+      "atlas": "skills_normal",
+      "index": 134
     },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianTotemAura.dds": {
-      "atlas": "skills_128",
-      "index": 275
+    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistNode.png": {
+      "atlas": "skills_normal",
+      "index": 135
     },
-    "Art/2DArt/SkillIcons/passives/Tactician/TacticianTotems.dds": {
-      "atlas": "skills_128",
-      "index": 276
-    },
-    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistChanceSkillNoCooldownSkill.dds": {
-      "atlas": "skills_128",
-      "index": 277
-    },
-    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistFasterRecoup.dds": {
-      "atlas": "skills_128",
-      "index": 278
-    },
-    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistGainMoreCastSpeed8Seconds.dds": {
-      "atlas": "skills_128",
-      "index": 279
-    },
-    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistGrantsReloadCooldownsSkill.dds": {
-      "atlas": "skills_128",
-      "index": 280
-    },
-    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistGrantsTemporalRiftSkill.dds": {
-      "atlas": "skills_128",
-      "index": 281
-    },
-    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistGrantsTimeStopSkill.dds": {
-      "atlas": "skills_128",
-      "index": 282
-    },
-    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistNearbyEnemiesProjectilesSlowed.dds": {
-      "atlas": "skills_128",
-      "index": 283
-    },
-    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistSynchronisationofPain.dds": {
-      "atlas": "skills_128",
-      "index": 284
-    },
-    "Art/2DArt/SkillIcons/passives/ThornsNotable1.dds": {
-      "atlas": "skills_128",
-      "index": 285
-    },
-    "Art/2DArt/SkillIcons/passives/Titan/TitanAdditionalInventory.dds": {
-      "atlas": "skills_128",
-      "index": 286
-    },
-    "Art/2DArt/SkillIcons/passives/Titan/TitanMoreBodyArmour.dds": {
-      "atlas": "skills_128",
-      "index": 287
-    },
-    "Art/2DArt/SkillIcons/passives/Titan/TitanMoreMaxLife.dds": {
-      "atlas": "skills_128",
-      "index": 288
-    },
-    "Art/2DArt/SkillIcons/passives/Titan/TitanMountainSplitter.dds": {
-      "atlas": "skills_128",
-      "index": 289
-    },
-    "Art/2DArt/SkillIcons/passives/Titan/TitanSlamSkillsAftershock.dds": {
-      "atlas": "skills_128",
-      "index": 290
-    },
-    "Art/2DArt/SkillIcons/passives/Titan/TitanSlamSkillsFistOfWar.dds": {
-      "atlas": "skills_128",
-      "index": 291
-    },
-    "Art/2DArt/SkillIcons/passives/Titan/TitanSmallPassiveDoubled.dds": {
-      "atlas": "skills_128",
-      "index": 292
-    },
-    "Art/2DArt/SkillIcons/passives/Titan/TitanYourHitsCrushEnemies.dds": {
-      "atlas": "skills_128",
-      "index": 293
-    },
-    "Art/2DArt/SkillIcons/passives/Trap.dds": {
-      "atlas": "skills_128",
-      "index": 294
-    },
-    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerBlockChance.dds": {
-      "atlas": "skills_128",
-      "index": 295
-    },
-    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerBreakEnemyArmour.dds": {
-      "atlas": "skills_128",
-      "index": 296
-    },
-    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerCanBlockAllDamageShieldNotRaised.dds": {
-      "atlas": "skills_128",
-      "index": 297
-    },
-    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerDamageTakenByTotems.dds": {
-      "atlas": "skills_128",
-      "index": 298
-    },
-    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerEncasedInJade.dds": {
-      "atlas": "skills_128",
-      "index": 299
-    },
-    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerEnemyArmourBrokenBelowZero.dds": {
-      "atlas": "skills_128",
-      "index": 300
-    },
-    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerTotemsDefendedByAncestors.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/ThornsNode1.png": {
+      "atlas": "skills_notable",
       "index": 301
     },
-    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerWarcryExplodesCorpses.dds": {
-      "atlas": "skills_128",
-      "index": 302
+    "Art/2DArt/SkillIcons/passives/Titan/TitanNode.png": {
+      "atlas": "skills_normal",
+      "index": 137
     },
-    "Art/2DArt/SkillIcons/passives/Warrior.dds": {
-      "atlas": "skills_128",
-      "index": 303
-    },
-    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterArmourEvasionConvertedSpellAegis.dds": {
-      "atlas": "skills_128",
-      "index": 304
-    },
-    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterCullingStrike.dds": {
-      "atlas": "skills_128",
-      "index": 305
-    },
-    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterDamageMonsterMissingFocus.dds": {
-      "atlas": "skills_128",
-      "index": 306
-    },
-    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterDrainMonsterFocus.dds": {
-      "atlas": "skills_128",
-      "index": 307
-    },
-    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterMonsterHolyExplosion.dds": {
-      "atlas": "skills_128",
-      "index": 308
-    },
-    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterRemovePercentageFullLifeEnemies.dds": {
-      "atlas": "skills_128",
-      "index": 309
-    },
-    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterSpecPoints.dds": {
-      "atlas": "skills_128",
-      "index": 310
-    },
-    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterStrongerSpellAegis.dds": {
-      "atlas": "skills_128",
-      "index": 311
-    },
-    "Art/2DArt/SkillIcons/passives/ashfrostandstorm.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/WarCryEffect.png": {
+      "atlas": "skills_notable",
       "index": 312
     },
-    "Art/2DArt/SkillIcons/passives/bodysoul.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerNode.png": {
+      "atlas": "skills_normal",
+      "index": 139
+    },
+    "Art/2DArt/SkillIcons/passives/Wildspeaker/WildspeakerNode.png": {
+      "atlas": "skills_normal",
+      "index": 140
+    },
+    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterNode.png": {
+      "atlas": "skills_notable",
+      "index": 336
+    },
+    "Art/2DArt/SkillIcons/passives/accuracydex.png": {
+      "atlas": "skills_notable",
+      "index": 340
+    },
+    "Art/2DArt/SkillIcons/passives/accuracystr.png": {
+      "atlas": "skills_notable",
+      "index": 341
+    },
+    "Art/2DArt/SkillIcons/passives/areaofeffect.png": {
+      "atlas": "skills_notable",
+      "index": 342
+    },
+    "Art/2DArt/SkillIcons/passives/attackspeed.png": {
+      "atlas": "skills_notable",
+      "index": 344
+    },
+    "Art/2DArt/SkillIcons/passives/attackspeedbow.png": {
+      "atlas": "skills_notable",
+      "index": 345
+    },
+    "Art/2DArt/SkillIcons/passives/auraareaofeffect.png": {
+      "atlas": "skills_normal",
+      "index": 147
+    },
+    "Art/2DArt/SkillIcons/passives/auraeffect.png": {
+      "atlas": "skills_notable",
+      "index": 346
+    },
+    "Art/2DArt/SkillIcons/passives/avoidchilling.png": {
+      "atlas": "skills_notable",
+      "index": 347
+    },
+    "Art/2DArt/SkillIcons/passives/axedmgspeed.png": {
+      "atlas": "skills_normal",
+      "index": 150
+    },
+    "Art/2DArt/SkillIcons/passives/blankDex.png": {
+      "atlas": "skills_normal",
+      "index": 151
+    },
+    "Art/2DArt/SkillIcons/passives/blankInt.png": {
+      "atlas": "skills_normal",
+      "index": 152
+    },
+    "Art/2DArt/SkillIcons/passives/blankStr.png": {
+      "atlas": "skills_normal",
+      "index": 153
+    },
+    "Art/2DArt/SkillIcons/passives/blockstr.png": {
+      "atlas": "skills_notable",
+      "index": 348
+    },
+    "Art/2DArt/SkillIcons/passives/castspeed.png": {
+      "atlas": "skills_notable",
+      "index": 350
+    },
+    "Art/2DArt/SkillIcons/passives/chargedex.png": {
+      "atlas": "skills_notable",
+      "index": 351
+    },
+    "Art/2DArt/SkillIcons/passives/chargeint.png": {
+      "atlas": "skills_notable",
+      "index": 352
+    },
+    "Art/2DArt/SkillIcons/passives/chargestr.png": {
+      "atlas": "skills_notable",
+      "index": 353
+    },
+    "Art/2DArt/SkillIcons/passives/colddamage.png": {
+      "atlas": "skills_notable",
+      "index": 354
+    },
+    "Art/2DArt/SkillIcons/passives/coldresist.png": {
+      "atlas": "skills_notable",
+      "index": 355
+    },
+    "Art/2DArt/SkillIcons/passives/criticaldaggerint.png": {
+      "atlas": "skills_notable",
+      "index": 356
+    },
+    "Art/2DArt/SkillIcons/passives/criticalstrikechance.png": {
+      "atlas": "skills_notable",
+      "index": 357
+    },
+    "Art/2DArt/SkillIcons/passives/criticalstrikechance2.png": {
+      "atlas": "skills_normal",
+      "index": 163
+    },
+    "Art/2DArt/SkillIcons/passives/damage.png": {
+      "atlas": "skills_notable",
+      "index": 358
+    },
+    "Art/2DArt/SkillIcons/passives/damage_blue.png": {
+      "atlas": "skills_notable",
+      "index": 359
+    },
+    "Art/2DArt/SkillIcons/passives/damageaxe.png": {
+      "atlas": "skills_notable",
+      "index": 360
+    },
+    "Art/2DArt/SkillIcons/passives/damagedualwield.png": {
+      "atlas": "skills_normal",
+      "index": 167
+    },
+    "Art/2DArt/SkillIcons/passives/damagespells.png": {
+      "atlas": "skills_notable",
+      "index": 361
+    },
+    "Art/2DArt/SkillIcons/passives/damagestaff.png": {
+      "atlas": "skills_notable",
+      "index": 362
+    },
+    "Art/2DArt/SkillIcons/passives/damagesword.png": {
+      "atlas": "skills_notable",
+      "index": 363
+    },
+    "Art/2DArt/SkillIcons/passives/dmgreduction.png": {
+      "atlas": "skills_notable",
+      "index": 365
+    },
+    "Art/2DArt/SkillIcons/passives/elementaldamage.png": {
+      "atlas": "skills_notable",
+      "index": 367
+    },
+    "Art/2DArt/SkillIcons/passives/energyshield.png": {
+      "atlas": "skills_notable",
+      "index": 368
+    },
+    "Art/2DArt/SkillIcons/passives/evade.png": {
+      "atlas": "skills_notable",
+      "index": 369
+    },
+    "Art/2DArt/SkillIcons/passives/executioner.png": {
+      "atlas": "skills_notable",
+      "index": 370
+    },
+    "Art/2DArt/SkillIcons/passives/firedamage.png": {
+      "atlas": "skills_notable",
+      "index": 372
+    },
+    "Art/2DArt/SkillIcons/passives/firedamageint.png": {
+      "atlas": "skills_notable",
+      "index": 373
+    },
+    "Art/2DArt/SkillIcons/passives/firedamagestr.png": {
+      "atlas": "skills_notable",
+      "index": 374
+    },
+    "Art/2DArt/SkillIcons/passives/fireresist.png": {
+      "atlas": "skills_notable",
+      "index": 375
+    },
+    "Art/2DArt/SkillIcons/passives/flaskdex.png": {
+      "atlas": "skills_notable",
+      "index": 377
+    },
+    "Art/2DArt/SkillIcons/passives/flaskint.png": {
+      "atlas": "skills_notable",
+      "index": 378
+    },
+    "Art/2DArt/SkillIcons/passives/flaskstr.png": {
+      "atlas": "skills_notable",
+      "index": 379
+    },
+    "Art/2DArt/SkillIcons/passives/increasedrunspeeddex.png": {
+      "atlas": "skills_notable",
+      "index": 381
+    },
+    "Art/2DArt/SkillIcons/passives/knockback.png": {
+      "atlas": "skills_notable",
+      "index": 382
+    },
+    "Art/2DArt/SkillIcons/passives/legstrength.png": {
+      "atlas": "skills_notable",
+      "index": 383
+    },
+    "Art/2DArt/SkillIcons/passives/life1.png": {
+      "atlas": "skills_notable",
+      "index": 384
+    },
+    "Art/2DArt/SkillIcons/passives/lifeleech.png": {
+      "atlas": "skills_notable",
+      "index": 385
+    },
+    "Art/2DArt/SkillIcons/passives/lifepercentage.png": {
+      "atlas": "skills_notable",
+      "index": 386
+    },
+    "Art/2DArt/SkillIcons/passives/lightningint.png": {
+      "atlas": "skills_notable",
+      "index": 387
+    },
+    "Art/2DArt/SkillIcons/passives/lightningstr.png": {
+      "atlas": "skills_notable",
+      "index": 388
+    },
+    "Art/2DArt/SkillIcons/passives/macedmg.png": {
+      "atlas": "skills_notable",
+      "index": 389
+    },
+    "Art/2DArt/SkillIcons/passives/mana.png": {
+      "atlas": "skills_notable",
+      "index": 390
+    },
+    "Art/2DArt/SkillIcons/passives/manaregeneration.png": {
+      "atlas": "skills_notable",
+      "index": 391
+    },
+    "Art/2DArt/SkillIcons/passives/manastr.png": {
+      "atlas": "skills_notable",
+      "index": 392
+    },
+    "Art/2DArt/SkillIcons/passives/minionattackspeed.png": {
+      "atlas": "skills_normal",
+      "index": 195
+    },
+    "Art/2DArt/SkillIcons/passives/miniondamageBlue.png": {
+      "atlas": "skills_notable",
+      "index": 393
+    },
+    "Art/2DArt/SkillIcons/passives/minionlife.png": {
+      "atlas": "skills_notable",
+      "index": 394
+    },
+    "Art/2DArt/SkillIcons/passives/minionstr.png": {
+      "atlas": "skills_notable",
+      "index": 395
+    },
+    "Art/2DArt/SkillIcons/passives/onehanddamage.png": {
+      "atlas": "skills_notable",
+      "index": 397
+    },
+    "Art/2DArt/SkillIcons/passives/plusattribute.png": {
+      "atlas": "skills_notable",
+      "index": 398
+    },
+    "Art/2DArt/SkillIcons/passives/plusdexterity.png": {
+      "atlas": "skills_notable",
+      "index": 399
+    },
+    "Art/2DArt/SkillIcons/passives/plusintelligence.png": {
+      "atlas": "skills_notable",
+      "index": 400
+    },
+    "Art/2DArt/SkillIcons/passives/plusintelligencedexterity.png": {
+      "atlas": "skills_notable",
+      "index": 401
+    },
+    "Art/2DArt/SkillIcons/passives/plusstrength.png": {
+      "atlas": "skills_notable",
+      "index": 402
+    },
+    "Art/2DArt/SkillIcons/passives/plusstrengthdexterity.png": {
+      "atlas": "skills_notable",
+      "index": 403
+    },
+    "Art/2DArt/SkillIcons/passives/plusstrengthintelligence.png": {
+      "atlas": "skills_notable",
+      "index": 404
+    },
+    "Art/2DArt/SkillIcons/passives/projectilespeed.png": {
+      "atlas": "skills_notable",
+      "index": 405
+    },
+    "Art/2DArt/SkillIcons/passives/shieldblock.png": {
+      "atlas": "skills_notable",
+      "index": 406
+    },
+    "Art/2DArt/SkillIcons/passives/spellcritical.png": {
+      "atlas": "skills_notable",
+      "index": 407
+    },
+    "Art/2DArt/SkillIcons/passives/stun2h.png": {
+      "atlas": "skills_notable",
+      "index": 411
+    },
+    "Art/2DArt/SkillIcons/passives/stunstr.png": {
+      "atlas": "skills_notable",
+      "index": 412
+    },
+    "Art/2DArt/SkillIcons/passives/tempint.png": {
+      "atlas": "skills_normal",
+      "index": 212
+    },
+    "Art/2DArt/SkillIcons/passives/totemandbrandlife.png": {
+      "atlas": "skills_notable",
+      "index": 413
+    },
+    "Art/2DArt/SkillIcons/passives/trapdamage.png": {
+      "atlas": "skills_notable",
+      "index": 414
+    },
+    "Art/2DArt/SkillIcons/passives/trapsmax.png": {
+      "atlas": "skills_notable",
+      "index": 415
+    },
+    "Art/2DArt/SkillIcons/passives/BattleRouse.png": {
+      "atlas": "skills_notable",
+      "index": 416
+    },
+    "Art/2DArt/SkillIcons/passives/IncreasedManaCostNotable.png": {
+      "atlas": "skills_notable",
+      "index": 139
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/AbyssalLichNode.png": {
+      "atlas": "skills_normal",
+      "index": 218
+    },
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderAdditionalPoints.png": {
+      "atlas": "skills_notable",
+      "index": 213
+    },
+    "Art/2DArt/SkillIcons/passives/StanceNotableSwitching.png": {
+      "atlas": "skills_normal",
+      "index": 220
+    },
+    "Art/2DArt/SkillIcons/passives/damagedualwieldgreen.png": {
+      "atlas": "skills_normal",
+      "index": 221
+    },
+    "Art/2DArt/SkillIcons/passives/eagleeye.png": {
+      "atlas": "skills_notable",
+      "index": 366
+    },
+    "Art/2DArt/SkillIcons/passives/legendaryswordsman.png": {
+      "atlas": "skills_normal",
+      "index": 223
+    },
+    "Art/2DArt/SkillIcons/ExplosiveGrenade.png": {
+      "atlas": "skills_notable",
+      "index": 1
+    },
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaBreachWalk.png": {
+      "atlas": "skills_notable",
+      "index": 5
+    },
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaDarknessProtectsLonger.png": {
+      "atlas": "skills_notable",
+      "index": 6
+    },
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaExtraChaosDamage.png": {
+      "atlas": "skills_notable",
+      "index": 7
+    },
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaExtraChaosDamagePerDarkness.png": {
+      "atlas": "skills_notable",
+      "index": 8
+    },
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaExtraChaosResistance.png": {
+      "atlas": "skills_notable",
+      "index": 9
+    },
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaFlameSelector.png": {
+      "atlas": "skills_notable",
+      "index": 10
+    },
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaManaLeechInstant.png": {
+      "atlas": "skills_notable",
+      "index": 11
+    },
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaReplaceSpiritWithDarkness.png": {
+      "atlas": "skills_notable",
+      "index": 12
+    },
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaSpecialNode.png": {
+      "atlas": "skills_notable",
+      "index": 13
+    },
+    "Art/2DArt/SkillIcons/passives/AcolyteofChayula/AcolyteOfChayulaUnravelling.png": {
+      "atlas": "skills_notable",
+      "index": 14
+    },
+    "Art/2DArt/SkillIcons/passives/Amazon/AmazonConsumeFrenzyChargeGainElementalInstillation.png": {
+      "atlas": "skills_notable",
+      "index": 15
+    },
+    "Art/2DArt/SkillIcons/passives/Amazon/AmazonDoubleEvasionfromGlovesBootsHelmsHalvedBodyArmour.png": {
+      "atlas": "skills_notable",
+      "index": 16
+    },
+    "Art/2DArt/SkillIcons/passives/Amazon/AmazonElementalDamageReductionperElementalInstillation.png": {
+      "atlas": "skills_notable",
+      "index": 17
+    },
+    "Art/2DArt/SkillIcons/passives/Amazon/AmazonExcessChancetoHitConvertedtoCritHitChance.png": {
+      "atlas": "skills_notable",
+      "index": 18
+    },
+    "Art/2DArt/SkillIcons/passives/Amazon/AmazonGainPhysicalDamageWeaponsAccuracy.png": {
+      "atlas": "skills_notable",
+      "index": 19
+    },
+    "Art/2DArt/SkillIcons/passives/Amazon/AmazonIncreasedLifeRecoveryRatePerMissingLife.png": {
+      "atlas": "skills_notable",
+      "index": 20
+    },
+    "Art/2DArt/SkillIcons/passives/Amazon/AmazonLifeFlasksRecoverManaViceVersa.png": {
+      "atlas": "skills_notable",
+      "index": 21
+    },
+    "Art/2DArt/SkillIcons/passives/Amazon/AmazonRareUniqueBloodlusted.png": {
+      "atlas": "skills_notable",
+      "index": 22
+    },
+    "Art/2DArt/SkillIcons/passives/Amazon/AmazonSpeedBloodlustedEnemy.png": {
+      "atlas": "skills_notable",
+      "index": 23
+    },
+    "Art/2DArt/SkillIcons/passives/Annihilation.png": {
+      "atlas": "skills_notable",
+      "index": 24
+    },
+    "Art/2DArt/SkillIcons/passives/ArchonGenericNotable.png": {
+      "atlas": "skills_notable",
+      "index": 26
+    },
+    "Art/2DArt/SkillIcons/passives/ArchonofUndeathNoteble.png": {
+      "atlas": "skills_notable",
+      "index": 27
+    },
+    "Art/2DArt/SkillIcons/passives/ArmourBreak2BuffIcon.png": {
+      "atlas": "skills_notable",
+      "index": 32
+    },
+    "Art/2DArt/SkillIcons/passives/AspectOfTheLynx.png": {
+      "atlas": "skills_notable",
+      "index": 36
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriPrimalMonkeyNotable.png": {
+      "atlas": "skills_notable",
+      "index": 38
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriPrimalOwlNotable.png": {
+      "atlas": "skills_notable",
+      "index": 39
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriPrimalSnakeNotable.png": {
+      "atlas": "skills_notable",
+      "index": 40
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriSacredFoxNotable.png": {
+      "atlas": "skills_notable",
+      "index": 41
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriSacredRabbitNotable.png": {
+      "atlas": "skills_notable",
+      "index": 42
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriVividCatNotable.png": {
+      "atlas": "skills_notable",
+      "index": 43
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriVividStagNotable.png": {
+      "atlas": "skills_notable",
+      "index": 44
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriVividWolfNotable.png": {
+      "atlas": "skills_notable",
+      "index": 45
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriWildBearNotable.png": {
+      "atlas": "skills_notable",
+      "index": 46
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriWildBoarNotable.png": {
+      "atlas": "skills_notable",
+      "index": 47
+    },
+    "Art/2DArt/SkillIcons/passives/AzmeriWildOxNotable.png": {
+      "atlas": "skills_notable",
+      "index": 48
+    },
+    "Art/2DArt/SkillIcons/passives/BannerAreaNotable.png": {
+      "atlas": "skills_notable",
+      "index": 49
+    },
+    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageCritDamagePerLife.png": {
+      "atlas": "skills_notable",
+      "index": 51
+    },
+    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageCurseInfiniteDuration.png": {
+      "atlas": "skills_notable",
+      "index": 52
+    },
+    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageDamageLeechedLife.png": {
+      "atlas": "skills_notable",
+      "index": 53
+    },
+    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageGainLifeEnergyShield.png": {
+      "atlas": "skills_notable",
+      "index": 54
+    },
+    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageHigherSpellBaseCritStrike.png": {
+      "atlas": "skills_notable",
+      "index": 55
+    },
+    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageLeaveBloodOrbs.png": {
+      "atlas": "skills_notable",
+      "index": 56
+    },
+    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageLifeLoss.png": {
+      "atlas": "skills_notable",
+      "index": 57
+    },
+    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodMageSaguineTides.png": {
+      "atlas": "skills_notable",
+      "index": 58
+    },
+    "Art/2DArt/SkillIcons/passives/Bloodmage/BloodPhysicalDamageExtraGore.png": {
+      "atlas": "skills_notable",
+      "index": 59
+    },
+    "Art/2DArt/SkillIcons/passives/BucklersNotable1.png": {
+      "atlas": "skills_notable",
+      "index": 61
+    },
+    "Art/2DArt/SkillIcons/passives/ChainingProjectiles.png": {
+      "atlas": "skills_notable",
+      "index": 62
+    },
+    "Art/2DArt/SkillIcons/passives/ChannellingAttacksNotable2.png": {
+      "atlas": "skills_notable",
+      "index": 63
+    },
+    "Art/2DArt/SkillIcons/passives/CharmNotable1.png": {
+      "atlas": "skills_notable",
+      "index": 67
+    },
+    "Art/2DArt/SkillIcons/passives/ClawsOfTheMagpie.png": {
+      "atlas": "skills_notable",
+      "index": 68
+    },
+    "Art/2DArt/SkillIcons/passives/CompanionsNotable1.png": {
+      "atlas": "skills_notable",
+      "index": 72
+    },
+    "Art/2DArt/SkillIcons/passives/CriticalStrikesNotable.png": {
+      "atlas": "skills_notable",
+      "index": 74
+    },
+    "Art/2DArt/SkillIcons/passives/CursemitigationclusterNode.png": {
+      "atlas": "skills_notable",
+      "index": 76
+    },
+    "Art/2DArt/SkillIcons/passives/CursemitigationclusterNotable.png": {
+      "atlas": "skills_notable",
+      "index": 77
+    },
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeFrenzyChargesGeneration.png": {
+      "atlas": "skills_notable",
+      "index": 78
+    },
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeFrenzyChargesHaveMoreEffect.png": {
+      "atlas": "skills_notable",
+      "index": 79
+    },
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeGrantsTwoAdditionalProjectiles.png": {
+      "atlas": "skills_notable",
+      "index": 80
+    },
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeLingeringMirage.png": {
+      "atlas": "skills_notable",
+      "index": 81
+    },
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeMarkEnemiesSpread.png": {
+      "atlas": "skills_notable",
+      "index": 82
+    },
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeMoreAccuracy.png": {
+      "atlas": "skills_notable",
+      "index": 83
+    },
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeProjectileDamageChoose.png": {
+      "atlas": "skills_notable",
+      "index": 84
+    },
+    "Art/2DArt/SkillIcons/passives/DeadEye/DeadeyeTailwind.png": {
+      "atlas": "skills_notable",
+      "index": 85
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/ElementalDamageTakenFromMana.png": {
+      "atlas": "skills_notable",
+      "index": 86
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/EnergyShieldPhyDmgReduction.png": {
+      "atlas": "skills_notable",
+      "index": 87
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/FireDjinnEmberSlash.png": {
+      "atlas": "skills_notable",
+      "index": 88
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/FireDjinnFlameRunes.png": {
+      "atlas": "skills_notable",
+      "index": 89
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/FireDjinnMeteoricSlam.png": {
+      "atlas": "skills_notable",
+      "index": 90
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/FocusStaff.png": {
+      "atlas": "skills_notable",
+      "index": 91
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/MoreEnergyShieldRechargeRate.png": {
+      "atlas": "skills_notable",
+      "index": 92
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SandDjinnCorpseBeetles.png": {
+      "atlas": "skills_notable",
+      "index": 93
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SandDjinnDaggerslamSkill.png": {
+      "atlas": "skills_notable",
+      "index": 94
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SandDjinnExplosiveTeleport.png": {
+      "atlas": "skills_notable",
+      "index": 95
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SummonFireDjinn.png": {
+      "atlas": "skills_notable",
+      "index": 96
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SummonSandDjinn.png": {
+      "atlas": "skills_notable",
+      "index": 97
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/SummonWaterDjinn.png": {
+      "atlas": "skills_notable",
+      "index": 98
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/TimelostJewelsLargerRadius.png": {
+      "atlas": "skills_notable",
+      "index": 99
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/WaterDjinnChiilldedGroundBurst.png": {
+      "atlas": "skills_notable",
+      "index": 100
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/WaterDjinnCommandOasis.png": {
+      "atlas": "skills_notable",
+      "index": 101
+    },
+    "Art/2DArt/SkillIcons/passives/DiscipleoftheDjinn/WaterDjinnESRechargeCommand.png": {
+      "atlas": "skills_notable",
+      "index": 102
+    },
+    "Art/2DArt/SkillIcons/passives/DruidGenericShapeshiftNotable.png": {
+      "atlas": "skills_notable",
+      "index": 104
+    },
+    "Art/2DArt/SkillIcons/passives/DruidShapeshiftBearNotable.png": {
+      "atlas": "skills_notable",
+      "index": 105
+    },
+    "Art/2DArt/SkillIcons/passives/DruidShapeshiftWolfNotable.png": {
+      "atlas": "skills_notable",
+      "index": 106
+    },
+    "Art/2DArt/SkillIcons/passives/DruidShapeshiftWyvernNotable.png": {
+      "atlas": "skills_notable",
+      "index": 107
+    },
+    "Art/2DArt/SkillIcons/passives/EnduranceFrenzyPowerChargeNode.png": {
+      "atlas": "skills_notable",
+      "index": 112
+    },
+    "Art/2DArt/SkillIcons/passives/EvasionAndBlindNotable.png": {
+      "atlas": "skills_notable",
+      "index": 116
+    },
+    "Art/2DArt/SkillIcons/passives/FlaskNotableCritStrikeRecharge.png": {
+      "atlas": "skills_notable",
+      "index": 120
+    },
+    "Art/2DArt/SkillIcons/passives/FlaskNotableFlasksLastLonger.png": {
+      "atlas": "skills_notable",
+      "index": 121
+    },
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingBarrier.png": {
+      "atlas": "skills_notable",
+      "index": 122
+    },
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingBuffSkillsReserveLessSpirit.png": {
+      "atlas": "skills_notable",
+      "index": 123
+    },
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingHighestAttributeSatisfiesGemRequirements.png": {
+      "atlas": "skills_notable",
+      "index": 124
+    },
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingInherentBonusesFromAttributesDouble.png": {
+      "atlas": "skills_notable",
+      "index": 125
+    },
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingLevelAllSkillGems.png": {
+      "atlas": "skills_notable",
+      "index": 126
+    },
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingMaxElementalResistanceSupportColour.png": {
+      "atlas": "skills_notable",
+      "index": 127
+    },
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingSameSupportMultipleTimes.png": {
+      "atlas": "skills_notable",
+      "index": 129
+    },
+    "Art/2DArt/SkillIcons/passives/Gemling/GemlingSkillsAdditionalSupport.png": {
+      "atlas": "skills_notable",
+      "index": 130
+    },
+    "Art/2DArt/SkillIcons/passives/Hearty.png": {
+      "atlas": "skills_notable",
+      "index": 133
+    },
+    "Art/2DArt/SkillIcons/passives/Hunter.png": {
+      "atlas": "skills_notable",
+      "index": 136
+    },
+    "Art/2DArt/SkillIcons/passives/IncreasedAttackDamageNotable.png": {
+      "atlas": "skills_notable",
+      "index": 137
+    },
+    "Art/2DArt/SkillIcons/passives/IncreasedMaximumLifeNotable.png": {
+      "atlas": "skills_notable",
+      "index": 140
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/Fireblood.png": {
+      "atlas": "skills_notable",
+      "index": 143
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/FuryManifest.png": {
+      "atlas": "skills_notable",
+      "index": 144
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalFamiliar.png": {
+      "atlas": "skills_notable",
+      "index": 145
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistConvertLifeToEnergyShield.png": {
+      "atlas": "skills_notable",
+      "index": 146
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistConvertLifeToMana.png": {
+      "atlas": "skills_notable",
+      "index": 147
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistConvertLifeToSpirit.png": {
+      "atlas": "skills_notable",
+      "index": 148
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistInfernalHeat.png": {
+      "atlas": "skills_notable",
+      "index": 149
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistTransformIntoDemon1.png": {
+      "atlas": "skills_notable",
+      "index": 150
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/InfernalistTransformIntoDemon2.png": {
+      "atlas": "skills_notable",
+      "index": 151
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/MoltenFury.png": {
+      "atlas": "skills_notable",
+      "index": 152
+    },
+    "Art/2DArt/SkillIcons/passives/Infernalist/ScorchTheEarth.png": {
+      "atlas": "skills_notable",
+      "index": 153
+    },
+    "Art/2DArt/SkillIcons/passives/InstillationsNotable1.png": {
+      "atlas": "skills_notable",
+      "index": 155
+    },
+    "Art/2DArt/SkillIcons/passives/Invoker/InvokerChillChanceBasedOnDamage.png": {
+      "atlas": "skills_notable",
+      "index": 156
+    },
+    "Art/2DArt/SkillIcons/passives/Invoker/InvokerCriticalStrikesIgnoreResistances.png": {
+      "atlas": "skills_notable",
+      "index": 157
+    },
+    "Art/2DArt/SkillIcons/passives/Invoker/InvokerEnergyDoubled.png": {
+      "atlas": "skills_notable",
+      "index": 158
+    },
+    "Art/2DArt/SkillIcons/passives/Invoker/InvokerEvasionEnergyShieldGrantsSpirit.png": {
+      "atlas": "skills_notable",
+      "index": 159
+    },
+    "Art/2DArt/SkillIcons/passives/Invoker/InvokerEvasionGrantsPhysicalDamageReduction.png": {
+      "atlas": "skills_notable",
+      "index": 160
+    },
+    "Art/2DArt/SkillIcons/passives/Invoker/InvokerGrantsMeditate.png": {
+      "atlas": "skills_notable",
+      "index": 161
+    },
+    "Art/2DArt/SkillIcons/passives/Invoker/InvokerShockMagnitude.png": {
+      "atlas": "skills_notable",
+      "index": 162
+    },
+    "Art/2DArt/SkillIcons/passives/Invoker/InvokerUnboundAvatar.png": {
+      "atlas": "skills_notable",
+      "index": 163
+    },
+    "Art/2DArt/SkillIcons/passives/Invoker/InvokerWildStrike.png": {
+      "atlas": "skills_notable",
+      "index": 164
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/LichApplyAdditionalCurses.png": {
+      "atlas": "skills_notable",
+      "index": 165
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/LichCursedEnemiesExplodeChaos.png": {
+      "atlas": "skills_notable",
+      "index": 166
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/LichImprovedUnholyMight.png": {
+      "atlas": "skills_notable",
+      "index": 167
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/LichLifeCannotChangeWhileES.png": {
+      "atlas": "skills_notable",
+      "index": 168
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/LichManaRegenBasedOnMaxLife.png": {
+      "atlas": "skills_notable",
+      "index": 169
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/LichSpellCostESandMoreDMG.png": {
+      "atlas": "skills_notable",
+      "index": 170
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/LichSpellsConsumePowerCharges.png": {
+      "atlas": "skills_notable",
+      "index": 171
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/LichUnholyMight.png": {
+      "atlas": "skills_notable",
+      "index": 172
+    },
+    "Art/2DArt/SkillIcons/passives/MartialArtist/MartialArtistAdditionalComboHit.png": {
+      "atlas": "skills_notable",
+      "index": 178
+    },
+    "Art/2DArt/SkillIcons/passives/MartialArtist/MartialArtistAllAttacksGenerateCombo.png": {
+      "atlas": "skills_notable",
+      "index": 179
+    },
+    "Art/2DArt/SkillIcons/passives/MartialArtist/MartialArtistCarrySoectralBell.png": {
+      "atlas": "skills_notable",
+      "index": 180
+    },
+    "Art/2DArt/SkillIcons/passives/MartialArtist/MartialArtistCoveredinStone.png": {
+      "atlas": "skills_notable",
+      "index": 181
+    },
+    "Art/2DArt/SkillIcons/passives/MartialArtist/MartialArtistExtraRunes.png": {
+      "atlas": "skills_notable",
+      "index": 182
+    },
+    "Art/2DArt/SkillIcons/passives/MartialArtist/MartialArtistHandWraps.png": {
+      "atlas": "skills_notable",
+      "index": 183
+    },
+    "Art/2DArt/SkillIcons/passives/MartialArtist/MartialArtistMantraofIllusions.png": {
+      "atlas": "skills_notable",
+      "index": 184
+    },
+    "Art/2DArt/SkillIcons/passives/MartialArtist/MartialArtistSpectralBell.png": {
+      "atlas": "skills_notable",
+      "index": 185
+    },
+    "Art/2DArt/SkillIcons/passives/Meleerange.png": {
+      "atlas": "skills_notable",
+      "index": 188
+    },
+    "Art/2DArt/SkillIcons/passives/MineManaReservationNotable.png": {
+      "atlas": "skills_notable",
+      "index": 190
+    },
+    "Art/2DArt/SkillIcons/passives/MinionAccuracyDamage.png": {
+      "atlas": "skills_notable",
+      "index": 191
+    },
+    "Art/2DArt/SkillIcons/passives/MinionChaosResistanceNode.png": {
+      "atlas": "skills_notable",
+      "index": 192
+    },
+    "Art/2DArt/SkillIcons/passives/Oracle/OracleDiffChoices.png": {
+      "atlas": "skills_notable",
+      "index": 205
+    },
+    "Art/2DArt/SkillIcons/passives/Oracle/OracleEnemiesActionsUnlucky.png": {
+      "atlas": "skills_notable",
+      "index": 206
+    },
+    "Art/2DArt/SkillIcons/passives/Oracle/OracleLifeManaHits.png": {
+      "atlas": "skills_notable",
+      "index": 207
+    },
+    "Art/2DArt/SkillIcons/passives/Oracle/OraclePassiveTreeAllocation.png": {
+      "atlas": "skills_notable",
+      "index": 208
+    },
+    "Art/2DArt/SkillIcons/passives/Oracle/OracleRerollingCrit.png": {
+      "atlas": "skills_notable",
+      "index": 209
+    },
+    "Art/2DArt/SkillIcons/passives/Oracle/OracleRipFromTime.png": {
+      "atlas": "skills_notable",
+      "index": 210
+    },
+    "Art/2DArt/SkillIcons/passives/Oracle/OracleSpellFlux.png": {
+      "atlas": "skills_notable",
+      "index": 211
+    },
+    "Art/2DArt/SkillIcons/passives/Oracle/OracleTotemLimit.png": {
+      "atlas": "skills_notable",
+      "index": 212
+    },
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderBrewConcoction.png": {
+      "atlas": "skills_notable",
+      "index": 214
+    },
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderCannotBeSlowed.png": {
+      "atlas": "skills_notable",
+      "index": 215
+    },
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderEnemiesMultiplePoisons.png": {
+      "atlas": "skills_notable",
+      "index": 216
+    },
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderEvasionDmgReducVsElementalDmg.png": {
+      "atlas": "skills_notable",
+      "index": 217
+    },
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderLifeFlasks.png": {
+      "atlas": "skills_notable",
+      "index": 218
+    },
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderMoreMovemenSpeedUsingSkills.png": {
+      "atlas": "skills_notable",
+      "index": 219
+    },
+    "Art/2DArt/SkillIcons/passives/PathFinder/PathfinderMultichoicePath.png": {
+      "atlas": "skills_notable",
+      "index": 220
+    },
+    "Art/2DArt/SkillIcons/passives/PhysicalDamageOverTimeNotable.png": {
+      "atlas": "skills_notable",
+      "index": 224
+    },
+    "Art/2DArt/SkillIcons/passives/PressurePoints.png": {
+      "atlas": "skills_notable",
+      "index": 226
+    },
+    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistBloodBoils.png": {
+      "atlas": "skills_notable",
+      "index": 227
+    },
+    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistDrainManaActivateCharms.png": {
+      "atlas": "skills_notable",
+      "index": 228
+    },
+    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistIncreasedEffectOfJewellery.png": {
+      "atlas": "skills_notable",
+      "index": 229
+    },
+    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistLifeLeechFromElementalOrChaos.png": {
+      "atlas": "skills_notable",
+      "index": 230
+    },
+    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistPlusOneMaxCharm.png": {
+      "atlas": "skills_notable",
+      "index": 231
+    },
+    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistPlusOneRingSlot.png": {
+      "atlas": "skills_notable",
+      "index": 232
+    },
+    "Art/2DArt/SkillIcons/passives/Primalist/PrimalistStabCorpse.png": {
+      "atlas": "skills_notable",
+      "index": 233
+    },
+    "Art/2DArt/SkillIcons/passives/ProjectileDmgNotable.png": {
+      "atlas": "skills_notable",
+      "index": 234
+    },
+    "Art/2DArt/SkillIcons/passives/ProjectilesNotable.png": {
+      "atlas": "skills_notable",
+      "index": 235
+    },
+    "Art/2DArt/SkillIcons/passives/PuppeteerNoteble.png": {
+      "atlas": "skills_notable",
+      "index": 236
+    },
+    "Art/2DArt/SkillIcons/passives/RageNotable.png": {
+      "atlas": "skills_notable",
+      "index": 238
+    },
+    "Art/2DArt/SkillIcons/passives/RemnantNotable.png": {
+      "atlas": "skills_notable",
+      "index": 241
+    },
+    "Art/2DArt/SkillIcons/passives/Shaman/ShamanAdaptToElements.png": {
+      "atlas": "skills_notable",
+      "index": 242
+    },
+    "Art/2DArt/SkillIcons/passives/Shaman/ShamanEvenMoreAdaptation.png": {
+      "atlas": "skills_notable",
+      "index": 243
+    },
+    "Art/2DArt/SkillIcons/passives/Shaman/ShamanGainSpiritEmptyCharmSlot.png": {
+      "atlas": "skills_notable",
+      "index": 244
+    },
+    "Art/2DArt/SkillIcons/passives/Shaman/ShamanPickEleDmg.png": {
+      "atlas": "skills_notable",
+      "index": 245
+    },
+    "Art/2DArt/SkillIcons/passives/Shaman/ShamanRageAffectsSpells.png": {
+      "atlas": "skills_notable",
+      "index": 246
+    },
+    "Art/2DArt/SkillIcons/passives/Shaman/ShamanRageonHit.png": {
+      "atlas": "skills_notable",
+      "index": 247
+    },
+    "Art/2DArt/SkillIcons/passives/Shaman/ShamanRunesTalismans.png": {
+      "atlas": "skills_notable",
+      "index": 248
+    },
+    "Art/2DArt/SkillIcons/passives/Shaman/ShamanUnleashTheElements.png": {
+      "atlas": "skills_notable",
+      "index": 249
+    },
+    "Art/2DArt/SkillIcons/passives/SkillGemSlotsNode.png": {
+      "atlas": "skills_notable",
+      "index": 251
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaCanOnlyWearNormalRarityBodyArmour.png": {
+      "atlas": "skills_notable",
+      "index": 252
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaCreateMinionMeleeWeapon.png": {
+      "atlas": "skills_notable",
+      "index": 253
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaFireResistAppliesToColdLightning.png": {
+      "atlas": "skills_notable",
+      "index": 254
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaImbueMainHandWeapon.png": {
+      "atlas": "skills_notable",
+      "index": 255
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaImprovedFireResistAppliesToColdLightning.png": {
+      "atlas": "skills_notable",
+      "index": 256
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus1.png": {
+      "atlas": "skills_notable",
+      "index": 257
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus2.png": {
+      "atlas": "skills_notable",
+      "index": 258
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus3.png": {
+      "atlas": "skills_notable",
+      "index": 259
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus4.png": {
+      "atlas": "skills_notable",
+      "index": 260
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus5.png": {
+      "atlas": "skills_notable",
+      "index": 261
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus6.png": {
+      "atlas": "skills_notable",
+      "index": 262
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus7.png": {
+      "atlas": "skills_notable",
+      "index": 263
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus8.png": {
+      "atlas": "skills_notable",
+      "index": 264
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus9.png": {
+      "atlas": "skills_notable",
+      "index": 265
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus10.png": {
+      "atlas": "skills_notable",
+      "index": 266
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus11.png": {
+      "atlas": "skills_notable",
+      "index": 267
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithOfKitavaNormalArmourBonus12.png": {
+      "atlas": "skills_notable",
+      "index": 268
+    },
+    "Art/2DArt/SkillIcons/passives/SmithofKitava/SmithofKitavaTriggerFireSpellsMeleeWeapon.png": {
+      "atlas": "skills_notable",
+      "index": 269
+    },
+    "Art/2DArt/SkillIcons/passives/SpearsNotable1.png": {
+      "atlas": "skills_notable",
+      "index": 270
+    },
+    "Art/2DArt/SkillIcons/passives/Storm Weaver.png": {
+      "atlas": "skills_notable",
+      "index": 272
+    },
+    "Art/2DArt/SkillIcons/passives/Stormweaver/AllDamageCanChill.png": {
+      "atlas": "skills_notable",
+      "index": 273
+    },
+    "Art/2DArt/SkillIcons/passives/Stormweaver/AllDamageCanShock.png": {
+      "atlas": "skills_notable",
+      "index": 274
+    },
+    "Art/2DArt/SkillIcons/passives/Stormweaver/ChillAddditionalTime.png": {
+      "atlas": "skills_notable",
+      "index": 275
+    },
+    "Art/2DArt/SkillIcons/passives/Stormweaver/GrantsArcaneSurge.png": {
+      "atlas": "skills_notable",
+      "index": 276
+    },
+    "Art/2DArt/SkillIcons/passives/Stormweaver/GrantsElementalStorm.png": {
+      "atlas": "skills_notable",
+      "index": 277
+    },
+    "Art/2DArt/SkillIcons/passives/Stormweaver/ImprovedArcaneSurge.png": {
+      "atlas": "skills_notable",
+      "index": 278
+    },
+    "Art/2DArt/SkillIcons/passives/Stormweaver/ImprovedElementalStorm.png": {
+      "atlas": "skills_notable",
+      "index": 279
+    },
+    "Art/2DArt/SkillIcons/passives/Stormweaver/ShockAddditionalTime.png": {
+      "atlas": "skills_notable",
+      "index": 280
+    },
+    "Art/2DArt/SkillIcons/passives/Stormweaver/StormweaverRemnant1.png": {
+      "atlas": "skills_notable",
+      "index": 281
+    },
+    "Art/2DArt/SkillIcons/passives/Stormweaver/StormweaverRemnant2.png": {
+      "atlas": "skills_notable",
+      "index": 282
+    },
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianAlliesGainAttack.png": {
+      "atlas": "skills_notable",
+      "index": 283
+    },
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianDeathFromAboveCommand.png": {
+      "atlas": "skills_notable",
+      "index": 284
+    },
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianEvasionArmourHigher.png": {
+      "atlas": "skills_notable",
+      "index": 285
+    },
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianGainStunThresholdArmour.png": {
+      "atlas": "skills_notable",
+      "index": 286
+    },
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianLessSpiritCostBuff.png": {
+      "atlas": "skills_notable",
+      "index": 287
+    },
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianMultipleBanners.png": {
+      "atlas": "skills_notable",
+      "index": 288
+    },
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianPinnedEnemiesCannotAct.png": {
+      "atlas": "skills_notable",
+      "index": 289
+    },
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianProjectileBuildsPin.png": {
+      "atlas": "skills_notable",
+      "index": 290
+    },
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianTotemAura.png": {
+      "atlas": "skills_notable",
+      "index": 291
+    },
+    "Art/2DArt/SkillIcons/passives/Tactician/TacticianTotems.png": {
+      "atlas": "skills_notable",
+      "index": 292
+    },
+    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistChanceSkillNoCooldownSkill.png": {
+      "atlas": "skills_notable",
+      "index": 293
+    },
+    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistFasterRecoup.png": {
+      "atlas": "skills_notable",
+      "index": 294
+    },
+    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistGainMoreCastSpeed8Seconds.png": {
+      "atlas": "skills_notable",
+      "index": 295
+    },
+    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistGrantsReloadCooldownsSkill.png": {
+      "atlas": "skills_notable",
+      "index": 296
+    },
+    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistGrantsTemporalRiftSkill.png": {
+      "atlas": "skills_notable",
+      "index": 297
+    },
+    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistGrantsTimeStopSkill.png": {
+      "atlas": "skills_notable",
+      "index": 298
+    },
+    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistNearbyEnemiesProjectilesSlowed.png": {
+      "atlas": "skills_notable",
+      "index": 299
+    },
+    "Art/2DArt/SkillIcons/passives/Temporalist/TemporalistSynchronisationofPain.png": {
+      "atlas": "skills_notable",
+      "index": 300
+    },
+    "Art/2DArt/SkillIcons/passives/ThornsNotable1.png": {
+      "atlas": "skills_notable",
+      "index": 302
+    },
+    "Art/2DArt/SkillIcons/passives/Titan/TitanAdditionalInventory.png": {
+      "atlas": "skills_notable",
+      "index": 303
+    },
+    "Art/2DArt/SkillIcons/passives/Titan/TitanMoreBodyArmour.png": {
+      "atlas": "skills_notable",
+      "index": 304
+    },
+    "Art/2DArt/SkillIcons/passives/Titan/TitanMoreMaxLife.png": {
+      "atlas": "skills_notable",
+      "index": 305
+    },
+    "Art/2DArt/SkillIcons/passives/Titan/TitanMountainSplitter.png": {
+      "atlas": "skills_notable",
+      "index": 306
+    },
+    "Art/2DArt/SkillIcons/passives/Titan/TitanSlamSkillsAftershock.png": {
+      "atlas": "skills_notable",
+      "index": 307
+    },
+    "Art/2DArt/SkillIcons/passives/Titan/TitanSlamSkillsFistOfWar.png": {
+      "atlas": "skills_notable",
+      "index": 308
+    },
+    "Art/2DArt/SkillIcons/passives/Titan/TitanSmallPassiveDoubled.png": {
+      "atlas": "skills_notable",
+      "index": 309
+    },
+    "Art/2DArt/SkillIcons/passives/Titan/TitanYourHitsCrushEnemies.png": {
+      "atlas": "skills_notable",
+      "index": 310
+    },
+    "Art/2DArt/SkillIcons/passives/Trap.png": {
+      "atlas": "skills_notable",
+      "index": 311
+    },
+    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerBlockChance.png": {
+      "atlas": "skills_notable",
       "index": 313
     },
-    "Art/2DArt/SkillIcons/passives/deepwisdom.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerBreakEnemyArmour.png": {
+      "atlas": "skills_notable",
       "index": 314
     },
-    "Art/2DArt/SkillIcons/passives/eagleeye.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerCanBlockAllDamageShieldNotRaised.png": {
+      "atlas": "skills_notable",
       "index": 315
     },
-    "Art/2DArt/SkillIcons/passives/executioner.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerDamageTakenByTotems.png": {
+      "atlas": "skills_notable",
       "index": 316
     },
-    "Art/2DArt/SkillIcons/passives/finesse.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerEncasedInJade.png": {
+      "atlas": "skills_notable",
       "index": 317
     },
-    "Art/2DArt/SkillIcons/passives/flameborn.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerEnemyArmourBrokenBelowZero.png": {
+      "atlas": "skills_notable",
       "index": 318
     },
-    "Art/2DArt/SkillIcons/passives/frostborn.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerTotemsDefendedByAncestors.png": {
+      "atlas": "skills_notable",
       "index": 319
     },
-    "Art/2DArt/SkillIcons/passives/heroicspirit.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Warbringer/WarbringerWarcryExplodesCorpses.png": {
+      "atlas": "skills_notable",
       "index": 320
     },
-    "Art/2DArt/SkillIcons/passives/legstrength.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Warrior.png": {
+      "atlas": "skills_notable",
       "index": 321
     },
-    "Art/2DArt/SkillIcons/passives/lifeleech.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Wildspeaker/WildspeakerBonusPerSocketedTalisman.png": {
+      "atlas": "skills_notable",
       "index": 322
     },
-    "Art/2DArt/SkillIcons/passives/liferegentoenergyshield.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Wildspeaker/WildspeakerCompanionDmgWeapon.png": {
+      "atlas": "skills_notable",
       "index": 323
     },
-    "Art/2DArt/SkillIcons/passives/newnewattackspeed.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Wildspeaker/WildspeakerOwlFeatherHigherCritDmg.png": {
+      "atlas": "skills_notable",
       "index": 324
     },
-    "Art/2DArt/SkillIcons/passives/steelspan.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Wildspeaker/WildspeakerOwlFeathers.png": {
+      "atlas": "skills_notable",
       "index": 325
     },
-    "Art/2DArt/SkillIcons/passives/stormborn.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Wildspeaker/WildspeakerSacredWisp.png": {
+      "atlas": "skills_notable",
       "index": 326
     },
-    "Art/2DArt/SkillIcons/passives/strongarm.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Wildspeaker/WildspeakerTameBeastTargetUnique.png": {
+      "atlas": "skills_notable",
       "index": 327
     },
-    "Art/2DArt/SkillIcons/passives/totemmax.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Wildspeaker/WildspeakerVividStags.png": {
+      "atlas": "skills_notable",
       "index": 328
     },
-    "Art/2DArt/SkillIcons/passives/vaalpact.dds": {
-      "atlas": "skills_128",
+    "Art/2DArt/SkillIcons/passives/Wildspeaker/WildspeakerVividWisps.png": {
+      "atlas": "skills_notable",
       "index": 329
+    },
+    "Art/2DArt/SkillIcons/passives/Wildspeaker/WildspeakerWildBear.png": {
+      "atlas": "skills_notable",
+      "index": 330
+    },
+    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterArmourEvasionConvertedSpellAegis.png": {
+      "atlas": "skills_notable",
+      "index": 331
+    },
+    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterCullingStrike.png": {
+      "atlas": "skills_notable",
+      "index": 332
+    },
+    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterDamageMonsterMissingFocus.png": {
+      "atlas": "skills_notable",
+      "index": 333
+    },
+    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterDrainMonsterFocus.png": {
+      "atlas": "skills_notable",
+      "index": 334
+    },
+    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterMonsterHolyExplosion.png": {
+      "atlas": "skills_notable",
+      "index": 335
+    },
+    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterRemovePercentageFullLifeEnemies.png": {
+      "atlas": "skills_notable",
+      "index": 337
+    },
+    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterSpecPoints.png": {
+      "atlas": "skills_notable",
+      "index": 338
+    },
+    "Art/2DArt/SkillIcons/passives/Witchhunter/WitchunterStrongerSpellAegis.png": {
+      "atlas": "skills_notable",
+      "index": 339
+    },
+    "Art/2DArt/SkillIcons/passives/ashfrostandstorm.png": {
+      "atlas": "skills_notable",
+      "index": 343
+    },
+    "Art/2DArt/SkillIcons/passives/bodysoul.png": {
+      "atlas": "skills_notable",
+      "index": 349
+    },
+    "Art/2DArt/SkillIcons/passives/deepwisdom.png": {
+      "atlas": "skills_notable",
+      "index": 364
+    },
+    "Art/2DArt/SkillIcons/passives/finesse.png": {
+      "atlas": "skills_notable",
+      "index": 371
+    },
+    "Art/2DArt/SkillIcons/passives/flameborn.png": {
+      "atlas": "skills_notable",
+      "index": 376
+    },
+    "Art/2DArt/SkillIcons/passives/frostborn.png": {
+      "atlas": "skills_notable",
+      "index": 380
+    },
+    "Art/2DArt/SkillIcons/passives/newnewattackspeed.png": {
+      "atlas": "skills_notable",
+      "index": 396
+    },
+    "Art/2DArt/SkillIcons/passives/steelspan.png": {
+      "atlas": "skills_notable",
+      "index": 408
+    },
+    "Art/2DArt/SkillIcons/passives/stormborn.png": {
+      "atlas": "skills_notable",
+      "index": 409
+    },
+    "Art/2DArt/SkillIcons/passives/strongarm.png": {
+      "atlas": "skills_notable",
+      "index": 410
+    },
+    "Art/2DArt/SkillIcons/passives/LethalAssault.png": {
+      "atlas": "skills_notable",
+      "index": 417
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/AbyssalLichAbyssalApparition.png": {
+      "atlas": "skills_notable",
+      "index": 418
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/AbyssalLichBoneGraft.png": {
+      "atlas": "skills_notable",
+      "index": 419
+    },
+    "Art/2DArt/SkillIcons/passives/Lich/AbyssalLichBoneOffering.png": {
+      "atlas": "skills_notable",
+      "index": 420
+    },
+    "Art/2DArt/SkillIcons/passives/StunAvoidNotable.png": {
+      "atlas": "skills_notable",
+      "index": 421
+    },
+    "Art/2DArt/SkillIcons/passives/fencing.png": {
+      "atlas": "skills_notable",
+      "index": 422
+    },
+    "Art/2DArt/SkillIcons/passives/fending.png": {
+      "atlas": "skills_notable",
+      "index": 423
+    },
+    "Art/2DArt/SkillIcons/passives/BulwarkKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 1
+    },
+    "Art/2DArt/SkillIcons/passives/CrimsonAssaultKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 2
+    },
+    "Art/2DArt/SkillIcons/passives/DancewithDeathKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 3
+    },
+    "Art/2DArt/SkillIcons/passives/DruidAlternateEnergyShield.png": {
+      "atlas": "skills_keystone",
+      "index": 4
+    },
+    "Art/2DArt/SkillIcons/passives/DruidAnimism.png": {
+      "atlas": "skills_keystone",
+      "index": 5
+    },
+    "Art/2DArt/SkillIcons/passives/DruidRageKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 6
+    },
+    "Art/2DArt/SkillIcons/passives/DruidWildsurgeIncantation.png": {
+      "atlas": "skills_keystone",
+      "index": 7
+    },
+    "Art/2DArt/SkillIcons/passives/EternalYouth.png": {
+      "atlas": "skills_keystone",
+      "index": 8
+    },
+    "Art/2DArt/SkillIcons/passives/FireSpellsBecomeChaosSpellsKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 9
+    },
+    "Art/2DArt/SkillIcons/passives/GiantBloodKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 10
+    },
+    "Art/2DArt/SkillIcons/passives/GlancingBlows.png": {
+      "atlas": "skills_keystone",
+      "index": 11
+    },
+    "Art/2DArt/SkillIcons/passives/HeartstopperKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 12
+    },
+    "Art/2DArt/SkillIcons/passives/HollowPalmTechniqueKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 13
+    },
+    "Art/2DArt/SkillIcons/passives/KeystoneAvatarOfFire.png": {
+      "atlas": "skills_keystone",
+      "index": 14
+    },
+    "Art/2DArt/SkillIcons/passives/KeystoneBloodMagic.png": {
+      "atlas": "skills_keystone",
+      "index": 15
+    },
+    "Art/2DArt/SkillIcons/passives/KeystoneChaosInoculation.png": {
+      "atlas": "skills_keystone",
+      "index": 16
+    },
+    "Art/2DArt/SkillIcons/passives/KeystoneConduit.png": {
+      "atlas": "skills_keystone",
+      "index": 17
+    },
+    "Art/2DArt/SkillIcons/passives/KeystoneEldritchBattery.png": {
+      "atlas": "skills_keystone",
+      "index": 18
+    },
+    "Art/2DArt/SkillIcons/passives/KeystoneElementalEquilibrium.png": {
+      "atlas": "skills_keystone",
+      "index": 19
+    },
+    "Art/2DArt/SkillIcons/passives/KeystoneIronReflexes.png": {
+      "atlas": "skills_keystone",
+      "index": 20
+    },
+    "Art/2DArt/SkillIcons/passives/KeystonePainAttunement.png": {
+      "atlas": "skills_keystone",
+      "index": 21
+    },
+    "Art/2DArt/SkillIcons/passives/KeystoneResoluteTechnique.png": {
+      "atlas": "skills_keystone",
+      "index": 22
+    },
+    "Art/2DArt/SkillIcons/passives/KeystoneUnwaveringStance.png": {
+      "atlas": "skills_keystone",
+      "index": 23
+    },
+    "Art/2DArt/SkillIcons/passives/KeystoneWhispersOfDoom.png": {
+      "atlas": "skills_keystone",
+      "index": 24
+    },
+    "Art/2DArt/SkillIcons/passives/MultipleBeastCompanionsKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 25
+    },
+    "Art/2DArt/SkillIcons/passives/NecromanticTalismanKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 26
+    },
+    "Art/2DArt/SkillIcons/passives/OasisKeystone2.png": {
+      "atlas": "skills_keystone",
+      "index": 27
+    },
+    "Art/2DArt/SkillIcons/passives/ResonanceKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 28
+    },
+    "Art/2DArt/SkillIcons/passives/SorceressInvocationSpellsKeystone.png": {
+      "atlas": "skills_keystone",
+      "index": 29
+    },
+    "Art/2DArt/SkillIcons/passives/heroicspirit.png": {
+      "atlas": "skills_keystone",
+      "index": 30
+    },
+    "Art/2DArt/SkillIcons/passives/liferegentoenergyshield.png": {
+      "atlas": "skills_keystone",
+      "index": 31
+    },
+    "Art/2DArt/SkillIcons/passives/totemmax.png": {
+      "atlas": "skills_keystone",
+      "index": 32
+    },
+    "Art/2DArt/SkillIcons/passives/vaalpact.png": {
+      "atlas": "skills_keystone",
+      "index": 33
     }
   },
   "frames": {
     "JewelFrameAllocated": {
       "file": "/tree/frames/JewelFrameAllocated.webp",
-      "w": 152,
-      "h": 156
+      "w": 76,
+      "h": 76
     },
     "JewelFrameCanAllocate": {
       "file": "/tree/frames/JewelFrameCanAllocate.webp",
-      "w": 152,
-      "h": 156
+      "w": 76,
+      "h": 76
     },
     "JewelFrameUnallocated": {
       "file": "/tree/frames/JewelFrameUnallocated.webp",
-      "w": 152,
-      "h": 156
+      "w": 76,
+      "h": 76
     },
     "KeystoneFrameAllocated": {
       "file": "/tree/frames/KeystoneFrameAllocated.webp",
-      "w": 220,
-      "h": 224
+      "w": 109,
+      "h": 111
     },
     "KeystoneFrameCanAllocate": {
       "file": "/tree/frames/KeystoneFrameCanAllocate.webp",
-      "w": 220,
-      "h": 224
+      "w": 109,
+      "h": 111
     },
     "KeystoneFrameUnallocated": {
       "file": "/tree/frames/KeystoneFrameUnallocated.webp",
-      "w": 220,
-      "h": 224
+      "w": 109,
+      "h": 111
     },
     "NotableFrameAllocated": {
       "file": "/tree/frames/NotableFrameAllocated.webp",
-      "w": 152,
-      "h": 156
+      "w": 76,
+      "h": 76
     },
     "NotableFrameCanAllocate": {
       "file": "/tree/frames/NotableFrameCanAllocate.webp",
-      "w": 152,
-      "h": 156
+      "w": 76,
+      "h": 76
     },
     "NotableFrameUnallocated": {
       "file": "/tree/frames/NotableFrameUnallocated.webp",
-      "w": 152,
-      "h": 156
+      "w": 76,
+      "h": 76
     },
     "PSSkillFrame": {
       "file": "/tree/frames/PSSkillFrame.webp",
-      "w": 104,
-      "h": 104
+      "w": 51,
+      "h": 51
     },
     "PSSkillFrameActive": {
       "file": "/tree/frames/PSSkillFrameActive.webp",
-      "w": 104,
-      "h": 104
+      "w": 51,
+      "h": 51
     },
     "PSSkillFrameHighlighted": {
       "file": "/tree/frames/PSSkillFrameHighlighted.webp",
-      "w": 104,
-      "h": 104
+      "w": 51,
+      "h": 51
     }
   },
   "nodeOverlay": {
-    "Keystone": {
-      "alloc": "KeystoneFrameAllocated",
-      "path": "KeystoneFrameCanAllocate",
-      "unalloc": "KeystoneFrameUnallocated"
-    },
     "Normal": {
-      "alloc": "PSSkillFrameActive",
+      "unalloc": "PSSkillFrame",
       "path": "PSSkillFrameHighlighted",
-      "unalloc": "PSSkillFrame"
+      "alloc": "PSSkillFrameActive"
     },
     "Notable": {
-      "alloc": "NotableFrameAllocated",
+      "unalloc": "NotableFrameUnallocated",
       "path": "NotableFrameCanAllocate",
-      "unalloc": "NotableFrameUnallocated"
+      "alloc": "NotableFrameAllocated"
+    },
+    "Keystone": {
+      "unalloc": "KeystoneFrameUnallocated",
+      "path": "KeystoneFrameCanAllocate",
+      "alloc": "KeystoneFrameAllocated"
     },
     "Socket": {
-      "alloc": "JewelFrameAllocated",
+      "unalloc": "JewelFrameUnallocated",
       "path": "JewelFrameCanAllocate",
-      "unalloc": "JewelFrameUnallocated"
+      "alloc": "JewelFrameAllocated"
     }
   }
 }

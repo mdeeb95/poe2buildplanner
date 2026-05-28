@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-05-21T02:01:05.587Z",
+  "fetchedAt": "2026-05-28T19:27:09.452Z",
   "files": {
     "bases.json": {
       "bases": 1122,
@@ -15,17 +15,19 @@
     },
     "tree-art.json": {
       "frames": 12,
-      "icons": 494
+      "icons": 536
     },
     "tree.json": {
-      "groups": 1497,
-      "nodes": 4353
+      "groups": 1573,
+      "nodes": 4743
     },
     "uniques.json": {
       "slots": 17,
       "uniques": 360
     }
   },
+  "gggTreeCommit": "8d9b16743be1a43faa3cb150673a2335e66335a2",
   "pobCommit": "63a375c1068e0d0c7ff7d12e7294aba224f64427",
-  "schemaVersion": 1
+  "schemaVersion": 1,
+  "treeVersion": "0_5"
 }
