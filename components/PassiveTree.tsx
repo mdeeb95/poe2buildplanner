@@ -625,6 +625,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
           allocated={allocatedIds}
           frontier={frontier}
           passiveWeaponSet={build.passiveWeaponSet}
+          searchMatches={searchMatches}
           showArt={showArt}
           svgRef={svgRef}
           gRef={gRef}

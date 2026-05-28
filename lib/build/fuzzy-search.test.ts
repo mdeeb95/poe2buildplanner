@@ -22,4 +22,17 @@ describe("fuzzyMatch", () => {
     expect(fuzzyMatch("Anything", "")).toBe(true);
     expect(fuzzyMatch("Anything", "   ")).toBe(true);
   });
+
+  it("matches inflections of the same stem", () => {
+    expect(fuzzyMatch("Parried", "parry")).toBe(true);
+    expect(fuzzyMatch("Parry", "parried")).toBe(true);
+    expect(fuzzyMatch("Chance to Parry", "parry")).toBe(true);
+    expect(fuzzyMatch("Parries", "parry")).toBe(true);
+    expect(fuzzyMatch("Parrying Stance", "parry")).toBe(true);
+  });
+
+  it("does not match unrelated words via the stem fallback", () => {
+    expect(fuzzyMatch("Lightning Damage", "life")).toBe(false);
+    expect(fuzzyMatch("Armour", "armament")).toBe(false);
+  });
 });

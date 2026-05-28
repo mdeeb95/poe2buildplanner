@@ -17,6 +17,7 @@ import {
   visualRadius,
   type FrameState,
 } from "@/lib/tree/art";
+import { nodeRadius } from "@/lib/tree/node-style";
 import type { TreeArtManifest } from "@/schemas/tree-art";
 import type { Tree, TreeNode } from "@/schemas/tree";
 
@@ -36,6 +37,7 @@ interface TreeArtCanvasProps {
   allocated: ReadonlySet<string>;
   frontier: ReadonlySet<string>;
   passiveWeaponSet: Readonly<Record<string, WeaponSet>>;
+  searchMatches: ReadonlySet<string>;
   showArt: boolean;
   svgRef: React.RefObject<SVGSVGElement | null>;
   gRef: React.RefObject<SVGGElement | null>;
@@ -128,6 +130,7 @@ const TreeArtCanvasImpl = forwardRef<TreeArtCanvasHandle, TreeArtCanvasProps>(fu
     allocated,
     frontier,
     passiveWeaponSet,
+    searchMatches,
     showArt,
     svgRef,
     gRef,
@@ -141,12 +144,14 @@ const TreeArtCanvasImpl = forwardRef<TreeArtCanvasHandle, TreeArtCanvasProps>(fu
 ) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imagesRef = useRef<Map<string, HTMLImageElement>>(new Map());
+  const searchColorRef = useRef<string | null>(null);
   const propsRef = useRef({
     tree,
     art,
     allocated,
     frontier,
     passiveWeaponSet,
+    searchMatches,
     showArt,
     svgRef,
     gRef,
@@ -162,6 +167,7 @@ const TreeArtCanvasImpl = forwardRef<TreeArtCanvasHandle, TreeArtCanvasProps>(fu
     allocated,
     frontier,
     passiveWeaponSet,
+    searchMatches,
     showArt,
     svgRef,
     gRef,
@@ -179,6 +185,7 @@ const TreeArtCanvasImpl = forwardRef<TreeArtCanvasHandle, TreeArtCanvasProps>(fu
       allocated: alloc,
       frontier: front,
       passiveWeaponSet: pws,
+      searchMatches: matches,
       svgRef: svgEl,
       gRef: gEl,
       getView: viewFn,
@@ -258,6 +265,39 @@ const TreeArtCanvasImpl = forwardRef<TreeArtCanvasHandle, TreeArtCanvasProps>(fu
         ctx.restore();
       }
     }
+
+    // Search highlight rings. The SVG ring (z-index 2) sits below this canvas,
+    // so node art would occlude it once zoomed in far enough to show art.
+    // Re-draw the rings here, on top of the art, to match the zoomed-out look.
+    if (matches.size > 0) {
+      let color = searchColorRef.current;
+      if (!color) {
+        color =
+          getComputedStyle(document.documentElement)
+            .getPropertyValue("--color-search")
+            .trim() || "#ffd54a";
+        searchColorRef.current = color;
+      }
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 5;
+      ctx.globalAlpha = 0.95;
+      for (const id of matches) {
+        const node = t.nodes[id];
+        if (!node || node.group === null || !nodeVisible(node, bounds)) continue;
+        const pt = svg.createSVGPoint();
+        pt.x = node.x;
+        pt.y = node.y;
+        const screen = pt.matrixTransform(ctm);
+        const cx = screen.x - canvasRect.left;
+        const cy = screen.y - canvasRect.top;
+        const r = (nodeRadius(node) + 8) * screenScale;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
   }, []);
 
   useImperativeHandle(ref, () => ({ draw }), [draw]);
@@ -287,7 +327,7 @@ const TreeArtCanvasImpl = forwardRef<TreeArtCanvasHandle, TreeArtCanvasProps>(fu
 
   useEffect(() => {
     draw();
-  }, [tree, allocated, frontier, passiveWeaponSet, showArt, draw]);
+  }, [tree, allocated, frontier, passiveWeaponSet, searchMatches, showArt, draw]);
 
   return <canvas ref={canvasRef} className="tree-art-canvas" aria-hidden />;
 });
