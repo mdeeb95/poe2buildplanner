@@ -11,6 +11,7 @@ function base(): BuildState {
     allocated: ["1", "2"],
     passiveWeaponSet: { "2": 1 },
     nodeLevels: {},
+    nodeNotes: {},
     skills: [],
     items: [],
   };

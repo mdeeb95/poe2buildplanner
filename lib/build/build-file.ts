@@ -1,5 +1,9 @@
 import { createEmptyBuild } from "./defaults";
-import { fromLevelInterval, passiveExportLevel, toLevelInterval } from "./levels";
+import {
+  fromPassiveLevelInterval,
+  passiveExportLevel,
+  toPassiveLevelInterval,
+} from "./levels";
 import type { BuildState, GearItem, SkillSetup } from "@/schemas/build";
 import { BuildFileSchema, type BuildFile } from "@/schemas/build-file";
 import { fetchAppJson } from "@/lib/data/fetch-app-json";
@@ -26,9 +30,9 @@ export function buildToFile(build: BuildState, _gems?: GemsFile): BuildFile {
     ascendancy: build.ascendancy || "",
     passives: build.allocated.map((id) => ({
       id,
-      level_interval: toLevelInterval(passiveExportLevel(build, id)),
+      level_interval: toPassiveLevelInterval(passiveExportLevel(build, id)),
       weapon_set: build.passiveWeaponSet[id] ?? 0,
-      additional_text: "",
+      additional_text: (build.nodeNotes[id] ?? "").trim(),
     })),
     skills: build.skills.map((s) => ({
       id: s.skillId,
@@ -63,11 +67,14 @@ export function buildFromFile(raw: unknown, classes: TreeClass[]): BuildState {
   const allocated: string[] = [];
   const passiveWeaponSet: BuildState["passiveWeaponSet"] = {};
   const nodeLevels: Record<string, number> = {};
+  const nodeNotes: Record<string, string> = {};
 
   for (const p of file.passives) {
     const id = p.id;
     if (!allocated.includes(id)) allocated.push(id);
-    nodeLevels[id] = fromLevelInterval(p.level_interval);
+    nodeLevels[id] = fromPassiveLevelInterval(p.level_interval);
+    const note = (p.additional_text ?? "").trim();
+    if (note) nodeNotes[id] = note;
     if (p.weapon_set === 1 || p.weapon_set === 2) {
       passiveWeaponSet[id] = p.weapon_set;
     }
@@ -119,6 +126,7 @@ export function buildFromFile(raw: unknown, classes: TreeClass[]): BuildState {
     allocated,
     passiveWeaponSet,
     nodeLevels,
+    nodeNotes,
     skills,
     items,
   };

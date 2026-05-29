@@ -22,6 +22,7 @@ function active(partial: Partial<ActiveGem> & Pick<ActiveGem, "id">): ActiveGem 
     kind: "active",
     name: partial.name ?? "Test",
     baseTypeName: partial.baseTypeName ?? partial.name ?? "Test",
+    description: partial.description ?? null,
     gameId: null,
     variantId: partial.variantId ?? null,
     grantedEffectId: null,

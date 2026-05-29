@@ -7,8 +7,8 @@ export function cloneBuild(build: BuildState): BuildState {
 }
 
 function recordsEqual(
-  a: Record<string, number>,
-  b: Record<string, number>,
+  a: Record<string, unknown>,
+  b: Record<string, unknown>,
 ): boolean {
   const aKeys = Object.keys(a);
   const bKeys = Object.keys(b);
@@ -49,6 +49,7 @@ export function buildStatesEqual(a: BuildState, b: BuildState): boolean {
   }
   if (!weaponSetsEqual(a.passiveWeaponSet, b.passiveWeaponSet)) return false;
   if (!recordsEqual(a.nodeLevels, b.nodeLevels)) return false;
+  if (!recordsEqual(a.nodeNotes, b.nodeNotes)) return false;
   if (a.skills.length !== b.skills.length || a.items.length !== b.items.length) {
     return false;
   }

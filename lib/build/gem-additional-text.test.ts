@@ -12,6 +12,7 @@ function retreatCatalog(): SupportGem {
     id: "Metadata/Items/Gems/SkillGemRetreatSupportThree",
     name: "Retreat III",
     baseTypeName: "Retreat III",
+    description: null,
     gameId: null,
     variantId: "RetreatSupportThree",
     grantedEffectId: null,

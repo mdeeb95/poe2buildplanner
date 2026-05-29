@@ -6,6 +6,7 @@ import { syncGems } from "./gems.js";
 import { syncBases } from "./bases.js";
 import { syncUniques } from "./uniques.js";
 import { syncStatDescriptions } from "./stat-descriptions.js";
+import { buildGemStatBlocks } from "./gem-stat-blocks.js";
 import { syncTreeArt, logIconCoverage } from "./tree-art.js";
 
 const SCHEMA_VERSION = 1;
@@ -29,7 +30,7 @@ async function main() {
   console.log(`        icons=${treeArt.iconCount} frames=${treeArt.frameCount}`);
   logIconCoverage(treeArt.manifest, tree.nodes);
 
-  const gems = await timed("gems", () => syncGems(upstream));
+  const { gems, statValues } = await timed("gems", () => syncGems(upstream));
   await writeJson("data/gems.json", gems);
   console.log(`        active=${Object.keys(gems.active).length} support=${Object.keys(gems.support).length}`);
 
@@ -45,6 +46,17 @@ async function main() {
   await writeJson("data/stat-descriptions.json", stats);
   console.log(`        entries=${stats.entries.length} stats=${Object.keys(stats.byStat).length}`);
 
+  const gemStatBlocks = await timed("gem-stat-blocks", async () =>
+    buildGemStatBlocks(statValues, stats, {
+      pobCommit: upstream.sha,
+      fetchedAt: new Date().toISOString(),
+    }),
+  );
+  await writeJson("data/gem-stat-blocks.json", gemStatBlocks);
+  console.log(
+    `        gems=${Object.keys(gemStatBlocks.gems).length} stats=${Object.keys(gemStatBlocks.descriptions).length}`,
+  );
+
   const meta = {
     pobCommit: upstream.sha,
     gggTreeCommit: ggg.sha,
@@ -58,6 +70,10 @@ async function main() {
       "bases.json": { bases: Object.keys(bases.bases).length, slots: Object.keys(bases.bySlot).length },
       "uniques.json": { uniques: Object.keys(uniques.uniques).length, slots: Object.keys(uniques.bySlot).length },
       "stat-descriptions.json": { entries: stats.entries.length, stats: Object.keys(stats.byStat).length },
+      "gem-stat-blocks.json": {
+        gems: Object.keys(gemStatBlocks.gems).length,
+        stats: Object.keys(gemStatBlocks.descriptions).length,
+      },
     },
   };
   await writeJson("data/_meta.json", meta);

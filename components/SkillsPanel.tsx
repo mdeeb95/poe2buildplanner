@@ -3,14 +3,20 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { AddPicker } from "@/components/AddPicker";
 import { GemIcon } from "@/components/GemIcon";
+import { GemTooltip, type GemTooltipData } from "@/components/GemTooltip";
 import { LevelPickerPopover } from "@/components/LevelPickerPopover";
 import {
   activeToPickerRow,
   supportToPickerRow,
+  syncBuildGemNames,
   type GemPickerRow,
+  type GemPickerKind,
+  type GemUiColor,
 } from "@/lib/build/gem-ui";
+import { renderStatLines, resolveGemLevel } from "@/lib/build/stat-render";
+import { formatStatRequirements } from "@/lib/build/gem-stat-requirement";
 import { fetchAppJson } from "@/lib/data/fetch-app-json";
-import { formatGemLevel, normalizeLevelInterval } from "@/lib/build/levels";
+import { formatGemLevel, normalizeLevelInterval, LEVEL_MAX } from "@/lib/build/levels";
 import {
   defaultSkillAdditionalText,
   defaultSupportAdditionalText,
@@ -30,12 +36,21 @@ import {
   supportCraftRequirementLevel,
 } from "@/lib/build/support-craft-level";
 import { fuzzyMatchAny } from "@/lib/build/fuzzy-search";
-import type { BuildState, SkillSetup } from "@/schemas/build";
-import { GemsFileSchema, type ActiveGem, type GemsFile } from "@/schemas/gem";
+import { reconcileGrantedSkills, type GrantedSkillIndex } from "@/lib/build/granted-skills";
+import type { BuildState, LevelInterval, SkillSetup } from "@/schemas/build";
+import { GemsFileSchema, type ActiveGem, type GemsFile, type SupportGem } from "@/schemas/gem";
+import {
+  GemStatBlocksFileSchema,
+  type GemStatBlocksFile,
+} from "@/schemas/gem-stat-block";
 
 interface SkillsPanelProps {
   build: BuildState;
   setBuild: React.Dispatch<React.SetStateAction<BuildState>>;
+  /** Snapshot level; gems whose level range excludes it render dimmed. */
+  viewerLevel: number;
+  /** Node-id → granted skill; auto-managed Skills rows track allocated nodes. */
+  grantedIndex: GrantedSkillIndex | null;
 }
 
 type AddingState =
@@ -46,6 +61,61 @@ type AddingState =
 type GemLevelTarget =
   | { kind: "skill"; skillId: string }
   | { kind: "support"; skillId: string; supportId: string };
+
+/** Framing fields shown in the gem tooltip, plus what the renderer needs for stat lines. */
+type GemTipInfo = Omit<GemTooltipData, "statLines" | "anchor"> & {
+  /** Catalog gem id used to look up stat values; "" when the gem is uncatalogued. */
+  gemId: string;
+  /** Resolved gem level the stat lines are shown at. */
+  gemLevel: number;
+};
+
+/** Build the tooltip framing for a gem from its catalog entry (or a name-only fallback). */
+function gemTipInfo(
+  name: string,
+  color: GemUiColor,
+  kind: GemPickerKind,
+  catalog: ActiveGem | SupportGem | undefined,
+  characterLevel: number,
+): GemTipInfo {
+  if (!catalog) {
+    return {
+      name,
+      color,
+      kind,
+      subtitle: kind === "support" ? "Support" : null,
+      tagLine: null,
+      category: null,
+      tier: null,
+      costMultiplier: null,
+      requirements: null,
+      description: null,
+      gemId: "",
+      gemLevel: 1,
+    };
+  }
+  const gemLevel = resolveGemLevel(catalog.levels, characterLevel, catalog.naturalMaxLevel);
+  const lvl = catalog.levels.find((l) => l.level === gemLevel);
+  const requirements = formatStatRequirements({
+    reqStr: lvl?.reqStr ?? 0,
+    reqDex: lvl?.reqDex ?? 0,
+    reqInt: lvl?.reqInt ?? 0,
+  });
+  return {
+    name,
+    color,
+    kind,
+    subtitle: kind === "support" ? "Support" : catalog.gemType,
+    tagLine: catalog.tagString,
+    category: catalog.gemFamily?.[0] ?? null,
+    tier: catalog.uncutTier ?? null,
+    costMultiplier: catalog.costMultiplier ?? null,
+    requirements: requirements || null,
+    description: catalog.description ?? null,
+    gemId: catalog.id,
+    gemLevel,
+  };
+}
 
 interface LevelPickerState {
   target: GemLevelTarget;
@@ -105,13 +175,76 @@ function GemAdditionalEditor({
   );
 }
 
-export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
+/** A gem is dimmed in snapshot mode when the viewer level falls outside its active range. */
+function gemDimmed(interval: LevelInterval, viewerLevel: number): boolean {
+  if (viewerLevel >= LEVEL_MAX) return false; // not snapshotting
+  return viewerLevel < interval[0] || viewerLevel > interval[1];
+}
+
+export function SkillsPanel({ build, setBuild, viewerLevel, grantedIndex }: SkillsPanelProps) {
   const [gems, setGems] = useState<GemsFile | null>(null);
   const [adding, setAdding] = useState<AddingState>(null);
   const [query, setQuery] = useState("");
   const [selectedSkillId, setSelectedSkillId] = useState<string | null>(null);
   const [selectedSupportId, setSelectedSupportId] = useState<string | null>(null);
   const [levelPicker, setLevelPicker] = useState<LevelPickerState | null>(null);
+  const [hoverGem, setHoverGem] = useState<(GemTipInfo & { anchor: GemTooltipData["anchor"] }) | null>(
+    null,
+  );
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Stat-block data (per-gem stat values + descriptions) is heavy and only used
+  // by the hover tooltip, so it loads lazily on the first gem hover.
+  const [statBlocks, setStatBlocks] = useState<GemStatBlocksFile | null>(null);
+  const statBlocksRequested = useRef(false);
+  const ensureStatBlocks = useCallback(() => {
+    if (statBlocksRequested.current) return;
+    statBlocksRequested.current = true;
+    fetchAppJson("/gem-stat-blocks")
+      .then((data) => {
+        const parsed = GemStatBlocksFileSchema.safeParse(data);
+        if (parsed.success) setStatBlocks(parsed.data);
+      })
+      .catch(() => {
+        /* stat blocks unavailable — tooltip falls back to framing + description */
+      });
+  }, []);
+
+  const showGemTip = useCallback(
+    (e: React.MouseEvent, info: GemTipInfo) => {
+      ensureStatBlocks();
+      const rect = e.currentTarget.getBoundingClientRect();
+      const anchor = {
+        left: rect.left,
+        right: rect.right,
+        top: rect.top,
+        bottom: rect.bottom,
+      };
+      if (hoverTimer.current) clearTimeout(hoverTimer.current);
+      hoverTimer.current = setTimeout(() => setHoverGem({ ...info, anchor }), 280);
+    },
+    [ensureStatBlocks],
+  );
+
+  // Resolve the hovered gem's blue stat lines once stat blocks have loaded.
+  // null = still loading; [] = gem has no renderable stat lines.
+  const hoverStatLines = useMemo<string[] | null>(() => {
+    if (!hoverGem) return null;
+    if (!statBlocks) return null;
+    const block = statBlocks.gems[hoverGem.gemId];
+    if (!block) return [];
+    return renderStatLines(block, hoverGem.gemLevel, statBlocks.descriptions);
+  }, [hoverGem, statBlocks]);
+
+  const hideGemTip = useCallback(() => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    hoverTimer.current = null;
+    setHoverGem(null);
+  }, []);
+
+  useEffect(() => () => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+  }, []);
 
   useEffect(() => {
     let aborted = false;
@@ -142,6 +275,23 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
       };
     });
   }, [gems, setBuild]);
+
+  // Resolve gem display names/colors from the catalog. Loaded builds (.build
+  // import, browser-draft restore, saved-build load) arrive with raw metadata
+  // ids as names; this keeps them in sync whenever the catalog or build
+  // changes. Idempotent — a no-op once names already match, so no render loop.
+  useEffect(() => {
+    if (!gems) return;
+    setBuild((prev) => syncBuildGemNames(prev, gems));
+  }, [gems, build, setBuild]);
+
+  // Keep auto-granted skill rows in sync with allocated tree nodes. Interactive
+  // allocation already reconciles atomically in PassiveTree; this is the
+  // catch-all for loaded/imported/restored builds. Idempotent (returns the same
+  // reference when nothing changes), so no history churn or render loop.
+  useEffect(() => {
+    setBuild((prev) => reconcileGrantedSkills(prev, grantedIndex));
+  }, [grantedIndex, build.allocated, setBuild]);
 
   const activeRows = useMemo(
     () => (gems ? Object.values(gems.active).map(activeToPickerRow) : []),
@@ -496,32 +646,50 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
           const skillDefault = skillCatalog ? defaultSkillAdditionalText(skillCatalog) : "";
           const skillShowReset =
             skillCatalog && (s.additionalText ?? "").trim() !== skillDefault.trim();
+          const isGranted = Boolean(s.grantedBy);
           return (
-            <div key={s.id} className={`skill-row ${isSel ? "is-sel" : ""}`}>
+            <div
+              key={s.id}
+              className={`skill-row ${isSel ? "is-sel" : ""}${isGranted ? " is-granted" : ""}${gemDimmed(s.levelInterval, viewerLevel) ? " is-dimmed" : ""}`}
+            >
               <div
                 className="skill-main"
                 onClick={() => {
                   setSelectedSkillId(s.id);
                   setSelectedSupportId(null);
                 }}
-                onContextMenu={(e) => openSkillLevelPicker(e, s.id, s.levelInterval)}
+                onContextMenu={
+                  isGranted ? undefined : (e) => openSkillLevelPicker(e, s.id, s.levelInterval)
+                }
+                onMouseEnter={(e) =>
+                  showGemTip(e, gemTipInfo(s.name, s.color, "skill", skillCatalog, s.levelInterval[1]))
+                }
+                onMouseLeave={hideGemTip}
               >
                 <GemIcon color={s.color} size={26} kind="skill" />
                 <div className="skill-name-wrap">
                   <span className="skill-name">{s.name}</span>
-                  <span className="skill-lvl mono">{formatGemLevel(s.levelInterval)}</span>
+                  {isGranted ? (
+                    <span className="skill-lvl skill-granted" title="Granted by an allocated passive">
+                      Granted
+                    </span>
+                  ) : (
+                    <span className="skill-lvl mono">{formatGemLevel(s.levelInterval)}</span>
+                  )}
                 </div>
-                <button
-                  type="button"
-                  className="row-x"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    removeSkill(s.id);
-                  }}
-                  title="Remove"
-                >
-                  ×
-                </button>
+                {!isGranted && (
+                  <button
+                    type="button"
+                    className="row-x"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeSkill(s.id);
+                    }}
+                    title="Remove"
+                  >
+                    ×
+                  </button>
+                )}
               </div>
 
               {isSel && !adding ? (
@@ -539,7 +707,17 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
               ) : null}
 
               <div className="supports">
-                {s.supports.map((sup) => {
+                {[...s.supports]
+                  .sort((a, b) => {
+                    const am = a.levelInterval[0];
+                    const bm = b.levelInterval[0];
+                    if (am !== bm) return am - bm;
+                    const ax = a.levelInterval[1];
+                    const bx = b.levelInterval[1];
+                    if (ax !== bx) return ax - bx;
+                    return a.name.localeCompare(b.name);
+                  })
+                  .map((sup) => {
                   const supSel = selectedSupportId === sup.id;
                   const isSwapping =
                     adding?.mode === "support" &&
@@ -564,7 +742,7 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
                       ) : (
                         <div className={`support-entry ${supSel ? "is-sel" : ""}`}>
                           <div
-                            className={`support-row ${supSel ? "is-sel" : ""}`}
+                            className={`support-row ${supSel ? "is-sel" : ""}${gemDimmed(sup.levelInterval, viewerLevel) ? " is-dimmed" : ""}`}
                             onClick={() => {
                               setSelectedSkillId(s.id);
                               setSelectedSupportId(sup.id);
@@ -572,6 +750,13 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
                             onContextMenu={(e) =>
                               openSupportLevelPicker(e, s.id, sup.id, sup.levelInterval)
                             }
+                            onMouseEnter={(e) =>
+                              showGemTip(
+                                e,
+                                gemTipInfo(sup.name, sup.color, "support", supCatalog, sup.levelInterval[1]),
+                              )
+                            }
+                            onMouseLeave={hideGemTip}
                           >
                             <span className="support-rail" />
                             <GemIcon color={sup.color} size={18} kind="support" />
@@ -681,6 +866,8 @@ export function SkillsPanel({ build, setBuild }: SkillsPanelProps) {
           onClose={() => setLevelPicker(null)}
         />
       )}
+
+      {hoverGem && <GemTooltip data={{ ...hoverGem, statLines: hoverStatLines }} />}
     </section>
   );
 }

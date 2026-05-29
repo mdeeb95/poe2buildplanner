@@ -23,6 +23,23 @@ export function findClassStartId(tree: Tree, className: string): string | null {
   return null;
 }
 
+/**
+ * The entry/root node of an ascendancy — the one node in the ascendancy that
+ * links back to a class start node. Allocating it reveals the cluster as
+ * connected. Falls back to the node whose `name` matches the ascendancy. Returns
+ * null when the ascendancy is empty/unknown.
+ */
+export function findAscendancyStartId(tree: Tree, ascendancyName: string): string | null {
+  if (!ascendancyName) return null;
+  let nameMatch: string | null = null;
+  for (const [id, node] of Object.entries(tree.nodes)) {
+    if (node.ascendancyName !== ascendancyName) continue;
+    if (node.name === ascendancyName) nameMatch = id;
+    if (node.neighbors.some((nb) => tree.nodes[nb]?.classesStart?.length)) return id;
+  }
+  return nameMatch;
+}
+
 /** Adjacency over main-tree nodes only (ascendancy nodes + cross-edges removed). */
 export function buildMainTreeAdjacency(tree: Tree): MainTreeAdjacency {
   const adj: MainTreeAdjacency = new Map();

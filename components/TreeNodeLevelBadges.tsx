@@ -19,6 +19,8 @@ export interface TreeNodeLevelBadgesHandle {
 interface TreeNodeLevelBadgesProps {
   tree: Tree | null;
   build: BuildState;
+  /** Snapshot level; nodes acquired above it render as dimmed "future" badges. */
+  viewerLevel: number;
   svgRef: React.RefObject<SVGSVGElement | null>;
   containerRef: React.RefObject<HTMLDivElement | null>;
   getView: () => { tx: number; ty: number; scale: number };
@@ -33,7 +35,7 @@ function badgeTreeOffset(nodeId: string, tree: Tree): { dx: number; dy: number }
 }
 
 function TreeNodeLevelBadgesImpl(
-  { tree, build, svgRef, containerRef, getView }: TreeNodeLevelBadgesProps,
+  { tree, build, viewerLevel, svgRef, containerRef, getView }: TreeNodeLevelBadgesProps,
   ref: React.Ref<TreeNodeLevelBadgesHandle>,
 ) {
   const layerRef = useRef<HTMLDivElement | null>(null);
@@ -71,7 +73,7 @@ function TreeNodeLevelBadgesImpl(
     }
   };
 
-  useImperativeHandle(ref, () => ({ update }), [tree, build]);
+  useImperativeHandle(ref, () => ({ update }), [tree, build, viewerLevel]);
 
   useLayoutEffect(() => {
     update();
@@ -84,14 +86,18 @@ function TreeNodeLevelBadgesImpl(
       {build.allocated.map((id) => {
         const node = tree.nodes[id];
         if (!node || node.group === null) return null;
+        // Ascendancy nodes carry no level — skip their badge.
+        if (node.ascendancyName !== null) return null;
+        const level = passiveDisplayLevel(build, id);
+        const isFuture = level > viewerLevel;
         return (
           <span
             key={id}
             data-node-id={id}
-            className="tree-node-level-badge mono"
+            className={`tree-node-level-badge mono${isFuture ? " is-future" : ""}`}
             style={{ transform: "translate(-9999px, -9999px)" }}
           >
-            {passiveDisplayLevel(build, id)}
+            {level}
           </span>
         );
       })}

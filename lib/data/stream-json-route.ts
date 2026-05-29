@@ -33,10 +33,15 @@ async function getEtag(filePath: string): Promise<string | null> {
     }
   }
   const fileKey = path.basename(filePath);
+  // Always fold the file's size + mtime into the signature. The `_meta.json`
+  // entry alone is too coarse — it summarises counts (e.g. {active, support})
+  // that stay constant when fields are added/edited in place, so a content edit
+  // that didn't change the meta would otherwise keep serving a stale 304.
+  const statSig = `${s.size}-${Math.floor(s.mtimeMs)}`;
   const fileSig =
     fileMeta?.[fileKey] != null
-      ? JSON.stringify(fileMeta[fileKey])
-      : String(Math.floor(s.mtimeMs));
+      ? `${JSON.stringify(fileMeta[fileKey])}-${statSig}`
+      : statSig;
   return `"${sha}-${fetchedAt}-${fileKey}-${fileSig}"`;
 }
 

@@ -6,6 +6,8 @@ interface TreeNodesActiveProps {
   tree: Tree;
   allocated: ReadonlyArray<string>;
   passiveWeaponSet: Readonly<Record<string, WeaponSet>>;
+  /** Render allocated nodes as faint grey "not yet acquired" ghosts (snapshot mode). */
+  ghost?: boolean;
 }
 
 function radiusFor(node: TreeNode): number {
@@ -28,14 +30,14 @@ function fillFor(weaponSet: WeaponSet | undefined): string | undefined {
   return undefined;
 }
 
-function TreeNodesActiveImpl({ tree, allocated, passiveWeaponSet }: TreeNodesActiveProps) {
+function TreeNodesActiveImpl({ tree, allocated, passiveWeaponSet, ghost }: TreeNodesActiveProps) {
   if (allocated.length === 0) return null;
   const rings: ReactElement[] = [];
   for (const id of allocated) {
     const node = tree.nodes[id];
     if (!node || node.group === null) continue;
     const r = radiusFor(node);
-    const ws = passiveWeaponSet[id];
+    const ws = ghost ? undefined : passiveWeaponSet[id];
     const tint = fillFor(ws);
     if (tint) {
       rings.push(
@@ -56,9 +58,9 @@ function TreeNodesActiveImpl({ tree, allocated, passiveWeaponSet }: TreeNodesAct
         cy={node.y}
         r={r + 6}
         fill="none"
-        stroke={strokeFor(ws)}
-        strokeWidth={5}
-        strokeOpacity={ws ? 0.65 : 0.45}
+        stroke={ghost ? "var(--text-4)" : strokeFor(ws)}
+        strokeWidth={ghost ? 3 : 5}
+        strokeOpacity={ghost ? 0.3 : ws ? 0.65 : 0.45}
         vectorEffect="non-scaling-stroke"
       />,
     );

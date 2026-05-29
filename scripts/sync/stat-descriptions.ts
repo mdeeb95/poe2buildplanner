@@ -4,6 +4,7 @@ import {
   type StatDescriptionEntry,
   type StatDescriptionLimit,
   type StatDescriptionLine,
+  type StatDescriptionTransform,
   type StatDescriptionsFile,
 } from "@/schemas/stat-description.js";
 import type { Upstream } from "./fetch.js";
@@ -83,16 +84,43 @@ function collectLines(node: unknown, out: StatDescriptionLine[]): void {
   }
   const rec = node as Record<string, unknown>;
   if (typeof rec.text === "string") {
-    out.push({
+    const line: StatDescriptionLine = {
       text: rec.text,
       limit: parseLimit(rec.limit),
-    });
+    };
+    const transforms = parseTransforms(rec);
+    if (transforms.length > 0) line.transforms = transforms;
+    out.push(line);
     return;
   }
   for (const [k, v] of Object.entries(rec)) {
     if (k === "stats" || k === "lang") continue;
     collectLines(v, out);
   }
+}
+
+/**
+ * A description line carries leading numeric-indexed value handlers, e.g.
+ * `{ [1] = { k = "negate", v = 1 }, limit = {...}, text = "..." }`. Here `k` is
+ * the handler name and `v` is the **1-based value index** the handler targets
+ * (not the descriptor's own position); we record it 0-based so the renderer can
+ * apply the transform to the matching value before substituting `{0}`/`{1}`.
+ */
+function parseTransforms(rec: Record<string, unknown>): StatDescriptionTransform[] {
+  const out: StatDescriptionTransform[] = [];
+  for (const [k, v] of Object.entries(rec)) {
+    const slot = Number(k);
+    if (!Number.isInteger(slot) || slot < 1) continue;
+    if (!v || typeof v !== "object" || Array.isArray(v)) continue;
+    const desc = v as Record<string, unknown>;
+    if (typeof desc.k !== "string") continue;
+    // `v` is the targeted value index (1-based); fall back to the descriptor's
+    // own position when it is absent.
+    const target = typeof desc.v === "number" ? desc.v : slot;
+    out.push({ index: target - 1, op: desc.k });
+  }
+  out.sort((a, b) => a.index - b.index);
+  return out;
 }
 
 function parseLimit(value: unknown): StatDescriptionLimit[] | null {

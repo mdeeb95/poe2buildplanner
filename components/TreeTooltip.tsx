@@ -19,6 +19,8 @@ interface TreeTooltipProps {
   tree: Tree | null;
   allocated?: boolean;
   level?: number;
+  /** Free-text note saved on this node, shown when present. */
+  note?: string;
   svgRef: React.RefObject<SVGSVGElement | null>;
   containerRef: React.RefObject<HTMLDivElement | null>;
   getView: () => { tx: number; ty: number; scale: number };
@@ -28,7 +30,7 @@ const OFFSET_X = 18;
 const OFFSET_Y = -18;
 
 function TreeTooltipImpl(
-  { nodeId, tree, allocated, level, svgRef, containerRef, getView }: TreeTooltipProps,
+  { nodeId, tree, allocated, level, note, svgRef, containerRef, getView }: TreeTooltipProps,
   ref: React.Ref<TreeTooltipHandle>,
 ) {
   const tipRef = useRef<HTMLDivElement | null>(null);
@@ -69,12 +71,19 @@ function TreeTooltipImpl(
       <div className="mb-1 font-semibold text-[color:var(--color-accent)]">
         {node.name || "Unnamed node"}
       </div>
-      {allocated && level != null && (
+      {allocated && level != null && node.ascendancyName === null && (
         <div className="mb-1 text-[color:var(--color-text-muted)]">
           Allocate at L{level}
           <span className="tree-tip-hint"> · Right-click to change</span>
         </div>
       )}
+      {note ? (
+        <div className="tree-tip-note">{note}</div>
+      ) : allocated ? (
+        <div className="mb-1 text-[color:var(--color-text-muted)] tree-tip-hint">
+          Right-click to add a note
+        </div>
+      ) : null}
       {node.stats.length > 0 ? (
         <ul className="space-y-0.5">
           {node.stats.map((s, i) => (

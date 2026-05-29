@@ -30,8 +30,8 @@ describe("build-file round-trip", () => {
     };
     const file = buildToFile(build);
     expect(file.passives).toEqual([
-      { id: "10", level_interval: [5, 100], weapon_set: 0, additional_text: "" },
-      { id: "20", level_interval: [1, 100], weapon_set: 2, additional_text: "" },
+      { id: "10", level_interval: [5, 123], weapon_set: 0, additional_text: "" },
+      { id: "20", level_interval: [1, 123], weapon_set: 2, additional_text: "" },
     ]);
     const back = buildFromFile(file, classes);
     expect(back.allocated).toEqual(["10", "20"]);
@@ -40,7 +40,7 @@ describe("build-file round-trip", () => {
     expect(back.className).toBe("Warrior");
   });
 
-  it("defaults passive level_interval to [1, 100] when nodeLevels unset", () => {
+  it("defaults passive level_interval to [1, 123] when nodeLevels unset", () => {
     const build: BuildState = {
       ...createEmptyBuild(),
       allocated: ["a", "b"],
@@ -50,9 +50,23 @@ describe("build-file round-trip", () => {
     };
     const file = buildToFile(build);
     expect(file.passives).toEqual([
-      { id: "a", level_interval: [12, 100], weapon_set: 0, additional_text: "" },
-      { id: "b", level_interval: [1, 100], weapon_set: 0, additional_text: "" },
+      { id: "a", level_interval: [12, 123], weapon_set: 0, additional_text: "" },
+      { id: "b", level_interval: [1, 123], weapon_set: 0, additional_text: "" },
     ]);
+  });
+
+  it("round-trips passive points past level 100 (quest-reward points)", () => {
+    const build: BuildState = {
+      ...createEmptyBuild(),
+      allocated: ["x"],
+      nodeLevels: { x: 118 },
+      skills: [],
+      items: [],
+    };
+    const file = buildToFile(build);
+    expect(file.passives[0]?.level_interval).toEqual([118, 123]);
+    const back = buildFromFile(file, classes);
+    expect(back.nodeLevels.x).toBe(118);
   });
 
   it("round-trips skill and support level_interval and additional_text", () => {

@@ -21,6 +21,13 @@ export const SkillSetupSchema = z.object({
   /** Auto-set craft requirement note; exported as `additional_text`. */
   additionalText: z.string().optional().default(""),
   supports: z.array(SupportSetupSchema),
+  /**
+   * Set when this skill is auto-managed because an allocated tree node grants it
+   * (holds the granting node id). The row is locked (no manual remove) and
+   * reconciled from the granted-skills index; editor-only, not written to
+   * `.build` files.
+   */
+  grantedBy: z.string().optional(),
 });
 
 export const GearItemSchema = z.object({
@@ -42,6 +49,10 @@ export const BuildStateSchema = z.object({
   // `.build` format's optional per-passive `weapon_set` uint.
   passiveWeaponSet: z.record(z.string(), z.union([z.literal(1), z.literal(2)])),
   nodeLevels: z.record(z.string(), z.number()),
+  // Free-text note per passive node, shown in its tooltip and exported as the
+  // `.build` passive `additional_text`. Optional so older saved/draft builds
+  // (which predate the field) still parse.
+  nodeNotes: z.record(z.string(), z.string()).default({}),
   skills: z.array(SkillSetupSchema),
   items: z.array(GearItemSchema),
 });

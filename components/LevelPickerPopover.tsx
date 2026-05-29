@@ -9,11 +9,12 @@ import {
   type FormEvent,
 } from "react";
 import {
-  clampLevel,
+  clampPassivePoint,
   DEFAULT_LEVEL_MAX,
   LEVEL_MAX,
   LEVEL_MIN,
   normalizeLevelInterval,
+  PASSIVE_POINTS_MAX,
 } from "@/lib/build/levels";
 import type { LevelInterval } from "@/schemas/build";
 
@@ -124,7 +125,7 @@ export function LevelPickerPopover(props: LevelPickerPopoverProps) {
         props.onApplyInterval(normalizeLevelInterval(min, max));
         return;
       }
-      props.onApply(clampLevel(min));
+      props.onApply(clampPassivePoint(min));
     },
     [draftMin, draftMax, intervalMode, props],
   );
@@ -172,7 +173,7 @@ export function LevelPickerPopover(props: LevelPickerPopoverProps) {
               ref={minInputRef}
               type="number"
               min={LEVEL_MIN}
-              max={LEVEL_MAX}
+              max={PASSIVE_POINTS_MAX}
               value={draftMin}
               onChange={(e) => setDraftMin(e.target.value)}
               className="level-picker-input mono"

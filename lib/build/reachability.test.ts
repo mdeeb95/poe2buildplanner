@@ -5,6 +5,7 @@ import {
   buildMainTreeAdjacency,
   canAllocate,
   cascadeDeallocate,
+  findAscendancyStartId,
   findClassStartId,
   mainTreeAllocated,
   reachableSet,
@@ -79,6 +80,25 @@ describe("findClassStartId", () => {
     const tree = fixtureTree();
     expect(findClassStartId(tree, "")).toBeNull();
     expect(findClassStartId(tree, "Ranger")).toBeNull();
+  });
+});
+
+describe("findAscendancyStartId", () => {
+  it("finds the ascendancy node that links back to a class start", () => {
+    const tree = fixtureTree();
+    // ASC's name is "n" (not "Titan"), so this relies on the class-start link.
+    expect(findAscendancyStartId(tree, "Titan")).toBe("ASC");
+  });
+  it("returns null for empty or unknown ascendancy", () => {
+    const tree = fixtureTree();
+    expect(findAscendancyStartId(tree, "")).toBeNull();
+    expect(findAscendancyStartId(tree, "Deadeye")).toBeNull();
+  });
+  it("falls back to a name match when no class-start link exists", () => {
+    const tree = fixtureTree();
+    tree.nodes.LONE = node({ neighbors: [], ascendancyName: "Lich" });
+    tree.nodes.LONE.name = "Lich";
+    expect(findAscendancyStartId(tree, "Lich")).toBe("LONE");
   });
 });
 

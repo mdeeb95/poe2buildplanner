@@ -13,6 +13,7 @@ function support(partial: Partial<SupportGem> & Pick<SupportGem, "id">): Support
     kind: "support",
     name: partial.name ?? "Test",
     baseTypeName: partial.baseTypeName ?? partial.name ?? "Test",
+    description: partial.description ?? null,
     gameId: null,
     variantId: partial.variantId ?? null,
     grantedEffectId: null,

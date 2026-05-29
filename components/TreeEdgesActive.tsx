@@ -10,13 +10,25 @@ interface TreeEdgesActiveProps {
   edgeIndex: ReadonlyArray<EdgeRecord>;
   allocatedIds: ReadonlySet<string>;
   passiveWeaponSet: Readonly<Record<string, WeaponSet>>;
+  /** Render every allocated edge as one faint grey path (snapshot ghost layer). */
+  ghost?: boolean;
 }
 
 function TreeEdgesActiveImpl({
   edgeIndex,
   allocatedIds,
   passiveWeaponSet,
+  ghost,
 }: TreeEdgesActiveProps) {
+  const ghostPath = useMemo(() => {
+    if (!ghost || allocatedIds.size === 0) return "";
+    const frags: string[] = [];
+    for (const e of edgeIndex) {
+      if (allocatedIds.has(e.a) && allocatedIds.has(e.b)) frags.push(e.fragment);
+    }
+    return frags.join("");
+  }, [ghost, edgeIndex, allocatedIds]);
+
   const paths = useMemo(() => {
     const global: string[] = [];
     const set1: string[] = [];
@@ -39,6 +51,22 @@ function TreeEdgesActiveImpl({
       set2: set2.join(""),
     };
   }, [edgeIndex, allocatedIds, passiveWeaponSet]);
+
+  if (ghost) {
+    if (!ghostPath) return null;
+    return (
+      <g className="tree-edges-active tree-edges-ghost">
+        <path
+          d={ghostPath}
+          fill="none"
+          stroke="var(--text-4)"
+          strokeWidth={3}
+          strokeOpacity={0.25}
+          vectorEffect="non-scaling-stroke"
+        />
+      </g>
+    );
+  }
 
   if (!paths.global && !paths.set1 && !paths.set2) return null;
 

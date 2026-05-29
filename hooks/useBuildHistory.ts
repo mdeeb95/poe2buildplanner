@@ -25,6 +25,11 @@ function isEditableTarget(target: EventTarget | null): boolean {
 export interface BuildHistoryControls {
   build: BuildState;
   setBuild: Dispatch<SetStateAction<BuildState>>;
+  /**
+   * Swap in a whole new build (hydration, loading a saved build, reset)
+   * without recording a history entry, clearing undo/redo in the process.
+   */
+  replace: (next: BuildState) => void;
   undo: () => void;
   redo: () => void;
   canUndo: boolean;
@@ -72,6 +77,14 @@ export function useBuildHistory(initial: BuildState): BuildHistoryControls {
     [pushPast],
   );
 
+  const replace = useCallback((next: BuildState) => {
+    pastRef.current = [];
+    futureRef.current = [];
+    skipHistoryRef.current = true;
+    setBuildInternal(next);
+    bumpHistory();
+  }, [bumpHistory]);
+
   const undo = useCallback(() => {
     const stack = pastRef.current;
     if (stack.length === 0) return;
@@ -117,6 +130,7 @@ export function useBuildHistory(initial: BuildState): BuildHistoryControls {
   return {
     build,
     setBuild,
+    replace,
     undo,
     redo,
     canUndo: pastRef.current.length > 0,

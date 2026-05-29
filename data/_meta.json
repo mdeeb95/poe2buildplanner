@@ -1,9 +1,13 @@
 {
-  "fetchedAt": "2026-05-28T19:27:09.452Z",
+  "fetchedAt": "2026-05-29T17:19:08.559Z",
   "files": {
     "bases.json": {
       "bases": 1122,
       "slots": 29
+    },
+    "gem-stat-blocks.json": {
+      "gems": 896,
+      "stats": 999
     },
     "gems.json": {
       "active": 344,

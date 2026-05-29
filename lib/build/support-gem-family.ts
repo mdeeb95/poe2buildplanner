@@ -144,8 +144,8 @@ export interface SupportSetupSeed {
   additionalText: string;
 }
 
-/** All higher variants in gemFamily after the picked tier (sorted by uncutTier). */
-export function higherSupportTiersInFamily(
+/** All variants in the same gemFamily (sorted by uncutTier ascending), including the picked one. */
+export function supportTiersInFamily(
   gems: GemsFile,
   currentSkillId: string,
 ): SupportGem[] {
@@ -153,14 +153,10 @@ export function higherSupportTiersInFamily(
   if (!current) return [];
   const family = supportFamilyKey(current);
   if (!family) return [];
-  const siblings = indexSupportFamilies(gems.support).get(family);
-  if (!siblings) return [];
-  const idx = siblings.findIndex((g) => g.id === currentSkillId);
-  if (idx < 0) return [];
-  return siblings.slice(idx + 1);
+  return indexSupportFamilies(gems.support).get(family) ?? [];
 }
 
-/** Support row(s) to add: picked tier plus all higher family tiers not already socketed. */
+/** Support row(s) to add: every family tier not already socketed (lower and higher than picked). */
 export function supportSetupsForAdd(
   gemId: string,
   gems: GemsFile,
@@ -197,9 +193,15 @@ export function supportSetupsForAdd(
     existing.add(id);
   };
 
-  append(gemId, gem, row.name);
-  for (const higher of higherSupportTiersInFamily(gems, gemId)) {
-    append(higher.id, higher, higher.name);
+  const family = supportTiersInFamily(gems, gemId);
+  if (family.length === 0) {
+    append(gemId, gem, row.name);
+    return seeds;
+  }
+  // Seed the whole family in tier order so picking any rank fills in the
+  // lower and higher ranks too, displayed lowest-to-highest.
+  for (const tier of family) {
+    append(tier.id, tier, tier.id === gemId ? row.name : tier.name);
   }
 
   return seeds;

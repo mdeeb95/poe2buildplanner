@@ -26,6 +26,12 @@ const BaseGemFields = {
   id: z.string(),
   name: z.string(),
   baseTypeName: z.string(),
+  /**
+   * Human-readable effect summary from PoB skill data (`description`).
+   * Optional + nullable so older/partial gem payloads still validate — a missing
+   * description must never fail the whole catalog parse (which would blank the picker).
+   */
+  description: z.string().nullish(),
   gameId: z.string().nullable(),
   variantId: z.string().nullable(),
   grantedEffectId: z.string().nullable(),
@@ -39,6 +45,12 @@ const BaseGemFields = {
   naturalMaxLevel: z.number().int().nullable(),
   levels: z.array(GemLevelSchema),
   gemFamily: z.array(z.string()).nullable(),
+  /**
+   * In-game cost multiplier as a percentage (e.g. 120 for a support with
+   * `manaMultiplier = 20`). Null when the gem has no multiplier. Shown in the
+   * stat-block tooltip; see `components/GemTooltip.tsx`.
+   */
+  costMultiplier: z.number().nullish(),
 };
 
 export const ActiveGemSchema = z.object({

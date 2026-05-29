@@ -155,6 +155,13 @@ body {
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 }
+/* Snapshot: passive taken above the viewer level — still readable, clearly "future". */
+.tree-node-level-badge.is-future {
+  opacity: 0.35;
+  filter: grayscale(1);
+  color: var(--text-3, #6a6a6a);
+  border-color: var(--text-4, #4a4a4a);
+}
 
 .tree-tip-hint {
   font-size: 10px;
@@ -250,6 +257,244 @@ body {
 .level-picker-secondary:hover {
   background: var(--bg-4, #222);
   color: var(--color-text-primary);
+}
+
+/* Node editor popover — level (optional) + free-text note. */
+.node-popover {
+  min-width: 240px;
+  max-width: 280px;
+}
+.node-popover-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--gold, #c9a36b);
+  margin-bottom: 8px;
+}
+.node-popover-note-label {
+  margin-top: 10px;
+}
+.node-popover-note {
+  width: 100%;
+  resize: vertical;
+  min-height: 48px;
+  padding: 6px 8px;
+  background: var(--bg-2, #131313);
+  border: 1px solid var(--border-2, rgba(255, 255, 255, 0.12));
+  color: var(--color-text-primary);
+  font-size: 12px;
+  line-height: 1.4;
+  border-radius: 2px;
+  outline: 0;
+}
+.node-popover-note:focus {
+  border-color: var(--gold-dim, #8a7348);
+}
+.node-popover-note::placeholder {
+  color: var(--text-3, #6a6a6a);
+}
+
+/* Saved note shown in a node's hover tooltip. */
+.tree-tip-note {
+  margin-bottom: 4px;
+  padding: 4px 6px;
+  border-left: 2px solid var(--gold-dim, #8a7348);
+  background: var(--bg-2, rgba(255, 255, 255, 0.04));
+  color: var(--color-text-primary);
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+/* Snapshot level slider (top bar) — preview the build at an earlier character level. */
+.level-slider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+}
+.level-slider-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  padding: 0;
+  border: 1px solid var(--bg-4, #222);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-2, #9a9a9a);
+  cursor: pointer;
+}
+.level-slider-play:hover {
+  color: var(--gold, #c9a36b);
+  border-color: var(--gold-dim, #8a7348);
+}
+.level-slider-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3, #6a6a6a);
+}
+.level-slider-n {
+  font-size: 11px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-2, #9a9a9a);
+}
+.level-slider.is-snapshot .level-slider-label {
+  color: var(--gold-dim, #8a7348);
+}
+.level-slider.is-snapshot .level-slider-n {
+  color: var(--gold, #c9a36b);
+}
+.level-slider-label:hover .level-slider-n {
+  color: var(--color-text-primary);
+}
+.level-slider-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 120px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--bg-4, #222);
+  outline: 0;
+  cursor: pointer;
+}
+.level-slider.is-snapshot .level-slider-range {
+  background: linear-gradient(
+    to right,
+    var(--gold-dim, #8a7348),
+    var(--bg-4, #222)
+  );
+}
+.level-slider-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold, #c9a36b);
+  border: 1px solid var(--bg-0, #000);
+  cursor: pointer;
+}
+.level-slider-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold, #c9a36b);
+  border: 1px solid var(--bg-0, #000);
+  cursor: pointer;
+}
+
+/* Snapshot: gem inactive at the viewer level — dim but keep selection legible. */
+.skill-row.is-dimmed,
+.support-row.is-dimmed {
+  opacity: 0.4;
+  filter: grayscale(0.8);
+}
+.skill-row.is-dimmed.is-sel,
+.support-row.is-dimmed.is-sel {
+  opacity: 0.7;
+  filter: grayscale(0.4);
+}
+
+/* Auto-granted skill (from an allocated ascendancy node): a small locked tag in
+   place of the editable gem level. */
+.skill-lvl.skill-granted {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 8.5px;
+  font-weight: 600;
+  color: var(--gold-dim, #8a7348);
+  border: 1px solid var(--gold-dim, #8a7348);
+  border-radius: 2px;
+  padding: 0 4px;
+  line-height: 1.5;
+}
+
+/* ── Top bar responsive ──────────────────────────────────────────────────────
+   The bar packs build meta, stats, the snapshot slider, and several action
+   buttons (Library, Reset, Import, Export, Save) into one 52px row. At narrow
+   widths it used to overlap; this lets the meta column shrink/clip and then
+   sheds the lowest-value pieces in order. globals.css loads last, so the .app
+   prefix wins over the generated design-editor.css. */
+.app .topbar {
+  grid-template-columns: auto minmax(0, 1fr) auto auto auto;
+  column-gap: 14px;
+}
+.app .tb-meta {
+  overflow: hidden;
+}
+.app .tb-name {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.app .level-slider {
+  min-width: 0;
+}
+.app .level-slider-range {
+  min-width: 60px;
+}
+
+/* 1. Drop the one-line description first — it's the most expendable. */
+@media (max-width: 1280px) {
+  .app .tb-desc {
+    display: none;
+  }
+}
+/* 2. Collapse action buttons to icon-only; their title tooltips still label them. */
+@media (max-width: 1180px) {
+  .app .tb-actions .tb-btn > span {
+    display: none;
+  }
+  .app .tb-actions .tb-btn {
+    gap: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+/* 3. Stats show numbers only; tighten the slider track. */
+@media (max-width: 1040px) {
+  .app .tb-stat-l {
+    display: none;
+  }
+  .app .tb-stats {
+    gap: 10px;
+  }
+  .app .level-slider-range {
+    width: 84px;
+  }
+}
+/* 4. Hide the stat cluster entirely; keep the slider usable. */
+@media (max-width: 900px) {
+  .app .tb-stats {
+    display: none;
+  }
+  .app .level-slider {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+/* 5. Last resort: slider collapses to a bare track. */
+@media (max-width: 760px) {
+  .app .level-slider-label {
+    display: none;
+  }
+  .app .level-slider-range {
+    width: 64px;
+  }
 }
 
 /* Site footer — fan disclaimer */

@@ -7,6 +7,7 @@ import {
   type GemsFile,
   type SupportGem,
 } from "@/schemas/gem.js";
+import type { GemStatValues } from "@/schemas/gem-stat-block.js";
 import type { Upstream } from "./fetch.js";
 
 const GEMS_INDEX = "src/Data/Gems.lua";
@@ -45,6 +46,7 @@ interface GemIndexEntry {
 interface SkillEntry {
   name?: string;
   baseTypeName?: string;
+  description?: string;
   color?: number;
   support?: boolean;
   requireSkillTypes?: string[];
@@ -56,7 +58,13 @@ interface SkillEntry {
   weaponTypes?: Record<string, boolean> | string[];
 }
 
-export async function syncGems(upstream: Upstream): Promise<GemsFile> {
+export interface GemSyncResult {
+  gems: GemsFile;
+  /** Per-gem raw stat values, keyed by the same gem id used in `gems`. */
+  statValues: Record<string, GemStatValues>;
+}
+
+export async function syncGems(upstream: Upstream): Promise<GemSyncResult> {
   const indexSrc = readLuaSource(await upstream.fetchFile(GEMS_INDEX));
   const { data: indexData } = parseReturnTable(indexSrc);
 
@@ -80,16 +88,21 @@ export async function syncGems(upstream: Upstream): Promise<GemsFile> {
   const active: Record<string, ActiveGem> = {};
   const support: Record<string, SupportGem> = {};
   const byBaseTypeName: Record<string, string> = {};
+  const statValues: Record<string, GemStatValues> = {};
 
   for (const [gameId, raw] of Object.entries(indexData)) {
     const entry = raw as GemIndexEntry;
     const grantedEffectId = entry.grantedEffectId ?? "";
     const skill = grantedEffectId ? allSkills[grantedEffectId] : undefined;
 
+    const stats = extractStatValues(skill);
+    if (stats) statValues[gameId] = stats;
+
     const baseFields = {
       id: gameId,
       name: entry.name ?? skill?.name ?? "",
       baseTypeName: entry.baseTypeName ?? skill?.baseTypeName ?? entry.name ?? "",
+      description: skill?.description ?? null,
       gameId: entry.gameId ?? null,
       variantId: entry.variantId ?? null,
       grantedEffectId: grantedEffectId || null,
@@ -108,6 +121,7 @@ export async function syncGems(upstream: Upstream): Promise<GemsFile> {
         isSupport: skill?.support === true,
       }),
       gemFamily: skill?.gemFamily ?? null,
+      costMultiplier: costMultiplierFrom(skill),
     };
 
     if (entry.baseTypeName) byBaseTypeName[entry.baseTypeName] = gameId;
@@ -143,7 +157,70 @@ export async function syncGems(upstream: Upstream): Promise<GemsFile> {
     byBaseTypeName,
   };
 
-  return GemsFileSchema.parse(result);
+  return { gems: GemsFileSchema.parse(result), statValues };
+}
+
+/** Values sorted by their numeric Lua key; passthrough for already-arrayed input. */
+function orderedNumericEntries(value: unknown): unknown[] {
+  if (Array.isArray(value)) return value;
+  if (!value || typeof value !== "object") return [];
+  return Object.keys(value as Record<string, unknown>)
+    .map((k) => ({ k, n: Number(k) }))
+    .filter(({ n }) => Number.isInteger(n))
+    .sort((a, b) => a.n - b.n)
+    .map(({ k }) => (value as Record<string, unknown>)[k]);
+}
+
+function firstStatSet(skill: SkillEntry | undefined): Record<string, unknown> | undefined {
+  if (!skill?.statSets) return undefined;
+  const first = orderedNumericEntries(skill.statSets)[0];
+  return first && typeof first === "object" ? (first as Record<string, unknown>) : undefined;
+}
+
+/**
+ * Extract a gem's renderable stat values from its primary stat set:
+ * `constantStats` are level-independent `[id, value]` pairs; `stats` lists the
+ * ordered ids whose per-level values live positionally in `statSet.levels[L]`
+ * (alongside `statInterpolation`/`actorLevel`, which we ignore). The `statMap`
+ * mod() definitions are already dropped by STATMAP_SKIP_KEYS during parsing.
+ */
+function extractStatValues(skill: SkillEntry | undefined): GemStatValues | null {
+  const statSet = firstStatSet(skill);
+  if (!statSet) return null;
+
+  const constant: Array<[string, number]> = [];
+  for (const pair of orderedNumericEntries(statSet.constantStats)) {
+    const [id, val] = orderedNumericEntries(pair);
+    if (typeof id === "string" && typeof val === "number") constant.push([id, val]);
+  }
+
+  const statIds = orderedNumericEntries(statSet.stats).filter(
+    (s): s is string => typeof s === "string",
+  );
+  let dynamic: GemStatValues["dynamic"] = null;
+  if (statIds.length > 0 && statSet.levels && typeof statSet.levels === "object") {
+    const byLevel: Record<string, number[]> = {};
+    for (const [lvl, lvlRec] of Object.entries(statSet.levels as Record<string, unknown>)) {
+      if (!Number.isInteger(Number(lvl))) continue;
+      byLevel[lvl] = orderedNumericEntries(lvlRec).filter(
+        (v): v is number => typeof v === "number",
+      );
+    }
+    dynamic = { statIds, byLevel };
+  }
+
+  if (constant.length === 0 && !dynamic) return null;
+  return { constant, dynamic };
+}
+
+/** Support gems carry `manaMultiplier` (e.g. 20 → 120%); most actives have none. */
+function costMultiplierFrom(skill: SkillEntry | undefined): number | null {
+  const first = orderedNumericEntries(skill?.levels)[0];
+  if (first && typeof first === "object") {
+    const mm = (first as Record<string, unknown>).manaMultiplier;
+    if (typeof mm === "number") return 100 + mm;
+  }
+  return null;
 }
 
 function collectLevels(

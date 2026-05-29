@@ -184,6 +184,65 @@
     .tb-btn-primary:hover { filter: brightness(1.08); color: #1a130a; }
     .tb-btn-ext { font-family: var(--font-mono); font-size: 11px; opacity: 0.75; }
 
+    .tb-saved { position: relative; }
+    .tb-saved-count {
+      margin-left: 6px; padding: 0 5px; min-width: 16px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 10px; line-height: 15px;
+      background: var(--bg-1); border: 1px solid var(--border-2); border-radius: 99px;
+      color: var(--text-2);
+    }
+    .tb-saved-menu {
+      position: absolute; top: calc(100% + 6px); right: 0;
+      width: 300px; max-height: 380px; display: flex; flex-direction: column;
+      background: var(--bg-3);
+      border: 1px solid var(--border-3);
+      border-radius: var(--radius);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.4);
+      padding: 6px;
+      z-index: 20;
+    }
+    .tb-saved-empty { padding: 14px 10px; font-size: 12px; color: var(--text-3); line-height: 1.5; }
+    .tb-saved-empty strong { color: var(--text-1); font-weight: 500; }
+    .tb-saved-list { overflow-y: auto; display: flex; flex-direction: column; gap: 2px; }
+    .tb-saved-item {
+      display: flex; align-items: stretch; gap: 2px;
+      border-radius: var(--radius-sm);
+    }
+    .tb-saved-item:hover { background: var(--bg-4); }
+    .tb-saved-item[data-on="1"] { background: var(--gold-soft, rgba(196,160,90,0.12)); }
+    .tb-saved-load {
+      flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px;
+      padding: 7px 8px; background: transparent; border: 0; cursor: pointer;
+      text-align: left; color: var(--text-1);
+    }
+    .tb-saved-name {
+      font-size: 12.5px; color: var(--text-0);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .tb-saved-meta {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 10.5px; color: var(--text-3);
+    }
+    .tb-saved-current {
+      font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid var(--gold-dim); border-radius: 99px;
+      padding: 0 5px; line-height: 13px;
+    }
+    .tb-saved-del {
+      flex: 0 0 auto; width: 30px; display: flex; align-items: center; justify-content: center;
+      background: transparent; border: 0; border-radius: var(--radius-sm);
+      color: var(--text-3); cursor: pointer;
+    }
+    .tb-saved-del:hover { background: var(--bg-2); color: var(--danger, #d66); }
+    .tb-saved-footer { margin-top: 4px; padding-top: 6px; border-top: 1px solid var(--border-1); }
+    .tb-saved-copy {
+      width: 100%; padding: 7px 8px; background: transparent;
+      border: 1px dashed var(--border-2); border-radius: var(--radius-sm);
+      color: var(--text-2); cursor: pointer; font-size: 12px;
+    }
+    .tb-saved-copy:hover { background: var(--bg-4); color: var(--text-0); border-color: var(--border-3); }
+
     .workspace { flex: 1; min-height: 0; display: flex; position: relative; }
 
     /* Header-gradient toggle — flattens the topbar's gold underline glow, the
@@ -629,6 +688,74 @@
       line-height: 1.35;
       letter-spacing: 0.01em;
     }
+    .gem-tooltip {
+      position: fixed;
+      z-index: 300;
+      pointer-events: none;
+      width: max-content;
+      max-width: 340px;
+      padding: 9px 11px;
+      background: var(--bg-1);
+      border: 1px solid var(--border-3);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+    }
+    .gem-tooltip-head {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 6px;
+    }
+    .gem-tooltip-title {
+      display: flex; flex-direction: column; gap: 1px; min-width: 0;
+    }
+    .gem-tooltip-name {
+      color: var(--text-0); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .gem-tooltip-sub {
+      color: var(--text-2); font-size: 10px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .gem-tooltip-tags {
+      color: var(--text-2); font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      margin-bottom: 5px;
+    }
+    .gem-tooltip-meta {
+      display: flex; flex-direction: column; gap: 1px;
+      margin-bottom: 6px;
+    }
+    .gem-tooltip-metarow {
+      display: flex; gap: 5px; font-size: 11px; line-height: 1.45;
+    }
+    .gem-tooltip-metalabel {
+      color: var(--text-2); text-transform: uppercase; letter-spacing: 0.03em;
+      font-size: 10px; align-self: center;
+    }
+    .gem-tooltip-metaval { color: var(--text-0); font-family: var(--font-mono); }
+    .gem-tooltip-desc {
+      margin: 0;
+      color: var(--text-1);
+      font-size: 11px;
+      line-height: 1.4;
+      font-style: italic;
+    }
+    .gem-tooltip-empty { color: var(--text-3); font-style: italic; }
+    .gem-tooltip-stats {
+      list-style: none; margin: 6px 0 0; padding: 0;
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .gem-tooltip-stats li {
+      color: var(--blue); font-size: 11px; line-height: 1.4;
+    }
+    .gem-tooltip-stats-loading {
+      margin: 6px 0 0; color: var(--text-3); font-size: 10px; font-style: italic;
+    }
+    .gem-tooltip-footer {
+      margin: 7px 0 0; padding-top: 6px;
+      border-top: 1px solid var(--border-1);
+      color: var(--text-2); font-size: 10px; font-style: italic; line-height: 1.4;
+    }
+
     .gem-additional-edit {
       padding: 2px 8px 6px 36px;
     }

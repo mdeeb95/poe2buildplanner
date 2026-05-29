@@ -30,6 +30,7 @@ import { searchNodes } from "@/lib/build/node-search";
 import {
   allocatableFrontier,
   buildMainTreeAdjacency,
+  findAscendancyStartId,
   findClassStartId,
   mainTreeAllocated,
   shortestPath,
@@ -51,9 +52,10 @@ import { TreeNodesPreview } from "@/components/TreeNodesPreview";
 import { TreeEdgesPreview } from "@/components/TreeEdgesPreview";
 import { TreeNodesSearch } from "@/components/TreeNodesSearch";
 import { TreeNodeLevelBadges, type TreeNodeLevelBadgesHandle } from "@/components/TreeNodeLevelBadges";
-import { LevelPickerPopover } from "@/components/LevelPickerPopover";
+import { NodePopover } from "@/components/NodePopover";
 import { TreeTooltip, type TreeTooltipHandle } from "@/components/TreeTooltip";
-import { passiveDisplayLevel } from "@/lib/build/levels";
+import { PASSIVE_POINTS_MAX, passiveDisplayLevel } from "@/lib/build/levels";
+import { reconcileGrantedSkills, type GrantedSkillIndex } from "@/lib/build/granted-skills";
 
 interface PassiveTreeProps {
   seed: {
@@ -63,6 +65,10 @@ interface PassiveTreeProps {
   };
   build: BuildState;
   setBuild: Dispatch<SetStateAction<BuildState>>;
+  /** Snapshot point count (1–123). When below the max, passives allocated past it are dimmed. */
+  viewerLevel: number;
+  /** Node-id → granted skill, for auto-managing Skills rows as ascendancy nodes change. */
+  grantedIndex: GrantedSkillIndex | null;
 }
 
 interface View {
@@ -99,7 +105,7 @@ function hoverRingFor(tree: Tree | null, id: string | null): HoverRingSpec | nul
   return { cx: node.x, cy: node.y, r: nodeRadius(node) + HOVER_RING_RADIUS_BUMP };
 }
 
-export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
+export function PassiveTree({ seed, build, setBuild, viewerLevel, grantedIndex }: PassiveTreeProps) {
   const [tree, setTree] = useState<Tree | null>(null);
   const [treeArt, setTreeArt] = useState<TreeArtManifest | null>(null);
   const [showArt, setShowArt] = useState(false);
@@ -124,6 +130,8 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
   // Latest values, readable synchronously from event handlers without stale closures.
   const buildRef = useRef(build);
   buildRef.current = build;
+  const grantedIndexRef = useRef(grantedIndex);
+  grantedIndexRef.current = grantedIndex;
   const treeRef = useRef<Tree | null>(null);
   const adjacencyRef = useRef<ReturnType<typeof buildMainTreeAdjacency> | null>(null);
   const startIdRef = useRef<string | null>(null);
@@ -194,6 +202,22 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
 
   // ---- Allocation derived from build ----
   const allocatedIds = useMemo(() => new Set(build.allocated), [build.allocated]);
+
+  // ---- Snapshot: split allocated into accessible (≤ level) and dimmed (> level) ----
+  const snapshot = viewerLevel < PASSIVE_POINTS_MAX;
+  const accessibleArr = useMemo(() => {
+    if (!snapshot) return build.allocated;
+    return build.allocated.filter((id) => passiveDisplayLevel(build, id) <= viewerLevel);
+  }, [snapshot, build, viewerLevel]);
+  const accessibleIds = useMemo(
+    () => (snapshot ? new Set(accessibleArr) : allocatedIds),
+    [snapshot, accessibleArr, allocatedIds],
+  );
+  const dimmedArr = useMemo(() => {
+    if (!snapshot) return [];
+    return build.allocated.filter((id) => passiveDisplayLevel(build, id) > viewerLevel);
+  }, [snapshot, build, viewerLevel]);
+
   const gCount = globalCount(build);
   const s1Count = setCount(build, 1);
   const s2Count = setCount(build, 2);
@@ -208,6 +232,40 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
     if (!tree || !adjacency || startId === null) return new Set<string>();
     return allocatableFrontier(adjacency, startId, mainTreeAllocated(tree, build));
   }, [tree, adjacency, startId, build]);
+
+  // Picking an ascendancy auto-allocates its start node (the cluster's root) so
+  // it renders connected without a manual click, and drops any nodes left over
+  // from a previously-selected ascendancy. Runs only when the ascendancy (or
+  // tree) changes; the functional update returns `prev` unchanged when there's
+  // nothing to do, so it never loops or churns history.
+  useEffect(() => {
+    if (!tree || !build.ascendancy) return;
+    const ascStart = findAscendancyStartId(tree, build.ascendancy);
+    if (!ascStart) return;
+    setBuild((prev) => {
+      if (prev.ascendancy !== build.ascendancy) return prev;
+      const foreign = new Set(
+        prev.allocated.filter((id) => {
+          const n = tree.nodes[id];
+          return n?.ascendancyName != null && n.ascendancyName !== prev.ascendancy;
+        }),
+      );
+      const hasStart = prev.allocated.includes(ascStart);
+      if (foreign.size === 0 && hasStart) return prev;
+      let allocated = foreign.size
+        ? prev.allocated.filter((id) => !foreign.has(id))
+        : prev.allocated;
+      if (!hasStart) allocated = [...allocated, ascStart];
+      if (foreign.size === 0) return { ...prev, allocated };
+      const passiveWeaponSet = { ...prev.passiveWeaponSet };
+      const nodeLevels = { ...prev.nodeLevels };
+      for (const id of foreign) {
+        delete passiveWeaponSet[id];
+        delete nodeLevels[id];
+      }
+      return { ...prev, allocated, passiveWeaponSet, nodeLevels };
+    });
+  }, [tree, build.ascendancy, setBuild]);
 
   // ---- Search highlight (matches node name or stats) ----
   const searchMatches = useMemo(
@@ -444,19 +502,22 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
         flashRejected(res.rejected);
         return;
       }
-      setBuild(res.build);
+      // Add/remove auto-granted skills atomically with the allocation change so
+      // it's a single undo step.
+      setBuild(reconcileGrantedSkills(res.build, grantedIndexRef.current));
     },
     [setBuild, flashRejected, flashMessage],
   );
   allocateNodeRef.current = allocateNode;
 
+  // The node editor stays open after applying a level so the note can be edited
+  // too; it closes via Done / Escape / outside-click.
   const setNodeLevel = useCallback(
     (nodeId: string, level: number) => {
       setBuild((prev) => ({
         ...prev,
         nodeLevels: { ...prev.nodeLevels, [nodeId]: level },
       }));
-      setLevelPicker(null);
     },
     [setBuild],
   );
@@ -471,7 +532,18 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
           nodeLevels: { ...prev.nodeLevels, [nodeId]: reset },
         };
       });
-      setLevelPicker(null);
+    },
+    [setBuild],
+  );
+
+  const setNodeNote = useCallback(
+    (nodeId: string, text: string) => {
+      setBuild((prev) => {
+        const nodeNotes = { ...prev.nodeNotes };
+        if (text) nodeNotes[nodeId] = text;
+        else delete nodeNotes[nodeId];
+        return { ...prev, nodeNotes };
+      });
     },
     [setBuild],
   );
@@ -539,7 +611,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
           ref={baseCanvasRef}
           tree={tree}
           edgeIndex={edgeIndex}
-          allocated={allocatedIds}
+          allocated={accessibleIds}
           frontier={frontier}
           svgRef={svgRef}
           gRef={gRef}
@@ -553,9 +625,17 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
         preserveAspectRatio="xMidYMid meet"
       >
         <g ref={gRef} style={{ willChange: "transform" }} pointerEvents="none">
+          {snapshot && (
+            <TreeEdgesActive
+              edgeIndex={edgeIndex}
+              allocatedIds={allocatedIds}
+              passiveWeaponSet={build.passiveWeaponSet}
+              ghost
+            />
+          )}
           <TreeEdgesActive
             edgeIndex={edgeIndex}
-            allocatedIds={allocatedIds}
+            allocatedIds={accessibleIds}
             passiveWeaponSet={build.passiveWeaponSet}
           />
           {tree && frontier.size > 0 && (
@@ -570,10 +650,18 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
           {tree && searchMatches.size > 0 && (
             <TreeNodesSearch tree={tree} matches={searchMatches} />
           )}
+          {tree && dimmedArr.length > 0 && (
+            <TreeNodesActive
+              tree={tree}
+              allocated={dimmedArr}
+              passiveWeaponSet={build.passiveWeaponSet}
+              ghost
+            />
+          )}
           {tree && (
             <TreeNodesActive
               tree={tree}
-              allocated={build.allocated}
+              allocated={accessibleArr}
               passiveWeaponSet={build.passiveWeaponSet}
             />
           )}
@@ -622,7 +710,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
           ref={artCanvasRef}
           tree={tree}
           art={treeArt}
-          allocated={allocatedIds}
+          allocated={accessibleIds}
           frontier={frontier}
           passiveWeaponSet={build.passiveWeaponSet}
           searchMatches={searchMatches}
@@ -641,6 +729,7 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
         ref={levelBadgesRef}
         tree={tree}
         build={build}
+        viewerLevel={viewerLevel}
         svgRef={svgRef}
         containerRef={containerRef}
         getView={getView}
@@ -658,17 +747,22 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
             ? passiveDisplayLevel(build, hoveredNodeId)
             : undefined
         }
+        note={hoveredNodeId != null ? build.nodeNotes[hoveredNodeId] : undefined}
         svgRef={svgRef}
         containerRef={containerRef}
         getView={getView}
       />
 
       {levelPicker && (
-        <LevelPickerPopover
+        <NodePopover
           anchor={{ clientX: levelPicker.clientX, clientY: levelPicker.clientY }}
+          nodeName={tree?.nodes[levelPicker.nodeId]?.name ?? "Node"}
+          showLevel={tree?.nodes[levelPicker.nodeId]?.ascendancyName == null}
           currentLevel={passiveDisplayLevel(build, levelPicker.nodeId)}
-          onApply={(level) => setNodeLevel(levelPicker.nodeId, level)}
-          onClear={() => clearNodeLevel(levelPicker.nodeId)}
+          note={build.nodeNotes[levelPicker.nodeId] ?? ""}
+          onApplyLevel={(level) => setNodeLevel(levelPicker.nodeId, level)}
+          onClearLevel={() => clearNodeLevel(levelPicker.nodeId)}
+          onNoteChange={(text) => setNodeNote(levelPicker.nodeId, text)}
           onClose={() => setLevelPicker(null)}
         />
       )}
@@ -685,8 +779,10 @@ export function PassiveTree({ seed, build, setBuild }: PassiveTreeProps) {
         </div>
         <div className="tree-stat-divider" />
         <div className="tree-stat-cluster">
-          <span className="tree-stat-n">{build.allocated.length}</span>
-          <span className="tree-stat-l">allocated</span>
+          <span className="tree-stat-n">
+            {snapshot ? `${accessibleArr.length}/${build.allocated.length}` : build.allocated.length}
+          </span>
+          <span className="tree-stat-l">{snapshot ? `allocated · Lv ${viewerLevel}` : "allocated"}</span>
         </div>
         <div className="tree-stat-divider" />
         <div className="tree-stat-cluster">

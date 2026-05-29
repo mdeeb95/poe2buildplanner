@@ -9,6 +9,7 @@ export function createEmptyBuild(): BuildState {
     allocated: [],
     passiveWeaponSet: {},
     nodeLevels: {},
+    nodeNotes: {},
     skills: [],
     items: [],
   };

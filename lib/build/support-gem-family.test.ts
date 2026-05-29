@@ -12,6 +12,7 @@ function armament(partial: Partial<SupportGem> & Pick<SupportGem, "id" | "name">
   return {
     kind: "support",
     baseTypeName: partial.baseTypeName ?? partial.name,
+    description: partial.description ?? null,
     gameId: null,
     variantId: null,
     grantedEffectId: null,
@@ -212,7 +213,46 @@ describe("supportSetupsForAdd", () => {
     ]);
   });
 
-  it("adding tier II also adds III", () => {
+  it("adding the top tier also fills in the lower tiers, ordered low-to-high", () => {
+    const rapidGems: GemsFile = {
+      version: { pobCommit: "", fetchedAt: "" },
+      active: {},
+      byBaseTypeName: {},
+      support: {
+        "Metadata/Items/Gems/SkillGemRapidAttacksSupport": armament({
+          id: "Metadata/Items/Gems/SkillGemRapidAttacksSupport",
+          name: "Rapid Attacks I",
+          gemFamily: ["RapidAttacks"],
+          uncutTier: 1,
+        }),
+        "Metadata/Items/Gems/SkillGemRapidAttacksSupportTwo": armament({
+          id: "Metadata/Items/Gems/SkillGemRapidAttacksSupportTwo",
+          name: "Rapid Attacks II",
+          gemFamily: ["RapidAttacks"],
+          uncutTier: 4,
+        }),
+        "Metadata/Items/Gems/SkillGemRapidAttacksSupportThree": armament({
+          id: "Metadata/Items/Gems/SkillGemRapidAttacksSupportThree",
+          name: "Rapid Attacks III",
+          gemFamily: ["RapidAttacks"],
+          uncutTier: 5,
+        }),
+      },
+    };
+    const seeds = supportSetupsForAdd(
+      "Metadata/Items/Gems/SkillGemRapidAttacksSupportThree",
+      rapidGems,
+      { name: "Rapid Attacks III", color: "green" },
+      [],
+    );
+    expect(seeds.map((s) => s.skillId)).toEqual([
+      "Metadata/Items/Gems/SkillGemRapidAttacksSupport",
+      "Metadata/Items/Gems/SkillGemRapidAttacksSupportTwo",
+      "Metadata/Items/Gems/SkillGemRapidAttacksSupportThree",
+    ]);
+  });
+
+  it("skips lower tiers already socketed when adding a higher tier", () => {
     const rapidGems: GemsFile = {
       version: { pobCommit: "", fetchedAt: "" },
       active: {},
@@ -233,13 +273,14 @@ describe("supportSetupsForAdd", () => {
       },
     };
     const seeds = supportSetupsForAdd(
-      "Metadata/Items/Gems/SkillGemRapidAttacksSupportTwo",
+      "Metadata/Items/Gems/SkillGemRapidAttacksSupportThree",
       rapidGems,
-      { name: "Rapid Attacks II", color: "green" },
-      [],
+      { name: "Rapid Attacks III", color: "green" },
+      ["Metadata/Items/Gems/SkillGemRapidAttacksSupportTwo"],
     );
-    expect(seeds).toHaveLength(2);
-    expect(seeds[1]?.skillId).toBe("Metadata/Items/Gems/SkillGemRapidAttacksSupportThree");
+    expect(seeds.map((s) => s.skillId)).toEqual([
+      "Metadata/Items/Gems/SkillGemRapidAttacksSupportThree",
+    ]);
   });
 });
 
