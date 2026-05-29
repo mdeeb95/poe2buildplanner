@@ -1,7 +1,6 @@
 import { createReadStream } from "node:fs";
 import { access, readFile, stat } from "node:fs/promises";
 import path from "node:path";
-import { Readable } from "node:stream";
 
 const META_PATH = path.join(process.cwd(), "data", "_meta.json");
 
@@ -55,8 +54,45 @@ export function createJsonDataRoute(filePath: string) {
       return new Response(null, { status: 304, headers: { ETag: etag } });
     }
 
-    const stream = createReadStream(filePath);
-    const webStream = Readable.toWeb(stream) as unknown as ReadableStream;
+    // Hand-rolled Node→web stream adapter. `Readable.toWeb` throws an uncaught
+    // `ERR_INVALID_STATE` ("Controller is already closed") when a client aborts
+    // mid-response, because it enqueues onto the closed controller. Guarding the
+    // controller calls and destroying the file stream on cancel keeps aborts
+    // (common for large cached payloads) from crashing the server.
+    const nodeStream = createReadStream(filePath);
+    const webStream = new ReadableStream<Uint8Array>({
+      start(controller) {
+        nodeStream.on("data", (chunk) => {
+          try {
+            controller.enqueue(chunk as Uint8Array);
+          } catch {
+            nodeStream.destroy();
+            return;
+          }
+          if ((controller.desiredSize ?? 1) <= 0) nodeStream.pause();
+        });
+        nodeStream.on("end", () => {
+          try {
+            controller.close();
+          } catch {
+            /* already closed */
+          }
+        });
+        nodeStream.on("error", (err) => {
+          try {
+            controller.error(err);
+          } catch {
+            /* already errored/closed */
+          }
+        });
+      },
+      pull() {
+        nodeStream.resume();
+      },
+      cancel() {
+        nodeStream.destroy();
+      },
+    });
 
     return new Response(webStream, {
       status: 200,
